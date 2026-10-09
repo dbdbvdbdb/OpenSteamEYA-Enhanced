@@ -1,0 +1,112 @@
+PASS original JWT inspection parses synthetic fields in AOT
+PASS original JWT inspection rejects malformed input
+PASS original DPAPI encryptor works with synthetic input in AOT
+PASS Steam CS2 protobuf varint
+PASS Steam CS2 protobuf fixed32
+PASS Steam CS2 protobuf fixed64
+PASS Steam CS2 protobuf boolean
+PASS Steam CS2 protobuf UTF8
+PASS Steam CS2 protobuf bytes and end
+PASS Steam CS2 protobuf rejects truncated payload
+PASS avatar multicolor extraction
+PASS avatar palette cache
+PASS missing custom image falls back to avatar palette
+PASS missing avatar falls back to default gradient
+PASS local image asynchronous softening
+PASS render cards-10-dark
+PASS cards record count
+PASS cards selection preserved
+PASS cards responsive card widths
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS render list-10-dark
+PASS list record count
+PASS list selection preserved
+PASS list responsive card widths
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS render cards-50-dark
+PASS cards record count
+PASS cards selection preserved
+PASS cards responsive card widths
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS render list-50-dark
+PASS list record count
+PASS list selection preserved
+PASS list responsive card widths
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS render cards-100-dark
+PASS cards record count
+PASS cards selection preserved
+PASS cards responsive card widths
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS render list-100-dark
+PASS list record count
+PASS list selection preserved
+PASS list responsive card widths
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS render privacy-100
+PASS cards record count
+PASS cards selection preserved
+PASS cards responsive card widths
+PASS cards title displayed
+PASS cards password masked
+PASS privacy identifiers hidden
+PASS cards title displayed
+PASS cards password masked
+PASS privacy identifiers hidden
+PASS cards title displayed
+PASS cards password masked
+PASS privacy identifiers hidden
+PASS render cards-100-light-minimum
+PASS cards record count
+PASS cards selection preserved
+PASS cards responsive card widths
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS render cards-100-light-wide
+PASS search preserves offscreen selection
+PASS clear search restores collection and selection
+PASS show saved password
+PASS hide saved password
+PASS custom reorder persists
+PASS reorder preserves selected identities
+PASS privacy prevents password reveal
+PASS group filter
+PASS combined search and group preserve selection (visible=1, selected=2, syncing=False, query=qa-account-010)
+PASS clear combined filter
+PASS copy login account
+PASS copy password special characters
+INFO actual rasterization scale 1.5

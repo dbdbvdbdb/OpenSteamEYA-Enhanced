@@ -8,3 +8,42 @@ obj/
 *.suo
 node_modules_temp/
 artifacts/
+
+# Local IDE/tooling state and generated build outputs
+TestResults/
+**/TestResults/
+*.pdb
+*.obj
+*.ilk
+*.tmp
+*.bak
+*.log
+.idea/
+.vscode/
+.env
+.env.*
+!.env.example
+
+# Real account stores, credentials, exports, backups and private signing material.
+# Keep synthetic fixtures in source code; never commit runtime data files.
+**/manager.json
+**/history.json
+**/accounts.json
+**/settings.json
+**/loginusers.vdf
+**/ssfn*
+**/synthetic-data/
+**/ui-check-results/
+**/backups/
+**/exports/
+**/userdata/
+*.db
+*.sqlite
+*.sqlite3
+*.pfx
+*.p12
+*.pem
+*.key
+*.zip
+*.7z
+*.dmp

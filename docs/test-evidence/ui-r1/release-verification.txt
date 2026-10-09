@@ -1,0 +1,16 @@
+Formal ZIP extraction: PASS
+Native AOT assert: PASS
+File count: 296
+PDB/QA/temp matches: 0
+QA command-line argument absent from formal EXE: PASS
+Formal executable file version: 0.2.1.0
+Extracted formal application responsive HWND startup: PASS
+Own process closed gracefully: True / exited: True
+Formal publish warnings: 0
+Final AOT QA build warnings: 0
+Native AOT UI checks: 183 PASS
+Native AOT data regression: 52 PASS
+Protected business source files: 44 unchanged
+Page LoginAsync/QueryAsync: byte-for-byte unchanged
+Actual system rasterization scale: 1.5
+Card geometry DIP: width=564.00; height=378.67; banner=157.92; loginHeight=44.00; corner=14

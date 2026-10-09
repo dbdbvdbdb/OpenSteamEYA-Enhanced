@@ -14,6 +14,9 @@ public static class Program
     [STAThread]
     private static int Main(string[] args)
     {
+#if MANAGER_UI_CHECKS
+        ManagerUiChecks.Configure(args);
+#endif
         if (args.Length > 0 && args[0] == Cs2CloudPushWorker.CommandLineSwitch)
         {
             return Cs2CloudPushWorker.Run(args);

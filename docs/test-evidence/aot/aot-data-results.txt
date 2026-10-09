@@ -1,0 +1,53 @@
+PASS plaintext and restart persistence
+PASS separate local JSON store
+PASS edit password
+PASS case insensitive duplicate rejection
+PASS txt 100 accounts roundtrip
+PASS txt exact special characters and empty passwords
+PASS txt metadata roundtrip
+PASS txt import result
+PASS csv 100 accounts roundtrip
+PASS csv exact special characters and empty passwords
+PASS csv metadata roundtrip
+PASS csv import result
+PASS json 100 accounts roundtrip
+PASS json exact special characters and empty passwords
+PASS json metadata roundtrip
+PASS json import result
+PASS CSV RFC4180 multiline and escaped quotes
+PASS CSV invalid structure row and safe preview
+PASS legacy TXT first delimiter and error line
+PASS JSON null password rejection
+PASS JSON null login rejection
+PASS CSV duplicate headers rejected
+PASS parser errors contain no input data
+PASS duplicate fill missing including file duplicates
+PASS fill empty password
+PASS skip duplicates
+PASS overwrite duplicates
+PASS SteamID mapping
+PASS login name mapping
+PASS never match nickname
+PASS conflicting identity never auto links
+PASS multiple candidates require confirmation
+PASS manual mapping
+PASS group range export
+PASS selected range export
+PASS optional metadata and mapping isolation in exports
+PASS backup only manager and custom resources
+PASS backup preview counts
+PASS replace restore all metadata and settings
+PASS restore favorite mapping and renamed image
+PASS merge restore deduplicates by login
+PASS delete group retains accounts in default
+PASS delete manager record only
+PASS ZIP path traversal rejected
+PASS failed restore leaves database intact
+PASS corrupt database cannot be overwritten
+PASS corrupt file preserved
+PASS backup preview detects corrupt current database
+PASS valid backup repairs corrupt manager store
+PASS unknown version rejected
+PASS invalid transaction atomic rollback
+PASS concurrent read modify write serialized
+All 52 checks passed. Only synthetic test accounts used.

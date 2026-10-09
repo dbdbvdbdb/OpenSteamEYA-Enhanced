@@ -60,15 +60,32 @@ public sealed partial class MainWindow : Window
 
         ConfigureWindowSize();
 
+#if MANAGER_UI_CHECKS
+        if (ManagerUiChecks.Enabled)
+        {
+            ApplyTheme(ElementTheme.Dark);
+            RootNavigationView.SelectedItem = ManagerNavItem;
+            RootNavigationView.Loaded += async (_, _) =>
+            {
+                if (ContentFrame.Content is AccountManagerPage page)
+                    await ManagerUiChecks.RunAsync(this, page);
+            };
+            return;
+        }
+#endif
+
         // 预载历史账号，登录页的头像/资料复用依赖该缓存。
         AppState.ReloadHistory();
         RootNavigationView.SelectedItem = LoginNavItem;
+        // Construct the original login page first so cards can reuse its established login/query workflow.
+        RootNavigationView.SelectedItem = ManagerNavItem;
 
         // 首次启动即解析并持久化 Steam 安装路径（之后上号直接复用，不再每次探测）。
         // 等内容进入可视树（XamlRoot 就绪）后再跑，检测失败才需要弹框。
         RootNavigationView.Loaded += OnRootNavigationViewLoaded;
 
-        _ = AppState.CheckForUpdatesAsync(isAutomatic: true);
+        if (GitHubUpdateService.EnhancedUpdatesConfigured)
+            _ = AppState.CheckForUpdatesAsync(isAutomatic: true);
     }
 
     // 启动时解析 Steam 路径：成功则静默持久化；自动检测失败时弹框让用户手动选择含 steam.exe 的目录。
@@ -140,6 +157,7 @@ public sealed partial class MainWindow : Window
     {
         var pageType = pageName switch
         {
+            "manager" => typeof(AccountManagerPage),
             "history" => typeof(HistoryPage),
             "cachedAccounts" => typeof(CachedAccountsPage),
             "loadout" => typeof(LoadoutPage),
@@ -154,6 +172,17 @@ public sealed partial class MainWindow : Window
             ContentFrame.Navigate(pageType, null, new EntranceNavigationTransitionInfo());
             ContentFrame.BackStack.Clear();
         }
+    }
+
+    public void OpenAccountManagerSettings()
+    {
+        RootNavigationView.SelectedItem = ManagerNavItem;
+        if (ContentFrame.Content is AccountManagerPage page) page.OpenManagerSettings();
+    }
+    public void OpenAccountManagerTool(string tool)
+    {
+        RootNavigationView.SelectedItem = ManagerNavItem;
+        if (ContentFrame.Content is AccountManagerPage page) page.OpenTool(tool);
     }
 
     private void OnBusyChanged(bool isBusy)
@@ -181,6 +210,7 @@ public sealed partial class MainWindow : Window
     /// <summary>本地化导航项文字；语言切换时由 Loc.LanguageChanged 再次调用。</summary>
     private void RefreshNavText()
     {
+        ManagerNavItem.Content = "账号管理";
         LoginNavItem.Content = Loc.T("Nav_Login");
         HistoryNavItem.Content = Loc.T("Nav_History");
         CachedAccountsNavItem.Content = Loc.T("Nav_CachedAccounts");

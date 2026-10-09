@@ -1,0 +1,2 @@
+PASS 44 protected business file hashes unchanged
+PASS original LoginAsync/QueryAsync methods unchanged

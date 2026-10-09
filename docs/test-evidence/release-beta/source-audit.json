@@ -1,0 +1,9 @@
+{
+  "commitsAllRefs": 61,
+  "worktreeFiles": 271,
+  "worktreeTextFiles": 231,
+  "historyUniqueBlobs": 426,
+  "historyTextBlobs": 423,
+  "findings": [],
+  "scope": "Public source candidates and all reachable Git objects; use Gitleaks separately."
+}

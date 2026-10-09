@@ -226,6 +226,18 @@
             <!-- 数据 -->
             <Border Style="{StaticResource CardBorderStyle}">
                 <StackPanel Spacing="10">
+                    <TextBlock Text="增强版账号管理" Style="{StaticResource SectionTitleTextStyle}" />
+                    <TextBlock Text="展示与排序、分组、卡片背景、密码显示、导入导出和备份恢复。密码管理数据独立保存在当前用户 LocalAppData。" TextWrapping="Wrap" />
+                    <Button Content="打开账号管理设置" Click="OpenManagerSettings_Click" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button Content="导入账号密码" Tag="import" Click="OpenManagerTool_Click" />
+                        <Button Content="导出账号密码" Tag="export" Click="OpenManagerTool_Click" />
+                        <Button Content="备份与恢复" Tag="backup" Click="OpenManagerTool_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="10">
                     <TextBlock
                         Text="{x:Bind Strings.Get('Settings_Data_Section'), Mode=OneWay}"
                         Style="{StaticResource SectionTitleTextStyle}" />

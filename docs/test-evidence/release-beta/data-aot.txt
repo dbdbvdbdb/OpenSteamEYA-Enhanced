@@ -1,0 +1,93 @@
+  正在确定要还原的项目…
+  已还原 %PROJECT_ROOT%\AccountManagement\AccountManagement.csproj (用时 208 毫秒)。
+  已还原 %PROJECT_ROOT%\tests\AccountManagement.Tests\AccountManagement.Tests.csproj (用时 208 毫秒)。
+  AccountManagement -> %PROJECT_ROOT%\AccountManagement\bin\Release\net10.0\AccountManagement.dll
+  AccountManagement.Tests -> %PROJECT_ROOT%\tests\AccountManagement.Tests\bin\Release\net10.0\win-x64\AccountManagement.Tests.dll
+  Generating native code
+  AccountManagement.Tests -> %PROJECT_ROOT%\artifacts\data-check-2df381348f264649991aec74ffa8f1d3\
+PASS plaintext and restart persistence
+PASS separate local JSON store
+PASS edit password
+PASS case insensitive duplicate rejection
+PASS txt 100 accounts roundtrip
+PASS txt exact special characters and empty passwords
+PASS txt metadata roundtrip
+PASS txt import result
+PASS csv 100 accounts roundtrip
+PASS csv exact special characters and empty passwords
+PASS csv metadata roundtrip
+PASS csv import result
+PASS json 100 accounts roundtrip
+PASS json exact special characters and empty passwords
+PASS json metadata roundtrip
+PASS json import result
+PASS CSV RFC4180 multiline and escaped quotes
+PASS CSV invalid structure row and safe preview
+PASS legacy TXT first delimiter and error line
+PASS JSON null password rejection
+PASS JSON null login rejection
+PASS CSV duplicate headers rejected
+PASS parser errors contain no input data
+PASS duplicate fill missing including file duplicates
+PASS fill empty password
+PASS skip duplicates
+PASS overwrite duplicates
+PASS SteamID mapping
+PASS login name mapping
+PASS never match nickname
+PASS conflicting identity never auto links
+PASS multiple candidates require confirmation
+PASS manual mapping
+PASS group range export
+PASS selected range export
+PASS optional metadata and mapping isolation in exports
+PASS backup only manager and custom resources
+PASS backup preview counts
+PASS replace restore all metadata and settings
+PASS restore favorite mapping and renamed image
+PASS merge restore deduplicates by login
+PASS delete group retains accounts in default
+PASS delete manager record only
+PASS ZIP path traversal rejected
+PASS failed restore leaves database intact
+PASS corrupt database cannot be overwritten
+PASS corrupt file preserved
+PASS backup preview detects corrupt current database
+PASS valid backup repairs corrupt manager store
+PASS unknown version rejected
+PASS invalid transaction atomic rollback
+PASS concurrent read modify write serialized
+PASS paste batch accepts LF/CRLF/CR and blank lines without quotes
+PASS paste trims login but preserves password spaces
+PASS paste preserves quotes backslashes and later separators
+PASS paste supports unsaved password records
+PASS paste validation retains source line numbers
+PASS paste validation never echoes input passwords
+PASS paste mode does not interpret file format headers
+PASS paste reuses atomic import with duplicate skip
+PASS paste duplicate skip preserves password identity mapping and notes
+PASS paste special password persists unchanged
+PASS selected queries are sequential and deduplicate credential identities
+PASS selected queries skip missing credentials and continue after failure
+PASS selected query cancellation stops the remaining queue
+PASS pre-cancelled query does not call Steam adapter
+PASS legacy v1 single group migrates without changing password
+PASS multiple memberships persist uniquely with legacy first group
+PASS grouped account appears in default and each assigned group
+PASS export range includes all members and default contains all accounts
+PASS portable export keeps passwords while isolating all group IDs
+PASS replace backup restore preserves all memberships
+PASS merge backup restore remaps every membership by group name
+PASS deleting one group preserves other memberships and password
+PASS invalid multi-group references are rejected before writing
+PASS failed query adds failure group without replacing manual memberships
+PASS skipped query uses unqueried group rather than failure group
+PASS successful query clears query labels only and preserves credentials and notes
+PASS unprocessed accounts retain original data and memberships
+PASS repeated failures reuse existing group and unique membership
+PASS batch records processed boundary before cancelled and unstarted accounts
+PASS batch retains per-identity success/failure outcomes for group assignment
+PASS batch integration assigns skipped and failed accounts to distinct groups
+PASS batch integration leaves successful duplicates and cancelled/unstarted records without failure labels
+PASS query grouping persists and failure accounts still appear in default
+All 85 checks passed. Only synthetic test accounts used.

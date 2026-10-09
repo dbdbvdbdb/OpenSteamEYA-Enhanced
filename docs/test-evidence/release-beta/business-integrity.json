@@ -1,0 +1,21 @@
+{
+  "baseline": "OpenSteamEYA-Enhanced-0.2.4-source-features.zip",
+  "filesCompared": 137,
+  "differences": [],
+  "businessSourceUnchanged": true,
+  "documentationPathsSanitized": [
+    "docs/test-evidence/aot/aot-publish.log",
+    "docs/test-evidence/features-0.2.2/features-0.2.2-aot-build.log",
+    "docs/test-evidence/features-0.2.2/features-0.2.2-build.log",
+    "docs/test-evidence/features-0.2.2/features-0.2.2-data-build.log",
+    "docs/test-evidence/features-0.2.2/features-0.2.2-publish.log",
+    "docs/test-evidence/features-0.2.3/features-0.2.3-aot-build.log",
+    "docs/test-evidence/features-0.2.3/features-0.2.3-build.log",
+    "docs/test-evidence/features-0.2.3/features-0.2.3-data-build.log",
+    "docs/test-evidence/features-0.2.3/features-0.2.3-publish.log",
+    "docs/test-evidence/features-0.2.4/features-0.2.4-aot-build.log",
+    "docs/test-evidence/features-0.2.4/features-0.2.4-publish.log",
+    "docs/test-evidence/ui-r1/publish.log",
+    "docs/test-evidence/ui-r1/ui-aot-build.log"
+  ]
+}

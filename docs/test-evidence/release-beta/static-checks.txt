@@ -1,0 +1,1 @@
+PASS actionlint 1.7.12: build.yml and release.yml; PASS all PowerShell scripts parse; PASS unresolved copyright blocks public release; PASS packaging guard rejects manager.json; Remote GitHub Actions: NOT RUN.

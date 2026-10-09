@@ -1,0 +1,6 @@
+11:52PM INF 50 commits scanned.
+11:52PM INF scanned ~1881289 bytes (1.88 MB) in 230ms
+11:52PM INF no leaks found
+11:52PM INF scanned ~1610135 bytes (1.61 MB) in 121ms
+11:52PM INF no leaks found
+Gitleaks: all-ref history and public source candidate scans passed; reports contain redacted values only.

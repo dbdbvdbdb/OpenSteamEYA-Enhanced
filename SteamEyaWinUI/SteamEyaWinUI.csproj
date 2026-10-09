@@ -9,10 +9,10 @@
     <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
     <UseWinUI>true</UseWinUI>
     <WindowsPackageType>None</WindowsPackageType>
-    <Version>0.1.0</Version>
-    <FileVersion>0.1.0.0</FileVersion>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
-    <InformationalVersion>v0.1.0-dev</InformationalVersion>
+    <Version>0.2.4</Version>
+    <FileVersion>0.2.4.0</FileVersion>
+    <AssemblyVersion>0.2.4.0</AssemblyVersion>
+    <InformationalVersion>v0.2.4-enhanced</InformationalVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <!-- 自定义 Program.Main：先拦截 CS2 云推送辅助进程模式（cs2-cloud-push 开关）再走 XAML 启动（见 Program.cs）。 -->
@@ -21,6 +21,8 @@
     <!-- Native AOT 发布（dotnet publish -r win-x64 -p:Platform=x64 时生效）。
          按 Windows App SDK 指引，PublishAot 需写在项目文件里以便还原期生效。 -->
     <PublishAot>true</PublishAot>
+    <!-- Keep globalization, stack traces and all feature switches; prefer compact native code. -->
+    <OptimizationPreference Condition="'$(Configuration)' == 'Release' and '$(PublishAot)' == 'true' and '$(OptimizationPreference)' == ''">Size</OptimizationPreference>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <!-- CsWinRT 源生成器可能产出 unsafe 代码（CsWinRT#1721）。 -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -35,8 +37,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AccountManagement\AccountManagement.csproj" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
+  <PropertyGroup Condition="'$(EnableManagerUiChecks)' == 'true'">
+    <DefineConstants>$(DefineConstants);MANAGER_UI_CHECKS</DefineConstants>
+  </PropertyGroup>
 
   <ItemGroup>
     <Content Include="Assets\AppIcon.ico" CopyToOutputDirectory="PreserveNewest" />
@@ -62,7 +68,9 @@
     <!-- 只引用 WinUI 组件包（自动带 Foundation/Base/InteractiveExperiences），
          避免 WindowsAppSDK 元包拖入 onnxruntime/DirectML/AI 等无用载荷（约 40 MB）。
          自包含模式下 WinUI 组件包自带运行时 DLL，无需 Runtime 包。 -->
-    <PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="2.2.1" />
+    <!-- 2.2.1 ships an Engineering Preview license that prohibits redistribution.
+         2.3.9 ships the Windows App SDK distributable-code terms. -->
+    <PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="2.3.9" />
   </ItemGroup>
 
   <!-- workaround：无打包 WinUI 应用 dotnet publish 时不会复制 PRI 资源索引文件，

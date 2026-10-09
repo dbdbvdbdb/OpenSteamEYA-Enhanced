@@ -1,0 +1,36 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file artifacts\release-win-x64-aot\SteamEyaWinUI.exe
+
+File Type: EXECUTABLE IMAGE
+
+  Image has the following dependencies:
+
+    ADVAPI32.dll
+    bcrypt.dll
+    CRYPT32.dll
+    IPHLPAPI.DLL
+    KERNEL32.dll
+    ncrypt.dll
+    ole32.dll
+    OLEAUT32.dll
+    USER32.dll
+    WS2_32.dll
+    api-ms-win-crt-heap-l1-1-0.dll
+    api-ms-win-crt-math-l1-1-0.dll
+    api-ms-win-crt-string-l1-1-0.dll
+    api-ms-win-crt-convert-l1-1-0.dll
+    api-ms-win-crt-stdio-l1-1-0.dll
+    api-ms-win-crt-runtime-l1-1-0.dll
+    api-ms-win-crt-locale-l1-1-0.dll
+
+  Summary
+
+      546000 .data
+       98000 .pdata
+      6E5000 .rdata
+        3000 .reloc
+       3B000 .rsrc
+      779000 .text

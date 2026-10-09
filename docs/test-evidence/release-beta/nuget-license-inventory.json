@@ -1,0 +1,137 @@
+[
+  {
+    "Package": "Microsoft.DotNet.ILCompiler/10.0.12",
+    "License": "MIT",
+    "LicenseType": "expression",
+    "LicenseUrl": "https://licenses.nuget.org/MIT",
+    "Notices": [
+      {
+        "File": "Microsoft.DotNet.ILCompiler-10.0.12-THIRD-PARTY-NOTICES.TXT",
+        "Sha256": "6d15e10a101c6bfff2ab4429ed061bf76c456fc4b23ad6b03e0d0f8377148a21"
+      }
+    ]
+  },
+  {
+    "Package": "Microsoft.NET.ILLink.Tasks/10.0.12",
+    "License": "MIT",
+    "LicenseType": "expression",
+    "LicenseUrl": "https://licenses.nuget.org/MIT",
+    "Notices": [
+      {
+        "File": "Microsoft.NET.ILLink.Tasks-10.0.12-THIRD-PARTY-NOTICES.TXT",
+        "Sha256": "6d15e10a101c6bfff2ab4429ed061bf76c456fc4b23ad6b03e0d0f8377148a21"
+      }
+    ]
+  },
+  {
+    "Package": "Microsoft.Web.WebView2/1.0.3719.77",
+    "License": "LICENSE.txt",
+    "LicenseType": "file",
+    "LicenseUrl": "https://aka.ms/deprecateLicenseUrl",
+    "Notices": [
+      {
+        "File": "Microsoft.Web.WebView2-1.0.3719.77-LICENSE.txt",
+        "Sha256": "0af8f1b807512aae39c2ac1aa4d0cae65cabecb6fd554b8439a5162a0d6eca55"
+      },
+      {
+        "File": "Microsoft.Web.WebView2-1.0.3719.77-NOTICE.txt",
+        "Sha256": "106423785c5b7eba0a8e61d1837f2132e9c828e20ad530f565d981c1df60dd90"
+      }
+    ]
+  },
+  {
+    "Package": "Microsoft.Windows.SDK.BuildTools/10.0.26100.4654",
+    "License": null,
+    "LicenseType": null,
+    "LicenseUrl": "https://aka.ms/WinSDKLicenseURL",
+    "Notices": []
+  },
+  {
+    "Package": "Microsoft.Windows.SDK.BuildTools.MSIX/1.7.251221100",
+    "License": "sdk_license.txt",
+    "LicenseType": "file",
+    "LicenseUrl": "https://aka.ms/deprecateLicenseUrl",
+    "Notices": [
+      {
+        "File": "Microsoft.Windows.SDK.BuildTools.MSIX-1.7.251221100-NOTICE.txt",
+        "Sha256": "f09ebf5de6a5c8e7ebc900bb2e52af2f75e13610a1cf91e1514530e448d956c3"
+      },
+      {
+        "File": "Microsoft.Windows.SDK.BuildTools.MSIX-1.7.251221100-sdk_license.txt",
+        "Sha256": "a7a5c7e7ff998558983d6aca2702117c328aeb0c6404d298cb275f5623c6fd13"
+      }
+    ]
+  },
+  {
+    "Package": "Microsoft.WindowsAppSDK.Base/2.0.4",
+    "License": "license.txt",
+    "LicenseType": "file",
+    "LicenseUrl": "https://aka.ms/deprecateLicenseUrl",
+    "Notices": [
+      {
+        "File": "Microsoft.WindowsAppSDK.Base-2.0.4-license.txt",
+        "Sha256": "5b11e6347756e40fe0274bc08c97f89201b94f0d50181a09a00f1f4740840501"
+      },
+      {
+        "File": "Microsoft.WindowsAppSDK.Base-2.0.4-NOTICE.txt",
+        "Sha256": "572b43d41dea717dae7dc5de69acb20a74df025e8f5a3c0aa6f7bca02615e23c"
+      }
+    ]
+  },
+  {
+    "Package": "Microsoft.WindowsAppSDK.Foundation/2.3.12",
+    "License": "license.txt",
+    "LicenseType": "file",
+    "LicenseUrl": "https://aka.ms/deprecateLicenseUrl",
+    "Notices": [
+      {
+        "File": "Microsoft.WindowsAppSDK.Foundation-2.3.12-license.txt",
+        "Sha256": "5b11e6347756e40fe0274bc08c97f89201b94f0d50181a09a00f1f4740840501"
+      }
+    ]
+  },
+  {
+    "Package": "Microsoft.WindowsAppSDK.InteractiveExperiences/2.1.9",
+    "License": "license.txt",
+    "LicenseType": "file",
+    "LicenseUrl": "https://aka.ms/deprecateLicenseUrl",
+    "Notices": [
+      {
+        "File": "Microsoft.WindowsAppSDK.InteractiveExperiences-2.1.9-license.txt",
+        "Sha256": "5b11e6347756e40fe0274bc08c97f89201b94f0d50181a09a00f1f4740840501"
+      }
+    ]
+  },
+  {
+    "Package": "Microsoft.WindowsAppSDK.WinUI/2.3.9",
+    "License": "license.txt",
+    "LicenseType": "file",
+    "LicenseUrl": "https://aka.ms/deprecateLicenseUrl",
+    "Notices": [
+      {
+        "File": "Microsoft.WindowsAppSDK.WinUI-2.3.9-license.txt",
+        "Sha256": "5b11e6347756e40fe0274bc08c97f89201b94f0d50181a09a00f1f4740840501"
+      },
+      {
+        "File": "Microsoft.WindowsAppSDK.WinUI-2.3.9-NOTICE.txt",
+        "Sha256": "e25393c0d340a1821827b093fa4dbbfcccd8feb7bf769e7fa773e3955cd5314b"
+      },
+      {
+        "File": "Microsoft.WindowsAppSDK.WinUI-2.3.9-tools-NOTICE.txt",
+        "Sha256": "4a9321fd173ebf4e8bbc79130794d4c3fe233acccbf7db8765e0addb8fbfb8ca"
+      }
+    ]
+  },
+  {
+    "Package": "runtime.win-x64.Microsoft.DotNet.ILCompiler/10.0.12",
+    "License": "MIT",
+    "LicenseType": "expression",
+    "LicenseUrl": "https://licenses.nuget.org/MIT",
+    "Notices": [
+      {
+        "File": "runtime.win-x64.Microsoft.DotNet.ILCompiler-10.0.12-THIRD-PARTY-NOTICES.TXT",
+        "Sha256": "6d15e10a101c6bfff2ab4429ed061bf76c456fc4b23ad6b03e0d0f8377148a21"
+      }
+    ]
+  }
+]

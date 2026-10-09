@@ -9,6 +9,8 @@ namespace SteamEyaWinUI.Services;
 
 internal sealed class GitHubUpdateService
 {
+    // Enable only after all repository/metadata URLs point to the owner's enhanced release repository.
+    public static bool EnhancedUpdatesConfigured => false;
     public const string RepositoryUrl = "https://github.com/hvh-software/OpenSteamEYA/";
     public const string ReleasesUrl = $"{RepositoryUrl}/releases";
     private const string LatestMetadataUrl = "https://github.com/hvh-software/OpenSteamEYA/releases/latest/download/latest.json";
@@ -39,6 +41,8 @@ internal sealed class GitHubUpdateService
 
     public async Task<GitHubUpdateInfo> CheckLatestAsync(CancellationToken cancellationToken = default)
     {
+        if (!EnhancedUpdatesConfigured)
+            throw new InvalidOperationException("增强版尚未配置独立更新源，已禁用上游自动更新以避免覆盖增强版。");
         var site = ResolveSite(_selectedProxyCode);
 
         using var metadataResponse = await HttpClient.GetAsync(BuildUrl(site, LatestMetadataUrl), cancellationToken);

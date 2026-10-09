@@ -1,0 +1,9 @@
+{
+  "version": "v0.2.4-beta",
+  "approved": false,
+  "items": [
+    { "id": "steamworks-redistribution", "status": "pending", "reason": "Valve-signed steam_api64.dll from upstream; applicable SDK redistribution license/evidence not supplied." },
+    { "id": "branding-provenance", "status": "pending", "reason": "Upstream AppIcon.ico and Logo.png original artwork provenance/rights not documented." },
+    { "id": "valve-icons-review", "status": "pending", "reason": "Valve weapon assets have community/informational and noncommercial restrictions; confirm terms apply to this distribution." }
+  ]
+}

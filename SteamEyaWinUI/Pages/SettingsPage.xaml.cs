@@ -12,6 +12,9 @@ namespace SteamEyaWinUI.Pages;
 
 public sealed partial class SettingsPage : Page, INotifyPropertyChanged
 {
+    private void OpenManagerSettings_Click(object sender, RoutedEventArgs e) => MainWindow.Instance?.OpenAccountManagerSettings();
+    private void OpenManagerTool_Click(object sender, RoutedEventArgs e)
+    { if (sender is Button { Tag: string tool }) MainWindow.Instance?.OpenAccountManagerTool(tool); }
     private readonly DispatcherQueue _dispatcherQueue = DispatcherQueue.GetForCurrentThread();
 
     // 代码设置 ComboBox.SelectedItem 会触发 SelectionChanged，置位以区分“用户选择”与“初始同步”，避免回写/重复应用。

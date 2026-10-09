@@ -1,0 +1,20 @@
+  正在确定要还原的项目…
+  所有项目均是最新的，无法还原。
+  AccountManagement -> %PROJECT_ROOT%\AccountManagement\bin\x64\Release\net10.0\AccountManagement.dll
+  SteamEyaWinUI -> %PROJECT_ROOT%\SteamEyaWinUI\bin\x64\Release\net10.0-windows10.0.19041.0\win-x64\SteamEyaWinUI.dll
+  SteamEyaWinUI -> %PROJECT_ROOT%\artifacts\.publish-aot-d5cf935693234f399d19fa7f75d08151\
+PASS Native AOT: x64 native PE, no managed app/runtime host, required WinUI/Steam resources present.
+Portable package checked: 300 files; no test data/debug outputs; required notices present.
+Portable package checked: 300 files; no test data/debug outputs; required notices present.
+{
+  "Mode": "aot",
+  "Version": "0.2.4",
+  "ReleaseLabel": "0.2.4-beta",
+  "FileCount": 300,
+  "UncompressedBytes": 78318847.0,
+  "ZipBytes": 29559348,
+  "ZipSha256": "A4C18EDF3BC1949C68FFAAF1936C32D68B23CA3572E6610621E96139C5CC0560",
+  "SevenZipBytes": 17862570,
+  "SevenZipSha256": "21825E4A128E6AECB518FAAF8097C7B20DA25B2C5075DAC0A03F721078CCC8FA"
+}
+Executable: %PROJECT_ROOT%\artifacts\release-win-x64-aot\SteamEyaWinUI.exe

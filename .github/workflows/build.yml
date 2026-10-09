@@ -1,0 +1,66 @@
+name: Windows Native AOT CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, 'enhancement/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows-x64:
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+      - name: Ensure C++ and Windows SDK
+        shell: pwsh
+        run: ./scripts/ensure-native-toolchain.ps1 -InstallMissing
+      - name: Audit all refs and public source for secrets
+        shell: pwsh
+        run: ./scripts/check-secrets.ps1
+      - name: Ensure 7-Zip
+        shell: pwsh
+        run: |
+          if (-not (Get-Command 7z -ErrorAction SilentlyContinue) -and -not (Test-Path "$env:ProgramFiles/7-Zip/7z.exe")) {
+            choco install 7zip -y --no-progress
+            if ($LASTEXITCODE -ne 0) { throw '7-Zip installation failed.' }
+          }
+      - name: Locked restore
+        shell: pwsh
+        run: |
+          dotnet restore ./SteamEyaWinUI/SteamEyaWinUI.csproj -r win-x64 -p:Platform=x64 -p:PublishAot=true --locked-mode
+          if ($LASTEXITCODE -ne 0) { throw 'Locked restore failed.' }
+      - name: Executable Native AOT data checks
+        shell: pwsh
+        run: ./scripts/check-data.ps1
+      - name: Real WinUI checks with synthetic accounts
+        shell: pwsh
+        run: ./scripts/check-manager-ui.ps1 -NativeAot
+      - name: Build and verify production portable packages
+        shell: pwsh
+        run: |
+          ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.4 -ReleaseLabel 0.2.4-beta
+          if (-not (Test-Path ./artifacts/OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.7z)) { throw '7z package missing.' }
+      # Do not upload binary/test databases. A Release job separately enforces public rights review.
+      - name: Store sanitized build metrics
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: windows-x64-metrics
+          path: |
+            artifacts/size-aot.json
+            artifacts/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14

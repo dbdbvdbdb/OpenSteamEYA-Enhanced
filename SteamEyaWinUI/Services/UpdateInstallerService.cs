@@ -19,6 +19,8 @@ internal sealed class UpdateInstallerService
         IProgress<UpdateDownloadProgress>? progress = null,
         CancellationToken cancellationToken = default)
     {
+        if (!GitHubUpdateService.EnhancedUpdatesConfigured)
+            throw new InvalidOperationException("增强版未配置独立更新源，不能下载安装上游版本。");
         if (string.IsNullOrWhiteSpace(update.ArtifactUrl))
         {
             throw new InvalidOperationException("更新下载地址为空。");

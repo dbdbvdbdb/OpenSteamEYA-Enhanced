@@ -1,0 +1,6 @@
+PASS Native AOT: x64 native PE, no managed app/runtime host, required WinUI/Steam resources present.
+PASS release package excludes PDB, temp files and test evidence
+PASS formal executable contains no QA switch or synthetic account markers
+PASS all 296 extracted files match release file hashes
+PASS extracted formal app started with responsive native window
+PASS own test application closed gracefully; no Steam login/query invoked

@@ -1,137 +1,85 @@
-# SteamEYA
+# OpenSteamEYA Enhanced
 
-[中文](README.md) | [English](README_EN.md)
+C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展独立账号管理。当前功能基线为 **v0.2.4**，拟发布版本为 **v0.2.4-beta**。
 
-用 EYA 令牌登录和管理 Steam 账号的 Windows 桌面工具。
+> 发布尚未通过版权审核，现有 Valve DLL 和图像保留供本地验证，授权待核实。此文档不代表已有公开 Release。见 [发布审查报告](docs/RELEASE-AUDIT.zh-CN.md)。
 
-[![][latest-version-shield]][latest-version-link]
-[![][github-downloads-shield]][github-downloads-link]
-[![][github-stars-shield]][github-stars-link]
-[![][github-license-shield]][github-license-link]
+当前仓库 [dbdbvdbdb/OpenSteamEYA-Enhanced](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced) 为维护者审核用的私有仓库。待维护者核实剩余授权并确认后，再决定公开仓库与发布；私有上传不代表版权门禁已通过。
 
-SteamEYA 用 EYA 令牌（一种 Steam 登录凭据）代替账号密码登录，不需要手动输入密码或处理令牌验证器。除了上号，它还能查询账号的优先分、CS2 等级和冷却状态，管理用过的账号，并清理创意工坊订阅。
+## 主要功能
 
-**👉 [前往 Releases 下载最新版本](https://github.com/hvh-software/OpenSteamEYA/releases)**
+- 保留 Steam/EYA 登录、历史及缓存账号、CS2 查询、配装、个性化、工坊和云同步。
+- 账号卡片、紧凑列表、隐私模式、搜索、收藏、多分组、备注和三种背景；默认分组包含全部账号。
+- 按 `steam账号----steam密码` 逐行批量添加；支持 TXT/CSV/JSON 导入导出和 ZIP 备份恢复。
+- 多选查询 CS2：失败加入“失败”，无凭据加入“未查询”，成功后移除结果标记。
+- 冷却时间用黄色、GCVAC 标记用红色，仅显示实际异常；无异常显示“正常”，无可靠数据显示“未知”。
 
-## 界面截图
+按 SteamID/登录账号匹配历史及缓存账号，昵称不作为身份依据。登录页成功保存历史后会自动显示于管理页，但输入的密码不会自动写入管理库；单独添加账密也不会生成 EYA 凭据。见 [使用指南](docs/RUNNING.zh-CN.md) 和 [更新记录](CHANGELOG.md)。
 
-<p align="center">
-  <img src="https://i.imgur.com/z75EaCd.png" alt="SteamEYA 界面截图 1"><br><br>
-  <img src="https://i.imgur.com/Waxspvt.png" alt="SteamEYA 界面截图 2"><br><br>
-  <img src="https://i.imgur.com/d2K2HRe.png" alt="SteamEYA 界面截图 3">
-</p>
+## 真实软件截图
 
-## 功能
+以下为真实 WinUI 应用隔离测试截图，账号、密码与状态均为虚构测试数据，不代表真实 Steam 账号。截图不是 AI 效果图。
 
-**独家功能**
-- **一键配装** —— 在「配装」页用拖拽搭好 T / CT 整套武器（仿 CS2 购买菜单界面），自动存为该账号的预设；上号时一键把整套原版武器（含 T / CT 专属枪）装备到账号，全程无需进游戏。
+![真实账号管理页面，合成测试数据](docs/screenshots/beta-accounts.png)
 
-**两种登录方式**
+![真实紧凑列表](docs/screenshots/beta-list.png)
 
-- **手动模式** —— 填入账户名和 EYA 令牌，一键登录到本机 Steam 客户端。
-- **自动模式** —— 输入卡密，自动从上游服务器解析出账号并登录。
+截图导出缩放不能代替各系统 DPI 的实机验收，见 [验收记录](docs/FEATURES-0.2.4.zh-CN.md)。
 
-**账号状态一目了然**
+## Windows x64 下载与运行
 
-登录或粘贴令牌后，右侧面板会显示：
+审核通过后将在本仓库 **Releases → v0.2.4-beta** 提供：
 
-- Steam64 ID 与 EYA 令牌（JWT）过期时间
-- 令牌可用状态
-- CS2 优先分、等级与冷却 / 封禁状态
+- `OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.zip`
+- `OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.7z`
+- `SHA256SUMS.txt`
 
-点「一键查询」即可联网刷新这些信息。
+ZIP/7z 内容相同，任选一种完整解压到本地文件夹，运行 `SteamEyaWinUI.exe`。保留全部 DLL、PRI、Assets、Languages 和许可证，不能只复制 EXE。Native AOT 无需额外安装 .NET Runtime，Windows App SDK 运行文件随包附带。源码最低系统声明为 Windows 10 build 17763；当前 Windows x64 测试机以外的系统仍需实机验证。
 
-**历史账号管理**
-
-- 登录或查询过的账号自动入库，带头像和昵称
-- 按账户名、昵称或 Steam64 搜索
-- 从剪贴板批量导入（`账户名----令牌` 格式），或把选中账号导出回剪贴板
-- 对任意历史账号直接一键查询或重新登录
-- 全选当前列表批量查询，或一键查询全部历史账号，查询过程可随时取消
-- 按 CS2 VAC 标记、优先分区间、国服状态及分组组合筛选（基于最近一次查询）
-
-**清理创意工坊订阅**
-
-一键取消当前账号在 CS2（AppID 730）下的全部创意工坊订阅。
-
-**自动更新**
-
-启动时检查 GitHub Releases，有新版本会在「关于」页提示，并可直接在应用内下载并启动安装器完成更新。
-
-**多语言界面**
-
-内置简体中文、繁体中文、English，可在「设置」页随时切换，立即生效。
-
-## 安装
-
-1. 在 [Releases](https://github.com/hvh-software/OpenSteamEYA/releases) 下载最新的 `SteamEYA-<版本>-win-x64-setup.exe`。
-2. 双击安装包，按安装向导完成安装。
-3. 从开始菜单或桌面快捷方式启动 SteamEYA。
-
-环境要求：Windows 10 1809（Build 17763）及以上，并已安装 Steam 客户端。无需额外安装任何运行时。
-
-## 常见问题
-
-**安装器启动失败怎么办？**
-
-请先检查是否被安全软件拦截，或前往 [Releases](https://github.com/hvh-software/OpenSteamEYA/releases) 重新下载最新安装包后重试。
-
-**EYA 令牌是什么？**
-
-一种以 `eyAi` 开头的 Steam 登录凭据（JWT）。手动模式直接粘贴它即可登录，无需账号密码。
-
-**为什么上号后没切换账号？**
-
-上号前需要先完全退出正在运行的 Steam。如果 Steam 以管理员权限运行而本程序没有，会无法结束它，程序会提示你手动退出后重试。
-
-## 从源码构建
-
-需要 .NET 10 SDK 和 Visual Studio 的 C++ 工具链。
-
-```bash
-git clone https://github.com/hvh-software/OpenSteamEYA.git
-cd OpenSteamEYA
-dotnet build SteamEyaWinUI/SteamEyaWinUI.csproj -c Release
-```
-
-构建安装包（需先安装 Inno Setup 6）：
+用 PowerShell 核对校验和，与 Release 的 SHA256SUMS.txt 比对：
 
 ```powershell
-./scripts/build-installer.ps1 -Version 0.1.0
+Get-FileHash .\OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.zip -Algorithm SHA256
 ```
 
-## 🤝 参与贡献
+便携指程序无需安装，账号数据仍写入用户目录。增强版尚未配置自己的更新源，原上游下载安装入口已禁用以防覆盖增强功能。
 
-如果您对这个项目感兴趣，欢迎参与贡献，也欢迎 "Star" 支持一下 ^_^ <br>
-以下为提 PR 并合并的小伙伴，在此感谢项目中所有的贡献者。
+## 明文密码与备份恢复
 
-<a href="https://github.com/hvh-software/OpenSteamEYA/graphs/contributors" target="_blank">
-  <table>
-    <tr>
-      <th colspan="2">
-        <br><img src="https://contrib.rocks/image?repo=hvh-software/OpenSteamEYA"><br><br>
-      </th>
-    </tr>
-  </table>
-</a>
+**账号管理密码以明文存储，导出和备份也包含明文密码。** 圆点和隐私模式不加密文件。限制本机文件访问，不要上传数据库、备份或含凭据截图。复制密码不会自动清空剪贴板，不新增密码自动清除或验证流程；原凭据与 Token 管理逻辑保持不变。
 
-1. Fork 本项目
-2. 创建新分支：`git checkout -b feature/amazing-feature`
-3. 提交更改：`git commit -m "Add amazing feature"`
-4. 推送分支：`git push origin feature/amazing-feature`
-5. 发起 Pull Request，等待合并
+- 管理库：`%LocalAppData%\OpenSteamEYA-Enhanced\manager.json`。
+- 本地背景：同目录 `backgrounds`；可再生成的缓存：`cache`。
+- 原程序数据：`%AppData%\SteamEYA`，历史记录为 `history\accounts.json`。两套数据独立。
 
-## 许可证
+在账号管理工具中备份/恢复。管理 ZIP 备份包含管理库和本地背景，**不包含原 EYA Token、Steam 会话和缓存凭据**，不能用它完整迁移登录状态。恢复前另做备份，可合并或覆盖；旧单分组备份兼容，多分组需当前版本完整读取。规则见 [格式与备份](docs/FORMATS-AND-BACKUP.zh-CN.md)。
 
-本项目基于 [MIT 许可证](LICENSE) 开源。
+## 源码编译
 
-<!-- LINK GROUP -->
+依赖 Windows x64、PowerShell 7、Git、.NET SDK **10.0.401**、Visual Studio 2022/2026 C++ Build Tools（MSVC x64/x86）、Windows SDK **10.0.26100.0**；打包 7z 需要 7-Zip。`global.json` 固定 SDK 补丁系列，NuGet 从官方源恢复。WinUI 使用允许随应用再分发的 **2.3.9** 组件包。
 
-[latest-version-shield]: https://img.shields.io/github/v/release/hvh-software/OpenSteamEYA?style=flat-square&label=latest%20version&labelColor=black
-[latest-version-link]: https://github.com/hvh-software/OpenSteamEYA/releases
-[github-downloads-shield]: https://img.shields.io/github/downloads/hvh-software/OpenSteamEYA/total?style=flat-square&logo=github&label=downloads&labelColor=black
-[github-downloads-link]: https://github.com/hvh-software/OpenSteamEYA/releases
-[github-stars-shield]: https://img.shields.io/github/stars/hvh-software/OpenSteamEYA?style=flat-square&logo=github&labelColor=black
-[github-stars-link]: https://github.com/hvh-software/OpenSteamEYA/stargazers
-[github-license-shield]: https://img.shields.io/github/license/hvh-software/OpenSteamEYA?style=flat-square&logo=github&labelColor=black
-[github-license-link]: https://github.com/hvh-software/OpenSteamEYA/blob/main/LICENSE
+在仓库根目录执行：
+
+```powershell
+pwsh ./scripts/ensure-native-toolchain.ps1
+dotnet restore ./SteamEyaWinUI/SteamEyaWinUI.csproj -r win-x64 -p:Platform=x64 -p:PublishAot=true --locked-mode
+pwsh ./scripts/check-data.ps1
+pwsh ./scripts/check-manager-ui.ps1 -NativeAot
+pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.4 -ReleaseLabel 0.2.4-beta
+```
+
+缺少工具链时可显式运行 `ensure-native-toolchain.ps1 -InstallMissing`，可能需要管理员权限并占用数 GB；脚本核验 Microsoft 安装器签名、不自动重启。测试使用隔离合成数据，UI 检查需 Windows 图形会话，缺少会话会报告失败。
+
+发布目录在 `artifacts/release-win-x64-aot`。脚本验证真实 Native AOT、排除测试数据和调试产物，保留依赖与许可，生成 ZIP、可用时生成 7z 和 SHA256SUMS.txt。AOT 失败不回退普通自包含程序。GitHub Actions 执行可运行的测试；Release 通过版权门禁后只创建草稿预发布，不自动公开正式版或覆盖已有资产。见 [贡献指南](CONTRIBUTING.md)。
+
+## 致谢、版权与非官方关系
+
+- [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA)：实际复用基础代码，MIT，保留 `Copyright (c) 2026 tuntun1337`。
+- [SteamAccountManager](https://github.com/Sakiora/SteamAccountManager)：交互参考，MIT，`Copyright (c) 2026 xiaoyu_jie`。未复制代码或图像，账号卡片独立实现。
+- Microsoft WinUI/Windows App SDK、.NET、Valve Steamworks 和 Counter-Strike 资源：各自适用独立条款，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 和包内 `third-party-licenses`。
+
+项目源代码适用 [MIT](LICENSE)。**MIT 不覆盖 Valve 资源或 Microsoft 专有运行组件。** 使用前请阅读并同意 [第三方使用条款](END_USER_TERMS.txt) 中适用的完整许可，再分发也必须遵守。
+
+这是独立、非官方增强版，与 Valve、Steam 及上游开发者没有官方合作或背书关系。相关商标属于 Valve，请遵守 Steam 服务条款。
+
+**如有版权问题，请联系删除。** 可通过维护者 GitHub 联系渠道或仓库版权问题 Issue 提供权属依据；不要公开账号凭据。此说明不代替授权，未核实资源不会据此被视为可公开发布。漏洞报告见 [SECURITY.md](SECURITY.md)。
