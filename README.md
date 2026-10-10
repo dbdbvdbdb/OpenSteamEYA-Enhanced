@@ -2,9 +2,7 @@
 
 C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展独立账号管理。当前功能基线为 **v0.2.4**，拟发布版本为 **v0.2.4-beta**。
 
-> 发布尚未通过版权审核，现有 Valve DLL 和图像保留供本地验证，授权待核实。此文档不代表已有公开 Release。见 [发布审查报告](docs/RELEASE-AUDIT.zh-CN.md)。
-
-当前仓库 [dbdbvdbdb/OpenSteamEYA-Enhanced](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced) 为维护者审核用的私有仓库。待维护者核实剩余授权并确认后，再决定公开仓库与发布；私有上传不代表版权门禁已通过。
+源码仓库：[dbdbvdbdb/OpenSteamEYA-Enhanced](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced)。当前尚未创建 GitHub Release；构建、测试和公开准备记录见 [发布审查报告](docs/RELEASE-AUDIT.zh-CN.md)。
 
 ## 主要功能
 
@@ -28,7 +26,7 @@ C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA
 
 ## Windows x64 下载与运行
 
-审核通过后将在本仓库 **Releases → v0.2.4-beta** 提供：
+计划在本仓库 **Releases → v0.2.4-beta** 提供以下文件，当前尚无已发布下载：
 
 - `OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.zip`
 - `OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.7z`
@@ -82,4 +80,4 @@ pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.4 -ReleaseLabel 0.2.
 
 这是独立、非官方增强版，与 Valve、Steam 及上游开发者没有官方合作或背书关系。相关商标属于 Valve，请遵守 Steam 服务条款。
 
-**如有版权问题，请联系删除。** 可通过维护者 GitHub 联系渠道或仓库版权问题 Issue 提供权属依据；不要公开账号凭据。此说明不代替授权，未核实资源不会据此被视为可公开发布。漏洞报告见 [SECURITY.md](SECURITY.md)。
+**如有版权问题，请联系删除。** 可通过维护者 GitHub 联系渠道或仓库版权问题 Issue 提供权属依据；不要公开账号凭据。第三方资源继续适用原声明及条款。漏洞报告见 [SECURITY.md](SECURITY.md)。

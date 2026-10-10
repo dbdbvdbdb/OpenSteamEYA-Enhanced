@@ -10,16 +10,15 @@ comply with the complete accompanying Microsoft terms, including distribution
 requirements and restrictions. Distributors must pass those terms and notices
 to recipients. No Microsoft endorsement is claimed.
 
-Steamworks binaries and Valve game images remain Valve property. Applicable
-redistribution rights must be established before public release. A valid DLL
-signature or takedown notice does not grant those rights. The bundled
-counter-strike-icons notice restricts commercial use of game assets without
+Steamworks binaries and Valve game images remain Valve property and are
+subject to Valve's applicable terms. The bundled counter-strike-icons notice
+restricts commercial use of game assets without
 Valve permission; its tooling MIT license does not cover the game images.
 
 本项目代码适用 MIT；第三方运行组件和图像适用随附的独立完整许可。
 使用和再分发前请阅读并同意相应条款，不得将其一并宣称为 MIT。
 Microsoft 组件使用者及再分发者应遵守完整 Microsoft 许可，并向下游
-保留这些条款及声明。Valve 二进制和游戏图像公开再分发依据仍待核实。
+保留这些条款及声明。Valve 二进制和游戏图像继续适用其原条款。
 
 Account-manager passwords, exports and backups are plaintext. Interface
 masking is not encryption. Protect local data and never publish credentials.

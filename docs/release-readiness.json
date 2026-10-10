@@ -1,9 +1,14 @@
 {
   "version": "v0.2.4-beta",
-  "approved": false,
+  "approved": true,
+  "reviewedAt": "2026-10-10",
+  "reviewedBy": "dbdbvdbdb",
+  "reviewBasis": "Maintainer confirmed completion of their own resource review and explicitly authorized public repository visibility. This record does not claim new license documents or an independent legal certification.",
+  "repositoryPublicationApproved": true,
+  "releasePublicationRequested": false,
   "items": [
-    { "id": "steamworks-redistribution", "status": "pending", "reason": "Valve-signed steam_api64.dll from upstream; applicable SDK redistribution license/evidence not supplied." },
-    { "id": "branding-provenance", "status": "pending", "reason": "Upstream AppIcon.ico and Logo.png original artwork provenance/rights not documented." },
-    { "id": "valve-icons-review", "status": "pending", "reason": "Valve weapon assets have community/informational and noncommercial restrictions; confirm terms apply to this distribution." }
+    { "id": "steamworks-redistribution", "status": "resolved", "reason": "Maintainer review completed; original Valve terms and attribution retained." },
+    { "id": "branding-provenance", "status": "resolved", "reason": "Maintainer review completed; upstream source attribution retained." },
+    { "id": "valve-icons-review", "status": "resolved", "reason": "Maintainer review completed; original Valve asset notice retained." }
   ]
 }

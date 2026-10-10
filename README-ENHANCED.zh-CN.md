@@ -2,7 +2,7 @@
 
 以 OpenSteamEYA 为基础的 C# / WinUI 3 Windows x64 桌面程序。原登录、历史账号、缓存账号、配装、个性化、工坊和 CS2 功能保留，新增独立的账号密码管理页。参考项目当前为表格界面，账号卡片按任务书原创实现，没有复制其资源或代码。
 
-> 本次 v0.2.4-beta 开源准备仍有 Valve DLL 与图像版权阻断，未公开仓库或 Release；当前权威说明见 README.md、THIRD_PARTY_NOTICES.md 和 docs/RELEASE-AUDIT.zh-CN.md。
+> 当前说明见 README.md、THIRD_PARTY_NOTICES.md 和 docs/RELEASE-AUDIT.zh-CN.md。源码已获维护者批准公开，v0.2.4-beta Release 尚未发布。
 
 ## 运行
 

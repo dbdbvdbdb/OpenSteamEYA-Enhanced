@@ -1,6 +1,6 @@
 # Third-party notices / 第三方声明
 
-审核日期：2026-10-09。项目源代码 MIT 不覆盖第三方运行组件及 Valve 资源。本清单描述实际使用情况，不授予第三方权利。所有上游原版权和各组件完整条款均应保留。
+更新日期：2026-10-10。项目源代码 MIT 不覆盖第三方运行组件及 Valve 资源。本清单描述实际使用情况，不授予第三方权利。所有上游原版权和各组件完整条款均应保留。
 
 ## 上游代码与参考
 
@@ -35,30 +35,30 @@ CsWinRT、WinRT.Runtime 和 Windows SDK .NET 投影来自 SDK/上述组件的构
 
 Microsoft 运行组件并非 MIT 源码再许可。本项目及下游分发者必须遵守其完整分发要求，将条款传递给使用者，见 END_USER_TERMS.txt。包中 LICENSE/NOTICE 的完整内容优先于此摘要。
 
-## Valve 与其他图像资源：尚有公开阻断
+## Valve 与其他图像资源
 
 ### steam_api64.dll
 
 `SteamEyaWinUI/steam_api64.dll` 是上游引入的 Steamworks API x64 二进制，用于现有 CS2 云同步。文件带有有效 Valve Corp. Authenticode 签名，版本 `10.51.08.25`；未修改。
 
-[Valve Steamworks SDK 文档](https://partner.steamgames.com/doc/sdk/api) 说明 API 运行库需随应用提供；[开源分发说明](https://partner.steamgames.com/doc/sdk/uploading/distributing_opensource) 允许与 MIT 等宽松开源许可配合，但不等于所有用途的无条件授权。上游仓库未附完整适用 SDK 协议，本项目维护者未提供对应授权材料。**再分发条款适用性待核实，不能认定该 DLL 为 MIT；在解决前阻止公开发布。** 保留功能和文件，禁止为缩包而删除它。
+使用及再分发适用 Valve 的 Steamworks 条款，该 DLL 不在项目 MIT 许可范围内。参考 [Steamworks API 文档](https://partner.steamgames.com/doc/sdk/api) 与 [Steamworks 开源分发说明](https://partner.steamgames.com/doc/sdk/uploading/distributing_opensource)。保留原文件和现有 CS2 云同步功能。
 
 ### 35 个 Counter-Strike 武器 SVG
 
 `SteamEyaWinUI/Assets/weapons/*.svg` 来自 [Juknum/counter-strike-icons](https://github.com/Juknum/counter-strike-icons)，原始图像属于 Valve。完整声明保存在 `third-party-licenses/counter-strike-icons-LICENSE.txt`。
 
-该 [许可证](https://github.com/Juknum/counter-strike-icons/blob/main/LICENSE) 将工具代码的 MIT（Copyright (c) 2026 Julien Constant）与游戏图像区分：图像限信息/社区用途，未经 Valve 许可不得商业使用，并应遵守 Valve 条款。本项目没有复用其提取工具源码。**不要给图像贴 MIT 标识或用于商业分发；需确认本次公开分发符合允许的范围。**
+该 [许可证](https://github.com/Juknum/counter-strike-icons/blob/main/LICENSE) 将工具代码的 MIT（Copyright (c) 2026 Julien Constant）与游戏图像区分：图像限信息/社区用途，未经 Valve 许可不得商业使用，并应遵守 Valve 条款。本项目没有复用其提取工具源码，游戏图像不在项目 MIT 许可范围内。
 
 ### AppIcon.ico 与 Logo.png
 
-`SteamEyaWinUI/Assets/AppIcon.ico` 和 `Logo.png` 来自上游提交 `0ddd5337aef79c0df476abcc96c4619586dd6582`。上游代码 MIT 已保留，但原始图像作者/授权来源未记载，维护者也未提供补充材料。**这是待核实资源，公开前需来源与许可证据或经授权更换原创资源。** 当前按要求保留，不因此推断图像作者已授权。
+`SteamEyaWinUI/Assets/AppIcon.ico` 和 `Logo.png` 来自上游提交 `0ddd5337aef79c0df476abcc96c4619586dd6582`，沿用原应用品牌图像。保留上游版权和出处，不将第三方图像改为增强版原创或重新许可为 MIT。
 
 ### 运行时用户背景和头像
 
-用户自选图片、Steam 公开头像/背景按用户操作加载到本地，运行包不携带用户图片与缓存；网络可访问不意味着可公开再分发。README 的实际 WinUI 截图使用合成数据，仍包含原应用 Logo，图标版权阻断解除前不公开上传。
+用户自选图片、Steam 公开头像/背景按用户操作加载到本地，运行包不携带用户图片与缓存。README 的实际 WinUI 截图使用合成数据，包含原应用 Logo。
 
 ## 商标与版权反馈
 
 Steam、Steamworks、Counter-Strike 为 Valve 的相关商标，本增强版与 Valve、Steam 及上游维护者无官方合作或背书关系。
 
-如有版权问题，请联系删除。请通过维护者 GitHub 联系渠道或本仓库版权问题 Issue 提供依据；不要发送账号密码或 Token。该说明不替代授权，不解除上述公开发布门禁。
+如有版权问题，请联系删除。请通过维护者 GitHub 联系渠道或本仓库版权问题 Issue 提供依据；不要发送账号密码或 Token。相关资源继续适用各自的版权声明及条款。
