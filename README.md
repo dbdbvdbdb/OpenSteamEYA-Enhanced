@@ -1,8 +1,8 @@
 # OpenSteamEYA Enhanced
 
-C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展独立账号管理。当前功能基线为 **v0.2.4**，拟发布版本为 **v0.2.4-beta**。
+C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展独立账号管理。当前功能基线为 **v0.2.4**，当前预发布版本为 **v0.2.4-beta**。
 
-源码仓库：[dbdbvdbdb/OpenSteamEYA-Enhanced](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced)。当前尚未创建 GitHub Release；构建、测试和公开准备记录见 [发布审查报告](docs/RELEASE-AUDIT.zh-CN.md)。
+源码仓库：[dbdbvdbdb/OpenSteamEYA-Enhanced](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced)。下载见 [v0.2.4-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.4-beta)；构建、测试和发布记录见 [发布审查报告](docs/RELEASE-AUDIT.zh-CN.md)。
 
 ## 主要功能
 
@@ -26,11 +26,11 @@ C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA
 
 ## Windows x64 下载与运行
 
-计划在本仓库 **Releases → v0.2.4-beta** 提供以下文件，当前尚无已发布下载：
+Windows x64 Native AOT 便携包已在 [v0.2.4-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.4-beta) 提供：
 
-- `OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.zip`
-- `OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.7z`
-- `SHA256SUMS.txt`
+- [ZIP（28.19 MiB）](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.4-beta/OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.zip)
+- [7z（17.04 MiB）](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.4-beta/OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.7z)
+- [SHA256SUMS.txt](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.4-beta/SHA256SUMS.txt)
 
 ZIP/7z 内容相同，任选一种完整解压到本地文件夹，运行 `SteamEyaWinUI.exe`。保留全部 DLL、PRI、Assets、Languages 和许可证，不能只复制 EXE。Native AOT 无需额外安装 .NET Runtime，Windows App SDK 运行文件随包附带。源码最低系统声明为 Windows 10 build 17763；当前 Windows x64 测试机以外的系统仍需实机验证。
 

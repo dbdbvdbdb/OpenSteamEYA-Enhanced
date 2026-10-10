@@ -1,0 +1,11 @@
+{
+  "ReleaseTag": "v0.2.4-beta",
+  "SourceCommit": "fd9fb63c6de0e3b70d1e8ddeacf954a41eef227a",
+  "BuildRun": "https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/actions/runs/38019962559",
+  "FileCount": 300,
+  "UncompressedBytes": 78316926.0,
+  "ZipBytes": 29558407,
+  "SevenZipBytes": 17865816,
+  "ZipSha256": "4595086e633ca92bc42880388c228df245105a65fb673f33579491621ba0e35a",
+  "SevenZipSha256": "c6b723ab72b5379eaa904a5250082752682f281e12c0f50b38f0d9fa54ff290d"
+}

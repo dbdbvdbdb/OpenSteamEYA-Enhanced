@@ -6,7 +6,7 @@
 
 维护者自行查询后确认资源审核完成，并明确批准公开 [dbdbvdbdb/OpenSteamEYA-Enhanced](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced)。根据该决定，移除 Steamworks DLL、原品牌图像及 Valve 武器图像的待核实与公开阻断描述，保留现有功能、资源、原作者版权和第三方许可。
 
-审核记录写入 `release-readiness.json`，依据为维护者本次确认，不表述为额外取得了新的授权文件。源码、文档、测试及上游提交历史均保留；生成程序包、日志、工具和测试数据库由 `.gitignore` 排除。**公开源码仓库与发布程序 Release 分别执行，当前尚未创建 Release。**
+审核记录写入 `release-readiness.json`，依据为维护者本次确认，不表述为额外取得了新的授权文件。源码、文档、测试及上游提交历史均保留；生成程序包、日志、工具和测试数据库由 `.gitignore` 排除。维护者随后明确要求创建 Release，[v0.2.4-beta 预发布版本](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.4-beta) 已于 2026-10-10 公开。
 
 ## 许可证结果
 
@@ -57,6 +57,7 @@ README 含上游致谢、功能、真实合成数据截图、Windows 下载/运�
 | 脚本语法 | 全部 PowerShell 脚本解析通过 |
 | Actions 静态检查 | 官方校验过的 actionlint **1.7.12**，两个工作流检查通过 |
 | **远端 GitHub Actions** | 提交 `6657c57` 的 [首次 Windows Native AOT CI](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/actions/runs/37957334299) 全部成功：85 项数据检查、224 项真实 WinUI 检查及 ZIP/7z 打包验证通过；后续提交结果以各自 Actions 记录为准 |
+| **正式 Release 构建** | 提交 `fd9fb63` 的 [发布工作流](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/actions/runs/38019962559) 全部成功，85 项数据及 224 项 WinUI 检查通过；附件下载后 SHA-256、ZIP/7z 完整性及实际 Windows 解压启动检查通过 |
 
 CI 使用官方 `windows-2025-vs2026`、固定 Actions 提交、.NET 10 SDK、完整 Git 历史扫描、C++/SDK 检查及必要时官方签名工具链安装、数据与实际 WinUI 检查、AOT 打包和校验。Release 接受 beta 标签，分离编译数字版本与标签，版权门禁在构建/上传前执行；只创建 draft prerelease、不标 Latest、不覆盖现有资产。没有自动公开正式版。
 
@@ -86,6 +87,22 @@ ZIP SHA-256：`a4c18edf3bc1949c68ffaaf1936c32d68b23ca3572e6610621e96139c5cc0560`
 
 这是本地审查构建，不是已发布资产。远端重编译后需以实际上传文件重新统计、生成校验和并更新 Release 说明。
 
+## 正式 Release 附件
+
+v0.2.4-beta 的源码标签对应 `fd9fb63c6de0e3b70d1e8ddeacf954a41eef227a`。正式附件由该提交的 GitHub Actions 构建，不复用旧本地审查包。
+
+| 文件 | 实际字节 | MiB |
+| --- | ---: | ---: |
+| Windows x64 Native AOT ZIP | 29,558,407 | 28.19 |
+| Windows x64 Native AOT 7z | 17,865,816 | 17.04 |
+| 解压后 300 个文件 | 78,316,926 | 74.69 |
+
+正式 ZIP SHA-256：`4595086e633ca92bc42880388c228df245105a65fb673f33579491621ba0e35a`。
+
+正式 7z SHA-256：`c6b723ab72b5379eaa904a5250082752682f281e12c0f50b38f0d9fa54ff290d`。
+
+下载入口、完整说明及 SHA256SUMS.txt 见 [Release 页面](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.4-beta)，统计及启动证据见 `test-evidence/release-beta/final-release-metrics.json`、`final-release-startup.txt`。
+
 ## 仍需人工验收
 
 真实测试账号的 Steam/EYA 账密登录及 Steam Guard、缓存一键登录、未保存密码账号登录、CS2 联网查询、CS2 云同步、配装/个性化/工坊等原功能；以及 Windows 10/11 其他系统、四种系统 DPI、深浅主题与窗口宽度组合。自动化覆盖管理操作、导入导出、备份恢复和界面合成场景，不能代替真实服务验收。用户先前仅确认原页面打开，联网验证留待自行测试。
@@ -98,4 +115,4 @@ ZIP SHA-256：`a4c18edf3bc1949c68ffaaf1936c32d68b23ca3572e6610621e96139c5cc0560`
 - 脚本：publish-enhanced、package-source、check-manager-ui，以及新增工具链、数据、敏感扫描、许可证归档、打包/启动/公开门禁检查和 audit-source.py。
 - 文档证据、最新真实截图及发布草稿。
 
-与原 v0.2.4 源码交付比较的 **137 个源码、UI、DLL 和图像文件哈希全部一致**。Steam 凭据、EYA、CS2 业务服务及账号管理密码数据逻辑均未改动。本次公开更新仅调整文档及维护者审核记录，不改业务代码、不删除资源、不重写 Git 历史、不创建 Release。
+与原 v0.2.4 源码交付比较的 **137 个源码、UI、DLL 和图像文件哈希全部一致**。Steam 凭据、EYA、CS2 业务服务及账号管理密码数据逻辑均未改动。公开与发布阶段仅调整文档及维护者审核记录，不改业务代码、不删除资源、不重写 Git 历史。最终按维护者要求公开 v0.2.4-beta 预发布版本。
