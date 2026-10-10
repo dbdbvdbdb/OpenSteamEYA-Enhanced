@@ -1,6 +1,6 @@
 # OpenSteamEYA 增强版 0.2.4 — 使用说明
 
-当前 v0.2.4-beta 功能基线为 0.2.4，GitHub Release 尚未发布。WinUI 使用允许随应用再分发的 2.3.9。请阅读并同意 END_USER_TERMS.txt 及 THIRD_PARTY_NOTICES.md 中相应组件的完整条款。
+v0.2.4-beta 功能基线为 0.2.4，Windows x64 便携包采用 Native AOT，无需额外安装 .NET Runtime。下载和校验文件见 [GitHub Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.4-beta)。WinUI 使用 2.3.9。请阅读并同意 END_USER_TERMS.txt 及 THIRD_PARTY_NOTICES.md 中相应组件的完整条款。
 
 将完整压缩包解压到本地普通文件夹，运行 `SteamEyaWinUI.exe`。不要只复制 EXE；同目录的 WinUI/Windows App SDK DLL、PRI、Assets、Languages 及 Steam API 文件都是程序的一部分。Native AOT 包无需安装 .NET 运行时。未提供安装器。
 

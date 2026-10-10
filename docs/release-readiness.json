@@ -5,7 +5,7 @@
   "reviewedBy": "dbdbvdbdb",
   "reviewBasis": "Maintainer confirmed completion of their own resource review and explicitly authorized public repository visibility. This record does not claim new license documents or an independent legal certification.",
   "repositoryPublicationApproved": true,
-  "releasePublicationRequested": false,
+  "releasePublicationRequested": true,
   "items": [
     { "id": "steamworks-redistribution", "status": "resolved", "reason": "Maintainer review completed; original Valve terms and attribution retained." },
     { "id": "branding-provenance", "status": "resolved", "reason": "Maintainer review completed; upstream source attribution retained." },
