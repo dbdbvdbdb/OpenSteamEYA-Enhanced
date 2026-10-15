@@ -56,7 +56,7 @@ Get-FileHash .\OpenSteamEYA-Enhanced-0.2.6-beta-win-x64-aot.zip -Algorithm SHA25
 
 ## 源码编译
 
-依赖 Windows x64、PowerShell 7、Git、.NET SDK **10.0.401**、Visual Studio 2022/2026 C++ Build Tools（MSVC x64/x86）、Windows SDK **10.0.26100.0**；打包 7z 需要 7-Zip。`global.json` 固定 SDK 补丁系列，NuGet 从官方源恢复。WinUI 使用允许随应用再分发的 **2.3.9** 组件包。
+依赖 Windows x64、PowerShell 7、Git、.NET SDK **10.0.401**、Visual Studio 2022/2026 C++ Build Tools（MSVC x64/x86）、Windows SDK **10.0.26100.0**；打包 7z 需要 7-Zip。`global.json` 固定 SDK 精确版本，避免预装 SDK 升级改变 Native AOT 依赖而使锁定还原失败；升级 SDK 时需同时审查并更新锁文件。NuGet 从官方源恢复。WinUI 使用允许随应用再分发的 **2.3.9** 组件包。
 
 在仓库根目录执行：
 

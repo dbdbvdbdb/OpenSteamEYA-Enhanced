@@ -38,6 +38,9 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           global-json-file: global.json
+      - name: Verify exact SDK for locked Native AOT restore
+        shell: pwsh
+        run: ./scripts/assert-dotnet-sdk.ps1
       - name: Validate version
         id: meta
         shell: pwsh
@@ -53,6 +56,19 @@ jobs:
           "label=$label" >> $env:GITHUB_OUTPUT
           "tag=v$label" >> $env:GITHUB_OUTPUT
           if (-not (Test-Path "./docs/releases/v$label.md")) { throw 'Reviewed release notes missing.' }
+      - name: Detect existing release without modifying it
+        id: existing
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ steps.meta.outputs.tag }}
+        run: |
+          $tags = gh api "repos/$env:GH_REPO/releases?per_page=100" --paginate --jq '.[].tag_name'
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot inspect releases; refusing to assume the tag is unpublished.' }
+          $exists = @($tags) -ccontains $env:RELEASE_TAG
+          "exists=$($exists.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          if ($exists) { Write-Output 'Release already exists. Build and tests will run; existing assets, tag and release state will be preserved.' }
       - name: Ensure C++ and Windows SDK
         shell: pwsh
         run: ./scripts/ensure-native-toolchain.ps1 -InstallMissing
@@ -93,6 +109,7 @@ jobs:
           if-no-files-found: error
           retention-days: 14
       - name: Create draft prerelease only
+        if: steps.existing.outputs.exists != 'true'
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}

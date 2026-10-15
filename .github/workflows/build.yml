@@ -25,6 +25,9 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           global-json-file: global.json
+      - name: Verify exact SDK for locked Native AOT restore
+        shell: pwsh
+        run: ./scripts/assert-dotnet-sdk.ps1
       - name: Ensure C++ and Windows SDK
         shell: pwsh
         run: ./scripts/ensure-native-toolchain.ps1 -InstallMissing
