@@ -1,4 +1,4 @@
-param([switch]$NativeAot = $true, [string]$Version = '0.2.5', [string]$ReleaseLabel = '')
+param([switch]$NativeAot = $true, [string]$Version = '0.2.6', [string]$ReleaseLabel = '')
 $ErrorActionPreference = 'Stop'
 if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw 'Version must be X.Y.Z' }
 if (-not $ReleaseLabel) { $ReleaseLabel = $Version }
@@ -12,7 +12,7 @@ if ($NativeAot) { $releaseDirectory += '-aot' }
 $stagingDirectory = Join-Path $artifactRoot ('.publish-' + $mode + '-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force -Path $stagingDirectory | Out-Null
 $publishArguments = @('publish', (Join-Path $projectRoot 'SteamEyaWinUI/SteamEyaWinUI.csproj'), '-c', 'Release', '-r', 'win-x64', '-p:Platform=x64', '-p:EnableManagerUiChecks=false', '-o', $stagingDirectory,
-    "-p:Version=$Version", "-p:FileVersion=$Version.0", "-p:AssemblyVersion=$Version.0", "-p:InformationalVersion=v$Version-enhanced", "-p:PublishAot=$($NativeAot.IsPresent.ToString().ToLowerInvariant())")
+    "-p:Version=$Version", "-p:FileVersion=$Version.0", "-p:AssemblyVersion=$Version.0", "-p:InformationalVersion=v$ReleaseLabel", "-p:PublishAot=$($NativeAot.IsPresent.ToString().ToLowerInvariant())")
 if (-not $NativeAot) { $publishArguments += '-p:PublishTrimmed=false' }
 else { $publishArguments += '-p:RestoreLockedMode=true' }
 & dotnet @publishArguments

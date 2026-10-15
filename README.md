@@ -1,8 +1,8 @@
 # OpenSteamEYA Enhanced
 
-C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展独立账号管理。当前版本为 **v0.2.5-beta（白号／黑号管理）**。
+C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展独立账号管理。当前版本为 **v0.2.6-beta（启动检查更新）**。
 
-源码仓库：[dbdbvdbdb/OpenSteamEYA-Enhanced](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced)。下载见 [v0.2.5-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.5-beta)；本次发布说明见 [v0.2.5-beta](docs/releases/v0.2.5-beta.md)，历史开源审查见 [发布审查报告](docs/RELEASE-AUDIT.zh-CN.md)。
+源码仓库：[dbdbvdbdb/OpenSteamEYA-Enhanced](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced)。下载见 [v0.2.6-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.6-beta)；本次发布说明见 [v0.2.6-beta](docs/releases/v0.2.6-beta.md)，历史开源审查见 [发布审查报告](docs/RELEASE-AUDIT.zh-CN.md)。
 
 详细规则与本地验证见 [v0.2.5 改造交付报告](docs/FEATURES-0.2.5.zh-CN.md)。
 
@@ -28,21 +28,21 @@ C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA
 
 ## Windows x64 下载与运行
 
-Windows x64 Native AOT 便携包已在 [v0.2.5-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.5-beta) 提供：
+Windows x64 Native AOT 便携包已在 [v0.2.6-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.6-beta) 提供：
 
-- [ZIP（28.24 MiB）](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.5-beta/OpenSteamEYA-Enhanced-0.2.5-beta-win-x64-aot.zip)
-- [7z（17.06 MiB）](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.5-beta/OpenSteamEYA-Enhanced-0.2.5-beta-win-x64-aot.7z)
-- [SHA256SUMS.txt](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.5-beta/SHA256SUMS.txt)
+- [ZIP（28.25 MiB）](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.6-beta/OpenSteamEYA-Enhanced-0.2.6-beta-win-x64-aot.zip)
+- [7z（17.07 MiB）](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.6-beta/OpenSteamEYA-Enhanced-0.2.6-beta-win-x64-aot.7z)
+- [SHA256SUMS.txt](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.6-beta/SHA256SUMS.txt)
 
 ZIP/7z 内容相同，任选一种完整解压到本地文件夹，运行 `SteamEyaWinUI.exe`。保留全部 DLL、PRI、Assets、Languages 和许可证，不能只复制 EXE。Native AOT 无需额外安装 .NET Runtime，Windows App SDK 运行文件随包附带。源码最低系统声明为 Windows 10 build 17763；当前 Windows x64 测试机以外的系统仍需实机验证。
 
 用 PowerShell 核对校验和，与 Release 的 SHA256SUMS.txt 比对：
 
 ```powershell
-Get-FileHash .\OpenSteamEYA-Enhanced-0.2.5-beta-win-x64-aot.zip -Algorithm SHA256
+Get-FileHash .\OpenSteamEYA-Enhanced-0.2.6-beta-win-x64-aot.zip -Algorithm SHA256
 ```
 
-便携指程序无需安装，账号数据仍写入用户目录。增强版尚未配置自己的更新源，原上游下载安装入口已禁用以防覆盖增强功能。
+便携指程序无需安装，账号数据仍写入用户目录。v0.2.6 起每次启动后台检查增强版 GitHub Releases（含 beta），有更新时在“关于”显示红点及下载入口；失败不打断使用，可手动重试，不自动下载安装。详见 [更新检查说明](docs/UPDATES.zh-CN.md)。已发布的 v0.2.5-beta 不具备此功能，首次升级需手动下载。
 
 ## 明文密码与备份恢复
 
@@ -65,7 +65,7 @@ pwsh ./scripts/ensure-native-toolchain.ps1
 dotnet restore ./SteamEyaWinUI/SteamEyaWinUI.csproj -r win-x64 -p:Platform=x64 -p:PublishAot=true --locked-mode
 pwsh ./scripts/check-data.ps1
 pwsh ./scripts/check-manager-ui.ps1 -NativeAot
-pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.5 -ReleaseLabel 0.2.5-beta
+pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.6 -ReleaseLabel 0.2.6-beta
 ```
 
 缺少工具链时可显式运行 `ensure-native-toolchain.ps1 -InstallMissing`，可能需要管理员权限并占用数 GB；脚本核验 Microsoft 安装器签名、不自动重启。测试使用隔离合成数据，UI 检查需 Windows 图形会话，缺少会话会报告失败。

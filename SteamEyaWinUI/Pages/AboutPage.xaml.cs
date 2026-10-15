@@ -34,7 +34,7 @@ public sealed partial class AboutPage : Page, INotifyPropertyChanged
     {
         base.OnNavigatedTo(e);
 
-        if (AppState.LatestUpdate is null && !AppState.IsCheckingForUpdates)
+        if (AppState.UpdateCheckedAt is null && !AppState.IsCheckingForUpdates)
         {
             _ = AppState.CheckForUpdatesAsync(isAutomatic: true);
         }
@@ -237,7 +237,7 @@ public sealed partial class AboutPage : Page, INotifyPropertyChanged
 
         AboutUpdateStatusText.Text = update.IsUpdateAvailable
             ? Loc.Tf("About_Update_Available_Format", update.LatestTag)
-            : Loc.Tf("About_Update_UpToDate_Format", update.LatestTag);
+            : Loc.Tf("About_Update_UpToDate_Format", update.CurrentVersion);
         AboutArtifactText.Text = string.IsNullOrWhiteSpace(update.ArtifactName)
             ? Loc.T("About_Artifact_NoAsset")
             : Loc.Tf("About_Artifact_Format", update.ArtifactName, FormatHelper.FormatFileSize(update.ArtifactSize));

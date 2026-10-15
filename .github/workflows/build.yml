@@ -52,8 +52,8 @@ jobs:
       - name: Build and verify production portable packages
         shell: pwsh
         run: |
-          ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.5 -ReleaseLabel 0.2.5-beta
-          if (-not (Test-Path ./artifacts/OpenSteamEYA-Enhanced-0.2.5-beta-win-x64-aot.7z)) { throw '7z package missing.' }
+          ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.6 -ReleaseLabel 0.2.6-beta
+          if (-not (Test-Path ./artifacts/OpenSteamEYA-Enhanced-0.2.6-beta-win-x64-aot.7z)) { throw '7z package missing.' }
       # Do not upload binary/test databases. A Release job separately enforces public rights review.
       - name: Store sanitized build metrics
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

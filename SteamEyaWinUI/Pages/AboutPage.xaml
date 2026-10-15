@@ -21,7 +21,7 @@
                 </Border>
 
                 <StackPanel Spacing="4" VerticalAlignment="Center">
-                    <TextBlock Text="SteamEYA" Style="{StaticResource PageTitleTextStyle}" />
+                    <TextBlock Text="OpenSteamEYA Enhanced" Style="{StaticResource PageTitleTextStyle}" />
                     <TextBlock
                         x:Name="AboutVersionText"
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
@@ -119,7 +119,7 @@
                         Text="{x:Bind Strings.Get('About_Repo_Section'), Mode=OneWay}"
                         Style="{StaticResource SectionTitleTextStyle}" />
                     <TextBlock
-                        Text="https://github.com/hvh-software/OpenSteamEYA"
+                        Text="https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced"
                         IsTextSelectionEnabled="True"
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                         TextWrapping="Wrap" />

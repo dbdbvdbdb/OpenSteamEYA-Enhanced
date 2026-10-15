@@ -1,6 +1,6 @@
-# OpenSteamEYA 增强版 0.2.4 — 使用说明
+# OpenSteamEYA 增强版 0.2.6 — 使用说明
 
-本文适用于 v0.2.5 白号／黑号管理版本，基于 v0.2.4-beta 改造。Windows x64 便携包采用 Native AOT，无需额外安装 .NET Runtime。本次程序包为本地交付，尚未发布到 GitHub；仓库中已有的 v0.2.4-beta 下载不包含本次改造。WinUI 使用 2.3.9。请阅读并同意 END_USER_TERMS.txt 及 THIRD_PARTY_NOTICES.md 中相应组件的完整条款。
+本文适用于 v0.2.6 白号／黑号管理及启动检查更新版本。Windows x64 便携包采用 Native AOT，无需额外安装 .NET Runtime。WinUI 使用 2.3.9。请阅读并同意 END_USER_TERMS.txt 及 THIRD_PARTY_NOTICES.md 中相应组件的完整条款。
 
 将完整压缩包解压到本地普通文件夹，运行 `SteamEyaWinUI.exe`。不要只复制 EXE；同目录的 WinUI/Windows App SDK DLL、PRI、Assets、Languages 及 Steam API 文件都是程序的一部分。Native AOT 包无需安装 .NET 运行时。未提供安装器。
 
@@ -43,3 +43,7 @@
 卡片默认从头像取色，也可选择本地图片或公开 Steam 资料背景；私密、网络失败或不支持的背景会回退。优先账户、在线等状态没有可靠数据时不猜测显示。原程序数据仍在 `%AppData%\SteamEYA`。
 
 增强版没有配置自己的更新源，因此已禁用上游下载安装，避免覆盖增强功能。源码、开发记录、测试证据及体积报告随源码交付，运行包仅保留使用/格式说明和许可。根 LICENSE 与 third-party-licenses 保留各自条款。
+
+## 检查更新
+
+每次启动后台检查增强版 GitHub Releases（包含 beta）一次。有新版时“关于”显示红点，可查看更新记录、下载 ZIP 或打开发布页。失败不打断使用，可在“关于”手动重试；不自动下载安装或覆盖文件。版本查询直连官方公开 GitHub API，不附带账号或凭据，下载代理只影响下载链接。升级前备份数据，将新包完整解压到新目录。

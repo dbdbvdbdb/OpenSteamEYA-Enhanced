@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-16",
+  "version": "0.2.6-beta",
+  "baseline": "817478f",
+  "native_aot": true,
+  "data_and_update_checks_passed": 134,
+  "winui_checks_passed": 274,
+  "live_public_github_api": "PASS: v0.2.5-beta and 29614302-byte portable ZIP identified via Native AOT implementation",
+  "production_zip_startup": "PASS: responsive native window and graceful exit",
+  "package": {
+    "Mode": "aot",
+    "Version": "0.2.6",
+    "ReleaseLabel": "0.2.6-beta",
+    "FileCount": 300,
+    "UncompressedBytes": 78466088.0,
+    "ZipBytes": 29624575,
+    "ZipSha256": "EB0F3E19AE3A4784B55EF052F5E63EC6DC3417A31E9725503E934A685F41082E",
+    "SevenZipBytes": 17902521,
+    "SevenZipSha256": "56B399C7CE60D1E67AFE3305D2D3089B6273A86081406B6B01BD131114705075"
+  },
+  "github_published": false,
+  "steam_login_or_cs2_network_testing": false,
+  "ui_release_data": "Synthetic v0.2.7-beta; screenshots are real WinUI renders"
+}

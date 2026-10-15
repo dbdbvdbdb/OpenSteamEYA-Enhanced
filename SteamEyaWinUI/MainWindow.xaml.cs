@@ -84,8 +84,7 @@ public sealed partial class MainWindow : Window
         // 等内容进入可视树（XamlRoot 就绪）后再跑，检测失败才需要弹框。
         RootNavigationView.Loaded += OnRootNavigationViewLoaded;
 
-        if (GitHubUpdateService.EnhancedUpdatesConfigured)
-            _ = AppState.CheckForUpdatesAsync(isAutomatic: true);
+        _ = AppState.CheckForUpdatesAsync(isAutomatic: true);
     }
 
     // 启动时解析 Steam 路径：成功则静默持久化；自动检测失败时弹框让用户手动选择含 steam.exe 的目录。

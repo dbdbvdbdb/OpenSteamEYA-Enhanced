@@ -20,7 +20,11 @@ internal static class AppState
     public static CsLoadoutService LoadoutService { get; } = new();
     public static SteamProfileService ProfileService { get; } = new();
     public static SteamCredentialsAuthService CredentialsAuthService { get; } = new();
+#if MANAGER_UI_CHECKS
+    public static GitHubUpdateService UpdateService { get; set; } = new();
+#else
     public static GitHubUpdateService UpdateService { get; } = new();
+#endif
     public static UpdateInstallerService UpdateInstallerService { get; } = new();
     public static SettingsService SettingsService { get; } = new();
     public static Cs2CloudService Cs2CloudService { get; } = new();
@@ -147,7 +151,7 @@ internal static class AppState
 
     public static async Task CheckForUpdatesAsync(bool isAutomatic)
     {
-        if (IsCheckingForUpdates)
+        if (IsCheckingForUpdates || (isAutomatic && UpdateCheckedAt.HasValue))
         {
             return;
         }
@@ -178,11 +182,12 @@ internal static class AppState
             }
             else if (!isAutomatic)
             {
-                ShowStatus(Loc.Tf("AppState_Update_UpToDate_Format", update.LatestTag), InfoBarSeverity.Success);
+                ShowStatus(Loc.Tf("AppState_Update_UpToDate_Format", update.CurrentVersion), InfoBarSeverity.Success);
             }
         }
         catch (Exception ex)
         {
+            LatestUpdate = null;
             UpdateCheckError = ex.Message;
             UpdateCheckedAt = DateTimeOffset.Now;
 

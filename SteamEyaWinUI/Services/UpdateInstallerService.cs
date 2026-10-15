@@ -6,6 +6,8 @@ namespace SteamEyaWinUI.Services;
 
 internal sealed class UpdateInstallerService
 {
+    // Enhanced releases are portable ZIP/7z packages; this legacy installer path remains disabled.
+    private static bool InstallerUpdatesSupported => false;
     private static readonly HttpClient HttpClient = CreateHttpClient();
 
     private const int DownloadBufferSize = 80 * 1024;
@@ -19,8 +21,8 @@ internal sealed class UpdateInstallerService
         IProgress<UpdateDownloadProgress>? progress = null,
         CancellationToken cancellationToken = default)
     {
-        if (!GitHubUpdateService.EnhancedUpdatesConfigured)
-            throw new InvalidOperationException("增强版未配置独立更新源，不能下载安装上游版本。");
+        if (!InstallerUpdatesSupported)
+            throw new InvalidOperationException("增强版使用便携包，请在发布页下载并完整解压，不支持自动安装。");
         if (string.IsNullOrWhiteSpace(update.ArtifactUrl))
         {
             throw new InvalidOperationException("更新下载地址为空。");

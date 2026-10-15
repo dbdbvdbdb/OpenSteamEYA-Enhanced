@@ -2,6 +2,14 @@ using System.IO.Compression;
 using System.Text;
 using OpenSteamEya.AccountManagement;
 
+if (args.Contains("--check-github"))
+{
+    var release = await new SteamEyaWinUI.Services.GitHubUpdateService().CheckLatestAsync();
+    Console.WriteLine($"Official GitHub API Native AOT check: {release.LatestTag}; {release.ArtifactType}; {release.ArtifactSize} bytes; {release.ReleaseUrl}");
+    if (release.ArtifactUrl is null) throw new Exception("Expected portable ZIP not found in public release");
+    return;
+}
+
 int passed = 0;
 void Check(bool condition, string name) { if (!condition) throw new Exception("FAILED: " + name); passed++; Console.WriteLine("PASS " + name); }
 async Task Reject(Func<Task> operation, string name)
@@ -112,6 +120,7 @@ try
     await Task.WhenAll(Enumerable.Range(0, 25).Select(n => new AccountStore(store.Root).SaveAccountAsync(new() { LoginName = "parallel-" + n })));
     Check((await store.LoadAsync()).Accounts.Count == 126, "concurrent read modify write serialized");
     await CategoryChecks.RunAsync(Check, root);
+    await UpdateChecks.RunAsync(Check);
     await FeatureChecks.RunAsync(Check, root);
     await GroupStatusChecks.RunAsync(Check, root);
     Console.WriteLine($"All {passed} checks passed. Only synthetic test accounts used.");
