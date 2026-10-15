@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace OpenSteamEya.AccountManagement;
 
-public sealed record BackupPreview(ManagerDocument Document, IReadOnlyDictionary<string, byte[]> Images, int Duplicates, bool CurrentUnreadable = false);
+public sealed record BackupPreview(ManagerDocument Document, IReadOnlyDictionary<string, byte[]> Images, int Duplicates, bool CurrentUnreadable = false, CategoryDocument? Categories = null);
 
 public sealed class BackupService(AccountStore store)
 {
@@ -11,6 +11,7 @@ public sealed class BackupService(AccountStore store)
     public async Task CreateAsync(string path)
     {
         var doc = await store.LoadAsync();
+        var categories = await new CategoryStore(store.Root).LoadAsync();
         var temp = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
         try
         {
@@ -18,6 +19,8 @@ public sealed class BackupService(AccountStore store)
             {
                 await using (var stream = archive.CreateEntry("manager.json").Open())
                     await JsonSerializer.SerializeAsync(stream, doc, ManagerJsonContext.Default.ManagerDocument);
+                await using (var stream = archive.CreateEntry("account-categories.json").Open())
+                    await JsonSerializer.SerializeAsync(stream, categories, CategoryJsonContext.Default.CategoryDocument);
                 foreach (var image in doc.Accounts.Select(x => x.Background.ImageFile).OfType<string>().Distinct())
                 {
                     var source = Path.Combine(store.ImageDirectory, image);
@@ -34,7 +37,7 @@ public sealed class BackupService(AccountStore store)
         try
         {
             using var archive = ZipFile.OpenRead(path);
-            if (archive.Entries.Count > 10001 || archive.Entries.Sum(x => x.Length) > MaxBytes ||
+            if (archive.Entries.Count > 10002 || archive.Entries.Sum(x => x.Length) > MaxBytes ||
                 archive.Entries.GroupBy(x => x.FullName, StringComparer.OrdinalIgnoreCase).Any(x => x.Count() > 1))
                 throw new InvalidDataException();
             var entry = archive.GetEntry("manager.json") ?? throw new InvalidDataException();
@@ -43,8 +46,16 @@ public sealed class BackupService(AccountStore store)
             await using (var stream = entry.Open())
                 doc = await JsonSerializer.DeserializeAsync(stream, ManagerJsonContext.Default.ManagerDocument) ?? throw new InvalidDataException();
             AccountStore.Validate(doc);
+            CategoryDocument categories = new();
+            if (archive.GetEntry("account-categories.json") is { } categoryEntry)
+            {
+                if (categoryEntry.Length > 32 * 1024 * 1024) throw new InvalidDataException();
+                await using var stream = categoryEntry.Open();
+                categories = await JsonSerializer.DeserializeAsync(stream, CategoryJsonContext.Default.CategoryDocument) ?? throw new InvalidDataException();
+                CategoryStore.Validate(categories);
+            }
             var images = new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);
-            foreach (var resource in archive.Entries.Where(x => x.FullName != "manager.json"))
+            foreach (var resource in archive.Entries.Where(x => x.FullName != "manager.json" && x.FullName != "account-categories.json"))
             {
                 if (!resource.FullName.StartsWith("backgrounds/", StringComparison.Ordinal) ||
                     !AccountStore.IsImageName(resource.FullName[12..]) || resource.Length > 20 * 1024 * 1024)
@@ -57,8 +68,8 @@ public sealed class BackupService(AccountStore store)
                     account.Background.ImageFile = null; // missing images fall back to Monet
             ManagerDocument current;
             try { current = await store.LoadAsync(); }
-            catch (InvalidDataException) { return new(doc, images, 0, true); }
-            return new(doc, images, doc.Accounts.Count(x => current.Accounts.Any(y => y.LoginName.Equals(x.LoginName, StringComparison.OrdinalIgnoreCase))));
+            catch (InvalidDataException) { return new(doc, images, 0, true, categories); }
+            return new(doc, images, doc.Accounts.Count(x => current.Accounts.Any(y => y.LoginName.Equals(x.LoginName, StringComparison.OrdinalIgnoreCase))), false, categories);
         }
         catch (Exception ex) when (ex is JsonException or InvalidDataException)
         { throw new InvalidDataException("备份版本、结构或资源无效，未修改任何数据。"); }
@@ -71,6 +82,23 @@ public sealed class BackupService(AccountStore store)
         var staged = new List<string>(); var renames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         Directory.CreateDirectory(store.ImageDirectory);
         bool committed = false;
+        var categoryStore = new CategoryStore(store.Root);
+        var oldCategories = await categoryStore.LoadAsync();
+        var incomingCategories = preview.Categories ?? new CategoryDocument();
+        CategoryStore.Validate(incomingCategories);
+        var oldAccounts = mode == RestoreMode.Merge ? (await store.LoadAsync()).Accounts : [];
+        // Stage classification first: a failed manager write restores it. Unknown entries cannot expose credentials.
+        await categoryStore.UpdateAsync(doc =>
+        {
+            if (mode == RestoreMode.Replace)
+            {
+                doc.BlackAccounts = incomingCategories.BlackAccounts.ToList();
+                doc.AddCredentialsToWhite = incomingCategories.AddCredentialsToWhite;
+            }
+            else foreach (var identity in incomingCategories.BlackAccounts)
+                if (!oldAccounts.Any(x => CategoryIdentity.Matches(x.LoginName, x.SteamId, identity.LoginName, identity.SteamId)))
+                    doc.Set(identity.LoginName, identity.SteamId, true);
+        });
         try
         {
             foreach (var (name, bytes) in preview.Images)
@@ -113,7 +141,11 @@ public sealed class BackupService(AccountStore store)
         }
         finally
         {
-            if (!committed) foreach (var path in staged) if (File.Exists(path)) File.Delete(path);
+            if (!committed)
+            {
+                await categoryStore.UpdateAsync(doc => { doc.BlackAccounts = oldCategories.BlackAccounts; doc.AddCredentialsToWhite = oldCategories.AddCredentialsToWhite; });
+                foreach (var path in staged) if (File.Exists(path)) File.Delete(path);
+            }
         }
     }
 }

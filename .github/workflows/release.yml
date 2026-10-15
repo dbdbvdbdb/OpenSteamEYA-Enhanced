@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Prerelease version without v (example: 0.2.4-beta)'
+        description: 'Prerelease version without v (example: 0.2.5-beta)'
         required: true
-        default: '0.2.4-beta'
+        default: '0.2.5-beta'
         type: string
 
 permissions:

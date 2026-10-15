@@ -284,7 +284,8 @@ internal sealed partial class AccountCard : UserControl
         Add(Account.Favorite ? "从收藏中移除" : "加入收藏", () => owner.ChangeAsync(Account, x => x.Favorite = !x.Favorite));
         Add("手动关联原账号", () => owner.LinkAsync(Account), !owner.IsPrivate);
         menu.Items.Add(new MenuFlyoutSeparator());
-        Add("删除密码管理记录", () => owner.DeleteAsync(Account)); return menu;
+        Add("转到黑号管理", () => owner.MoveToBlackAsync(Account), !owner.IsPrivate);
+        Add("删除账号", () => owner.DeleteAsync(Account)); return menu;
     }
     private async Task ApplyBackgroundAsync(string? avatarPath, string? avatarUrl, string steamId)
     {

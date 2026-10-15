@@ -25,6 +25,8 @@ public sealed partial class AccountManagerPage
         var dialog = Dialog("批量添加账号", Scroll(form), "添加账号");
         dialog.IsPrimaryButtonEnabled = false;
         input.TextChanged += (_, _) => { dialog.IsPrimaryButtonEnabled = !string.IsNullOrWhiteSpace(input.Text); feedback.Text = ""; };
+        ImportPreview? accepted = null;
+        DuplicatePolicy acceptedPolicy = DuplicatePolicy.Skip;
         // A validation failure leaves the pasted input available for correction. Never echo password lines.
         dialog.PrimaryButtonClick += async (_, args) =>
         {
@@ -40,9 +42,7 @@ public sealed partial class AccountManagerPage
                     feedback.Text = preview.Issues.Count > 0 ? string.Join("\n", preview.Issues.Take(8).Select(x => $"第 {x.Line} 行：{x.Reason}")) : "请输入至少一个账号。";
                     return;
                 }
-                var result = await ManagedAccounts.Store.ImportAsync(preview, duplicatePolicy);
-                await ReloadAsync();
-                AppState.ShowStatus($"批量添加完成：新增 {result.Added} · 更新 {result.Updated} · 跳过 {result.Skipped}", InfoBarSeverity.Success);
+                accepted = preview; acceptedPolicy = duplicatePolicy;
             }
             catch
             {
@@ -50,6 +50,9 @@ public sealed partial class AccountManagerPage
             }
             finally { input.IsEnabled = policy.IsEnabled = true; deferral.Complete(); }
         };
-        await dialog.ShowAsync();
+        if (await dialog.ShowAsync() != ContentDialogResult.Primary || accepted is null) return;
+        var result = await AccountClassification.ImportWhiteAsync(this, accepted, acceptedPolicy);
+        await ReloadAsync();
+        AppState.ShowStatus($"批量添加完成：新增 {result.Added} · 更新 {result.Updated} · 跳过 {result.Skipped}", InfoBarSeverity.Success);
     }
 }

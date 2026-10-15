@@ -9,10 +9,10 @@
     <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
     <UseWinUI>true</UseWinUI>
     <WindowsPackageType>None</WindowsPackageType>
-    <Version>0.2.4</Version>
-    <FileVersion>0.2.4.0</FileVersion>
-    <AssemblyVersion>0.2.4.0</AssemblyVersion>
-    <InformationalVersion>v0.2.4-enhanced</InformationalVersion>
+    <Version>0.2.5</Version>
+    <FileVersion>0.2.5.0</FileVersion>
+    <AssemblyVersion>0.2.5.0</AssemblyVersion>
+    <InformationalVersion>v0.2.5-enhanced</InformationalVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <!-- 自定义 Program.Main：先拦截 CS2 云推送辅助进程模式（cs2-cloud-push 开关）再走 XAML 启动（见 Program.cs）。 -->

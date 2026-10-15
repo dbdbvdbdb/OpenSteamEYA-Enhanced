@@ -32,6 +32,9 @@ internal sealed class AccountHistoryService
     public AccountHistoryService()
     {
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+#if MANAGER_UI_CHECKS
+        if (ManagerUiChecks.Enabled) appData = Path.Combine(ManagerUiChecks.DataRoot, "original-services");
+#endif
         AppFolderPath = Path.Combine(appData, AppFolderName);
         HistoryFolderPath = Path.Combine(AppFolderPath, HistoryFolderName);
         HistoryFilePath = Path.Combine(HistoryFolderPath, HistoryFileName);

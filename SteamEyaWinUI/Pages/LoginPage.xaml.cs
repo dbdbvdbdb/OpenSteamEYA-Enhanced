@@ -20,6 +20,30 @@ public sealed partial class LoginPage : Page, INotifyPropertyChanged
     private string? _cachedLicenseKey;
     private SteamUpstreamServer? _cachedServer;
     private bool _suppressModeStatus;
+    private string? _credentialOriginName;
+    private string? _credentialOriginToken;
+    private bool _whitePreferenceReady;
+    private bool IsNewTokenSource(string name, string token) => IsAutoMode ||
+        !string.Equals(name, _credentialOriginName, StringComparison.OrdinalIgnoreCase) || token != _credentialOriginToken;
+    private async Task<string?> ClassifySavedAsync(string name, string id, bool black, string? password = null)
+    {
+        try
+        {
+            return await AccountClassification.AddAsync(this, name, id, black, password) ? null : "已取消管理分类，历史记录仍已保存。";
+        }
+        catch (Exception ex) { return "历史已保存，但管理分类未完成：" + ex.Message; }
+    }
+    private async void LoadWhitePreference(object sender, RoutedEventArgs e)
+    {
+        try { AddToWhiteBox.IsChecked = (await AccountClassification.Categories.LoadAsync()).AddCredentialsToWhite; _whitePreferenceReady = true; }
+        catch (Exception ex) { ShowStatus(ex.Message, InfoBarSeverity.Error); }
+    }
+    private async void SaveWhitePreference(object sender, RoutedEventArgs e)
+    {
+        if (!_whitePreferenceReady) return;
+        try { var value = AddToWhiteBox.IsChecked == true; await AccountClassification.Categories.UpdateAsync(x => x.AddCredentialsToWhite = value); }
+        catch (Exception ex) { ShowStatus(ex.Message, InfoBarSeverity.Error); }
+    }
 
     // 历史账号保存是否失败：SaveLoginHistoryAsync 置位，登录消息据此决定 Warning/Success 严重度
     // （本地化后历史后缀文案不再含固定中文前缀，故改用此标志替代原先的字符串前缀判断）。
@@ -28,6 +52,9 @@ public sealed partial class LoginPage : Page, INotifyPropertyChanged
     public LoginPage()
     {
         InitializeComponent();
+        Loaded += LoadWhitePreference;
+        AddToWhiteBox.Checked += SaveWhitePreference;
+        AddToWhiteBox.Unchecked += SaveWhitePreference;
 
         UpstreamServerBox.ItemsSource = SteamLicenseClient.Servers;
         UpstreamServerBox.SelectedIndex = 2;
@@ -76,6 +103,7 @@ public sealed partial class LoginPage : Page, INotifyPropertyChanged
     {
         var enabled = !isBusy;
         ModeSelector.IsEnabled = enabled;
+        AddToWhiteBox.IsEnabled = CredAccountNameBox.IsEnabled = CredPasswordBox.IsEnabled = CredFetchButton.IsEnabled = enabled;
         AccountNameBox.IsEnabled = enabled;
         EyaTokenBox.IsEnabled = enabled;
         UpstreamServerBox.IsEnabled = enabled;
@@ -104,6 +132,8 @@ public sealed partial class LoginPage : Page, INotifyPropertyChanged
         EyaTokenBox.Text = account.EyaToken;
         UpdateAccountInfo(account.AccountName, account.EyaToken);
         ApplyAccountInfoProfile(account);
+        _credentialOriginName = account.AccountName;
+        _credentialOriginToken = FormatHelper.NormalizeToken(account.EyaToken);
 
         ShowStatus(
             Loc.Tf("Login_Status_HistoryLoaded_Format", account.AccountName, FormatHelper.FormatDateTime(account.LastLoginAt)),
@@ -284,6 +314,7 @@ public sealed partial class LoginPage : Page, INotifyPropertyChanged
     {
         var accountName = CredAccountNameBox.Text.Trim();
         var password = CredPasswordBox.Password;
+        var addToWhite = AddToWhiteBox.IsChecked == true;
 
         if (string.IsNullOrWhiteSpace(accountName))
         {
@@ -309,10 +340,15 @@ public sealed partial class LoginPage : Page, INotifyPropertyChanged
             var token = FormatHelper.NormalizeToken(result.RefreshToken);
             var info = AppState.JwtTokenService.Inspect(token);
 
+            cancellationToken.ThrowIfCancellationRequested();
             // 保存到历史账号。
             await AppState.AccountHistoryService.SaveLoginAsync(
                 result.AccountName, result.SteamId, token, info.ExpiresAt);
             AppState.ReloadHistory(result.SteamId);
+            _credentialOriginName = result.AccountName;
+            _credentialOriginToken = token;
+            var managementStatus = addToWhite && !cancellationToken.IsCancellationRequested
+                ? await ClassifySavedAsync(result.AccountName, result.SteamId, false, password) : null;
 
             // 填进手动模式并切过去，方便接着上号/查询；清空密码不留存。
             _suppressModeStatus = true;
@@ -323,7 +359,8 @@ public sealed partial class LoginPage : Page, INotifyPropertyChanged
             CredPasswordBox.Password = string.Empty;
             UpdateAccountInfo(result.AccountName, token);
 
-            ShowStatus(Loc.Tf("Creds_Status_Saved_Format", result.AccountName), InfoBarSeverity.Success);
+            ShowStatus(Loc.Tf("Creds_Status_Saved_Format", result.AccountName) + (managementStatus is null ? "" : " " + managementStatus),
+                managementStatus is null ? InfoBarSeverity.Success : InfoBarSeverity.Warning);
         }
         catch (OperationCanceledException)
         {
@@ -453,9 +490,12 @@ public sealed partial class LoginPage : Page, INotifyPropertyChanged
                 () => AppState.LoginService.Login(accountName, eyaToken, progress),
                 cancellationToken);
             var historyStatus = await SaveLoginHistoryAsync(result, eyaToken, profile);
+            var managementStatus = !_lastLoginHistorySaveFailed && !cancellationToken.IsCancellationRequested && IsNewTokenSource(accountName, eyaToken)
+                ? await ClassifySavedAsync(result.AccountName, result.SteamId, true) : null;
+            if (managementStatus is not null) historyStatus += " " + managementStatus;
             ShowStatus(
                 Loc.Tf("Login_Status_LoginStarted_Format", result.SteamId, FormatHelper.FormatRemaining(result.Remaining), historyStatus),
-                _lastLoginHistorySaveFailed
+                _lastLoginHistorySaveFailed || managementStatus is not null
                     ? InfoBarSeverity.Warning
                     : InfoBarSeverity.Success);
         }
@@ -552,9 +592,11 @@ public sealed partial class LoginPage : Page, INotifyPropertyChanged
         {
             var (accountName, eyaToken) = await GetCredentialsAsync(cancellationToken);
             var score = await QueryAndSaveCsStatusAsync(accountName, eyaToken, cancellationToken);
+            var managementStatus = !cancellationToken.IsCancellationRequested && IsNewTokenSource(accountName, eyaToken)
+                ? await ClassifySavedAsync(accountName, AppState.JwtTokenService.Inspect(eyaToken).SteamId ?? "", true) : null;
             ShowStatus(
-                Loc.Tf("Login_Status_QueryDone_Format", score.DisplayText, score.PlayerLevelText, score.CooldownText, score.GcVacText),
-                InfoBarSeverity.Success);
+                Loc.Tf("Login_Status_QueryDone_Format", score.DisplayText, score.PlayerLevelText, score.CooldownText, score.GcVacText) + (managementStatus is null ? "" : " " + managementStatus),
+                managementStatus is null ? InfoBarSeverity.Success : InfoBarSeverity.Warning);
         }
         catch (OperationCanceledException)
         {

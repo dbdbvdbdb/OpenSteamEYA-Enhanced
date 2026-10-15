@@ -68,6 +68,15 @@ public sealed partial class AccountManagerPage
         var result = AccountMapping.Resolve(account, ManagedAccounts.Identities());
         if (result.Conflict) account.LinkedKey = await ChooseMappingAsync(result.Candidates);
         else account.LinkedKey = result.Key;
+        var categories = await AccountClassification.Categories.LoadAsync();
+        if (categories.IsBlack(account.LoginName, account.SteamId))
+        {
+            await AccountClassification.AddAsync(this, account.LoginName, account.SteamId, false, account.Password);
+            await ReloadAsync(); return;
+        }
+        var sameIdentity = AccountClassification.Find(await ManagedAccounts.Store.LoadAsync(), account.LoginName, account.SteamId);
+        if (sameIdentity is not null && sameIdentity.Id != account.Id)
+            throw new InvalidDataException("该登录账号或 SteamID 已存在，请编辑已有记录，未新增重复账号。");
         await ManagedAccounts.Store.SaveAccountAsync(account); await ReloadAsync();
         AppState.ShowStatus(account.LinkedKey is null ? "已保存独立记录，可稍后关联原账号。" : "已保存并关联原账号。", InfoBarSeverity.Success);
     }
@@ -98,7 +107,12 @@ public sealed partial class AccountManagerPage
         if (privacy) return;
         var key = await ChooseMappingAsync(ManagedAccounts.Identities()); if (key is null) return;
         var identity = ManagedAccounts.Identities().First(x => x.Key == key);
-        var existing = document.Accounts.FirstOrDefault(x => x.LoginName.Equals(identity.LoginName, StringComparison.OrdinalIgnoreCase));
+        if ((await AccountClassification.Categories.LoadAsync()).IsBlack(identity.LoginName, identity.SteamId))
+        {
+            await AccountClassification.AddAsync(this, identity.LoginName, identity.SteamId, false);
+            await ReloadAsync(); return;
+        }
+        var existing = AccountClassification.Find(document, identity.LoginName, identity.SteamId);
         if (existing is not null) { await ChangeAsync(existing, x => x.LinkedKey = key); return; }
         var history = ManagedAccounts.History(key); var cached = ManagedAccounts.Cached(key);
         await ManagedAccounts.Store.SaveAccountAsync(new() { LoginName = identity.LoginName, SteamId = identity.SteamId,
@@ -107,8 +121,13 @@ public sealed partial class AccountManagerPage
     }
     internal async Task DeleteAsync(ManagedAccount account)
     {
-        if (await Dialog("删除密码管理记录", Text("仅删除增强版的密码、备注、收藏与背景配置。原有 Steam/EYA 登录凭证和历史记录保持不变。已有登录凭证的账号仍会显示为未保存密码。"), "删除记录").ShowAsync() != ContentDialogResult.Primary) return;
-        await ManagedAccounts.Store.DeleteAccountAsync(account.Id); selected.Remove(account.Id); await ReloadAsync();
+        await AccountClassification.DeleteAsync(this, [new() { LoginName = account.LoginName, SteamId = account.SteamId }]);
+        selected.Remove(account.Id); await ReloadAsync();
+    }
+    internal async Task MoveToBlackAsync(ManagedAccount account)
+    {
+        await AccountClassification.AddAsync(this, account.LoginName, account.SteamId, true, explicitMove: true);
+        await ReloadAsync();
     }
     internal async Task MoveGroupAsync(ManagedAccount account)
     {
@@ -154,7 +173,7 @@ public sealed partial class AccountManagerPage
         form.Children.Add(previewList);
         var dialog = Dialog("导入预览", Scroll(form), "开始导入"); dialog.IsPrimaryButtonEnabled = preview.Rows.Count > 0;
         if (await dialog.ShowAsync() != ContentDialogResult.Primary) return;
-        var result = await ManagedAccounts.Store.ImportAsync(preview, Policy(policy));
+        var result = await AccountClassification.ImportWhiteAsync(this, preview, Policy(policy));
         await ReloadAsync();
         AppState.ShowStatus($"新增 {result.Added} · 更新 {result.Updated} · 跳过 {result.Skipped} · 失败 {result.Failed}", InfoBarSeverity.Success);
     }
@@ -284,11 +303,12 @@ public sealed partial class AccountManagerPage
         var preview = await ManagedAccounts.Backup.PreviewAsync(source);
         var restore = Choice("恢复方式", "合并恢复", "覆盖新增管理数据"); var policy = Choice("重复账号", "跳过", "覆盖", "仅补缺失密码");
         if (preview.CurrentUnreadable) restore.SelectedIndex = 1;
-        var previewForm = Form(); previewForm.Children.Add(Text($"备份版本：{preview.Document.Version}\n账号：{preview.Document.Accounts.Count}\n分组：{preview.Document.Groups.Count}\n重复账号：{preview.Duplicates}\n背景资源：{preview.Images.Count}\n仅影响增强版管理数据，原登录凭证不受影响。"));
+        var previewForm = Form(); previewForm.Children.Add(Text($"备份版本：{preview.Document.Version}\n账号：{preview.Document.Accounts.Count}\n分组：{preview.Document.Groups.Count}\n重复账号：{preview.Duplicates}\n背景资源：{preview.Images.Count}\n包含白号、黑号的管理资料和分类；合并保留已有归属，覆盖按备份归属恢复。原登录凭证不受影响。"));
         previewForm.Children.Add(restore); previewForm.Children.Add(policy);
         if (preview.CurrentUnreadable) previewForm.Children.Add(Text("当前密码管理文件损坏，无法统计重复账号；请选择覆盖恢复。原登录凭证不受影响。"));
         if (await Dialog("备份预览", previewForm, "恢复").ShowAsync() != ContentDialogResult.Primary) return;
         await ManagedAccounts.Backup.RestoreAsync(preview, restore.SelectedIndex == 0 ? RestoreMode.Merge : RestoreMode.Replace, Policy(policy));
+        AccountClassification.NotifyChanged();
         await ReloadAsync(); AppState.ShowStatus("备份恢复完成。", InfoBarSeverity.Success);
     }
 
@@ -311,7 +331,7 @@ public sealed partial class AccountManagerPage
         { Directory.CreateDirectory(ManagedAccounts.Store.Root); System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", ManagedAccounts.Store.Root) { UseShellExecute = true }); return Task.CompletedTask; });
         foreach (var element in new UIElement[] { view, sort, groupDisplay, favorite, mode, strength, brightness, blur, full, hide, privateMode,
             Text("密码数据位置：" + ManagedAccounts.Store.Root), Text("本地文件、导出和备份包含明文密码。目录固定在当前用户 LocalAppData，避免漫游同步。"), folder }) form.Children.Add(element);
-        if (await Dialog("账号管理设置", Scroll(form), "保存").ShowAsync() != ContentDialogResult.Primary) return;
+        if (await Dialog("白号管理设置", Scroll(form), "保存").ShowAsync() != ContentDialogResult.Primary) return;
         await ManagedAccounts.Store.UpdateAsync(doc => doc.Preferences = new()
         { View = view.SelectedIndex == 1 ? "list" : "cards", Sort = sorts[sort.SelectedIndex], FavoritesFirst = favorite.IsChecked == true,
             GroupDisplay = groupDisplay.SelectedIndex == 1 ? "sections" : "filter", BackgroundMode = mode.SelectedIndex == 1 ? "steam" : "monet",

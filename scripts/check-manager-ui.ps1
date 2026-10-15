@@ -21,7 +21,7 @@ if ($NativeAot) {
     }
 }
 $process = Start-Process -FilePath (Join-Path $testOutput 'SteamEyaWinUI.exe') -ArgumentList '--manager-ui-check' -WindowStyle Hidden -PassThru
-if (-not $process.WaitForExit(60000)) { throw 'QA did not finish within 60 seconds. Inspect the test process before retrying.' }
+if (-not $process.WaitForExit(120000)) { throw 'QA did not finish within 120 seconds. Inspect the test process before retrying.' }
 $runDirectory = Get-Content -LiteralPath (Join-Path $testOutput 'ui-check-results/latest-run.txt')
 $failureFile = Join-Path $runDirectory 'failure.txt'
 if (Test-Path -LiteralPath $failureFile) { Get-Content -LiteralPath $failureFile; throw 'QA checks failed.' }

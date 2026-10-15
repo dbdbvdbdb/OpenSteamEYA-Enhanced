@@ -86,6 +86,8 @@
                             Header="{x:Bind Strings.Get('Creds_Field_Password'), Mode=OneWay}"
                             PlaceholderText="{x:Bind Strings.Get('Creds_Field_Password_Placeholder'), Mode=OneWay}" />
 
+                        <CheckBox x:Name="AddToWhiteBox" Content="同时添加到白号管理" IsChecked="True" />
+
                         <Button
                             x:Name="CredFetchButton"
                             HorizontalAlignment="Stretch"

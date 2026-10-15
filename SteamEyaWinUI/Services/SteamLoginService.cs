@@ -101,6 +101,8 @@ internal sealed class SteamLoginService
         }
     }
 
+    internal IReadOnlyList<CachedSteamLoginAccount> GetAllCachedLoginAccountsForDeletion() => _loginCacheService.LoadAll();
+
     public int DeleteCachedLoginAccounts(IReadOnlyCollection<CachedSteamLoginAccount> accounts)
     {
         return _loginCacheService.Delete(accounts);

@@ -73,7 +73,7 @@ try
     await store.UpdateAsync(doc => doc.Accounts[0].Background = new() { Mode = "local", ImageFile = "test.png" });
     var backup = new BackupService(store); var path = Path.Combine(root, "backup.zip"); await backup.CreateAsync(path);
     using (var archive = ZipFile.OpenRead(path))
-        Check(archive.Entries.Count == 2 && !archive.Entries.Any(x => x.FullName.Contains("cached-login") || x.FullName.Contains("token")), "backup only manager and custom resources");
+        Check(archive.Entries.Count == 3 && archive.GetEntry("account-categories.json") is not null && !archive.Entries.Any(x => x.FullName.Contains("cached-login") || x.FullName.Contains("token")), "backup only manager, classification and custom resources");
     var previewBackup = await backup.PreviewAsync(path);
     Check(previewBackup.Duplicates == 102 && previewBackup.Images.Count == 1, "backup preview counts");
     var restored = new AccountStore(Path.Combine(root, "restored")); var restorer = new BackupService(restored);
@@ -111,6 +111,7 @@ try
     Check(Enumerable.SequenceEqual(before, afterFailedTransaction), "invalid transaction atomic rollback");
     await Task.WhenAll(Enumerable.Range(0, 25).Select(n => new AccountStore(store.Root).SaveAccountAsync(new() { LoginName = "parallel-" + n })));
     Check((await store.LoadAsync()).Accounts.Count == 126, "concurrent read modify write serialized");
+    await CategoryChecks.RunAsync(Check, root);
     await FeatureChecks.RunAsync(Check, root);
     await GroupStatusChecks.RunAsync(Check, root);
     Console.WriteLine($"All {passed} checks passed. Only synthetic test accounts used.");

@@ -70,7 +70,7 @@ public sealed partial class AccountManagerPage
         foreach (var retainedMenu in new[] { (MenuFlyout)card.ContextFlyout })
         {
             var items = retainedMenu.Items.OfType<MenuFlyoutItem>().Select(x => x.Text).ToList();
-            ManagerUiChecks.Check(items.Count == 13 && items.Contains("设置账号背景") && items.Contains("设置账号分组") && items.Contains("删除密码管理记录"), "right-click menu retains all 13 original actions");
+            ManagerUiChecks.Check(items.Count == 14 && items.Contains("设置账号背景") && items.Contains("设置账号分组") && items.Contains("删除账号") && items.Contains("转到黑号管理"), "right-click menu retains original actions and adds classification move");
         }
         card.ContextFlyout.ShowAt(card); await Task.Delay(150);
         ManagerUiChecks.Check(Microsoft.UI.Xaml.Media.VisualTreeHelper.GetOpenPopupsForXamlRoot(XamlRoot).Count > 0 && !card.Actions.ContainsKey("more"), "right-click menu opens and footer ellipsis is removed");

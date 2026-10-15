@@ -153,12 +153,12 @@ public sealed partial class MainWindow : Window
         }
     }
 
-    private void NavigateTo(string pageName)
+    internal void NavigateTo(string pageName)
     {
         var pageType = pageName switch
         {
             "manager" => typeof(AccountManagerPage),
-            "history" => typeof(HistoryPage),
+            "history" or "black" => typeof(HistoryPage),
             "cachedAccounts" => typeof(CachedAccountsPage),
             "loadout" => typeof(LoadoutPage),
             "personalization" => typeof(PersonalizationPage),
@@ -167,9 +167,9 @@ public sealed partial class MainWindow : Window
             _ => typeof(LoginPage)
         };
 
-        if (ContentFrame.CurrentSourcePageType != pageType)
+        if (ContentFrame.CurrentSourcePageType != pageType || pageType == typeof(HistoryPage))
         {
-            ContentFrame.Navigate(pageType, null, new EntranceNavigationTransitionInfo());
+            ContentFrame.Navigate(pageType, pageName, new EntranceNavigationTransitionInfo());
             ContentFrame.BackStack.Clear();
         }
     }
@@ -210,7 +210,7 @@ public sealed partial class MainWindow : Window
     /// <summary>本地化导航项文字；语言切换时由 Loc.LanguageChanged 再次调用。</summary>
     private void RefreshNavText()
     {
-        ManagerNavItem.Content = "账号管理";
+        ManagerNavItem.Content = "白号管理";
         LoginNavItem.Content = Loc.T("Nav_Login");
         HistoryNavItem.Content = Loc.T("Nav_History");
         CachedAccountsNavItem.Content = Loc.T("Nav_CachedAccounts");

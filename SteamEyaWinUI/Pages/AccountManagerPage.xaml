@@ -24,7 +24,7 @@
   <Grid ColumnSpacing="12">
    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
   <StackPanel Spacing="4" Margin="0,0,12,0">
-   <TextBlock Text="账号管理" FontSize="28" FontWeight="SemiBold"/>
+   <TextBlock Text="白号管理" FontSize="28" FontWeight="SemiBold"/>
    <TextBlock x:Name="Summary" Text="独立密码记录 · 关联原有登录凭证" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
   </StackPanel>
    <TextBox x:Name="Search" Grid.Column="1" MaxWidth="380" HorizontalAlignment="Right" VerticalAlignment="Center" PlaceholderText="搜索昵称、账号、SteamID、备注" TextChanged="FilterChanged"/>

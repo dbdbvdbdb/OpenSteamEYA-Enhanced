@@ -1,8 +1,10 @@
 # OpenSteamEYA Enhanced
 
-C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展独立账号管理。当前功能基线为 **v0.2.4**，当前预发布版本为 **v0.2.4-beta**。
+C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展独立账号管理。当前版本为 **v0.2.5-beta（白号／黑号管理）**。
 
-源码仓库：[dbdbvdbdb/OpenSteamEYA-Enhanced](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced)。下载见 [v0.2.4-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.4-beta)；构建、测试和发布记录见 [发布审查报告](docs/RELEASE-AUDIT.zh-CN.md)。
+源码仓库：[dbdbvdbdb/OpenSteamEYA-Enhanced](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced)。下载见 [v0.2.5-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.5-beta)；本次发布说明见 [v0.2.5-beta](docs/releases/v0.2.5-beta.md)，历史开源审查见 [发布审查报告](docs/RELEASE-AUDIT.zh-CN.md)。
+
+详细规则与本地验证见 [v0.2.5 改造交付报告](docs/FEATURES-0.2.5.zh-CN.md)。
 
 ## 主要功能
 
@@ -12,32 +14,32 @@ C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA
 - 多选查询 CS2：失败加入“失败”，无凭据加入“未查询”，成功后移除结果标记。
 - 冷却时间用黄色、GCVAC 标记用红色，仅显示实际异常；无异常显示“正常”，无可靠数据显示“未知”。
 
-按 SteamID/登录账号匹配历史及缓存账号，昵称不作为身份依据。登录页成功保存历史后会自动显示于管理页，但输入的密码不会自动写入管理库；单独添加账密也不会生成 EYA 凭据。见 [使用指南](docs/RUNNING.zh-CN.md) 和 [更新记录](CHANGELOG.md)。
+按 SteamID/登录账号匹配历史及缓存账号，昵称不作为身份依据。账密登录勾选“同时添加到白号管理”后，成功保存历史时同步账号和本次密码；默认勾选并记忆。自动／手动及账号 Token 导入进入黑号管理，跨分类重复需人工选择唯一归属。旧管理记录留在白号管理，支持手动转移。单独添加账密不会生成 EYA 凭据。见 [使用指南](docs/RUNNING.zh-CN.md) 和 [更新记录](CHANGELOG.md)。
 
 ## 真实软件截图
 
 以下为真实 WinUI 应用隔离测试截图，账号、密码与状态均为虚构测试数据，不代表真实 Steam 账号。截图不是 AI 效果图。
 
-![真实账号管理页面，合成测试数据](docs/screenshots/beta-accounts.png)
+![真实白号管理页面，合成测试数据](docs/screenshots/0.2.5/classification-white.png)
 
-![真实紧凑列表](docs/screenshots/beta-list.png)
+![真实黑号管理页面](docs/screenshots/0.2.5/classification-black.png)
 
-截图导出缩放不能代替各系统 DPI 的实机验收，见 [验收记录](docs/FEATURES-0.2.4.zh-CN.md)。
+截图导出缩放不能代替各系统 DPI 的实机验收，见 [验收记录](docs/FEATURES-0.2.5.zh-CN.md)。
 
 ## Windows x64 下载与运行
 
-Windows x64 Native AOT 便携包已在 [v0.2.4-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.4-beta) 提供：
+Windows x64 Native AOT 便携包已在 [v0.2.5-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.5-beta) 提供：
 
-- [ZIP（28.19 MiB）](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.4-beta/OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.zip)
-- [7z（17.04 MiB）](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.4-beta/OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.7z)
-- [SHA256SUMS.txt](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.4-beta/SHA256SUMS.txt)
+- [ZIP（28.24 MiB）](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.5-beta/OpenSteamEYA-Enhanced-0.2.5-beta-win-x64-aot.zip)
+- [7z（17.06 MiB）](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.5-beta/OpenSteamEYA-Enhanced-0.2.5-beta-win-x64-aot.7z)
+- [SHA256SUMS.txt](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/v0.2.5-beta/SHA256SUMS.txt)
 
 ZIP/7z 内容相同，任选一种完整解压到本地文件夹，运行 `SteamEyaWinUI.exe`。保留全部 DLL、PRI、Assets、Languages 和许可证，不能只复制 EXE。Native AOT 无需额外安装 .NET Runtime，Windows App SDK 运行文件随包附带。源码最低系统声明为 Windows 10 build 17763；当前 Windows x64 测试机以外的系统仍需实机验证。
 
 用 PowerShell 核对校验和，与 Release 的 SHA256SUMS.txt 比对：
 
 ```powershell
-Get-FileHash .\OpenSteamEYA-Enhanced-0.2.4-beta-win-x64-aot.zip -Algorithm SHA256
+Get-FileHash .\OpenSteamEYA-Enhanced-0.2.5-beta-win-x64-aot.zip -Algorithm SHA256
 ```
 
 便携指程序无需安装，账号数据仍写入用户目录。增强版尚未配置自己的更新源，原上游下载安装入口已禁用以防覆盖增强功能。
@@ -63,7 +65,7 @@ pwsh ./scripts/ensure-native-toolchain.ps1
 dotnet restore ./SteamEyaWinUI/SteamEyaWinUI.csproj -r win-x64 -p:Platform=x64 -p:PublishAot=true --locked-mode
 pwsh ./scripts/check-data.ps1
 pwsh ./scripts/check-manager-ui.ps1 -NativeAot
-pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.4 -ReleaseLabel 0.2.4-beta
+pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.5 -ReleaseLabel 0.2.5-beta
 ```
 
 缺少工具链时可显式运行 `ensure-native-toolchain.ps1 -InstallMissing`，可能需要管理员权限并占用数 GB；脚本核验 Microsoft 安装器签名、不自动重启。测试使用隔离合成数据，UI 检查需 Windows 图形会话，缺少会话会报告失败。

@@ -27,6 +27,9 @@ internal sealed class SteamLoginCacheService
     public SteamLoginCacheService()
     {
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+#if MANAGER_UI_CHECKS
+        if (ManagerUiChecks.Enabled) appData = Path.Combine(ManagerUiChecks.DataRoot, "original-services");
+#endif
         AppFolderPath = Path.Combine(appData, AppFolderName);
         CacheFilePath = Path.Combine(AppFolderPath, CacheFileName);
         AvatarFolderPath = Path.Combine(AppFolderPath, AvatarFolderName);

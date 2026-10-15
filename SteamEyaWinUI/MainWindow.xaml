@@ -46,9 +46,10 @@
             SelectionChanged="RootNavigationView_SelectionChanged">
             <!-- 导航项文字由 MainWindow.RefreshNavText() 按当前语言在代码里设置（构造时即设、语言切换时刷新）。 -->
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="ManagerNavItem" Content="账号管理" Tag="manager">
+                <NavigationViewItem x:Name="ManagerNavItem" Content="白号管理" Tag="manager">
                     <NavigationViewItem.Icon><FontIcon Glyph="&#xE716;" /></NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem x:Name="BlackNavItem" Content="黑号管理" Tag="black"><NavigationViewItem.Icon><FontIcon Glyph="&#xE77B;" /></NavigationViewItem.Icon></NavigationViewItem>
                 <NavigationViewItem
                     x:Name="LoginNavItem"
                     Tag="login">

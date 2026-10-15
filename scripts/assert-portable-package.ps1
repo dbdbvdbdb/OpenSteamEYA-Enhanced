@@ -4,7 +4,7 @@ $root = [System.IO.Path]::GetFullPath($PublishDirectory).TrimEnd([System.IO.Path
 $files = @(Get-ChildItem -LiteralPath $PublishDirectory -Recurse -File)
 foreach ($file in $files) {
     $relative = [System.IO.Path]::GetRelativePath($root, $file.FullName).Replace('\','/')
-    if ($relative -match '(?i)(^|/)(tests|synthetic-data|ui-check-results|bin|obj|userdata|backups|exports)(/|$)|\.(pdb|obj|tmp|bak|log|db|sqlite3?|pfx|p12|pem|key|dmp)$|(^|/)(manager\.json|history\.json|loginusers\.vdf|ssfn\d+)$') { throw "Forbidden runtime package file: $relative" }
+    if ($relative -match '(?i)(^|/)(tests|synthetic-data|ui-check-results|bin|obj|userdata|backups|exports)(/|$)|\.(pdb|obj|tmp|bak|log|db|sqlite3?|pfx|p12|pem|key|dmp)$|(^|/)(account-categories\.json|categories\.lock|manager\.lock|manager\.json|history\.json|loginusers\.vdf|ssfn\d+)$') { throw "Forbidden runtime package file: $relative" }
     # WinUI's NoiseAsset is an SDK runtime texture, not a development screenshot.
     if ($file.Extension -in @('.png','.jpg','.jpeg') -and $relative -notmatch '^(Assets/|Microsoft.UI.Xaml/Assets/)') { throw "Unexpected runtime screenshot: $relative" }
 }

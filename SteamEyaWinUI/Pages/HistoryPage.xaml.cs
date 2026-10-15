@@ -58,6 +58,9 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
 
     /// <summary>页面是否处于活动（已导航到、未离开）状态，用于不可见时延迟重建。</summary>
     private bool _isActive;
+    private bool _blackMode;
+    private OpenSteamEya.AccountManagement.ManagerDocument _blackDocument = new();
+    private int _scopeGeneration;
 
     /// <summary>
     /// 不可见期间收到 HistoryChanged 时只更新快照并记下待选中 SteamID（null 表示保持当前选择），
@@ -94,6 +97,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
         _cooldownTimer.Tick += (_, _) => OnCooldownTick();
 
         AppState.HistoryChanged += OnHistoryChanged;
+        AccountClassification.Changed += () => OnHistoryChanged(null);
         AppState.BusyChanged += _ => UpdateControlsEnabled();
         Loc.LanguageChanged += OnLanguageChanged;
 
@@ -130,6 +134,13 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
+        FlushPendingNote();
+        _noteAccount = null;
+        _allItems = []; _viewItems.Clear();
+        _blackMode = e.Parameter as string == "black";
+        _checkedKeys.Clear();
+        HistoryTitle.Text = _blackMode ? "黑号管理" : Loc.T("History_Title");
+        MoveToWhiteButton.Visibility = _blackMode ? Visibility.Visible : Visibility.Collapsed;
         _isActive = true;
 
         // 分组定义存于 settings.json（无变更事件），进入页面时重新加载以反映在别处的编辑。
@@ -162,18 +173,32 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
         AppState.CancelBusyOperation();
     }
 
-    private void OnHistoryChanged(string? selectSteamId)
+    private async void OnHistoryChanged(string? selectSteamId)
     {
-        // 进入页面时 OnNavigatedTo 触发的 ReloadHistory 会先于此处把 _isActive 置 true，正常重建；
-        // 页面不可见时（其它页触发的后台刷新）只更新内存快照并记下待选中意图，下次 OnNavigatedTo 再重建。
-        _allItems = AppState.HistoryAccounts;
-        if (!_isActive)
+        var generation = ++_scopeGeneration;
+        try
         {
-            _pendingSelectSteamId = selectSteamId ?? _pendingSelectSteamId;
-            return;
+            var items = _blackMode ? await AccountClassification.BlackItemsAsync() : AppState.HistoryAccounts;
+            if (generation != _scopeGeneration) return;
+            _allItems = items;
+            if (_blackMode) { _blackDocument = await ManagedAccounts.Store.LoadAsync(); if (generation != _scopeGeneration) return; LoadGroups(); }
+            if (!_isActive) { _pendingSelectSteamId = selectSteamId ?? _pendingSelectSteamId; return; }
+            RebuildView(selectSteamId ?? GetSelectedSteamId());
         }
+        catch (Exception ex) { _allItems = []; RebuildView(null); AppState.ShowStatus(ex.Message, InfoBarSeverity.Error); }
+    }
 
-        RebuildView(selectSteamId ?? GetSelectedSteamId());
+    private async void MoveToWhite_Click(object sender, RoutedEventArgs e)
+    {
+        if (_isDialogFlowActive || AppState.IsBusy) return;
+        _isDialogFlowActive = true;
+        try
+        {
+            foreach (var account in GetCheckedAccounts())
+                await AccountClassification.AddAsync(this, account.AccountName, account.SteamId, false, explicitMove: true);
+        }
+        catch (Exception ex) { AppState.ShowStatus(ex.Message, InfoBarSeverity.Error); }
+        finally { _isDialogFlowActive = false; UpdateControlsEnabled(); }
     }
 
     private void RebuildView(string? selectSteamId)
@@ -230,6 +255,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
     /// <summary>按当前快照重算页头摘要与空状态文案（语言切换时也复用此处刷新已显示文本）。</summary>
     private void UpdateSummaryTexts()
     {
+        HistoryTitle.Text = _blackMode ? "黑号管理" : Loc.T("History_Title");
         var hasAny = _allItems.Count > 0;
         HistoryEmptyText.Text = hasAny ? Loc.T("History_Empty_NoMatch") : Loc.T("History_Empty_Title");
         HistoryEmptyHintText.Text = hasAny
@@ -238,6 +264,11 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
         HistorySummaryText.Text = hasAny
             ? Loc.Tf("History_Subtitle_Count_Format", _allItems.Count)
             : Loc.T("History_Subtitle");
+        if (_blackMode)
+        {
+            HistorySummaryText.Text = $"共 {_allItems.Count} 个黑号 · 自动／手动导入及手动转入的账号";
+            if (!hasAny) HistoryEmptyHintText.Text = "从登录页自动／手动模式导入，或从白号管理手动转入。";
+        }
         HistoryListSummaryText.Text = Loc.Tf("History_Filter_Count_Format", _viewItems.Count, _allItems.Count);
         HistoryFilterHintText.Text = Loc.T(_statusFilter.IsValidScoreRange
             ? "History_Filter_Hint"
@@ -400,7 +431,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
             return;
         }
 
-        var steamIds = AppState.HistoryAccounts
+        var steamIds = _allItems
             .Select(item => item.SteamId)
             .Where(id => !string.IsNullOrWhiteSpace(id))
             .ToList();
@@ -451,7 +482,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
         try
         {
             await QueryAccountsAsync(
-                AppState.HistoryAccounts.ToList(),
+                _allItems.ToList(),
                 "History_Status_NoneToQueryAll",
                 "History_Status_QueryAllProgress_Format",
                 "History_Status_QueryAllDone_Format",
@@ -479,6 +510,11 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
             return;
         }
 
+        if (_blackMode && accounts.Any(x => string.IsNullOrWhiteSpace(x.EyaToken)))
+        {
+            AppState.ShowStatus("所选账号尚无历史 EYA 凭据，不能导出账号／Token。请先在登录页添加凭据；密码与备注可通过管理备份保留。", InfoBarSeverity.Warning);
+            return;
+        }
         var text = string.Join(
             Environment.NewLine,
             accounts.Select(account => $"{account.AccountName}----{account.EyaToken}"));
@@ -550,6 +586,8 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
         {
             var (added, updated) = AppState.AccountHistoryService.ImportAccounts(selected);
             AppState.ReloadHistory(selected[0].SteamId);
+            foreach (var entry in selected)
+                await AccountClassification.AddAsync(this, entry.AccountName, entry.SteamId, true);
             AppState.ShowStatus(
                 Loc.Tf("History_Status_ImportDone_Format", added, updated),
                 InfoBarSeverity.Success);
@@ -646,58 +684,15 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
 
     private async Task DeleteAccountsWithConfirmAsync(IReadOnlyList<SteamAccountHistoryItem> accounts)
     {
-        if (_isDialogFlowActive)
-        {
-            return;
-        }
-
-        if (accounts.Count == 0)
-        {
-            AppState.ShowStatus(Loc.T("History_Status_NoneToDelete"), InfoBarSeverity.Error);
-            return;
-        }
-
-        var nameText = string.Join("、", accounts.Take(5).Select(account => account.AccountTitle));
-        var summary = accounts.Count > 5
-            ? Loc.Tf("History_Delete_Confirm_Many_Format", nameText, accounts.Count)
-            : Loc.Tf("History_Delete_Confirm_Few_Format", nameText, accounts.Count);
-
-        var dialog = new ContentDialog
-        {
-            Title = Loc.T("History_Delete_Dialog_Title"),
-            Content = summary,
-            PrimaryButtonText = Loc.T("Common_Delete"),
-            CloseButtonText = Loc.T("Common_Cancel"),
-            DefaultButton = ContentDialogButton.Close,
-            XamlRoot = XamlRoot
-        };
-
+        if (_isDialogFlowActive || accounts.Count == 0) return;
         _isDialogFlowActive = true;
         try
         {
-            if (await dialog.ShowAsync() != ContentDialogResult.Primary)
-            {
-                return;
-            }
-
-            // 删除前把这些键移出批量选择集，避免重建后残留在已选状态。
-            foreach (var account in accounts)
-            {
-                _checkedKeys.Remove(AccountHistoryService.GetAccountKey(account));
-            }
-
-            var removed = AppState.AccountHistoryService.DeleteAccounts(accounts);
-            AppState.ReloadHistory();
-            AppState.ShowStatus(Loc.Tf("History_Status_Deleted_Format", removed), InfoBarSeverity.Success);
+            var removed = await AccountClassification.DeleteAsync(this, accounts.Select(x => new OpenSteamEya.AccountManagement.CategoryIdentity { LoginName = x.AccountName, SteamId = x.SteamId }).ToList());
+            AppState.ShowStatus($"已处理 {removed} 个账号。", InfoBarSeverity.Success);
         }
-        catch (Exception ex)
-        {
-            AppState.ShowStatus(Loc.Tf("History_Status_DeleteFail_Format", ex.Message), InfoBarSeverity.Error);
-        }
-        finally
-        {
-            _isDialogFlowActive = false;
-        }
+        catch (Exception ex) { AppState.ShowStatus(ex.Message, InfoBarSeverity.Error); }
+        finally { _isDialogFlowActive = false; }
     }
 
     // ---------- 卡片悬停 / 左上角勾选 / 单卡操作 ----------
@@ -768,6 +763,12 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
 
         try
         {
+            if (_blackMode && string.IsNullOrWhiteSpace(account.EyaToken))
+            {
+                await LoginBlackCacheAsync(account, progress, cancellationToken);
+                AppState.ShowStatus("已请求使用原 Steam 缓存启动登录。", InfoBarSeverity.Success);
+                return;
+            }
             var result = await loginPage.QuickLoginAsync(
                 account.AccountName, account.EyaToken, progress, cancellationToken);
             AppState.ReloadHistory(result.SteamId);
@@ -851,48 +852,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
 
     private async void ClearHistoryButton_Click(object sender, RoutedEventArgs e)
     {
-        if (_isDialogFlowActive)
-        {
-            return;
-        }
-
-        var total = AppState.HistoryAccounts.Count;
-        if (total == 0)
-        {
-            AppState.ShowStatus(Loc.T("History_Status_NoneToClear"), InfoBarSeverity.Error);
-            return;
-        }
-
-        var dialog = new ContentDialog
-        {
-            Title = Loc.T("History_ClearAll_Dialog_Title"),
-            Content = Loc.Tf("History_ClearAll_Dialog_Content_Format", total),
-            PrimaryButtonText = Loc.T("Common_Clear"),
-            CloseButtonText = Loc.T("Common_Cancel"),
-            DefaultButton = ContentDialogButton.Close,
-            XamlRoot = XamlRoot
-        };
-
-        _isDialogFlowActive = true;
-        try
-        {
-            if (await dialog.ShowAsync() != ContentDialogResult.Primary)
-            {
-                return;
-            }
-
-            var cleared = AppState.AccountHistoryService.ClearAll();
-            AppState.ReloadHistory();
-            AppState.ShowStatus(Loc.Tf("History_Status_Cleared_Format", cleared), InfoBarSeverity.Success);
-        }
-        catch (Exception ex)
-        {
-            AppState.ShowStatus(Loc.Tf("History_Status_ClearFail_Format", ex.Message), InfoBarSeverity.Error);
-        }
-        finally
-        {
-            _isDialogFlowActive = false;
-        }
+        await DeleteAccountsWithConfirmAsync(_allItems.ToList());
     }
 
     private async void ClearInvalidAccountsButton_Click(object sender, RoutedEventArgs e)
@@ -902,7 +862,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
             return;
         }
 
-        var accounts = AppState.HistoryAccounts.ToList();
+        var accounts = _allItems.Where(x => !string.IsNullOrWhiteSpace(x.EyaToken)).ToList();
         if (accounts.Count == 0)
         {
             AppState.ShowStatus(Loc.T("History_Status_NoneToTest"), InfoBarSeverity.Error);
@@ -984,7 +944,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
             // 无论是完整跑完、遇网络错误还是被取消，已确认被 Steam 拒绝的账号都照删；
             // 停止只是不再测试剩余账号（未测试的账号一律保留）。
             var removed = invalid.Count > 0
-                ? AppState.AccountHistoryService.DeleteAccounts(invalid)
+                ? await AccountClassification.DeleteAsync(this, invalid.Select(x => new OpenSteamEya.AccountManagement.CategoryIdentity { LoginName = x.AccountName, SteamId = x.SteamId }).ToList())
                 : 0;
             if (removed > 0)
             {
@@ -1013,7 +973,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
             }
 
             AppState.ShowStatus(
-                removed > 0
+                invalid.Count > 0
                     ? Loc.Tf("History_Status_TestDone_WithRemoved_Format", tested, removed)
                     : Loc.Tf("History_Status_TestDone_AllValid_Format", tested),
                 InfoBarSeverity.Success);
@@ -1348,7 +1308,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
 
     // 把备注框里相对 _noteAccount 的未保存改动落盘（失焦时、以及每次覆盖备注框之前调用）。
     // 幂等：无改动时直接返回，不刷屏；就地更新内存实例（卡片备注标记随 INPC 立即刷新），不整表重建。
-    private void FlushPendingNote()
+    private async void FlushPendingNote()
     {
         var account = _noteAccount;
         if (account is null || HistoryDetailNoteBox is null)
@@ -1367,7 +1327,9 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
         account.Note = normalized;
         try
         {
-            AppState.AccountHistoryService.SetNote(account, normalized);
+            if (_blackMode)
+                await ManagedAccounts.Store.UpdateAsync(doc => { var managed = AccountClassification.Find(doc, account.AccountName, account.SteamId); if (managed is not null) managed.Note = normalized ?? ""; });
+            else AppState.AccountHistoryService.SetNote(account, normalized);
             AppState.ShowStatus(Loc.T("History_Status_NoteSaved"), InfoBarSeverity.Success);
         }
         catch (Exception ex)
@@ -1488,8 +1450,11 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
 
                     var token = FormatHelper.NormalizeToken(result.RefreshToken);
                     var info = AppState.JwtTokenService.Inspect(token);
+                    cancellationToken.ThrowIfCancellationRequested();
                     await AppState.AccountHistoryService.SaveLoginAsync(
                         result.AccountName, result.SteamId, token, info.ExpiresAt);
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await AccountClassification.AddAsync(this, result.AccountName, result.SteamId, false, entry.Password);
                     lastSteamId = result.SteamId;
                     added++;
                 }
@@ -1731,7 +1696,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
 
     private void LoadGroups()
     {
-        _groups = AppState.SettingsService.Load().Groups
+        _groups = (_blackMode ? _blackDocument.Groups.Select(x => new AccountGroup { Id = x.Id.ToString(), Name = x.Name, Order = x.Order }).ToList() : AppState.SettingsService.Load().Groups)
             .OrderBy(group => group.Order)
             .ThenBy(group => group.Name, StringComparer.CurrentCultureIgnoreCase)
             .ToList();
@@ -1828,7 +1793,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
         BatchGroupFlyout.Items.Add(manageItem);
     }
 
-    private void ApplyBatchGroup(string groupId, bool add)
+    private async void ApplyBatchGroup(string groupId, bool add)
     {
         var accounts = GetCheckedAccounts();
         if (accounts.Count == 0)
@@ -1838,7 +1803,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
 
         try
         {
-            var changed = AppState.AccountHistoryService.SetGroupMembership(accounts, groupId, add);
+            var changed = _blackMode ? await SetBlackGroupsAsync(accounts, groupId, add) : AppState.AccountHistoryService.SetGroupMembership(accounts, groupId, add);
             AppState.ReloadHistory(GetSelectedSteamId());
             var groupName = _groups.FirstOrDefault(group => group.Id == groupId)?.Name ?? string.Empty;
             AppState.ShowStatus(
@@ -1866,11 +1831,12 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
 
         try
         {
-            var group = CreateGroup(name);
+            var group = _blackMode ? await CreateBlackGroupAsync(name) : CreateGroup(name);
             var accounts = GetCheckedAccounts();
             if (accounts.Count > 0)
             {
-                AppState.AccountHistoryService.SetGroupMembership(accounts, group.Id, true);
+                if (_blackMode) await SetBlackGroupsAsync(accounts, group.Id, true);
+                else AppState.AccountHistoryService.SetGroupMembership(accounts, group.Id, true);
             }
 
             AppState.ReloadHistory(GetSelectedSteamId());
@@ -1938,6 +1904,7 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
 
     private async Task ManageGroupsAsync()
     {
+        if (_blackMode) { await ManageBlackGroupsAsync(); return; }
         if (_isDialogFlowActive)
         {
             return;
@@ -2098,12 +2065,13 @@ public sealed partial class HistoryPage : Page, INotifyPropertyChanged
         HistorySearchBox.IsEnabled = !isBusy;
         ImportHistoryButton.IsEnabled = !isBusy;
         BatchImportWhiteButton.IsEnabled = !isBusy;
-        ClearHistoryButton.IsEnabled = !isBusy && AppState.HistoryAccounts.Count > 0;
-        ClearInvalidAccountsButton.IsEnabled = !isBusy && AppState.HistoryAccounts.Count > 0;
-        OneClickHistoryQueryButton.IsEnabled = !isBusy && hasActive;
-        UseHistoryAccountButton.IsEnabled = !isBusy && hasActive;
+        ClearHistoryButton.IsEnabled = !isBusy && _allItems.Count > 0;
+        ClearInvalidAccountsButton.IsEnabled = !isBusy && _allItems.Count > 0;
+        OneClickHistoryQueryButton.IsEnabled = !isBusy && hasActive && HistoryAccountList.SelectedItem is SteamAccountHistoryItem queryAccount && !string.IsNullOrWhiteSpace(queryAccount.EyaToken);
+        UseHistoryAccountButton.IsEnabled = !isBusy && hasActive && HistoryAccountList.SelectedItem is SteamAccountHistoryItem loadAccount && !string.IsNullOrWhiteSpace(loadAccount.EyaToken);
+        MoveToWhiteButton.IsEnabled = !isBusy && !_isDialogFlowActive;
         QueryAllHistoryButton.Visibility = _isQueryAllInFlight ? Visibility.Collapsed : Visibility.Visible;
-        QueryAllHistoryButton.IsEnabled = !isBusy && AppState.HistoryAccounts.Count > 0;
+        QueryAllHistoryButton.IsEnabled = !isBusy && _allItems.Count > 0;
         CancelAllHistoryButton.Visibility = _isQueryAllInFlight ? Visibility.Visible : Visibility.Collapsed;
         CancelAllHistoryButton.IsEnabled = _isQueryAllInFlight;
         BatchClearButton.IsEnabled = !isBusy;

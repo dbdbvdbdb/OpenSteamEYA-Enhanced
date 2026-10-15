@@ -25,6 +25,7 @@ public sealed partial class AccountManagerPage : Page
     public AccountManagerPage()
     {
         InitializeComponent(); Cards.ItemsSource = visible;
+        AccountClassification.Changed += () => DispatcherQueue.TryEnqueue(() => _ = SafeAsync(ReloadAsync));
         AppState.HistoryChanged += steamId => DispatcherQueue.TryEnqueue(() => _ = SafeAsync(ReloadAsync));
         AppState.CachedLoginAccountsRefreshed += () => DispatcherQueue.TryEnqueue(() => _ = SafeAsync(ReloadAsync));
         AppState.BusyChanged += _ => DispatcherQueue.TryEnqueue(UpdateSelectionToolbar);
@@ -46,23 +47,8 @@ public sealed partial class AccountManagerPage : Page
             Search.Visibility = GroupFilter.Visibility = privacy ? Visibility.Collapsed : Visibility.Visible;
             resolved.Clear();
             var identities = ManagedAccounts.Identities();
-            // Project all original accounts into the independent manager, including accounts with no saved password.
-            var missing = identities.GroupBy(x => x.LoginName, StringComparer.OrdinalIgnoreCase)
-                .Where(group => !document.Accounts.Any(x => x.LoginName.Equals(group.Key, StringComparison.OrdinalIgnoreCase))).ToList();
-            if (missing.Count > 0)
-            {
-                await ManagedAccounts.Store.UpdateAsync(doc =>
-                {
-                    foreach (var group in missing)
-                    {
-                        if (doc.Accounts.Any(x => x.LoginName.Equals(group.Key, StringComparison.OrdinalIgnoreCase))) continue;
-                        var identity = group.First(); bool ambiguous = group.Count() > 1;
-                        doc.Accounts.Add(new() { LoginName = identity.LoginName, SteamId = ambiguous ? "" : identity.SteamId,
-                            LinkedKey = ambiguous ? null : identity.Key, Order = doc.Accounts.Count });
-                    }
-                });
-                document = await ManagedAccounts.Store.LoadAsync();
-            }
+            var categories = await AccountClassification.Categories.LoadAsync();
+            document.Accounts.RemoveAll(x => categories.IsBlack(x.LoginName, x.SteamId));
             foreach (var account in document.Accounts)
                 resolved[account.Id] = AccountMapping.Resolve(account, identities).Key;
             var group = (GroupFilter.SelectedItem as ComboBoxItem)?.Tag;

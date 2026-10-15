@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Spacing="4">
-                <TextBlock Text="{x:Bind Strings.Get('History_Title'), Mode=OneWay}" Style="{StaticResource PageTitleTextStyle}" />
+                <TextBlock x:Name="HistoryTitle" Text="{x:Bind Strings.Get('History_Title'), Mode=OneWay}" Style="{StaticResource PageTitleTextStyle}" />
                 <TextBlock
                     x:Name="HistorySummaryText"
                     Text="{x:Bind Strings.Get('History_Subtitle'), Mode=OneWay}"
@@ -468,6 +468,10 @@
                     BorderThickness="1"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                     <Grid ColumnSpacing="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
@@ -477,17 +481,17 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBlock
-                            x:Name="BatchSelectionText"
+                            x:Name="BatchSelectionText" Grid.Row="1"
                             VerticalAlignment="Center"
                             FontWeight="SemiBold"
                             Text="{x:Bind Strings.Get('Common_Selected_Format'), Mode=OneWay}" />
                         <Button
-                            x:Name="BatchClearButton"
+                            x:Name="BatchClearButton" Grid.Row="1"
                             Grid.Column="1"
                             Click="BatchClearButton_Click"
                             Content="{x:Bind Strings.Get('Common_ClearSelection'), Mode=OneWay}" />
                         <Button
-                            x:Name="BatchQueryButton"
+                            x:Name="BatchQueryButton" Grid.Row="1"
                             Grid.Column="2"
                             Click="BatchQueryButton_Click"
                             ToolTipService.ToolTip="{x:Bind Strings.Get('History_BatchQuery_Tooltip'), Mode=OneWay}">
@@ -497,7 +501,7 @@
                             </StackPanel>
                         </Button>
                         <Button
-                            x:Name="BatchGroupButton"
+                            x:Name="BatchGroupButton" Grid.Row="1"
                             Grid.Column="3"
                             ToolTipService.ToolTip="{x:Bind Strings.Get('History_BatchGroup_Tooltip'), Mode=OneWay}">
                             <StackPanel Orientation="Horizontal" Spacing="6">
@@ -509,7 +513,7 @@
                             </Button.Flyout>
                         </Button>
                         <Button
-                            x:Name="BatchExportButton"
+                            x:Name="BatchExportButton" Grid.Row="1"
                             Grid.Column="4"
                             Click="BatchExportButton_Click"
                             ToolTipService.ToolTip="{x:Bind Strings.Get('History_BatchExport_Tooltip'), Mode=OneWay}">
@@ -519,8 +523,9 @@
                             </StackPanel>
                         </Button>
                         <!-- 批量删除：破坏性，红色标识。 -->
+                        <Button x:Name="MoveToWhiteButton" Grid.Row="0" Grid.ColumnSpan="6" HorizontalAlignment="Left" Margin="0,0,0,8" Content="转到白号管理" Click="MoveToWhite_Click" Visibility="Collapsed" />
                         <Button
-                            x:Name="BatchDeleteButton"
+                            x:Name="BatchDeleteButton" Grid.Row="1"
                             Grid.Column="5"
                             Click="BatchDeleteButton_Click"
                             ToolTipService.ToolTip="{x:Bind Strings.Get('History_BatchDelete_Tooltip'), Mode=OneWay}">

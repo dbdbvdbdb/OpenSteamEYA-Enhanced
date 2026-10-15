@@ -20,6 +20,9 @@ internal sealed class SettingsService
     public SettingsService()
     {
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+#if MANAGER_UI_CHECKS
+        if (ManagerUiChecks.Enabled) appData = Path.Combine(ManagerUiChecks.DataRoot, "original-services");
+#endif
         AppFolderPath = Path.Combine(appData, AppFolderName);
         _settingsFilePath = Path.Combine(AppFolderPath, SettingsFileName);
     }

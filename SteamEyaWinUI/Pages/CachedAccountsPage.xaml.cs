@@ -223,48 +223,7 @@ public sealed partial class CachedAccountsPage : Page, INotifyPropertyChanged
 
     private async void ClearCachedButton_Click(object sender, RoutedEventArgs e)
     {
-        if (_isDialogFlowActive)
-        {
-            return;
-        }
-
-        if (_sourceItems.Count == 0)
-        {
-            AppState.ShowStatus(Loc.T("Cached_Clear_None"), InfoBarSeverity.Error);
-            return;
-        }
-
-        var dialog = new ContentDialog
-        {
-            Title = Loc.T("Cached_Clear_Dialog_Title"),
-            Content = Loc.Tf("Cached_Clear_Dialog_Content_Format", _sourceItems.Count),
-            PrimaryButtonText = Loc.T("Common_Clear"),
-            CloseButtonText = Loc.T("Common_Cancel"),
-            DefaultButton = ContentDialogButton.Close,
-            XamlRoot = XamlRoot
-        };
-
-        _isDialogFlowActive = true;
-        try
-        {
-            if (await dialog.ShowAsync() != ContentDialogResult.Primary)
-            {
-                return;
-            }
-
-            _checkedKeys.Clear();
-            var cleared = AppState.LoginService.ClearCachedLoginAccounts();
-            Reload();
-            AppState.ShowStatus(Loc.Tf("Cached_Clear_Success_Format", cleared), InfoBarSeverity.Success);
-        }
-        catch (Exception ex)
-        {
-            AppState.ShowStatus(Loc.Tf("Cached_Clear_Fail_Format", ex.Message), InfoBarSeverity.Error);
-        }
-        finally
-        {
-            _isDialogFlowActive = false;
-        }
+        await DeleteAccountsWithConfirmAsync(_sourceItems.ToList());
     }
 
     // ---------- 卡片悬停 / 左上角勾选（与历史账号页一致） ----------
@@ -357,58 +316,15 @@ public sealed partial class CachedAccountsPage : Page, INotifyPropertyChanged
 
     private async Task DeleteAccountsWithConfirmAsync(IReadOnlyList<CachedSteamLoginAccount> accounts)
     {
-        if (_isDialogFlowActive)
-        {
-            return;
-        }
-
-        if (accounts.Count == 0)
-        {
-            AppState.ShowStatus(Loc.T("Cached_Delete_NoSelection"), InfoBarSeverity.Error);
-            return;
-        }
-
-        var nameText = string.Join("、", accounts.Take(5).Select(account => account.AccountTitle));
-        var summary = accounts.Count > 5
-            ? Loc.Tf("Cached_Delete_Dialog_Many_Format", nameText, accounts.Count)
-            : Loc.Tf("Cached_Delete_Dialog_Few_Format", nameText, accounts.Count);
-
-        var dialog = new ContentDialog
-        {
-            Title = Loc.T("Cached_Delete_Dialog_Title"),
-            Content = summary,
-            PrimaryButtonText = Loc.T("Common_Delete"),
-            CloseButtonText = Loc.T("Common_Cancel"),
-            DefaultButton = ContentDialogButton.Close,
-            XamlRoot = XamlRoot
-        };
-
+        if (_isDialogFlowActive || accounts.Count == 0) return;
         _isDialogFlowActive = true;
         try
         {
-            if (await dialog.ShowAsync() != ContentDialogResult.Primary)
-            {
-                return;
-            }
-
-            // 删除前把这些键移出批量选择集，避免重建后残留在已选状态。
-            foreach (var account in accounts)
-            {
-                _checkedKeys.Remove(account.CacheKey);
-            }
-
-            var removed = AppState.LoginService.DeleteCachedLoginAccounts(accounts);
-            Reload();
-            AppState.ShowStatus(Loc.Tf("Cached_Delete_Success_Format", removed), InfoBarSeverity.Success);
+            var count = await AccountClassification.DeleteAsync(this, accounts.Select(x => new OpenSteamEya.AccountManagement.CategoryIdentity { LoginName = x.AccountName, SteamId = x.SteamId }).ToList());
+            Reload(); AppState.ShowStatus($"已处理 {count} 个账号。", InfoBarSeverity.Success);
         }
-        catch (Exception ex)
-        {
-            AppState.ShowStatus(Loc.Tf("Cached_Delete_Fail_Format", ex.Message), InfoBarSeverity.Error);
-        }
-        finally
-        {
-            _isDialogFlowActive = false;
-        }
+        catch (Exception ex) { AppState.ShowStatus(ex.Message, InfoBarSeverity.Error); }
+        finally { _isDialogFlowActive = false; }
     }
 
     private string? GetSelectedKey()

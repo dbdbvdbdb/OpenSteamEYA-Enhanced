@@ -26,6 +26,9 @@ TestResults/
 
 # Real account stores, credentials, exports, backups and private signing material.
 # Keep synthetic fixtures in source code; never commit runtime data files.
+**/account-categories.json
+**/categories.lock
+**/manager.lock
 **/manager.json
 **/history.json
 **/accounts.json

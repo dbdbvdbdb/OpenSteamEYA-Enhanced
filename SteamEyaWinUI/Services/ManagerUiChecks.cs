@@ -12,7 +12,7 @@ using Windows.Storage.Streams;
 namespace SteamEyaWinUI.Services;
 
 // Compiled only into an explicit QA build. Never reads credential stores, writes user data or logs passwords.
-internal static class ManagerUiChecks
+internal static partial class ManagerUiChecks
 {
     public static bool Enabled { get; private set; }
     public static string OutputRoot { get; } = Path.Combine(AppContext.BaseDirectory, "ui-check-results", "run-" + DateTime.Now.ToString("yyyyMMdd-HHmmss") + "-" + Guid.NewGuid().ToString("N")[..6]);
@@ -80,6 +80,7 @@ internal static class ManagerUiChecks
             await page.CheckCardStatesAsync(name => CaptureAsync(window, name));
             await page.CheckCooldownStatusAsync(name => CaptureAsync(window, name));
             foreach (double scale in new[] { 1.0, 1.25, 1.5, 2.0 }) await CaptureAsync(window, "render-scale-" + (int)(scale * 100), scale);
+            await CheckClassificationsAsync(window, page);
             Results.Add("INFO actual rasterization scale " + page.XamlRoot.RasterizationScale);
             await File.WriteAllLinesAsync(Path.Combine(OutputRoot, "results.txt"), Results);
         }
@@ -144,7 +145,7 @@ internal static class ManagerUiChecks
         else await image.RenderAsync(root);
         var buffer = await image.GetPixelsAsync(); var bytes = new byte[buffer.Length];
         using (var reader = DataReader.FromBuffer(buffer)) reader.ReadBytes(bytes);
-        CheckPage!.VerifyCapturedCardPixels(root, image.PixelWidth, image.PixelHeight, bytes);
+        if (!name.StartsWith("classification-")) CheckPage!.VerifyCapturedCardPixels(root, image.PixelWidth, image.PixelHeight, bytes);
         Check(image.PixelWidth > 500 && image.PixelHeight > 500 && bytes.Any(x => x != 0), "render " + name);
         var path = Path.Combine(OutputRoot, name + ".png"); await File.WriteAllBytesAsync(path, []);
         var file = await StorageFile.GetFileFromPathAsync(path); using var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
