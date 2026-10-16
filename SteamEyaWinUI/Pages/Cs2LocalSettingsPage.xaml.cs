@@ -19,6 +19,7 @@ public sealed partial class Cs2LocalSettingsPage : Page
     private IReadOnlyList<DisplayMode> _modes = [];
     private bool _busy, _syncing, _bindingSelection, _resolutionDirty;
     private string _category = "视频";
+    private string? _renderedCategory;
     private string? _steamOverride;
     private string? _videoError;
     private int DirtyCount => _settings.Count(s => s.Dirty) + _bindings.Count + (_resolutionDirty ? 1 : 0) +
@@ -163,14 +164,30 @@ public sealed partial class Cs2LocalSettingsPage : Page
         CategoryTitle.Text = _category;
         DisplayPanel.Visibility = _category == "视频" ? Visibility.Visible : Visibility.Collapsed;
         BindingsPanel.Visibility = _category == "键位绑定" ? Visibility.Visible : Visibility.Collapsed;
-        RowsPanel.Children.Clear(); string query = SearchBox.Text.Trim(); string group = "";
-        foreach (var row in _settings.Where(r => r.Spec.Category == _category && (query.Length == 0 ||
-            string.Join(' ', r.Spec.Label, r.Spec.EnglishName, r.Key, r.Spec.Description).Contains(query, StringComparison.OrdinalIgnoreCase))))
+        RowsPanel.Children.Clear(); string query = SearchBox.Text.Trim();
+        var matching = _settings.Where(r => r.Spec.Category == _category && (query.Length == 0 ||
+            string.Join(' ', r.Spec.Label, r.Spec.EnglishName, r.Key, r.Spec.Description).Contains(query, StringComparison.OrdinalIgnoreCase))).ToArray();
+        void AddGroup(string title, IEnumerable<TemplateSetting> values, StackPanel host)
         {
-            string nextGroup = _category == "视频" ? row.Spec.Key.StartsWith("setting.") || row.Spec.Key == "r_player_visibility_mode" ? "高级视频与支持状态" : "基础视频" : _category;
-            if (group != nextGroup) { RowsPanel.Children.Add(new TextBlock { Text = nextGroup, FontSize = 17, FontWeight = Microsoft.UI.Text.FontWeights.SemiBold, Margin = new Thickness(4, 12, 0, 6) }); group = nextGroup; }
-            RowsPanel.Children.Add(CreateRow(row));
+            var rows = values.ToArray(); if (rows.Length == 0) return;
+            host.Children.Add(new TextBlock { Text = title, FontSize = 17, FontWeight = Microsoft.UI.Text.FontWeights.SemiBold, Margin = new Thickness(4, 12, 0, 6) });
+            foreach (var row in rows) host.Children.Add(CreateRow(row));
         }
+        if (_category == "视频")
+        {
+            AddGroup("基础视频", matching.Where(r => r.Enabled && r.Spec.FileName != LocalConfigStore.VideoFile && r.Spec.Key != "r_player_visibility_mode"), RowsPanel);
+            AddGroup("高级视频", matching.Where(r => r.Enabled && (r.Spec.FileName == LocalConfigStore.VideoFile || r.Spec.Key == "r_player_visibility_mode")), RowsPanel);
+            var unsupported = matching.Where(r => !r.Enabled).ToArray();
+            if (unsupported.Length > 0)
+            {
+                var details = new StackPanel { Spacing = 3 };
+                foreach (var row in unsupported) details.Children.Add(CreateRow(row));
+                RowsPanel.Children.Add(new Expander { Header = $"尚待验证 / 硬件相关项目（{unsupported.Length}）", Content = details,
+                    IsExpanded = query.Length > 0, HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Stretch });
+            }
+        }
+        else AddGroup(_category, matching, RowsPanel);
+        if (_renderedCategory != _category) { SettingsScroll.ChangeView(null, 0, null, true); _renderedCategory = _category; }
         EmptyText.Visibility = RowsPanel.Children.Count == 0 && _category != "键位绑定" ? Visibility.Visible : Visibility.Collapsed;
         RenderBinding(); UpdateActions();
     }

@@ -62,7 +62,7 @@ internal sealed class UnifiedConfigStore(string root)
     }
     private static void ValidateManifest(TemplateManifest manifest)
     {
-        if (manifest.Version != 1 || manifest.Revision.Length != 32 || !manifest.Revision.All(Uri.IsHexDigit) ||
+        if (manifest.Version != 1 || manifest.Revision is null || manifest.Revision.Length != 32 || !manifest.Revision.All(Uri.IsHexDigit) ||
             string.IsNullOrWhiteSpace(manifest.Name) || manifest.Name.Length > 100 || manifest.Files is null ||
             manifest.Files.Count is < 1 or > 4 || manifest.Files.Keys.Any(n => !LocalConfigStore.FileNames.Contains(n)))
             throw new InvalidDataException("模板版本、文件清单或名称无效。");

@@ -41,6 +41,13 @@ internal static partial class ManagerUiChecks
         Check(!Directory.Exists(steam) && store.Load().Files.Count == 4, "unified CS2 template can be created without Steam accounts");
         Check(!Find<Button>("SaveButton").IsEnabled, "unified CS2 initial load has no unsaved changes");
         window.ApplyTheme(ElementTheme.Dark); await CaptureAsync(window, "cs2-unified-video-dark");
+        var msaa = FindElements(page).OfType<ComboBox>().Single(c => c.Tag?.ToString() == "setting.msaa_samples");
+        Check(msaa.Items.Count == 4, "unified CS2 MSAA uses the verified four menu choices");
+        msaa.StartBringIntoView(); await Task.Delay(250);
+        await CaptureAsync(window, "cs2-unified-video-advanced-dark");
+        var ao = FindElements(page).OfType<ComboBox>().Single(c => c.Tag?.ToString() == "setting.videocfg_ao_detail");
+        Check(ao.Items.OfType<ComboBoxItem>().Select(i => i.Tag?.ToString()).SequenceEqual(new[] { "0", "2", "3" }), "unified CS2 AO control has only current menu values");
+
         foreach (string category in new[] { "音频", "游戏", "HUD", "准星", "鼠标键盘" })
         {
             await Tab(category);
