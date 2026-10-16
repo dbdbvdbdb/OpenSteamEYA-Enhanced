@@ -1,4 +1,4 @@
-param([switch]$NativeAot)
+param([switch]$NativeAot, [switch]$Cs2Only)
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $testOutput = Join-Path $projectRoot 'artifacts/ui-check'
@@ -20,7 +20,8 @@ if ($NativeAot) {
         }
     }
 }
-$process = Start-Process -FilePath (Join-Path $testOutput 'SteamEyaWinUI.exe') -ArgumentList '--manager-ui-check' -WindowStyle Hidden -PassThru
+$checkArgument = if ($Cs2Only) { '--cs2-settings-ui-check' } else { '--manager-ui-check' }
+$process = Start-Process -FilePath (Join-Path $testOutput 'SteamEyaWinUI.exe') -ArgumentList $checkArgument -WindowStyle Hidden -PassThru
 if (-not $process.WaitForExit(120000)) { throw 'QA did not finish within 120 seconds. Inspect the test process before retrying.' }
 $runDirectory = Get-Content -LiteralPath (Join-Path $testOutput 'ui-check-results/latest-run.txt')
 $failureFile = Join-Path $runDirectory 'failure.txt'

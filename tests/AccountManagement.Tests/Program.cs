@@ -120,6 +120,7 @@ try
     await Task.WhenAll(Enumerable.Range(0, 25).Select(n => new AccountStore(store.Root).SaveAccountAsync(new() { LoginName = "parallel-" + n })));
     Check((await store.LoadAsync()).Accounts.Count == 126, "concurrent read modify write serialized");
     await CategoryChecks.RunAsync(Check, root);
+    Cs2ConfigChecks.Run(Check, root);
     await UpdateChecks.RunAsync(Check);
     await FeatureChecks.RunAsync(Check, root);
     await GroupStatusChecks.RunAsync(Check, root);

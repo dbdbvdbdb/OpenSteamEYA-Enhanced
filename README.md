@@ -1,14 +1,17 @@
 # OpenSteamEYA Enhanced
 
-C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展独立账号管理。当前版本为 **v0.2.6-beta（启动检查更新）**。
+C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展独立账号管理。当前源码为 **v0.2.7-beta（CS2 本地设置，尚未发布）**；已公开下载版本仍为 v0.2.6-beta。
 
 源码仓库：[dbdbvdbdb/OpenSteamEYA-Enhanced](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced)。下载见 [v0.2.6-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.6-beta)；本次发布说明见 [v0.2.6-beta](docs/releases/v0.2.6-beta.md)，历史开源审查见 [发布审查报告](docs/RELEASE-AUDIT.zh-CN.md)。
 
 详细规则与本地验证见 [v0.2.5 改造交付报告](docs/FEATURES-0.2.5.zh-CN.md)。
 
+新增 CS2 页面、测试结果和待验收限制见 [v0.2.7 交付报告](docs/FEATURES-0.2.7.zh-CN.md)，发布说明草稿见 [v0.2.7-beta](docs/releases/v0.2.7-beta.md)。
+
 ## 主要功能
 
 - 保留 Steam/EYA 登录、历史及缓存账号、CS2 查询、配装、个性化、工坊和云同步。
+- 新增 [CS2 本地设置](docs/CS2-LOCAL-SETTINGS.zh-CN.md)：五类常用设置编辑、保存前备份、保存后自动尝试同账号云同步，机器与画面设置仅本机保存。
 - 账号卡片、紧凑列表、隐私模式、搜索、收藏、多分组、备注和三种背景；默认分组包含全部账号。
 - 按 `steam账号----steam密码` 逐行批量添加；支持 TXT/CSV/JSON 导入导出和 ZIP 备份恢复。
 - 多选查询 CS2：失败加入“失败”，无凭据加入“未查询”，成功后移除结果标记。
@@ -23,6 +26,8 @@ C# / WinUI 3 / .NET 10 的 Windows x64 Steam 账号工具，基于 [OpenSteamEYA
 ![真实白号管理页面，合成测试数据](docs/screenshots/0.2.5/classification-white.png)
 
 ![真实黑号管理页面](docs/screenshots/0.2.5/classification-black.png)
+
+![真实 CS2 本地设置页面，虚构配置](docs/screenshots/0.2.7/cs2-settings-audio.png)
 
 截图导出缩放不能代替各系统 DPI 的实机验收，见 [验收记录](docs/FEATURES-0.2.5.zh-CN.md)。
 
@@ -65,7 +70,7 @@ pwsh ./scripts/ensure-native-toolchain.ps1
 dotnet restore ./SteamEyaWinUI/SteamEyaWinUI.csproj -r win-x64 -p:Platform=x64 -p:PublishAot=true --locked-mode
 pwsh ./scripts/check-data.ps1
 pwsh ./scripts/check-manager-ui.ps1 -NativeAot
-pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.6 -ReleaseLabel 0.2.6-beta
+pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.7 -ReleaseLabel 0.2.7-beta
 ```
 
 缺少工具链时可显式运行 `ensure-native-toolchain.ps1 -InstallMissing`，可能需要管理员权限并占用数 GB；脚本核验 Microsoft 安装器签名、不自动重启。测试使用隔离合成数据，UI 检查需 Windows 图形会话，缺少会话会报告失败。

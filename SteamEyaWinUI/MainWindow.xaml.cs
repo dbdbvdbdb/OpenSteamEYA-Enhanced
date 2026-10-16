@@ -160,6 +160,7 @@ public sealed partial class MainWindow : Window
             "history" or "black" => typeof(HistoryPage),
             "cachedAccounts" => typeof(CachedAccountsPage),
             "loadout" => typeof(LoadoutPage),
+            "cs2LocalSettings" => typeof(Cs2LocalSettingsPage),
             "personalization" => typeof(PersonalizationPage),
             "settings" => typeof(SettingsPage),
             "about" => typeof(AboutPage),

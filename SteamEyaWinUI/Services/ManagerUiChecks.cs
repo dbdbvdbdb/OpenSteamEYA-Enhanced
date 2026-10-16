@@ -15,13 +15,15 @@ namespace SteamEyaWinUI.Services;
 internal static partial class ManagerUiChecks
 {
     public static bool Enabled { get; private set; }
+    private static bool Cs2Only { get; set; }
     public static string OutputRoot { get; } = Path.Combine(AppContext.BaseDirectory, "ui-check-results", "run-" + DateTime.Now.ToString("yyyyMMdd-HHmmss") + "-" + Guid.NewGuid().ToString("N")[..6]);
     public static string DataRoot => Path.Combine(OutputRoot, "synthetic-data");
     public static string AvatarPath => Path.Combine(OutputRoot, "fixture-avatar.png");
     private static readonly List<string> Results = [];
     private static AccountManagerPage? CheckPage;
     internal static readonly Dictionary<Guid, Models.SteamAccountHistoryItem> StatusFixtures = [];
-    public static void Configure(string[] args) => Enabled = args.Contains("--manager-ui-check");
+    public static void Configure(string[] args)
+    { Cs2Only=args.Contains("--cs2-settings-ui-check");Enabled=Cs2Only || args.Contains("--manager-ui-check"); }
     public static void Check(bool value, string name)
     { if (!value) throw new InvalidOperationException("UI check failed: " + name); Results.Add("PASS " + name); }
     public static void Info(string value) => Results.Add("INFO " + value);
@@ -34,6 +36,12 @@ internal static partial class ManagerUiChecks
             await File.WriteAllTextAsync(Path.Combine(AppContext.BaseDirectory, "ui-check-results", "latest-run.txt"), OutputRoot);
             var previousFailure = Path.Combine(OutputRoot, "failure.txt");
             if (File.Exists(previousFailure)) File.Delete(previousFailure);
+            if(Cs2Only)
+            {
+                await CheckCs2SettingsAsync(window);
+                await File.WriteAllLinesAsync(Path.Combine(OutputRoot,"results.txt"),Results);
+                return;
+            }
             CheckOriginalServicesOffline();
             await WriteFixtureAsync();
             var palette = await CardBackgroundService.GetAsync(new(), AvatarPath, null, "", new(), true);
@@ -82,6 +90,7 @@ internal static partial class ManagerUiChecks
             foreach (double scale in new[] { 1.0, 1.25, 1.5, 2.0 }) await CaptureAsync(window, "render-scale-" + (int)(scale * 100), scale);
             await CheckClassificationsAsync(window, page);
             await CheckUpdatesAsync(window);
+            await CheckCs2SettingsAsync(window);
             Results.Add("INFO actual rasterization scale " + page.XamlRoot.RasterizationScale);
             await File.WriteAllLinesAsync(Path.Combine(OutputRoot, "results.txt"), Results);
         }
@@ -146,7 +155,7 @@ internal static partial class ManagerUiChecks
         else await image.RenderAsync(root);
         var buffer = await image.GetPixelsAsync(); var bytes = new byte[buffer.Length];
         using (var reader = DataReader.FromBuffer(buffer)) reader.ReadBytes(bytes);
-        if (!name.StartsWith("classification-") && !name.StartsWith("update-")) CheckPage!.VerifyCapturedCardPixels(root, image.PixelWidth, image.PixelHeight, bytes);
+        if (!name.StartsWith("classification-") && !name.StartsWith("update-") && !name.StartsWith("cs2-settings-")) CheckPage!.VerifyCapturedCardPixels(root, image.PixelWidth, image.PixelHeight, bytes);
         Check(image.PixelWidth > 500 && image.PixelHeight > 500 && bytes.Any(x => x != 0), "render " + name);
         var path = Path.Combine(OutputRoot, name + ".png"); await File.WriteAllBytesAsync(path, []);
         var file = await StorageFile.GetFileFromPathAsync(path); using var stream = await file.OpenAsync(FileAccessMode.ReadWrite);

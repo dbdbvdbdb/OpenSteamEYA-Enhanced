@@ -1,0 +1,2 @@
+d7a83f5fad123608e2cd9ba0b0fad713ab933243f44b222bb4d8e140f727e8de  OpenSteamEYA-Enhanced-0.2.7-beta-win-x64-aot.zip
+ce0974b08d6dbb46bb099942411ba808d6e7e77b9f4e42525972424a622ea1be  OpenSteamEYA-Enhanced-0.2.7-beta-win-x64-aot.7z

@@ -16,7 +16,7 @@ if (Test-Path -LiteralPath $exe) {
     $bytes = [System.IO.File]::ReadAllBytes($exe)
     $utf8 = [System.Text.Encoding]::UTF8.GetString($bytes)
     $utf16 = [System.Text.Encoding]::Unicode.GetString($bytes)
-    foreach ($marker in @('--manager-ui-check','qa-account-','synthetic-data','cooldown-groups-dark')) {
+    foreach ($marker in @('--manager-ui-check','--cs2-settings-ui-check','qa-account-','synthetic-data','cooldown-groups-dark')) {
         if ($utf8.Contains($marker) -or $utf16.Contains($marker)) { throw 'QA marker remains in production executable.' }
     }
 }

@@ -1,6 +1,6 @@
-# OpenSteamEYA 增强版 0.2.6 — 使用说明
+# OpenSteamEYA 增强版 0.2.7 — 使用说明
 
-本文适用于 v0.2.6 白号／黑号管理及启动检查更新版本。Windows x64 便携包采用 Native AOT，无需额外安装 .NET Runtime。WinUI 使用 2.3.9。请阅读并同意 END_USER_TERMS.txt 及 THIRD_PARTY_NOTICES.md 中相应组件的完整条款。
+本文适用于 v0.2.7 CS2 本地设置版本。Windows x64 便携包采用 Native AOT，无需额外安装 .NET Runtime。WinUI 使用 2.3.9。请阅读并同意 END_USER_TERMS.txt 及 THIRD_PARTY_NOTICES.md 中相应组件的完整条款。
 
 将完整压缩包解压到本地普通文件夹，运行 `SteamEyaWinUI.exe`。不要只复制 EXE；同目录的 WinUI/Windows App SDK DLL、PRI、Assets、Languages 及 Steam API 文件都是程序的一部分。Native AOT 包无需安装 .NET 运行时。未提供安装器。
 
@@ -42,7 +42,11 @@
 
 卡片默认从头像取色，也可选择本地图片或公开 Steam 资料背景；私密、网络失败或不支持的背景会回退。优先账户、在线等状态没有可靠数据时不猜测显示。原程序数据仍在 `%AppData%\SteamEYA`。
 
-增强版没有配置自己的更新源，因此已禁用上游下载安装，避免覆盖增强功能。源码、开发记录、测试证据及体积报告随源码交付，运行包仅保留使用/格式说明和许可。根 LICENSE 与 third-party-licenses 保留各自条款。
+增强版使用自己的 GitHub 更新源；上游下载安装入口已禁用。源码、开发记录、测试证据及体积报告随源码交付，运行包仅保留使用/格式说明和许可。根 LICENSE 与 third-party-licenses 保留各自条款。
+
+## CS2 本地设置
+
+左侧新增「CS2 本地设置」，在关闭游戏后选择本机已有配置的账号，以画面、音频、游戏 / HUD、准星、鼠标键盘五类编辑。保存前自动备份；保存后自动尝试同步该 SteamID 的用户参数与键位。机器和画面文件仅本机保存。需要 Steam 登录同一账号并启用云；缺少云镜像或推送失败会明确提示。原「设置 → CS2 设置同步」保留。范围、备份恢复及云边界见 [详细使用说明](docs/CS2-LOCAL-SETTINGS.zh-CN.md)。
 
 ## 检查更新
 

@@ -1,0 +1,39 @@
+PASS CS2 UI discovers only synthetic local profiles
+PASS CS2 initial render does not dirty original config
+PASS render cs2-settings-video-dark
+PASS CS2 category controls 音频
+PASS render cs2-settings-audio
+PASS CS2 category controls 游戏 / HUD
+PASS render cs2-settings-hud
+PASS CS2 category controls 准星
+PASS render cs2-settings-crosshair
+PASS CS2 category controls 鼠标键盘
+PASS render cs2-settings-keyboard
+PASS CS2 setting and binding edits enable save
+PASS CS2 UI operation completes
+PASS CS2 save automatically pushes only allowed files to selected SteamID
+PASS CS2 native UI writes edited sensitivity
+PASS CS2 native UI writes selected key action
+PASS CS2 saved edits reset and backup restore becomes available
+PASS render cs2-settings-saved
+PASS CS2 UI operation completes
+PASS CS2 running-game rejection never pushes cloud
+PASS CS2 UI operation completes
+PASS CS2 failed cloud accurately preserves local success
+PASS render cs2-settings-cloud-warning
+PASS CS2 UI operation completes
+PASS CS2 invalid numeric input is rejected before cloud
+PASS CS2 undo restores snapshot
+PASS CS2 UI operation completes
+PASS CS2 restore button restores latest saved backup
+PASS CS2 explicitly local restore does not silently overwrite cloud
+PASS render cs2-settings-audio-light
+PASS render cs2-settings-light-narrow
+PASS CS2 save action fits narrow window
+PASS CS2 search filters actual settings
+PASS CS2 cancelling account switch preserves unsaved edits
+PASS CS2 UI operation completes
+PASS CS2 missing supported settings show empty state without invented values
+PASS render cs2-settings-empty-light
+PASS CS2 unknown boolean value is displayed honestly instead of false
+INFO CS2 editor screenshots use synthetic local files and a simulated cloud sender. No real game configuration or cloud content was modified.

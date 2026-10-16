@@ -38,6 +38,7 @@ TestResults/
 **/synthetic-data/
 **/ui-check-results/
 **/backups/
+**/cs2-settings-backups/
 **/exports/
 **/userdata/
 *.db
