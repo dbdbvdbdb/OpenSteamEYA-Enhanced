@@ -30,6 +30,12 @@ internal sealed class ConfigText
             if (char.IsWhiteSpace(_text[p])) { p++; continue; }
             if (_text[p] == '/' && p + 1 < _text.Length && _text[p + 1] == '/')
             { while (p < _text.Length && _text[p] != '\n') p++; continue; }
+            if (_text[p] == '/' && p + 1 < _text.Length && _text[p + 1] == '*')
+            {
+                int close = _text.IndexOf("*/", p + 2, StringComparison.Ordinal);
+                if (close < 0) throw new InvalidDataException("配置注释未闭合。");
+                p = close + 2; continue;
+            }
             if (_text[p] is '{' or '}') { _tokens.Add(new("", p, 1, _text[p++])); continue; }
             int start = p; var value = new StringBuilder();
             if (_text[p] == '"')
@@ -76,6 +82,13 @@ internal sealed class ConfigText
         var matches = Entries.Where(e => e.Section == section && e.Key == key).ToArray();
         if (matches.Length > 1) throw new InvalidDataException("配置存在重复键：" + key);
         return matches.SingleOrDefault();
+    }
+    public bool HasSection(string section) => _ends.ContainsKey(section);
+    public void EnsureUnique()
+    {
+        if (_ends.Keys.GroupBy(s => s, StringComparer.OrdinalIgnoreCase).Any(g => g.Count() > 1) ||
+            Entries.GroupBy(e => (e.Section.ToUpperInvariant(), e.Key.ToUpperInvariant())).Any(g => g.Count() > 1))
+            throw new InvalidDataException("配置存在重复键（包含大小写重复），不能安全编辑。");
     }
     public byte[] Patch(string section, IReadOnlyDictionary<string, string> changes, bool allowInsert = false)
     {

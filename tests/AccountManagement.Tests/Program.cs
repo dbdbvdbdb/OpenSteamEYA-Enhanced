@@ -121,6 +121,7 @@ try
     Check((await store.LoadAsync()).Accounts.Count == 126, "concurrent read modify write serialized");
     await CategoryChecks.RunAsync(Check, root);
     Cs2ConfigChecks.Run(Check, root);
+    UnifiedConfigChecks.Run(Check, root);
     await UpdateChecks.RunAsync(Check);
     Cs2SettingsChecks.Run(Check, root);
     await FeatureChecks.RunAsync(Check, root);
