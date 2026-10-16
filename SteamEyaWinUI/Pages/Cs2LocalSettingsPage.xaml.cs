@@ -239,7 +239,7 @@ public sealed partial class Cs2LocalSettingsPage : Page
             var document = new ConfigText(_working.Files.GetValueOrDefault(LocalConfigStore.KeysFile) ?? UnifiedConfigStore.EmptyFile(LocalConfigStore.KeysFile));
             var original = document.Entries.SingleOrDefault(e => e.Section == "config/bindings" && e.Key.Equals(key, StringComparison.OrdinalIgnoreCase))?.Value;
             var keep = new ComboBoxItem { Content = "保留原绑定", Tag = "#keep" }; ActionBox.Items.Add(keep);
-            foreach (var action in SettingCatalog.BindActions) ActionBox.Items.Add(new ComboBoxItem { Content = action.Label, Tag = action.Value });
+            foreach (var action in SettingCatalog.VerifiedBindActions) ActionBox.Items.Add(new ComboBoxItem { Content = action.Label, Tag = action.Value });
             ActionBox.SelectedItem = _bindings.TryGetValue(key, out var value) ? ActionBox.Items.OfType<ComboBoxItem>().First(i => (string)i.Tag == value) : keep;
             BindingSummary.Text = "模板当前绑定：" + (original ?? "未配置") + $" · 待保存 {_bindings.Count} 项";
         }

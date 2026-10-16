@@ -131,7 +131,7 @@ internal sealed class UnifiedConfigStore(string root)
             var changes = new Dictionary<string, string>();
             foreach (var (key, value) in bindings)
             {
-                if (!SettingCatalog.BindKeys.Contains(key, StringComparer.OrdinalIgnoreCase) || !SettingCatalog.BindActions.Any(a => a.Value == value))
+                if (!SettingCatalog.BindKeys.Contains(key, StringComparer.OrdinalIgnoreCase) || !SettingCatalog.VerifiedBindActions.Any(a => a.Value == value))
                     throw new InvalidDataException("键位或动作未验证。");
                 var existing = doc.Entries.Where(e => e.Section == "config/bindings" && e.Key.Equals(key, StringComparison.OrdinalIgnoreCase)).ToArray();
                 if (existing.Length > 1) throw new InvalidDataException("重复键位。");
@@ -218,7 +218,15 @@ internal sealed class UnifiedConfigStore(string root)
     {
         string root = SafeConfigIO.Child(BackupRoot, "templates");
         if (!Directory.Exists(root)) return [];
-        return Directory.GetDirectories(root).OrderByDescending(Directory.GetLastWriteTimeUtc).Select(p => new TemplateBackupInfo(p, Path.GetFileName(p))).ToArray();
+        var backups = new List<TemplateBackupInfo>();
+        foreach (var directory in Directory.GetDirectories(root).OrderByDescending(Directory.GetLastWriteTimeUtc))
+        {
+            SafeConfigIO.RejectLinks(directory);
+            var manifest = JsonSerializer.Deserialize(SafeConfigIO.Read(SafeConfigIO.Child(directory, "template.json"), 65536), TemplateJsonContext.Default.TemplateManifest)
+                ?? throw new InvalidDataException("模板备份清单无效。");
+            backups.Add(new(directory, $"{manifest.SavedUtc.ToLocalTime():g} · {manifest.Name}"));
+        }
+        return backups;
     }
     public TemplateSnapshot RestoreTemplate(TemplateSnapshot current, string directory)
     {

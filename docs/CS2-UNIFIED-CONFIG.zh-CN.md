@@ -36,7 +36,7 @@
 
 旧备份仍位于 `%AppData%/SteamEYA/cs2-settings-backups/`，不会迁移或删除。模板、CS2 备份和账号管理 ZIP 备份相互独立。导出目录包含完整原生文件；模板在应用中逻辑统一，未将不同原生格式强行拼成 cfg 脚本。
 
-批量目标限定为指定 Steam 的规范十进制账号目录，且已存在 `userdata/<AccountID>/730`。只写 `local/cfg` 的上述四种文件；其他 slot、remote、凭据、其他游戏和未知文件不写入。目标的未知参数、硬件 ID 和未覆盖的自定义绑定保留。模板的未知字段和自定义命令保留在导出中，但批量部署只复制已验证参数和白名单标准绑定动作，避免用来源账号的未知字段覆盖目标。可以独立编辑验证过的标准按键。
+批量目标限定为指定 Steam 的规范十进制账号目录，且已存在 `userdata/<AccountID>/730`。只写 `local/cfg` 的上述四种文件；其他 slot、remote、凭据、其他游戏和未知文件不写入。目标的未知参数、硬件 ID 和未覆盖的自定义绑定保留。模板的未知字段和自定义命令保留在导出中，但批量部署只复制已验证参数和白名单标准绑定动作，避免用来源账号的未知字段覆盖目标。可以独立编辑验证过的标准按键。旧版 `<unbound>` 哨兵的原生持久化语义尚未核实，统一页暂不提供该动作，导入后也不向账号传播。
 
 用户/机器参数和键位文件缺失时按已核实的 `config/convars`、`config/bindings` 结构创建。视频文件必须由游戏初始化且目标 `Version=16`，缺失或其他版本时跳过该文件并报告，其他安全文件仍可应用。单文件上限 2 MiB，拒绝异常结构、重复/大小写重复键、链接、路径逃逸和 NTFS 替代数据流。UTF-8、带 BOM UTF-8、UTF-16 LE/BE 的字节序、注释、未知字段及未修改的文本保持原样；已存在的 `$N` 参数后缀按各目标自身的键名保留。
 
@@ -44,7 +44,7 @@
 
 ## 参数核实依据
 
-核对的游戏内容快照：SteamTracking/GameTracking-CS2，提交 **5ab573fa8afb5b8db98869d79ed79399fca6e747**（2026-10-15）。读取的是客户端数据和参数声明；没有在真实 CS2 客户端中逐项操作/验证画面效果，不能把源码核对等同于实机验收。
+核对的游戏内容快照：SteamTracking/GameTracking-CS2，提交 **5ab573fa8afb5b8db98869d79ed79399fca6e747**（2026-10-15），`ClientVersion=2000933`、`PatchVersion=1.41.9.1`（同快照 `game/csgo/steam.inf`）。读取的是客户端数据和参数声明；没有在真实 CS2 客户端中逐项操作/验证画面效果，不能把源码核对等同于实机验收。
 
 - [视频菜单定义](https://github.com/SteamTracking/GameTracking-CS2/blob/5ab573fa8afb5b8db98869d79ed79399fca6e747/game/csgo/pak01_dir/panorama/layout/settings/settings_video.xml)：客户端公开的控件、档位和亮度范围。
 - [视频格式版本](https://github.com/SteamTracking/GameTracking-CS2/blob/5ab573fa8afb5b8db98869d79ed79399fca6e747/game/csgo/pak01_dir/cfg/video_version.txt)：版本 16。

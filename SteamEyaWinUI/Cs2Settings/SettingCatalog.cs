@@ -19,7 +19,7 @@ internal sealed record SettingSpec(string Key, string Label, string Category, do
     public bool AllowInsert { get; init; }
     public bool HardwareDependent { get; init; }
     public bool RestartRequired { get; init; } = true;
-    public string Compatibility { get; init; } = SettingCatalog.SourceRevision;
+    public string Compatibility { get; init; } = SettingCatalog.GameCompatibility;
     public string Evidence { get; init; } = "";
     public string DataType => Boolean ? "boolean" : Choices is not null ? "enum" : Step >= 1 ? "integer" : "number";
 

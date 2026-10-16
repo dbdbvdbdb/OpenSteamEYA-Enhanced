@@ -4,6 +4,8 @@ internal static partial class SettingCatalog
 {
     public const string SourceRevision = "5ab573fa8afb5b8db98869d79ed79399fca6e747";
     public const string VideoVersion = "16";
+    public const string GameCompatibility = "ClientVersion 2000933 / Patch 1.41.9.1 / video 16";
+    public static SettingChoice[] VerifiedBindActions => BindActions.Where(a => a.Value != "<unbound>").ToArray();
     private static class Cache
     {
         internal static readonly SettingSpec[] Visible = All.Select(Describe).Concat(VideoSettings()).Select(English).GroupBy(s => s.Key).Select(g => g.Last()).ToArray();

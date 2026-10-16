@@ -38,7 +38,7 @@ internal sealed class ConfigApplyService(string steamRoot, string backupRoot, Fu
             string cfg = DirectoryFor(id);
             // Existing 730 data is required; never provision CS2 under unrelated Steam accounts.
             if (!Directory.Exists(Path.Combine(folder, "730"))) continue;
-            var original = new Dictionary<string, byte[]?>(); var after = new Dictionary<string, byte[]?>(); var notes = new List<string>();
+            var original = new Dictionary<string, byte[]?>(); var after = new Dictionary<string, byte[]?>(); var notes = rows.Where(r => !r.Enabled && r.Original is not null).Select(r => "未应用的模板参数：" + r.Key + "（" + r.Issue + "）").ToList();
             try
             {
                 SafeConfigIO.RejectLinks(cfg);
@@ -59,7 +59,7 @@ internal sealed class ConfigApplyService(string steamRoot, string backupRoot, Fu
                         var source = new ConfigText(template.Files[name]);
                         foreach (var bind in source.Entries.Where(e => e.Section == section))
                         {
-                            if (!SettingCatalog.BindKeys.Contains(bind.Key, StringComparer.OrdinalIgnoreCase) || !SettingCatalog.BindActions.Any(a => a.Value == bind.Value))
+                            if (!SettingCatalog.BindKeys.Contains(bind.Key, StringComparer.OrdinalIgnoreCase) || !SettingCatalog.VerifiedBindActions.Any(a => a.Value == bind.Value))
                             { notes.Add("自定义或未验证的模板键位仅保留在模板中：" + bind.Key); continue; }
                             var existing = doc.Entries.SingleOrDefault(e => e.Section == section && e.Key.Equals(bind.Key, StringComparison.OrdinalIgnoreCase));
                             changes.Add(existing?.Key ?? bind.Key, bind.Value);
@@ -88,6 +88,7 @@ internal sealed class ConfigApplyService(string steamRoot, string backupRoot, Fu
                     if (changes.Count == 0) continue;
                     byte[] result = doc.Patch(section, changes, true);
                     if (SafeConfigIO.Same(bytes, result)) continue;
+                    SafeConfigIO.ValidateFile(name, result);
                     original.Add(name, bytes); after.Add(name, result);
                 }
                 accounts.Add(new(id, cfg, original, after, notes, null));
