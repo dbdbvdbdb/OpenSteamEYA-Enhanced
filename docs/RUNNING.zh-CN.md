@@ -1,6 +1,6 @@
-# OpenSteamEYA 增强版 0.2.6 — 使用说明
+# OpenSteamEYA 增强版 0.2.7 — 使用说明
 
-本文适用于 v0.2.6 白号／黑号管理及启动检查更新版本。Windows x64 便携包采用 Native AOT，无需额外安装 .NET Runtime。WinUI 使用 2.3.9。请阅读并同意 END_USER_TERMS.txt 及 THIRD_PARTY_NOTICES.md 中相应组件的完整条款。
+本文适用于 v0.2.7 白号／黑号管理、启动检查更新及 CS2 本地设置读取版本。Windows x64 便携包采用 Native AOT，无需额外安装 .NET Runtime。WinUI 使用 2.3.9。请阅读并同意 END_USER_TERMS.txt 及 THIRD_PARTY_NOTICES.md 中相应组件的完整条款。
 
 将完整压缩包解压到本地普通文件夹，运行 `SteamEyaWinUI.exe`。不要只复制 EXE；同目录的 WinUI/Windows App SDK DLL、PRI、Assets、Languages 及 Steam API 文件都是程序的一部分。Native AOT 包无需安装 .NET 运行时。未提供安装器。
 
@@ -32,7 +32,7 @@
 
 黑号列表复用历史页面；搜索、筛选、选中、查询、详情和 Token 导出沿用原服务。没有 EYA 凭据的转入账号无法直接查询或导出 Token，需补充原凭据；其密码、备注及背景仍在管理库中保留；一键登录可继续使用已有且唯一关联的 Steam 快速登录缓存。
 
-## CS2 本地设置（新增源码功能，尚未发布）
+## CS2 本地设置（v0.2.7 新增）
 
 从左侧“CS2 本地设置”进入，选择本机账号，查看该账号已保存的键位、视频、游戏、鼠标、准星、音频和其他参数。账号来自 Steam 的 `userdata` 目录，并通过 SteamID64 区分；离线可用的昵称或账号名用于辅助识别。即使账号不在白号/黑号管理库中，也可读取其本机 CS2 配置。
 

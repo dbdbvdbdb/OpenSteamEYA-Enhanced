@@ -3,7 +3,7 @@
 > **基于 WinUI 3 与 .NET 10 的 Windows x64 Steam 账号管理工具**
 > 源自 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA)，专注独立账号管理与批量操作
 
-[![版本](https://img.shields.io/badge/版本-v0.2.6--beta-blue)]()
+[![版本](https://img.shields.io/badge/版本-v0.2.7--beta-blue)]()
 [![平台](https://img.shields.io/badge/平台-Windows%20x64-0078D4)]()
 [![技术栈](https://img.shields.io/badge/技术栈-WinUI%203%20%7C%20.NET%2010-purple)]()
 [![编译方式](https://img.shields.io/badge/编译-Native%20AOT-green)]()
@@ -16,7 +16,7 @@
 
 本项目基于 [hvh-software/OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展开发，在保留原有 EYA 登录、CS2 查询、配装、个性化等功能的基础上，**新增了独立的账号管理系统**，支持白号/黑号分类管理、批量导入导出、隐私模式、多分组等增强功能。
 
-> **当前版本**：v0.2.6-beta（启动时自动检查更新）
+> **当前版本**：v0.2.7-beta（启动时自动检查更新）
 
 ---
 
@@ -34,6 +34,10 @@
 - **创意工坊**：一键清理 CS2 创意工坊订阅
 
 ### 🆕 Enhanced 增强功能
+
+#### 🎛️ CS2 本地设置读取
+
+选择本机 Steam 账号，读取已保存的键位、视频、游戏、鼠标、准星及音频设置。支持按文件和分类筛选、搜索及刷新，显示来源路径和修改时间；本地配置与云缓存分别展示，仅读取、不改写配置。
 
 #### 📇 账号卡片与列表管理
 
@@ -76,12 +80,12 @@
 
 ### 下载方式
 
-从 [v0.2.6-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.6-beta) 页面下载：
+从 [v0.2.7-beta Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.7-beta) 页面下载：
 
 | 格式 | 大小 | 说明 |
 |------|------|------|
-| ZIP | 28.25 MiB | 推荐，解压即用 |
-| 7z | 17.07 MiB | 压缩率更高 |
+| ZIP | 见 Release 附件 | 推荐，解压即用 |
+| 7z | 见 Release 附件 | 压缩率更高 |
 
 ### 运行步骤
 
@@ -95,7 +99,7 @@
 使用 PowerShell 计算 SHA256 校验和，与 Release 中的 `SHA256SUMS.txt` 比对：
 
 ```powershell
-Get-FileHash .\OpenSteamEYA-Enhanced-0.2.6-beta-win-x64-aot.zip -Algorithm SHA256
+Get-FileHash .\OpenSteamEYA-Enhanced-0.2.7-beta-win-x64-aot.zip -Algorithm SHA256
 ```
 
 ---
@@ -156,7 +160,7 @@ pwsh ./scripts/check-data.ps1
 pwsh ./scripts/check-manager-ui.ps1 -NativeAot
 
 # 4. 发布 Native AOT 便携包
-pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.6 -ReleaseLabel 0.2.6-beta
+pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.7 -ReleaseLabel 0.2.7-beta
 ```
 
 NuGet 从官方源恢复，WinUI 使用允许随应用再分发的 **2.3.9** 组件包。
@@ -173,7 +177,7 @@ NuGet 从官方源恢复，WinUI 使用允许随应用再分发的 **2.3.9** 组
 | [更新检查说明](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/blob/main/docs/UPDATES.zh-CN.md) | 自动更新机制 |
 | [功能交付报告](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/blob/main/docs/FEATURES-0.2.5.zh-CN.md) | v0.2.5 改造详情 |
 | [发布审查报告](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/blob/main/docs/RELEASE-AUDIT.zh-CN.md) | 开源审查记录 |
-| [发布说明](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/blob/main/docs/releases/v0.2.6-beta.md) | v0.2.6-beta 发布说明 |
+| [发布说明](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/blob/main/docs/releases/v0.2.7-beta.md) | v0.2.7-beta 发布说明 |
 
 ---
 
