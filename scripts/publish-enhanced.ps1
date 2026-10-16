@@ -1,4 +1,4 @@
-param([switch]$NativeAot = $true, [string]$Version = '0.2.7', [string]$ReleaseLabel = '')
+param([switch]$NativeAot = $true, [string]$Version = '0.2.8', [string]$ReleaseLabel = '')
 $ErrorActionPreference = 'Stop'
 if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw 'Version must be X.Y.Z' }
 if (-not $ReleaseLabel) { $ReleaseLabel = $Version }

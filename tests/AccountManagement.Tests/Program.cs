@@ -122,6 +122,7 @@ try
     await CategoryChecks.RunAsync(Check, root);
     Cs2ConfigChecks.Run(Check, root);
     await UpdateChecks.RunAsync(Check);
+    Cs2SettingsChecks.Run(Check, root);
     await FeatureChecks.RunAsync(Check, root);
     await GroupStatusChecks.RunAsync(Check, root);
     Console.WriteLine($"All {passed} checks passed. Only synthetic test accounts used.");

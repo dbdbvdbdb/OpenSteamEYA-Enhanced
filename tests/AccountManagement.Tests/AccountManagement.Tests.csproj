@@ -5,5 +5,7 @@
   <Compile Include="../../SteamEyaWinUI/Cs2Settings/*.cs" Link="Cs2Settings/%(Filename)%(Extension)" />
   <Compile Include="../../SteamEyaWinUI/Services/GitHubUpdateService.cs" Link="Update/GitHubUpdateService.cs" />
   <Compile Include="../../SteamEyaWinUI/Models/GitHubUpdateInfo.cs" Link="Update/GitHubUpdateInfo.cs" />
+  <Compile Include="../../SteamEyaWinUI/Services/Cs2SettingsParser.cs" Link="Cs2/Cs2SettingsParser.cs" />
+  <Compile Include="../../SteamEyaWinUI/Services/Cs2LocalSettingsService.cs" Link="Cs2/Cs2LocalSettingsService.cs" />
  </ItemGroup>
 </Project>

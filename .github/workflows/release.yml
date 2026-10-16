@@ -1,14 +1,18 @@
-name: Prepare beta Release
+name: Build and publish Release
 
 on:
   push:
-    tags: ['v*-beta', 'v*-beta.*']
+    tags: ['v*']
+    # This version's public release was explicitly requested by the maintainer.
+    # Other tags and manual runs retain the draft-only behavior below.
+    branches: [main]
+    paths: ['docs/releases/v0.2.8.md']
   workflow_dispatch:
     inputs:
       version:
-        description: 'Prerelease version without v (example: 0.2.7-beta)'
+        description: 'Version without v (example: 0.2.8)'
         required: true
-        default: '0.2.7-beta'
+        default: '0.2.8'
         type: string
 
 permissions:
@@ -47,14 +51,17 @@ jobs:
         env:
           INPUT_VERSION: ${{ inputs.version }}
           REF_NAME: ${{ github.ref_name }}
+          REF: ${{ github.ref }}
           EVENT_NAME: ${{ github.event_name }}
         run: |
-          $label = if ($env:EVENT_NAME -eq 'push') { $env:REF_NAME -replace '^v', '' } else { $env:INPUT_VERSION.Trim() }
-          if ($label -notmatch '^(\d+\.\d+\.\d+)-beta(?:\.\d+)?$') { throw 'Only X.Y.Z-beta[.N] is accepted. No stable release.' }
+          $publishRequested = $env:EVENT_NAME -eq 'push' -and $env:REF -eq 'refs/heads/main'
+          $label = if ($publishRequested) { '0.2.8' } elseif ($env:EVENT_NAME -eq 'push') { $env:REF_NAME -replace '^v', '' } else { $env:INPUT_VERSION.Trim() }
+          if ($label -notmatch '^(\d+\.\d+\.\d+)(?:-beta(?:\.\d+)?)?$') { throw 'Expected X.Y.Z or X.Y.Z-beta[.N].' }
           $numeric = $Matches[1]
           "version=$numeric" >> $env:GITHUB_OUTPUT
           "label=$label" >> $env:GITHUB_OUTPUT
           "tag=v$label" >> $env:GITHUB_OUTPUT
+          "publish=$($publishRequested.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           if (-not (Test-Path "./docs/releases/v$label.md")) { throw 'Reviewed release notes missing.' }
       - name: Detect existing release without modifying it
         id: existing
@@ -108,7 +115,7 @@ jobs:
             artifacts/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
-      - name: Create draft prerelease only
+      - name: Create release (draft unless this publication was requested)
         if: steps.existing.outputs.exists != 'true'
         shell: pwsh
         env:
@@ -117,6 +124,7 @@ jobs:
           RELEASE_TAG: ${{ steps.meta.outputs.tag }}
           RELEASE_LABEL: ${{ steps.meta.outputs.label }}
           RELEASE_COMMIT: ${{ github.sha }}
+          PUBLISH_REQUESTED: ${{ steps.meta.outputs.publish }}
         run: |
           $existing = gh release view $env:RELEASE_TAG --json tagName --jq '.tagName' 2>$null
           if ($LASTEXITCODE -eq 0) { throw 'Release already exists. Refusing to overwrite assets or release state.' }
@@ -124,5 +132,12 @@ jobs:
           if ($LASTEXITCODE -ne 0 -or $repo -ne $env:GH_REPO) { throw 'Repository authentication failed.' }
           $zip = "./artifacts/OpenSteamEYA-Enhanced-$env:RELEASE_LABEL-win-x64-aot.zip"
           $seven = "./artifacts/OpenSteamEYA-Enhanced-$env:RELEASE_LABEL-win-x64-aot.7z"
-          gh release create $env:RELEASE_TAG $zip $seven ./artifacts/SHA256SUMS.txt --target $env:RELEASE_COMMIT --title "OpenSteamEYA Enhanced $env:RELEASE_TAG" --notes-file "./docs/releases/$env:RELEASE_TAG.md" --draft --prerelease --latest=false
-          if ($LASTEXITCODE -ne 0) { throw 'Draft prerelease creation failed.' }
+          $releaseArgs = @('release','create',$env:RELEASE_TAG,$zip,$seven,'./artifacts/SHA256SUMS.txt',
+            '--target',$env:RELEASE_COMMIT,'--title',"OpenSteamEYA Enhanced $env:RELEASE_TAG",
+            '--notes-file',"./docs/releases/$env:RELEASE_TAG.md")
+          if ($env:RELEASE_LABEL.Contains('-')) { $releaseArgs += @('--prerelease','--latest=false') } else { $releaseArgs += '--latest=true' }
+          if ($env:PUBLISH_REQUESTED -eq 'true') {
+            if ($env:RELEASE_TAG -ne 'v0.2.8') { throw 'Publication authorization is limited to v0.2.8.' }
+          } else { $releaseArgs += '--draft' }
+          & gh @releaseArgs
+          if ($LASTEXITCODE -ne 0) { throw 'Release creation failed.' }
