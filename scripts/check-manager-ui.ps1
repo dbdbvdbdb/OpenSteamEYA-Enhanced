@@ -24,7 +24,12 @@ $process = Start-Process -FilePath (Join-Path $testOutput 'SteamEyaWinUI.exe') -
 if (-not $process.WaitForExit(120000)) { throw 'QA did not finish within 120 seconds. Inspect the test process before retrying.' }
 $runDirectory = Get-Content -LiteralPath (Join-Path $testOutput 'ui-check-results/latest-run.txt')
 $failureFile = Join-Path $runDirectory 'failure.txt'
-if (Test-Path -LiteralPath $failureFile) { Get-Content -LiteralPath $failureFile; throw 'QA checks failed.' }
+if (Test-Path -LiteralPath $failureFile) {
+    $partialResultsFile = Join-Path $runDirectory 'partial-results.txt'
+    if (Test-Path -LiteralPath $partialResultsFile) { Get-Content -LiteralPath $partialResultsFile }
+    Get-Content -LiteralPath $failureFile
+    throw 'QA checks failed.'
+}
 $results = Get-Content -LiteralPath (Join-Path $runDirectory 'results.txt')
 $results
 Write-Output "Passed: $(($results | Where-Object { $_ -like 'PASS *' }).Count)"
