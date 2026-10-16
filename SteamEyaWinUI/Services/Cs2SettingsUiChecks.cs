@@ -104,6 +104,17 @@ internal static partial class ManagerUiChecks
         Find<TextBox>("SearchBox").Text = "主音量"; await Task.Delay(150);
         Check(FindElements(page).OfType<TextBox>().Count(t => t.Tag?.ToString() == "volume") == 1, "unified CS2 search retains matching editable parameter");
         Find<TextBox>("SearchBox").Text = ""; await Task.Delay(100);
+        var partial = store.Load();
+        partial = store.Replace(partial, partial with { Files = new Dictionary<string, byte[]> {
+            [LocalConfigStore.UserFile] = UnifiedConfigStore.EmptyFile(LocalConfigStore.UserFile),
+            [LocalConfigStore.VideoFile] = UnifiedConfigStore.EmptyFile(LocalConfigStore.VideoFile) } }, "缺失参数测试模板");
+        await page.PrepareForCheckAsync(store, steam); await Tab("鼠标键盘");
+        Check(!Find<Button>("SaveButton").IsEnabled, "unified CS2 rendering absent defaults does not silently add parameters");
+        var addMissing = FindElements(page).OfType<Button>().Single(b => b.Tag?.ToString() == "add:sensitivity");
+        Press(addMissing); Press(Find<Button>("SaveButton")); await Wait();
+        var inserted = new ConfigText(store.Load().Files[LocalConfigStore.UserFile]);
+        Check(inserted.Find("config/convars", "sensitivity")?.Value == "1.25" && inserted.Find("config/convars", "zoom_sensitivity_ratio") is null,
+            "unified CS2 explicitly adds only the selected missing default parameter");
         Info("Unified CS2 UI uses isolated templates and synthetic account directories. No Steam session, credentials or cloud APIs were used. Physical monitor/driver and game-effect validation remains pending.");
     }
 }

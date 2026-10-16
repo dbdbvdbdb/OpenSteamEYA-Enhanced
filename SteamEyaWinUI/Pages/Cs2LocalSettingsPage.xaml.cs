@@ -243,7 +243,15 @@ public sealed partial class Cs2LocalSettingsPage : Page
         }
         control.Tag = row.Key; Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(control, spec.Label);
         var editor = new StackPanel { Spacing = 4, VerticalAlignment = VerticalAlignment.Center };
-        editor.Children.Add(control); editor.Children.Add(error); Grid.SetColumn(editor, 1); grid.Children.Add(editor); return grid;
+        editor.Children.Add(control);
+        if (row.Enabled && row.Original is null)
+        {
+            var add = new Button { Content = "加入模板", Tag = "add:" + row.Key, HorizontalAlignment = HorizontalAlignment.Left };
+            ToolTipService.SetToolTip(add, "将此项当前编辑值加入正确配置节点；不改变账号文件。");
+            add.Click += (_, _) => Change(row.Value);
+            editor.Children.Add(add);
+        }
+        editor.Children.Add(error); Grid.SetColumn(editor, 1); grid.Children.Add(editor); return grid;
     }
     private void KeyChanged(object sender, SelectionChangedEventArgs e) { if (!_bindingSelection) RenderBinding(); }
     private void RenderBinding()
