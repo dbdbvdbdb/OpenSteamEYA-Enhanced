@@ -118,7 +118,11 @@ internal static class UnifiedConfigChecks
         var backup101 = applied.Accounts.Single(a => a.AccountId == 101).Backup!;
         Pass(File.ReadAllBytes(Path.Combine(backup101, LocalConfigStore.UserFile)).SequenceEqual(before[Path.Combine(Cfg(101), LocalConfigStore.UserFile)]), "per-account backup exactly matches original bytes");
         Pass(File.ReadAllBytes(Path.Combine(Cfg(202), LocalConfigStore.UserFile)).SequenceEqual(before[Path.Combine(Cfg(202), LocalConfigStore.UserFile)]), "read-only account remains unchanged");
-        var restoredResult = service.Apply(service.PreviewRestore(backup101));
+        // Simulate an interrupted rollback: one file is already original, the rest are still the applied bytes.
+        File.WriteAllBytes(Path.Combine(Cfg(101), LocalConfigStore.MachineFile), before[Path.Combine(Cfg(101), LocalConfigStore.MachineFile)]);
+        var partialRestore = service.PreviewRestore(backup101);
+        Pass(!partialRestore.Accounts.Single().After.ContainsKey(LocalConfigStore.MachineFile), "restore handles mixed original/applied files without rewriting already-original data");
+        var restoredResult = service.Apply(partialRestore);
         Pass(restoredResult.Succeeded == 1 && File.ReadAllBytes(Path.Combine(Cfg(101), LocalConfigStore.UserFile)).SequenceEqual(before[Path.Combine(Cfg(101), LocalConfigStore.UserFile)]), "account restore creates own backup and restores exact data");
         var backup303 = applied.Accounts.Single(a => a.AccountId == 303).Backup!;
         service.Apply(service.PreviewRestore(backup303));

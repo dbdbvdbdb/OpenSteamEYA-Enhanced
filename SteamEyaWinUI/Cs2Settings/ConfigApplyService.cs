@@ -231,9 +231,12 @@ internal sealed class ConfigApplyService(string steamRoot, string backupRoot, Fu
             var bytes = hash is null ? null : SafeConfigIO.Read(SafeConfigIO.Child(directory, name));
             if (bytes is not null && SafeConfigIO.Hash(bytes) != hash) throw new InvalidDataException("备份文件校验失败。");
             byte[]? current = SafeConfigIO.ReadOptional(SafeConfigIO.Child(target, name));
-            if ((current is null ? null : SafeConfigIO.Hash(current)) != manifest.After[name]) throw new IOException("备份之后此账号配置已发生变化，拒绝覆盖新内容。");
+            string? currentHash = current is null ? null : SafeConfigIO.Hash(current);
+            if (currentHash == hash) continue; // already original, e.g. a partially completed rollback
+            if (currentHash != manifest.After[name]) throw new IOException("备份之后此账号配置已发生变化，拒绝覆盖新内容。");
             before.Add(name, current); after.Add(name, bytes);
         }
+        if (after.Count == 0) throw new InvalidOperationException("这些文件已是备份中的原始状态，无需再次恢复。");
         var plan = new AccountApplyPlan(manifest.AccountId, target, before, after, [], null);
         ValidatePlan(plan);
         return new(SteamRoot, "restore", [plan]);
