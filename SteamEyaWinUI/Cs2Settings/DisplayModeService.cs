@@ -29,16 +29,28 @@ internal static class DisplayModeService
     }
     public static TemplateSnapshot ChangeResolution(TemplateSnapshot snapshot, string device, int width, int height, IReadOnlyList<DisplayMode> liveModes)
     {
-        if (!liveModes.Any(m => m.Device == device && m.Width == width && m.Height == height)) throw new InvalidDataException("显示设备不支持此分辨率。");
         if (!snapshot.Files.TryGetValue(LocalConfigStore.VideoFile, out var bytes)) throw new InvalidDataException("请先导入游戏生成的视频配置。");
         var doc = new ConfigText(bytes); doc.EnsureUnique();
+        int? refresh = SavedRefresh(doc);
+        if (refresh is null) throw new InvalidDataException("当前刷新率不是已验证的整数 Hz，不能安全修改分辨率；请先在游戏内选择显示模式。");
+        if (!liveModes.Any(m => m.Device == device && m.Width == width && m.Height == height && m.Hz == refresh))
+            throw new InvalidDataException("显示设备不支持此分辨率与当前刷新率组合。");
         if (doc.Find("video.cfg", "Version")?.Value != SettingCatalog.VideoVersion || doc.Find("video.cfg", "setting.defaultres") is null || doc.Find("video.cfg", "setting.defaultresheight") is null)
             throw new InvalidDataException("视频版本或分辨率字段未验证，拒绝生成未知显示配置。");
         var files = snapshot.Files.ToDictionary(p => p.Key, p => p.Value.ToArray());
         files[LocalConfigStore.VideoFile] = doc.Patch("video.cfg", new Dictionary<string, string> {
             ["setting.defaultres"] = width.ToString(System.Globalization.CultureInfo.InvariantCulture),
             ["setting.defaultresheight"] = height.ToString(System.Globalization.CultureInfo.InvariantCulture) });
-        return snapshot with { Files = files, Manifest = snapshot.Manifest with { Display = new(device, width, height) } };
+        return snapshot with { Files = files, Manifest = snapshot.Manifest with { Display = new(device, width, height, refresh.Value) } };
+    }
+    internal static int? SavedRefresh(ConfigText document)
+    {
+        if (!long.TryParse(document.Find("video.cfg", "setting.refreshrate_numerator")?.Value,
+            System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out long numerator) ||
+            !long.TryParse(document.Find("video.cfg", "setting.refreshrate_denominator")?.Value,
+            System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out long denominator) ||
+            denominator <= 0 || numerator <= 0 || numerator % denominator != 0 || numerator / denominator > 1000) return null;
+        return (int)(numerator / denominator);
     }
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     private struct DisplayDevice

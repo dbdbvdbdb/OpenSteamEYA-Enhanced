@@ -20,7 +20,8 @@ internal sealed class ConfigApplyService(string steamRoot, string backupRoot, Fu
         foreach (var (name, bytes) in template.Files) SafeConfigIO.ValidateFile(name, bytes);
         UnifiedConfigStore.ValidateVideoCombination(template.Files);
         var rows = UnifiedConfigStore.GetSettings(template);
-        if (template.Manifest.Display is { } display && !(displayModes?.Invoke() ?? DisplayModeService.Enumerate()).Any(m => m.Device == display.Device && m.Width == display.Width && m.Height == display.Height))
+        if (template.Manifest.Display is { } display && !(displayModes?.Invoke() ?? DisplayModeService.Enumerate()).Any(m => m.Device == display.Device && m.Width == display.Width && m.Height == display.Height && m.Hz == display.Hz) ||
+            template.Manifest.Display is { } savedDisplay && (!template.Files.TryGetValue(LocalConfigStore.VideoFile, out var displayBytes) || DisplayModeService.SavedRefresh(new ConfigText(displayBytes)) != savedDisplay.Hz))
             throw new InvalidDataException("模板分辨率不在当前显示设备的有效模式中；请重新选择分辨率或导入不含显示模式绑定的模板。");
         foreach (var row in rows.Where(r => r.Enabled && r.Original is not null))
         {
@@ -77,8 +78,8 @@ internal sealed class ConfigApplyService(string steamRoot, string backupRoot, Fu
                     }
                     if (name == LocalConfigStore.VideoFile && template.Manifest.Display is { } selection)
                     {
-                        if (doc.Find("video.cfg", "setting.defaultres") is null || doc.Find("video.cfg", "setting.defaultresheight") is null)
-                            notes.Add("目标视频文件缺少显示模式字段，未修改分辨率。");
+                        if (doc.Find("video.cfg", "setting.defaultres") is null || doc.Find("video.cfg", "setting.defaultresheight") is null || DisplayModeService.SavedRefresh(doc) != selection.Hz)
+                            notes.Add("目标视频文件缺少显示字段或刷新率不同，未修改分辨率。");
                         else
                         {
                             changes["setting.defaultres"] = selection.Width.ToString(CultureInfo.InvariantCulture);

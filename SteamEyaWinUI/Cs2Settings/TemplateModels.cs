@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace SteamEyaWinUI.Cs2Settings;
 
-internal sealed record DisplaySelection(string Device, int Width, int Height);
+internal sealed record DisplaySelection(string Device, int Width, int Height, int Hz = 0);
 
 internal sealed record TemplateManifest
 {

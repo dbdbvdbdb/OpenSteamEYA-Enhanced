@@ -35,7 +35,7 @@
     <StackPanel Spacing="8">
      <TextBlock Text="设备列表仅用于校验分辨率，不写入未经验证的 CS2 显示器编号。刷新率、宽高比和显示模式暂保留导入值；需要先导入游戏生成的版本 16 视频配置。" TextWrapping="Wrap"/>
      <ComboBox x:Name="DisplayBox" Header="显示设备（仅校验模式）" SelectionChanged="DisplayChanged" HorizontalAlignment="Stretch"/>
-     <ComboBox x:Name="ResolutionBox" Header="受设备支持的分辨率" SelectionChanged="ResolutionChanged" HorizontalAlignment="Stretch"/>
+     <ComboBox x:Name="ResolutionBox" Header="受设备及当前刷新率支持的分辨率" PlaceholderText="需要游戏生成的已有整数刷新率配置" SelectionChanged="ResolutionChanged" HorizontalAlignment="Stretch"/>
     </StackPanel>
     </Expander>
     <StackPanel x:Name="RowsPanel" Spacing="3"/>

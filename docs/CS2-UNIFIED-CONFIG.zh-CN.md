@@ -59,7 +59,7 @@
 | --- | --- | --- |
 | 显示模式 | fullscreen / nowindowborder / coop_fullscreen 组合 | 待核实原生控件完整组合，保留导入值，不开放编辑 |
 | 宽高比 | 原生 AspectRatioEnum 与显示模式联动 | 待核实持久化映射；不强行写入菜单序号 |
-| 分辨率 | video.cfg 的已有 defaultres/defaultresheight | Windows `EnumDisplayDevicesW/EnumDisplaySettingsExW` 实际枚举；成对修改已有键，重新校验设备。没有字段时先从游戏导入 |
+| 分辨率 | video.cfg 的已有 defaultres/defaultresheight | Windows `EnumDisplayDevicesW/EnumDisplaySettingsExW` 实际枚举；仅在已有整数刷新率可核实且设备支持该分辨率/刷新率组合时成对修改已有键，逐账号刷新率不同时跳过。缺字段或分数/自动刷新率需先在游戏内处理 |
 | 显示器选择 | monitor_index | 只显示 Windows 实际设备用于校验模式，不猜测 CS2 编号 |
 | 刷新率 | numerator/denominator | 原生控件负责分数刷新率，当前仅枚举驱动模式，保留导入值、不开放写入 |
 | 亮度/Gamma | machine/convars: r_fullscreen_gamma | 可编辑 1–4，声明默认 2.2；不把百分比当 Gamma 写入 |

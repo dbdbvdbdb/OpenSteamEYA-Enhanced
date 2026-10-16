@@ -148,10 +148,11 @@ internal static class UnifiedConfigChecks
         Pass(UnifiedConfigStore.GetSettings(template with { Files = wrongVersion }).Where(r => r.Spec.FileName == LocalConfigStore.VideoFile).All(r => !r.Enabled), "unknown video version cannot expose editable video options");
         var modes = new[] { new DisplayMode("fixture-device", "Synthetic monitor", 1920, 1080, 144, true) };
         var withVideo = template.Files.ToDictionary(p => p.Key, p => p.Value.ToArray());
-        withVideo[LocalConfigStore.VideoFile] = Encoding.UTF8.GetBytes("\"video.cfg\" { Version 16 \"setting.defaultres\" 1280 \"setting.defaultresheight\" 720 }");
+        withVideo[LocalConfigStore.VideoFile] = Encoding.UTF8.GetBytes("\"video.cfg\" { Version 16 \"setting.defaultres\" 1280 \"setting.defaultresheight\" 720 \"setting.refreshrate_numerator\" 144 \"setting.refreshrate_denominator\" 1 }");
         var selection = DisplayModeService.ChangeResolution(template with { Files = withVideo }, "fixture-device", 1920, 1080, modes);
         Pass(selection.Manifest.Display?.Width == 1920, "resolution selection records validated device and dimensions");
         Reject(() => DisplayModeService.ChangeResolution(selection, "fixture-device", 8000, 8000, modes), "unsupported hardware mode rejected");
+        Reject(() => DisplayModeService.ChangeResolution(selection, "fixture-device", 1920, 1080, [new("fixture-device", "Synthetic monitor", 1920, 1080, 60, true)]), "resolution unsupported at saved refresh rate rejected");
         Reject(() => service.Preview(selection), "stale or foreign display binding blocks application");
         Pass(new ConfigApplyService(steam, backups, () => false, displayModes: () => modes).Preview(selection).Accounts.Count > 0, "hardware mode is revalidated before apply preview");
         if (!OperatingSystem.IsWindows())

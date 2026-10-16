@@ -295,7 +295,8 @@ public sealed partial class Cs2LocalSettingsPage : Page
         {
             ResolutionBox.Items.Clear();
             if (DisplayBox.SelectedItem is not ComboBoxItem device) return;
-            foreach (var mode in _modes.Where(m => m.Device == (string)device.Tag).DistinctBy(m => (m.Width, m.Height)))
+            int? refresh = _working is not null && _working.Files.TryGetValue(LocalConfigStore.VideoFile, out var video) ? DisplayModeService.SavedRefresh(new ConfigText(video)) : null;
+            foreach (var mode in _modes.Where(m => m.Device == (string)device.Tag && m.Hz == refresh).DistinctBy(m => (m.Width, m.Height)))
                 ResolutionBox.Items.Add(new ComboBoxItem { Content = $"{mode.Width} × {mode.Height}", Tag = mode });
         }
         finally { _syncing = previous; }
