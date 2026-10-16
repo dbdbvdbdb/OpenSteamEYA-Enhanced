@@ -121,6 +121,7 @@ try
     Check((await store.LoadAsync()).Accounts.Count == 126, "concurrent read modify write serialized");
     await CategoryChecks.RunAsync(Check, root);
     await UpdateChecks.RunAsync(Check);
+    Cs2SettingsChecks.Run(Check, root);
     await FeatureChecks.RunAsync(Check, root);
     await GroupStatusChecks.RunAsync(Check, root);
     Console.WriteLine($"All {passed} checks passed. Only synthetic test accounts used.");

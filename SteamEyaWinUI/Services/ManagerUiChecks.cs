@@ -82,6 +82,7 @@ internal static partial class ManagerUiChecks
             foreach (double scale in new[] { 1.0, 1.25, 1.5, 2.0 }) await CaptureAsync(window, "render-scale-" + (int)(scale * 100), scale);
             await CheckClassificationsAsync(window, page);
             await CheckUpdatesAsync(window);
+            await CheckCs2SettingsAsync(window);
             Results.Add("INFO actual rasterization scale " + page.XamlRoot.RasterizationScale);
             await File.WriteAllLinesAsync(Path.Combine(OutputRoot, "results.txt"), Results);
         }

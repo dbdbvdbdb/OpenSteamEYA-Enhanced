@@ -1,0 +1,76 @@
+<Page
+    x:Class="SteamEyaWinUI.Pages.Cs2SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:SteamEyaWinUI.Models"
+    NavigationCacheMode="Required">
+    <Grid Padding="32,24,32,16" RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Spacing="4">
+            <TextBlock Text="{x:Bind Strings.Get('Cs2Settings_Title'), Mode=OneWay}" Style="{StaticResource PageTitleTextStyle}" />
+            <TextBlock Text="{x:Bind Strings.Get('Cs2Settings_Hint'), Mode=OneWay}" Style="{StaticResource PageSubtitleTextStyle}" TextWrapping="Wrap" />
+        </StackPanel>
+        <Grid Grid.Row="1" ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ComboBox x:Name="AccountBox" Header="{x:Bind Strings.Get('Cs2Settings_Account'), Mode=OneWay}"
+                      HorizontalAlignment="Stretch" SelectionChanged="AccountBox_SelectionChanged" />
+            <Button x:Name="RefreshButton" Grid.Column="1" VerticalAlignment="Bottom"
+                    Content="{x:Bind Strings.Get('Cs2Settings_Refresh'), Mode=OneWay}" Click="RefreshButton_Click" />
+            <ProgressRing x:Name="LoadingRing" Grid.Column="2" Width="24" Height="24" VerticalAlignment="Bottom" IsActive="False" Visibility="Collapsed" />
+        </Grid>
+        <Grid Grid.Row="2" ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <ComboBox x:Name="FileBox" Header="{x:Bind Strings.Get('Cs2Settings_File'), Mode=OneWay}"
+                      HorizontalAlignment="Stretch" SelectionChanged="Filter_SelectionChanged" />
+            <ComboBox x:Name="CategoryBox" Grid.Column="1" Header="{x:Bind Strings.Get('Cs2Settings_Category'), Mode=OneWay}"
+                      HorizontalAlignment="Stretch" SelectionChanged="Filter_SelectionChanged" />
+        </Grid>
+        <StackPanel Grid.Row="3" Spacing="6">
+            <TextBox x:Name="SearchBox" PlaceholderText="{x:Bind Strings.Get('Cs2Settings_Search'), Mode=OneWay}" TextChanged="SearchBox_TextChanged"
+                     AutomationProperties.Name="{x:Bind Strings.Get('Cs2Settings_Search'), Mode=OneWay}" />
+            <TextBlock x:Name="SourcePathText" IsTextSelectionEnabled="True" TextWrapping="Wrap" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        </StackPanel>
+        <InfoBar x:Name="ReadInfoBar" Grid.Row="4" IsOpen="False" IsClosable="True" Severity="Warning" MaxHeight="120" />
+        <Grid Grid.Row="5">
+            <ListView x:Name="SettingsList" SelectionMode="None" HorizontalContentAlignment="Stretch">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Cs2SettingRow">
+                        <Grid Padding="8,10" ColumnSpacing="16" RowSpacing="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Spacing="3">
+                                <TextBlock Text="{x:Bind Title}" FontWeight="SemiBold" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                                <TextBlock Text="{x:Bind Detail}" TextWrapping="Wrap" FontSize="12" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{x:Bind Value}" FontFamily="Consolas" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{x:Bind Source}" FontSize="12" TextWrapping="Wrap" IsTextSelectionEnabled="True" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBlock x:Name="EmptyText" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" MaxWidth="580" />
+        </Grid>
+        <TextBlock x:Name="CountText" Grid.Row="6" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+    </Grid>
+</Page>
