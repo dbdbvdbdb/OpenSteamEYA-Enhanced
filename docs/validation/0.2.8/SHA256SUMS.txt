@@ -1,0 +1,2 @@
+4e6e531dec1a703c3b97b1439c58c3619b27b1308c86e1d23c8ddaff1131eae8  OpenSteamEYA-Enhanced-0.2.8-win-x64-aot.zip
+0fd3a7a931f04671b7101b62b6e1967b51f88ea72c22acba1c5600239f143d19  OpenSteamEYA-Enhanced-0.2.8-win-x64-aot.7z

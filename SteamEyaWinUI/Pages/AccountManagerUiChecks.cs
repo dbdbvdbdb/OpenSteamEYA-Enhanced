@@ -186,8 +186,7 @@ public sealed partial class AccountManagerPage
         var card = visible.First(x => x.Account.Password.Length > 0);
         foreach (var (action, expected) in new[] { ("copy-account", card.Account.LoginName), ("copy-password", card.Account.Password), ("copy-id", card.Account.SteamId) })
         {
-            Invoke(card.Actions[action]); await Task.Delay(80);
-            ManagerUiChecks.Check(await Windows.ApplicationModel.DataTransfer.Clipboard.GetContent().GetTextAsync() == expected, "native button " + action);
+            await ManagerUiChecks.CheckClipboardTextAsync(() => Invoke(card.Actions[action]), expected, "native button " + action);
         }
     }
     internal async Task SwitchUiCheckAsync(string mode, bool privateMode)

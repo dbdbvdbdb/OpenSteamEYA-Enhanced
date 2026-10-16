@@ -1,0 +1,4 @@
+PASS Native AOT: x64 native PE, no managed app/runtime host, required WinUI/Steam resources present.
+Portable package checked: 301 files; no test data/debug outputs; required notices present.
+PASS extracted production package starts with a responsive native window.
+PASS own test application closed gracefully; no login/query action invoked.

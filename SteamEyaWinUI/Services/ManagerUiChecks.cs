@@ -194,17 +194,37 @@ internal static partial class ManagerUiChecks
         catch { Results.Add("INFO clipboard checks skipped because original formats could not be preserved"); return; }
         try
         {
-            ClipboardService.Copy("qa-copy-account");
-            Check(await Windows.ApplicationModel.DataTransfer.Clipboard.GetContent().GetTextAsync() == "qa-copy-account", "copy login account");
-            ClipboardService.Copy("synthetic-copy----\\\"中文");
-            Check(await Windows.ApplicationModel.DataTransfer.Clipboard.GetContent().GetTextAsync() == "synthetic-copy----\\\"中文", "copy password special characters");
+            await CheckClipboardTextAsync(() => ClipboardService.Copy("qa-copy-account"), "qa-copy-account", "copy login account");
+            await CheckClipboardTextAsync(() => ClipboardService.Copy("synthetic-copy----\\\"中文"), "synthetic-copy----\\\"中文", "copy password special characters");
             await page.CheckCardClipboardAsync();
         }
         finally
         {
-            if (old.AvailableFormats.Count > 0) Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(snapshot);
-            else Windows.ApplicationModel.DataTransfer.Clipboard.Clear();
+            for (int attempt=0; ; attempt++)
+                try
+                {
+                    if (old.AvailableFormats.Count > 0) Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(snapshot);
+                    else Windows.ApplicationModel.DataTransfer.Clipboard.Clear();
+                    break;
+                }
+                catch (System.Runtime.InteropServices.COMException) when (attempt<9) { await Task.Delay(100); }
         }
+    }
+    internal static async Task CheckClipboardTextAsync(Action copy, string expected, string name)
+    {
+        for(int attempt=0;attempt<10;attempt++)
+        {
+            try
+            {
+                copy(); await Task.Delay(100);
+                var view=Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
+                if(view.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.Text) && await view.GetTextAsync()==expected)
+                { Check(true,name);return; }
+            }
+            catch(System.Runtime.InteropServices.COMException) when(attempt<9) { }
+            await Task.Delay(100);
+        }
+        Check(false,name+" (clipboard unavailable or unexpected content after bounded retry)");
     }
 }
 #endif
