@@ -147,7 +147,14 @@ internal static partial class ManagerUiChecks
         else await image.RenderAsync(root);
         var buffer = await image.GetPixelsAsync(); var bytes = new byte[buffer.Length];
         using (var reader = DataReader.FromBuffer(buffer)) reader.ReadBytes(bytes);
-        if (!name.StartsWith("classification-") && !name.StartsWith("update-")) CheckPage!.VerifyCapturedCardPixels(root, image.PixelWidth, image.PixelHeight, bytes);
+        var activePage = FindElements(root).OfType<Microsoft.UI.Xaml.Controls.Frame>()
+            .FirstOrDefault(frame => frame.Name == "ContentFrame")?.Content;
+        // Cached pages still exist after navigation. Validate the page actually being
+        // captured, rather than assuming every new screenshot name contains cards.
+        if (activePage is AccountManagerPage manager && !name.StartsWith("classification-"))
+            manager.VerifyCapturedCardPixels(root, image.PixelWidth, image.PixelHeight, bytes);
+        else if (activePage is Cs2SettingsPage settings)
+            settings.VerifySettingsCapture(root);
         Check(image.PixelWidth > 500 && image.PixelHeight > 500 && bytes.Any(x => x != 0), "render " + name);
         var path = Path.Combine(OutputRoot, name + ".png"); await File.WriteAllBytesAsync(path, []);
         var file = await StorageFile.GetFileFromPathAsync(path); using var stream = await file.OpenAsync(FileAccessMode.ReadWrite);

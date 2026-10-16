@@ -9,6 +9,27 @@ namespace SteamEyaWinUI.Pages;
 
 public sealed partial class Cs2SettingsPage
 {
+    internal void VerifySettingsCapture(FrameworkElement root)
+    {
+        var container = SettingsList.ContainerFromIndex(0) as ListViewItem;
+        ManagerUiChecks.Check(container is { IsLoaded: true, ActualWidth: > 0, ActualHeight: > 0 },
+            "CS2 screenshot contains a realized settings row");
+        var point = container!.TransformToVisual(root).TransformPoint(new Windows.Foundation.Point());
+        ManagerUiChecks.Check(point.X >= 0 && point.Y >= 0 && point.X + container.ActualWidth <= root.ActualWidth + 1 &&
+            point.Y + container.ActualHeight <= root.ActualHeight + 1, "CS2 settings row inside screenshot");
+        var row = (Cs2SettingRow)SettingsList.Items[0];
+        var texts = Walk(container).OfType<TextBlock>().Select(t => t.Text).ToArray();
+        ManagerUiChecks.Check(texts.Contains(row.Title) && texts.Contains(row.Value) && texts.Contains(row.Source),
+            "CS2 screenshot row displays compiled title, value and source bindings");
+
+        static IEnumerable<DependencyObject> Walk(DependencyObject element)
+        {
+            yield return element;
+            for (int i = 0; i < Microsoft.UI.Xaml.Media.VisualTreeHelper.GetChildrenCount(element); i++)
+                foreach (var child in Walk(Microsoft.UI.Xaml.Media.VisualTreeHelper.GetChild(element, i))) yield return child;
+        }
+    }
+
     internal async Task CheckSettingsUiAsync()
     {
         async Task WaitForReadAsync()
