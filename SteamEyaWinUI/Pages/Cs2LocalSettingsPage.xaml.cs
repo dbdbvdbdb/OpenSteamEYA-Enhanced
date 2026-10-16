@@ -194,7 +194,7 @@ public sealed partial class Cs2LocalSettingsPage : Page
     private FrameworkElement CreateRow(TemplateSetting row)
     {
         var spec = row.Spec;
-        var grid = new Grid { Padding = new Thickness(16, 12, 16, 12), ColumnSpacing = 16, MinHeight = 78, Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"], CornerRadius = new CornerRadius(4) };
+        var grid = new Grid { Padding = new Thickness(16, 12, 16, 12), ColumnSpacing = 16, MinHeight = 78, Style = (Style)Resources["Cs2SettingCardStyle"], Tag = "setting-row:" + row.Key };
         grid.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) }); grid.ColumnDefinitions.Add(new() { Width = new GridLength(250) });
         var label = new StackPanel { Spacing = 4, VerticalAlignment = VerticalAlignment.Center };
         label.Children.Add(new TextBlock { Text = spec.Label, FontSize = 15, TextWrapping = TextWrapping.Wrap });

@@ -41,9 +41,13 @@ internal static partial class ManagerUiChecks
         Check(!Directory.Exists(steam) && store.Load().Files.Count == 4, "unified CS2 template can be created without Steam accounts");
         Check(!Find<Button>("SaveButton").IsEnabled, "unified CS2 initial load has no unsaved changes");
         window.ApplyTheme(ElementTheme.Dark); await CaptureAsync(window, "cs2-unified-video-dark");
+        var card = FindElements(page).OfType<Grid>().First(g => g.Tag?.ToString()?.StartsWith("setting-row:") == true);
+        var background = card.Background as Microsoft.UI.Xaml.Media.SolidColorBrush;
+        Check(background is not null && (background.Color.R * background.Color.A / 255.0 + 32 * (255 - background.Color.A) / 255.0) < 100,
+            "unified CS2 cards resolve a dark theme background with readable contrast");
         var msaa = FindElements(page).OfType<ComboBox>().Single(c => c.Tag?.ToString() == "setting.msaa_samples");
         Check(msaa.Items.Count == 4, "unified CS2 MSAA uses the verified four menu choices");
-        msaa.StartBringIntoView(); await Task.Delay(250);
+        msaa.StartBringIntoView(new BringIntoViewOptions { VerticalAlignmentRatio = 0, AnimationDesired = false }); await Task.Delay(250);
         await CaptureAsync(window, "cs2-unified-video-advanced-dark");
         var ao = FindElements(page).OfType<ComboBox>().Single(c => c.Tag?.ToString() == "setting.videocfg_ao_detail");
         Check(ao.Items.OfType<ComboBoxItem>().Select(i => i.Tag?.ToString()).SequenceEqual(new[] { "0", "2", "3" }), "unified CS2 AO control has only current menu values");
