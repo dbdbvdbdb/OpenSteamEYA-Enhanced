@@ -52,7 +52,8 @@ public sealed partial class Cs2LocalSettingsPage : Page
     {
         _busy = busy; BusyRing.IsActive = busy;
         TemplateNameBox.IsEnabled = ImportButton.IsEnabled = ExportButton.IsEnabled = RestoreButton.IsEnabled = !busy;
-        SettingsScroll.IsEnabled = SearchBox.IsEnabled = TabsPanel.IsEnabled = !busy;
+        SettingsScroll.IsEnabled = SearchBox.IsEnabled = !busy;
+        foreach (var tab in TabsPanel.Children.OfType<ToggleButton>()) tab.IsEnabled = !busy;
         UpdateActions();
     }
     private void UpdateActions()
