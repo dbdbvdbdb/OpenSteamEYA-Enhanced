@@ -1,0 +1,7 @@
+{
+  "Id": "DISPLAY-01",
+  "Reproduced": true,
+  "Meaning": "A manifest/file resolution mismatch is accepted; deployment follows metadata rather than the native template\u0027s width/height.",
+  "Before": "\u0022video.cfg\u0022 { Version 16 \u0022setting.defaultres\u0022 1280 \u0022setting.defaultresheight\u0022 720 \u0022setting.refreshrate_numerator\u0022 60 \u0022setting.refreshrate_denominator\u0022 1 }",
+  "After": "\u0022video.cfg\u0022 { Version 16 \u0022setting.defaultres\u0022 \u00221920\u0022 \u0022setting.defaultresheight\u0022 \u00221080\u0022 \u0022setting.refreshrate_numerator\u0022 60 \u0022setting.refreshrate_denominator\u0022 1 }"
+}

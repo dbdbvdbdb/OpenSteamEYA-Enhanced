@@ -1,0 +1,118 @@
+{
+  "client": {
+    "ClientVersion": "2000933",
+    "ServerVersion": "2000933",
+    "PatchVersion": "1.41.9.1",
+    "ProductName": "cs2",
+    "appID": "730",
+    "ServerAppID": "2347773",
+    "SourceRevision": "11133601",
+    "VersionDate": "Oct 15 2026",
+    "VersionTime": "10:15:52"
+  },
+  "vpk_index_sha256": "f0943b4d5a86fe8f4891ab98983b9d132b4450b9b7401a03a530bcd63f293f99",
+  "resources": [
+    {
+      "resource": "cfg/video_defaults_0.txt",
+      "present": true,
+      "sha256": "131aa9d90e19ff04ce061bb97f529619efa90c6aa3e50454933e668237f2b6a3",
+      "size": 467,
+      "scope": "installed-client data, not game execution",
+      "pairs": {
+        "setting.shaderquality": "0",
+        "setting.r_texturefilteringquality": "0",
+        "setting.msaa_samples": "0",
+        "setting.r_csgo_cmaa_enable": "0",
+        "setting.videocfg_shadow_quality": "0",
+        "setting.videocfg_dynamic_shadows": "0",
+        "setting.videocfg_texture_detail": "0",
+        "setting.videocfg_particle_detail": "0",
+        "setting.videocfg_ao_detail": "0",
+        "setting.videocfg_hdr_detail": "3",
+        "setting.videocfg_fsr_detail": "3"
+      }
+    },
+    {
+      "resource": "cfg/video_defaults_1.txt",
+      "present": true,
+      "sha256": "0062786f8bade21ad02d27c94bc8d529b63413d754bc802772c2512f2686ec26",
+      "size": 468,
+      "scope": "installed-client data, not game execution",
+      "pairs": {
+        "setting.shaderquality": "0",
+        "setting.r_texturefilteringquality": "1",
+        "setting.msaa_samples": "2",
+        "setting.r_csgo_cmaa_enable": "0",
+        "setting.videocfg_shadow_quality": "1",
+        "setting.videocfg_dynamic_shadows": "1",
+        "setting.videocfg_texture_detail": "1",
+        "setting.videocfg_particle_detail": "1",
+        "setting.videocfg_ao_detail": "0",
+        "setting.videocfg_hdr_detail": "3",
+        "setting.videocfg_fsr_detail": "2"
+      }
+    },
+    {
+      "resource": "cfg/video_defaults_2.txt",
+      "present": true,
+      "sha256": "61d9827ab616b9cbd6639acaf8864d735466194b004e33def55a56ad6df9acea",
+      "size": 468,
+      "scope": "installed-client data, not game execution",
+      "pairs": {
+        "setting.shaderquality": "1",
+        "setting.r_texturefilteringquality": "3",
+        "setting.msaa_samples": "4",
+        "setting.r_csgo_cmaa_enable": "0",
+        "setting.videocfg_shadow_quality": "2",
+        "setting.videocfg_dynamic_shadows": "1",
+        "setting.videocfg_texture_detail": "2",
+        "setting.videocfg_particle_detail": "2",
+        "setting.videocfg_ao_detail": "2",
+        "setting.videocfg_hdr_detail": "-1",
+        "setting.videocfg_fsr_detail": "0"
+      }
+    },
+    {
+      "resource": "cfg/video_defaults_3.txt",
+      "present": true,
+      "sha256": "4b6637a8a70596a998dc493dc9c16ae1b8c8f36a370b55ab31ded02fd978d657",
+      "size": 477,
+      "scope": "installed-client data, not game execution",
+      "pairs": {
+        "setting.shaderquality": "1",
+        "setting.r_texturefilteringquality": "5",
+        "setting.msaa_samples": "8",
+        "setting.r_csgo_cmaa_enable": "0",
+        "setting.videocfg_shadow_quality": "3",
+        "setting.videocfg_dynamic_shadows": "1",
+        "setting.videocfg_texture_detail": "2",
+        "setting.videocfg_particle_detail": "3",
+        "setting.videocfg_ao_detail": "3",
+        "setting.videocfg_hdr_detail": "-1",
+        "setting.videocfg_fsr_detail": "0"
+      }
+    },
+    {
+      "resource": "cfg/video_version.txt",
+      "present": true,
+      "sha256": "077ad71b08b4ec06ad4541d7e6cec1b437ec0d2a190c2fba668bedbd46661bb1",
+      "size": 197,
+      "scope": "installed-client data, not game execution",
+      "pairs": {
+        "Version": "16"
+      }
+    },
+    {
+      "resource": "panorama/layout/settings/settings_video.xml",
+      "present": false
+    },
+    {
+      "resource": "panorama/layout/settings/settings_video.vxml_c",
+      "present": true,
+      "sha256": "5a083ebabd37351e58208bf036dd66fde8b1f35513c121257b188838d145be0e",
+      "size": 7903,
+      "scope": "installed-client data, not game execution"
+    }
+  ],
+  "extractorLaunchesGame": false
+}
