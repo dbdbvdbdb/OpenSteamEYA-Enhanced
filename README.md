@@ -3,7 +3,7 @@
 > **基于 WinUI 3 与 .NET 10 的 Windows x64 Steam 账号管理工具**
 > 源自 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA)，专注独立账号管理与批量操作
 
-[![版本](https://img.shields.io/badge/版本-v0.2.8-blue)]()
+[![版本](https://img.shields.io/badge/版本-v0.2.9-blue)]()
 [![平台](https://img.shields.io/badge/平台-Windows%20x64-0078D4)]()
 [![技术栈](https://img.shields.io/badge/技术栈-WinUI%203%20%7C%20.NET%2010-purple)]()
 [![编译方式](https://img.shields.io/badge/编译-Native%20AOT-green)]()
@@ -16,17 +16,17 @@
 
 本项目基于 [hvh-software/OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展开发，在保留原有 EYA 登录、CS2 查询、配装、个性化等功能的基础上，**新增了独立的账号管理系统**，支持白号/黑号分类管理、批量导入导出、隐私模式、多分组等增强功能。
 
-> **当前版本**：v0.2.8（CS2 本地设置编辑与自动云同步）
+> **当前版本**：v0.2.9（CS2 统一配置与安全批量应用）
 
 ---
 
 ## ✨ 核心功能
 
-### 🎛️ CS2 统一配置（本开发分支，尚未发布）
+### 🎛️ CS2 统一配置
 
 应用独立保存一套原生配置模板，支持默认创建、文件夹/账号一次性导入、导出和恢复。无需 Steam 账号即可编辑；保存与应用分离，一次预览并确认后应用到所有适用本机账号，自动逐账号备份、检测冲突并在失败时尝试回滚。此页面不执行 Steam Cloud 推送。
 
-新增经当前游戏菜单和视频格式 16 核实的高级视频目录；缺失的已验证参数可以安全加入正确节点。未核实的显示模式、刷新率和驱动能力显示限制说明，不生成虚假键。详见 [参数核实与开发验收](docs/CS2-UNIFIED-CONFIG.zh-CN.md)。当前公开 v0.2.8 的行为见该版本的发布说明。
+新增经当前游戏菜单和视频格式 16 核实的高级视频目录；缺失的已验证参数可以安全加入正确节点。未核实的显示模式、刷新率和驱动能力显示限制说明，不生成虚假键。详见 [参数核实与开发验收](docs/CS2-UNIFIED-CONFIG.zh-CN.md)。本页保存与批量应用均不自动推送 Steam Cloud。
 
 ### 🎮 保留原有能力
 
@@ -86,7 +86,7 @@
 
 ### 下载方式
 
-从 [v0.2.8 Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.8) 页面下载：
+从 [v0.2.9 Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.9) 页面下载：
 
 | 格式 | 大小 | 说明 |
 |------|------|------|
@@ -105,7 +105,7 @@
 使用 PowerShell 计算 SHA256 校验和，与 Release 中的 `SHA256SUMS.txt` 比对：
 
 ```powershell
-Get-FileHash .\OpenSteamEYA-Enhanced-0.2.8-win-x64-aot.zip -Algorithm SHA256
+Get-FileHash .\OpenSteamEYA-Enhanced-0.2.9-win-x64-aot.zip -Algorithm SHA256
 ```
 
 ---
@@ -166,7 +166,7 @@ pwsh ./scripts/check-data.ps1
 pwsh ./scripts/check-manager-ui.ps1 -NativeAot
 
 # 4. 发布 Native AOT 便携包
-pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.8 -ReleaseLabel 0.2.8
+pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.9 -ReleaseLabel 0.2.9
 ```
 
 NuGet 从官方源恢复，WinUI 使用允许随应用再分发的 **2.3.9** 组件包。
@@ -183,7 +183,7 @@ NuGet 从官方源恢复，WinUI 使用允许随应用再分发的 **2.3.9** 组
 | [更新检查说明](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/blob/main/docs/UPDATES.zh-CN.md) | 自动更新机制 |
 | [功能交付报告](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/blob/main/docs/FEATURES-0.2.5.zh-CN.md) | v0.2.5 改造详情 |
 | [发布审查报告](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/blob/main/docs/RELEASE-AUDIT.zh-CN.md) | 开源审查记录 |
-| [发布说明](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/blob/main/docs/releases/v0.2.8.md) | v0.2.8 发布说明 |
+| [发布说明](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/blob/main/docs/releases/v0.2.9.md) | v0.2.9 发布说明 |
 
 ---
 

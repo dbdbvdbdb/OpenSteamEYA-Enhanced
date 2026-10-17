@@ -1,6 +1,6 @@
-# OpenSteamEYA 增强版 0.2.8 — 使用说明
+# OpenSteamEYA 增强版 0.2.9 — 使用说明
 
-本文适用于 v0.2.8 白号／黑号管理、启动检查更新及 CS2 本地设置读取版本。Windows x64 便携包采用 Native AOT，无需额外安装 .NET Runtime。WinUI 使用 2.3.9。请阅读并同意 END_USER_TERMS.txt 及 THIRD_PARTY_NOTICES.md 中相应组件的完整条款。
+本文适用于 v0.2.9 白号／黑号管理、启动检查更新及 CS2 统一配置版本。Windows x64 便携包采用 Native AOT，无需额外安装 .NET Runtime。WinUI 使用 2.3.9。请阅读并同意 END_USER_TERMS.txt 及 THIRD_PARTY_NOTICES.md 中相应组件的完整条款。
 
 将完整压缩包解压到本地普通文件夹，运行 `SteamEyaWinUI.exe`。不要只复制 EXE；同目录的 WinUI/Windows App SDK DLL、PRI、Assets、Languages 及 Steam API 文件都是程序的一部分。Native AOT 包无需安装 .NET 运行时。未提供安装器。
 
