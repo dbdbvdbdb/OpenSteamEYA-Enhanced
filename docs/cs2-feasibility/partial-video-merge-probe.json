@@ -1,0 +1,7 @@
+{
+  "Id": "MERGE-01",
+  "Reproduced": true,
+  "Meaning": "Partial template AA merged with target FSR violates the application\u0027s own conservative rule; this does not prove an engine incompatibility.",
+  "Before": "\u89C6\u9891\u6A21\u677F MSAA=4\uFF0C\u76EE\u6807 FSR=2 / MSAA=0 / CMAA=0",
+  "After": "\u0022video.cfg\u0022 { Version 16 \u0022setting.msaa_samples\u0022 \u00224\u0022 \u0022setting.r_csgo_cmaa_enable\u0022 0 \u0022setting.videocfg_fsr_detail\u0022 2 }"
+}

@@ -1,0 +1,394 @@
+{
+  "scope": "Pinned extracted declarations only; not runtime observations",
+  "source_revision": "5ab573fa8afb5b8db98869d79ed79399fca6e747",
+  "source_sha256": "a9959783532d8736eceb41493acf000b7594295b8a8996078c3f0ca088d7f5ac",
+  "rows": [
+    {
+      "id": "fps_max",
+      "present": true,
+      "declared_default": "120",
+      "declaration_flags": "archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "fps_max_ui",
+      "present": true,
+      "declared_default": "0",
+      "declaration_flags": "archive",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "r_fullscreen_gamma",
+      "present": true,
+      "declared_default": "2.2",
+      "declaration_flags": "min: 1, max: 4, archive snapshot_ignored",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "volume",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "min: 0, max: 1, archive",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "snd_gamevolume",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "min: 0, max: 1, archive snapshot_ignored",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "snd_voipvolume",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "min: 0, max: 2, archive snapshot_ignored",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "snd_musicvolume",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "min: 0, max: 1, archive snapshot_ignored",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "snd_menumusic_volume",
+      "present": true,
+      "declared_default": "0.04",
+      "declaration_flags": "min: 0, max: 1, clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "snd_mvp_volume",
+      "present": true,
+      "declared_default": "0.16",
+      "declaration_flags": "min: 0, max: 1, clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "snd_roundstart_volume",
+      "present": true,
+      "declared_default": "0",
+      "declaration_flags": "min: 0, max: 1, clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "snd_roundend_volume",
+      "present": true,
+      "declared_default": "0.16",
+      "declaration_flags": "min: 0, max: 1, clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "snd_tensecondwarning_volume",
+      "present": true,
+      "declared_default": "0.04",
+      "declaration_flags": "min: 0, max: 1, clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "snd_mute_losefocus",
+      "present": true,
+      "declared_default": "true",
+      "declaration_flags": "archive snapshot_ignored",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "snd_mute_mvp_music_live_players",
+      "present": true,
+      "declared_default": "false",
+      "declaration_flags": "clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "hud_scaling",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "min: 0.9, max: 1.1, clientdll archive",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_hud_radar_scale",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "min: 0.8, max: 1.3, clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_radar_scale",
+      "present": true,
+      "declared_default": "0.7",
+      "declaration_flags": "min: 0.25, max: 1, clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_radar_icon_scale_min",
+      "present": true,
+      "declared_default": "0.6",
+      "declaration_flags": "min: 0.4, max: 1.25, clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_radar_always_centered",
+      "present": true,
+      "declared_default": "true",
+      "declaration_flags": "clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_radar_rotate",
+      "present": true,
+      "declared_default": "true",
+      "declaration_flags": "clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_radar_square_with_scoreboard",
+      "present": true,
+      "declared_default": "true",
+      "declaration_flags": "clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_showloadout",
+      "present": true,
+      "declared_default": "true",
+      "declaration_flags": "clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_use_opens_buy_menu",
+      "present": true,
+      "declared_default": "false",
+      "declaration_flags": "clientdll archive userinfo per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "mm_dedicated_search_maxping",
+      "present": true,
+      "declared_default": "150",
+      "declaration_flags": "min: 25, max: 350, archive",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "viewmodel_fov",
+      "present": true,
+      "declared_default": "60",
+      "declaration_flags": "min: 60, max: 68, clientdll archive userinfo per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "viewmodel_offset_x",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "min: -2, max: 2.5, clientdll archive userinfo per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "viewmodel_offset_y",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "min: -2, max: 2, clientdll archive userinfo per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "viewmodel_offset_z",
+      "present": true,
+      "declared_default": "-1",
+      "declaration_flags": "min: -2, max: 2, clientdll archive userinfo per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_crosshair_length",
+      "present": true,
+      "declared_default": "8",
+      "declaration_flags": "min: 0, max: 255, clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_crosshair_gap",
+      "present": true,
+      "declared_default": "4",
+      "declaration_flags": "min: -3840, max: 3840, clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_crosshair_thickness",
+      "present": true,
+      "declared_default": "2",
+      "declaration_flags": "min: 0, max: 32, clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_crosshaircolor_r",
+      "present": true,
+      "declared_default": "0",
+      "declaration_flags": "min: 0, max: 255, clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_crosshaircolor_g",
+      "present": true,
+      "declared_default": "255",
+      "declaration_flags": "min: 0, max: 255, clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_crosshaircolor_b",
+      "present": true,
+      "declared_default": "0",
+      "declaration_flags": "min: 0, max: 255, clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_crosshairdot",
+      "present": true,
+      "declared_default": "false",
+      "declaration_flags": "clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_crosshair_t",
+      "present": true,
+      "declared_default": "false",
+      "declaration_flags": "clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_crosshair_drawoutline",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "min: 0, max: 2, clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_crosshair_recoil",
+      "present": true,
+      "declared_default": "true",
+      "declaration_flags": "clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_crosshair_sniper_width",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "sensitivity",
+      "present": true,
+      "declared_default": "1.25",
+      "declaration_flags": "min: 0.0001, max: 8, clientdll archive userinfo per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "zoom_sensitivity_ratio",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "min: 0.01, max: 3, clientdll archive per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "cl_sniper_auto_rezoom",
+      "present": true,
+      "declared_default": "true",
+      "declaration_flags": "clientdll archive userinfo per_user",
+      "catalog_file": "cs2_user_convars_0_slot0.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    },
+    {
+      "id": "r_player_visibility_mode",
+      "present": true,
+      "declared_default": "1",
+      "declaration_flags": "clientdll archive release",
+      "catalog_file": "cs2_machine_convars.vcfg",
+      "archive_scope_matches": true,
+      "game_status": "待实机验证"
+    }
+  ]
+}
