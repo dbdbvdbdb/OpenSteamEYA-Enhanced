@@ -1,4 +1,4 @@
-param([switch]$NativeAot = $true, [string]$Version = '0.2.8', [string]$ReleaseLabel = '')
+param([switch]$NativeAot = $true, [string]$Version = '0.2.9', [string]$ReleaseLabel = '')
 $ErrorActionPreference = 'Stop'
 if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw 'Version must be X.Y.Z' }
 if (-not $ReleaseLabel) { $ReleaseLabel = $Version }
@@ -47,6 +47,7 @@ $releaseDocs = Join-Path $stagingDirectory 'docs'
 New-Item -ItemType Directory -Force -Path $releaseDocs | Out-Null
 Copy-Item -LiteralPath (Join-Path $projectRoot 'docs/FORMATS-AND-BACKUP.zh-CN.md') -Destination $releaseDocs
 Copy-Item -LiteralPath (Join-Path $projectRoot 'docs/CS2-LOCAL-SETTINGS.zh-CN.md') -Destination $releaseDocs
+Copy-Item -LiteralPath (Join-Path $projectRoot 'docs/CS2-UNIFIED-CONFIG.zh-CN.md') -Destination $releaseDocs
 $licenses = Join-Path $stagingDirectory 'third-party-licenses'
 New-Item -ItemType Directory -Force -Path $licenses | Out-Null
 Copy-Item -LiteralPath (Join-Path $projectRoot 'third-party-licenses/counter-strike-icons-LICENSE.txt') -Destination $licenses

@@ -6,13 +6,13 @@ on:
     # This version's public release was explicitly requested by the maintainer.
     # Other tags and manual runs retain the draft-only behavior below.
     branches: [main]
-    paths: ['docs/releases/v0.2.8.md']
+    paths: ['docs/releases/v0.2.9.md']
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version without v (example: 0.2.8)'
+        description: 'Version without v (example: 0.2.9)'
         required: true
-        default: '0.2.8'
+        default: '0.2.9'
         type: string
 
 permissions:
@@ -55,7 +55,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
         run: |
           $publishRequested = $env:EVENT_NAME -eq 'push' -and $env:REF -eq 'refs/heads/main'
-          $label = if ($publishRequested) { '0.2.8' } elseif ($env:EVENT_NAME -eq 'push') { $env:REF_NAME -replace '^v', '' } else { $env:INPUT_VERSION.Trim() }
+          $label = if ($publishRequested) { '0.2.9' } elseif ($env:EVENT_NAME -eq 'push') { $env:REF_NAME -replace '^v', '' } else { $env:INPUT_VERSION.Trim() }
           if ($label -notmatch '^(\d+\.\d+\.\d+)(?:-beta(?:\.\d+)?)?$') { throw 'Expected X.Y.Z or X.Y.Z-beta[.N].' }
           $numeric = $Matches[1]
           "version=$numeric" >> $env:GITHUB_OUTPUT
@@ -137,7 +137,7 @@ jobs:
             '--notes-file',"./docs/releases/$env:RELEASE_TAG.md")
           if ($env:RELEASE_LABEL.Contains('-')) { $releaseArgs += @('--prerelease','--latest=false') } else { $releaseArgs += '--latest=true' }
           if ($env:PUBLISH_REQUESTED -eq 'true') {
-            if ($env:RELEASE_TAG -ne 'v0.2.8') { throw 'Publication authorization is limited to v0.2.8.' }
+            if ($env:RELEASE_TAG -ne 'v0.2.9') { throw 'Publication authorization is limited to v0.2.9.' }
           } else { $releaseArgs += '--draft' }
           & gh @releaseArgs
           if ($LASTEXITCODE -ne 0) { throw 'Release creation failed.' }

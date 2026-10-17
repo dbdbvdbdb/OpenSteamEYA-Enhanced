@@ -3,10 +3,26 @@ using System.Text.RegularExpressions;
 
 namespace SteamEyaWinUI.Cs2Settings;
 
+internal enum SettingAvailability { Verified, HardwareDependent, Unsupported, Pending }
+
 internal sealed record SettingChoice(string Value, string Label);
 internal sealed record SettingSpec(string Key, string Label, string Category, double Min = 0, double Max = 1,
     double Step = .01, SettingChoice[]? Choices = null, bool Boolean = false)
 {
+    public string EnglishName { get; init; } = "";
+    public string Description { get; init; } = "";
+    public string FileName { get; init; } = LocalConfigStore.UserFile;
+    public string Section => FileName == LocalConfigStore.VideoFile ? "video.cfg" : "config/convars";
+    public string? DefaultValue { get; init; }
+    public string DefaultOrigin { get; init; } = "游戏参数声明";
+    public SettingAvailability Availability { get; init; } = SettingAvailability.Pending;
+    public bool AllowInsert { get; init; }
+    public bool HardwareDependent { get; init; }
+    public bool RestartRequired { get; init; } = true;
+    public string Compatibility { get; init; } = SettingCatalog.GameCompatibility;
+    public string Evidence { get; init; } = "";
+    public string DataType => Boolean ? "boolean" : Choices is not null ? "enum" : Step >= 1 ? "integer" : "number";
+
     public string Validate(string value, string original)
     {
         if (Boolean)
@@ -25,7 +41,7 @@ internal sealed record SettingSpec(string Key, string Label, string Category, do
     }
 }
 
-internal static class SettingCatalog
+internal static partial class SettingCatalog
 {
     public static string BaseKey(string key) => Regex.Replace(key, @"\$[0-9]+$", "");
     private static SettingSpec N(string key, string title, string category, double min, double max, double step = .01) => new(key,title,category,min,max,step);
