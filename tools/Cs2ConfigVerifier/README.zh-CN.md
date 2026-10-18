@@ -39,3 +39,7 @@ python scripts/capture-cs2-client-evidence.py --game-root '<CS2 安装目录>' -
 ```
 
 脚本读取固定白名单 VPK 资源并核对 CRC，输出版本、散列和原生视频预设键值。所有提取文件仅保存在本地忽略目录；这些数据只能证明安装包包含相应资源，不能证明运行时采纳或效果生效。参数完整清单和逐项验收步骤见 `docs/CS2-CONFIG-FEASIBILITY-REPORT.zh-CN.md`。
+
+## 已复核实机记录汇总
+
+`python scripts/render-cs2-runtime-report.py` 将静态目录与已人工复核的 `docs/cs2-feasibility/runtime-observations.json` 合并，生成138行CSV/Markdown；拒绝未知或重复ID、缺失或越界证据路径。它不会根据文件一致性自动判为游戏通过。真实截图和多账号首次重写/重试限制见主报告；重启字段目前对应第一账号，不代表第二账号重启也通过。

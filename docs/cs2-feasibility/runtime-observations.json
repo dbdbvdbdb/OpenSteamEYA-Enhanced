@@ -1,0 +1,2101 @@
+[
+  {
+    "Id": "setting.mat_vsync",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "1",
+    "RestartChecked": true,
+    "AfterRestartValue": "1",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "setting.msaa_samples",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0; native menu later 2",
+    "RestartChecked": true,
+    "AfterRestartValue": "0; native menu later 2",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/fsr-quality.png",
+      "screenshots/fsr-msaa-native-combination.png",
+      "screenshots/fsr-msaa-restarted.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "fps_max",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "141",
+    "RestartChecked": true,
+    "AfterRestartValue": "141",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "fps_max_ui",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "51",
+    "RestartChecked": true,
+    "AfterRestartValue": "51",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "r_fullscreen_gamma",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "2.3",
+    "RestartChecked": true,
+    "AfterRestartValue": "2.3",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "volume",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.36",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.36",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "snd_gamevolume",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.64",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.64",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "snd_voipvolume",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.49",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.49",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "snd_musicvolume",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.25",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.25",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "snd_menumusic_volume",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.09",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.09",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "snd_mvp_volume",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.16",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.16",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "snd_roundstart_volume",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.04",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.04",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "snd_roundend_volume",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.09",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.09",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "snd_tensecondwarning_volume",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.25",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.25",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "snd_mute_losefocus",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "true",
+    "RestartChecked": true,
+    "AfterRestartValue": "true",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "snd_mute_mvp_music_live_players",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "false",
+    "RestartChecked": true,
+    "AfterRestartValue": "false",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "hud_scaling",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.95",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.95",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "cl_hud_radar_scale",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.9",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.9",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "cl_radar_scale",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.4",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.4",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "cl_radar_icon_scale_min",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.8",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.8",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "cl_radar_always_centered",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "false",
+    "RestartChecked": true,
+    "AfterRestartValue": "false",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "cl_radar_rotate",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "false",
+    "RestartChecked": true,
+    "AfterRestartValue": "false",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "cl_radar_square_with_scoreboard",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "false",
+    "RestartChecked": true,
+    "AfterRestartValue": "false",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "cl_showloadout",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "false; B first=true, repeat=false",
+    "RestartChecked": true,
+    "AfterRestartValue": "false",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote false to true in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_use_opens_buy_menu",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "true; B first=false, repeat=true",
+    "RestartChecked": true,
+    "AfterRestartValue": "true",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote true to false in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "mm_dedicated_search_maxping",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "80",
+    "RestartChecked": true,
+    "AfterRestartValue": "80",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "viewmodel_fov",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "64; B first=68, repeat=64",
+    "RestartChecked": true,
+    "AfterRestartValue": "64",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 64 to 68 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "viewmodel_offset_x",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "1; B first=2.5, repeat=1",
+    "RestartChecked": true,
+    "AfterRestartValue": "1",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1 to 2.5 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "viewmodel_offset_y",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "1; B first=0, repeat=1",
+    "RestartChecked": true,
+    "AfterRestartValue": "1",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1 to 0 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "viewmodel_offset_z",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "-1; B first=-1.5, repeat=-1",
+    "RestartChecked": true,
+    "AfterRestartValue": "-1",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote -1 to -1.5 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_crosshair_length",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "4; B first=0, repeat=4",
+    "RestartChecked": true,
+    "AfterRestartValue": "4",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 4 to 0 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_crosshair_gap",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "2; B first=8, repeat=2",
+    "RestartChecked": true,
+    "AfterRestartValue": "2",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 2 to 8 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_crosshair_thickness",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "1; B first=3, repeat=1",
+    "RestartChecked": true,
+    "AfterRestartValue": "1",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1 to 3 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_crosshaircolor_r",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "200; B first=0, repeat=200",
+    "RestartChecked": true,
+    "AfterRestartValue": "200",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 200 to 0 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_crosshaircolor_g",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "100; B first=255, repeat=100",
+    "RestartChecked": true,
+    "AfterRestartValue": "100",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 100 to 255 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_crosshaircolor_b",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "50; B first=0, repeat=50",
+    "RestartChecked": true,
+    "AfterRestartValue": "50",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 50 to 0 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_crosshairdot",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "false; B first=true, repeat=false",
+    "RestartChecked": true,
+    "AfterRestartValue": "false",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote false to true in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_crosshair_t",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "true; B first=false, repeat=true",
+    "RestartChecked": true,
+    "AfterRestartValue": "true",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote true to false in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_crosshair_drawoutline",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "1; B first=0, repeat=1",
+    "RestartChecked": true,
+    "AfterRestartValue": "1",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1 to 0 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_crosshair_recoil",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "true; B first=false, repeat=true",
+    "RestartChecked": true,
+    "AfterRestartValue": "true",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote true to false in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_crosshair_sniper_width",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "2; B first=1, repeat=2",
+    "RestartChecked": true,
+    "AfterRestartValue": "2",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 2 to 1 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "sensitivity",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "1.23; B first=1.5, repeat=1.23",
+    "RestartChecked": true,
+    "AfterRestartValue": "1.23",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1.23 to 1.5 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "zoom_sensitivity_ratio",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0.93; B first=0.8, repeat=0.93",
+    "RestartChecked": true,
+    "AfterRestartValue": "0.93",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 0.93 to 0.8 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "cl_sniper_auto_rezoom",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "true; B first=false, repeat=true",
+    "RestartChecked": true,
+    "AfterRestartValue": "true",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-convars-02.png",
+      "runtime-phases/test-b-first/diff-start.json",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote true to false in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
+  },
+  {
+    "Id": "setting.r_csgo_cmaa_enable",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "1; later 0",
+    "RestartChecked": true,
+    "AfterRestartValue": "1; later 0",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/fsr-quality.png",
+      "screenshots/fsr-msaa-native-combination.png",
+      "screenshots/fsr-msaa-restarted.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "setting.videocfg_shadow_quality",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "1",
+    "RestartChecked": true,
+    "AfterRestartValue": "1",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "setting.videocfg_dynamic_shadows",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0",
+    "RestartChecked": true,
+    "AfterRestartValue": "0",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "setting.videocfg_texture_detail",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "1",
+    "RestartChecked": true,
+    "AfterRestartValue": "1",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "setting.r_texturefilteringquality",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "4",
+    "RestartChecked": true,
+    "AfterRestartValue": "4",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "setting.shaderquality",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0",
+    "RestartChecked": true,
+    "AfterRestartValue": "0",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "setting.videocfg_particle_detail",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "1",
+    "RestartChecked": true,
+    "AfterRestartValue": "1",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "setting.videocfg_ao_detail",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0",
+    "RestartChecked": true,
+    "AfterRestartValue": "0",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "setting.videocfg_hdr_detail",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "3",
+    "RestartChecked": true,
+    "AfterRestartValue": "3",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "setting.videocfg_fsr_detail",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0; later 2",
+    "RestartChecked": true,
+    "AfterRestartValue": "0; later 2",
+    "Evidence": [
+      "screenshots/batch-all-advanced-top.png",
+      "screenshots/batch-all-advanced-bottom.png",
+      "screenshots/batch-restarted-advanced-top.png",
+      "screenshots/batch-restarted-advanced-bottom.png",
+      "screenshots/fsr-quality.png",
+      "screenshots/fsr-msaa-native-combination.png",
+      "screenshots/fsr-msaa-restarted.png",
+      "screenshots/test-b-advanced-top.png",
+      "screenshots/test-b-advanced-bottom.png"
+    ],
+    "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "r_player_visibility_mode",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "0",
+    "RestartChecked": true,
+    "AfterRestartValue": "0",
+    "Evidence": [
+      "screenshots/batch-all-convars-01.png",
+      "screenshots/batch-all-convars-02.png",
+      "screenshots/batch-restarted-convars-01.png",
+      "screenshots/batch-restarted-convars-02.png",
+      "screenshots/test-b-retry-convars-01.png",
+      "screenshots/test-b-retry-convars-02.png"
+    ],
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
+  },
+  {
+    "Id": "bind:a",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:b",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:c",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:d",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:e",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:f",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:g",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:h",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:i",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:j",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:k",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:l",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:m",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:n",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:o",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:p",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:q",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:r",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:s",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:t",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:u",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:v",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:w",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-01.png",
+      "screenshots/bindings-restarted-01.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:x",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:y",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:z",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:0",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:1",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:2",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:3",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:4",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:5",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:6",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:7",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:8",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:9",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:SPACE",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:CTRL",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:SHIFT",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:ALT",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:TAB",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:ENTER",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:BACKSPACE",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:ESCAPE",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F1",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F2",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-02.png",
+      "screenshots/bindings-restarted-02.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F3",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F4",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F5",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F6",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F7",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F8",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F9",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F10",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F11",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:F12",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:MOUSE1",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:MOUSE2",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:MOUSE3",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:MOUSE4",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:MOUSE5",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:MWHEELUP",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:MWHEELDOWN",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:UPARROW",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:DOWNARROW",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:LEFTARROW",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  },
+  {
+    "Id": "bind:RIGHTARROW",
+    "Status": "部分通过",
+    "GameActuallyStarted": true,
+    "ClientVersion": "2000933 / 1.41.9.1",
+    "ObservedInGame": true,
+    "InGameValue": "+lookatweapon",
+    "RestartChecked": true,
+    "AfterRestartValue": "+lookatweapon",
+    "Evidence": [
+      "screenshots/bindings-03.png",
+      "screenshots/bindings-restarted-03.png"
+    ],
+    "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
+  }
+]

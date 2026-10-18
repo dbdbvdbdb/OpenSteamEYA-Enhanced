@@ -1,0 +1,146 @@
+{
+  "BeforeStage": "applied",
+  "AfterStage": "started",
+  "Changes": [
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_drawoutline",
+      "Before": "1",
+      "After": "0",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_gap",
+      "Before": "2",
+      "After": "8",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_length",
+      "Before": "4",
+      "After": "0",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_recoil",
+      "Before": "true",
+      "After": "false",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_sniper_width",
+      "Before": "2",
+      "After": "1",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_t",
+      "Before": "true",
+      "After": "false",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_thickness",
+      "Before": "1",
+      "After": "3",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshaircolor_b",
+      "Before": "50",
+      "After": "0",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshaircolor_g",
+      "Before": "100",
+      "After": "255",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshaircolor_r",
+      "Before": "200",
+      "After": "0",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshairdot",
+      "Before": "false",
+      "After": "true",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_showloadout",
+      "Before": "false",
+      "After": "true",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_sniper_auto_rezoom",
+      "Before": "true",
+      "After": "false",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_use_opens_buy_menu",
+      "Before": "true",
+      "After": "false",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "sensitivity",
+      "Before": "1.23",
+      "After": "1.5",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_fov",
+      "Before": "64",
+      "After": "68",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_offset_x",
+      "Before": "1",
+      "After": "2.5",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_offset_y",
+      "Before": "1",
+      "After": "0",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_offset_z",
+      "Before": "-1",
+      "After": "-1.5",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "zoom_sensitivity_ratio",
+      "Before": "0.93",
+      "After": "0.8",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    }
+  ]
+}
