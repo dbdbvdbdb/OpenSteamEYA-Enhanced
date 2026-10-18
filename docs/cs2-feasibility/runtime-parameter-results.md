@@ -16,13 +16,13 @@
 | snd_voipvolume | 语音音量 | cs2_machine_convars.vcfg / config/convars | 0.49 | 0.49 | 部分通过 |
 | snd_musicvolume | 音乐音量 | cs2_machine_convars.vcfg / config/convars | 0.25 | 0.25 | 部分通过 |
 | snd_menumusic_volume | 主菜单音乐 | cs2_machine_convars.vcfg / config/convars | 0.09 | 0.09 | 部分通过 |
-| snd_mvp_volume | MVP 音乐 | cs2_machine_convars.vcfg / config/convars | 0.16 | 0.16 | 部分通过 |
+| snd_mvp_volume | MVP 音乐 | cs2_machine_convars.vcfg / config/convars | 0.16; B Cloud-on=0.09 | 0.16; B Cloud-on=0.09 | 部分通过 |
 | snd_roundstart_volume | 回合开始音乐 | cs2_machine_convars.vcfg / config/convars | 0.04 | 0.04 | 部分通过 |
 | snd_roundend_volume | 回合结束音乐 | cs2_machine_convars.vcfg / config/convars | 0.09 | 0.09 | 部分通过 |
 | snd_tensecondwarning_volume | 十秒警告音量 | cs2_machine_convars.vcfg / config/convars | 0.25 | 0.25 | 部分通过 |
 | snd_mute_losefocus | 切出游戏时静音 | cs2_machine_convars.vcfg / config/convars | true | true | 部分通过 |
 | snd_mute_mvp_music_live_players | 存活时关闭 MVP 音乐 | cs2_machine_convars.vcfg / config/convars | false | false | 部分通过 |
-| hud_scaling | HUD 缩放 | cs2_machine_convars.vcfg / config/convars | 0.95 | 0.95 | 部分通过 |
+| hud_scaling | HUD 缩放 | cs2_machine_convars.vcfg / config/convars | 0.95; B Cloud-on=0.91 | 0.95; B Cloud-on=0.91 | 部分通过 |
 | cl_hud_radar_scale | 雷达面板大小 | cs2_machine_convars.vcfg / config/convars | 0.9 | 0.9 | 部分通过 |
 | cl_radar_scale | 雷达地图缩放 | cs2_machine_convars.vcfg / config/convars | 0.4 | 0.4 | 部分通过 |
 | cl_radar_icon_scale_min | 雷达图标大小 | cs2_machine_convars.vcfg / config/convars | 0.8 | 0.8 | 部分通过 |
@@ -37,7 +37,7 @@
 | viewmodel_offset_y | 持枪位置：前后 | cs2_user_convars_0_slot0.vcfg / config/convars | 1; B first=0, repeat=1 | 1 | 部分通过 |
 | viewmodel_offset_z | 持枪位置：垂直 | cs2_user_convars_0_slot0.vcfg / config/convars | -1; B first=-1.5, repeat=-1 | -1 | 部分通过 |
 | cl_crosshair_length | 准星线长 | cs2_user_convars_0_slot0.vcfg / config/convars | 4; B first=0, repeat=4 | 4 | 部分通过 |
-| cl_crosshair_gap | 准星间距 | cs2_user_convars_0_slot0.vcfg / config/convars | 2; B first=8, repeat=2 | 2 | 部分通过 |
+| cl_crosshair_gap | 准星间距 | cs2_user_convars_0_slot0.vcfg / config/convars | 2; B first=8, repeat=2; B Cloud-on=3 | 2; B Cloud-on=3 | 部分通过 |
 | cl_crosshair_thickness | 准星粗细 | cs2_user_convars_0_slot0.vcfg / config/convars | 1; B first=3, repeat=1 | 1 | 部分通过 |
 | cl_crosshairsize | 经典准星线长 | cs2_user_convars_0_slot0.vcfg / config/convars | 未部署测试 | 未验证 | 待实机验证 |
 | cl_crosshairgap | 经典准星间距 | cs2_user_convars_0_slot0.vcfg / config/convars | 未部署测试 | 未验证 | 待实机验证 |
@@ -51,7 +51,7 @@
 | cl_crosshair_drawoutline | 描边 | cs2_user_convars_0_slot0.vcfg / config/convars | 1; B first=0, repeat=1 | 1 | 部分通过 |
 | cl_crosshair_recoil | 跟随后坐力 | cs2_user_convars_0_slot0.vcfg / config/convars | true; B first=false, repeat=true | true | 部分通过 |
 | cl_crosshair_sniper_width | 狙击准星宽度 | cs2_user_convars_0_slot0.vcfg / config/convars | 2; B first=1, repeat=2 | 2 | 部分通过 |
-| sensitivity | 鼠标灵敏度 | cs2_user_convars_0_slot0.vcfg / config/convars | 1.23; B first=1.5, repeat=1.23 | 1.23 | 部分通过 |
+| sensitivity | 鼠标灵敏度 | cs2_user_convars_0_slot0.vcfg / config/convars | 1.23; B first=1.5, repeat=1.23; B Cloud-on=1.41 | 1.23; B Cloud-on=1.41 | 部分通过 |
 | zoom_sensitivity_ratio | 开镜灵敏度倍率 | cs2_user_convars_0_slot0.vcfg / config/convars | 0.93; B first=0.8, repeat=0.93 | 0.93 | 部分通过 |
 | cl_sniper_auto_rezoom | 狙击射击后自动开镜 | cs2_user_convars_0_slot0.vcfg / config/convars | true; B first=false, repeat=true | true | 部分通过 |
 | setting.r_csgo_cmaa_enable | CMAA 抗锯齿 | cs2_video.txt / video.cfg | 1; later 0 | 1; later 0 | 部分通过 |

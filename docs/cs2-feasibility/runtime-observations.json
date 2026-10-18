@@ -198,9 +198,9 @@
     "GameActuallyStarted": true,
     "ClientVersion": "2000933 / 1.41.9.1",
     "ObservedInGame": true,
-    "InGameValue": "0.16",
+    "InGameValue": "0.16; B Cloud-on=0.09",
     "RestartChecked": true,
-    "AfterRestartValue": "0.16",
+    "AfterRestartValue": "0.16; B Cloud-on=0.09",
     "Evidence": [
       "screenshots/batch-all-convars-01.png",
       "screenshots/batch-all-convars-02.png",
@@ -210,9 +210,12 @@
       "screenshots/test-b-retry-convars-02.png",
       "screenshots/cloud-off-first.png",
       "screenshots/cloud-off-repeat.png",
-      "cloud-runtime-summary.json"
+      "cloud-runtime-summary.json",
+      "screenshots/cloud-on-first.png",
+      "screenshots/cloud-on-restarted.png",
+      "runtime-phases/cloud/on/diff-start.json"
     ],
-    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Cloud-on and repeat-restart checks not completed; local backup restored. Do not infer the overwrite was caused by online Cloud."
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Later Cloud-on session: these four targets were queried, normally exited and directly restarted with matching values; full 55-setting B restart remains incomplete. Local backup restored, remote restoration not verified. Do not infer the overwrite was caused by online Cloud. Cloud-on reused caches, so the sequential off/on comparison does not isolate a remote download cause. Four other user crosshair fields were rewritten; see on/diff-start.json."
   },
   {
     "Id": "snd_roundstart_volume",
@@ -315,9 +318,9 @@
     "GameActuallyStarted": true,
     "ClientVersion": "2000933 / 1.41.9.1",
     "ObservedInGame": true,
-    "InGameValue": "0.95",
+    "InGameValue": "0.95; B Cloud-on=0.91",
     "RestartChecked": true,
-    "AfterRestartValue": "0.95",
+    "AfterRestartValue": "0.95; B Cloud-on=0.91",
     "Evidence": [
       "screenshots/batch-all-convars-01.png",
       "screenshots/batch-all-convars-02.png",
@@ -327,9 +330,12 @@
       "screenshots/test-b-retry-convars-02.png",
       "screenshots/cloud-off-first.png",
       "screenshots/cloud-off-repeat.png",
-      "cloud-runtime-summary.json"
+      "cloud-runtime-summary.json",
+      "screenshots/cloud-on-first.png",
+      "screenshots/cloud-on-restarted.png",
+      "runtime-phases/cloud/on/diff-start.json"
     ],
-    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Cloud-on and repeat-restart checks not completed; local backup restored. Do not infer the overwrite was caused by online Cloud."
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Later Cloud-on session: these four targets were queried, normally exited and directly restarted with matching values; full 55-setting B restart remains incomplete. Local backup restored, remote restoration not verified. Do not infer the overwrite was caused by online Cloud. Cloud-on reused caches, so the sequential off/on comparison does not isolate a remote download cause. Four other user crosshair fields were rewritten; see on/diff-start.json."
   },
   {
     "Id": "cl_hud_radar_scale",
@@ -617,9 +623,9 @@
     "GameActuallyStarted": true,
     "ClientVersion": "2000933 / 1.41.9.1",
     "ObservedInGame": true,
-    "InGameValue": "2; B first=8, repeat=2",
+    "InGameValue": "2; B first=8, repeat=2; B Cloud-on=3",
     "RestartChecked": true,
-    "AfterRestartValue": "2",
+    "AfterRestartValue": "2; B Cloud-on=3",
     "Evidence": [
       "screenshots/batch-all-convars-01.png",
       "screenshots/batch-all-convars-02.png",
@@ -631,9 +637,12 @@
       "screenshots/test-b-retry-convars-02.png",
       "screenshots/cloud-off-first.png",
       "screenshots/cloud-off-repeat.png",
-      "cloud-runtime-summary.json"
+      "cloud-runtime-summary.json",
+      "screenshots/cloud-on-first.png",
+      "screenshots/cloud-on-restarted.png",
+      "runtime-phases/cloud/on/diff-start.json"
     ],
-    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 2 to 8 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Cloud-on and repeat-restart checks not completed; local backup restored. Do not infer the overwrite was caused by online Cloud."
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 2 to 8 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Later Cloud-on session: these four targets were queried, normally exited and directly restarted with matching values; full 55-setting B restart remains incomplete. Local backup restored, remote restoration not verified. Do not infer the overwrite was caused by online Cloud. Cloud-on reused caches, so the sequential off/on comparison does not isolate a remote download cause. Four other user crosshair fields were rewritten; see on/diff-start.json."
   },
   {
     "Id": "cl_crosshair_thickness",
@@ -830,9 +839,9 @@
     "GameActuallyStarted": true,
     "ClientVersion": "2000933 / 1.41.9.1",
     "ObservedInGame": true,
-    "InGameValue": "1.23; B first=1.5, repeat=1.23",
+    "InGameValue": "1.23; B first=1.5, repeat=1.23; B Cloud-on=1.41",
     "RestartChecked": true,
-    "AfterRestartValue": "1.23",
+    "AfterRestartValue": "1.23; B Cloud-on=1.41",
     "Evidence": [
       "screenshots/batch-all-convars-01.png",
       "screenshots/batch-all-convars-02.png",
@@ -844,9 +853,12 @@
       "screenshots/test-b-retry-convars-02.png",
       "screenshots/cloud-off-first.png",
       "screenshots/cloud-off-repeat.png",
-      "cloud-runtime-summary.json"
+      "cloud-runtime-summary.json",
+      "screenshots/cloud-on-first.png",
+      "screenshots/cloud-on-restarted.png",
+      "runtime-phases/cloud/on/diff-start.json"
     ],
-    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1.23 to 1.5 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Cloud-on and repeat-restart checks not completed; local backup restored. Do not infer the overwrite was caused by online Cloud."
+    "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1.23 to 1.5 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Later Cloud-on session: these four targets were queried, normally exited and directly restarted with matching values; full 55-setting B restart remains incomplete. Local backup restored, remote restoration not verified. Do not infer the overwrite was caused by online Cloud. Cloud-on reused caches, so the sequential off/on comparison does not isolate a remote download cause. Four other user crosshair fields were rewritten; see on/diff-start.json."
   },
   {
     "Id": "zoom_sensitivity_ratio",

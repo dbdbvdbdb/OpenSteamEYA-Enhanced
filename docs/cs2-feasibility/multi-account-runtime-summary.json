@@ -154,5 +154,13 @@
   "InterruptionNote": "A later read-only comparison after the user resumed found 24 differences in account A; source/timing is unknown and those later changes were preserved. Do not attribute these differences to B deployment.",
   "OverwriteRootCauseConfirmed": false,
   "CloudOnOffControlledTestComplete": false,
-  "ActualRenderingAndInputEffectsComplete": false
+  "ActualRenderingAndInputEffectsComplete": false,
+  "CloudOnOffLimitedFourSettingComparisonComplete": true,
+  "SecondAccountRestartCheckedSubset": [
+    "sensitivity",
+    "cl_crosshair_gap",
+    "hud_scaling",
+    "snd_mvp_volume"
+  ],
+  "FinalRestartConsoleChecksCompletedNote": "False refers to the earlier full 55-setting batch. Later Cloud-on session queried the four-setting subset after direct restart."
 }

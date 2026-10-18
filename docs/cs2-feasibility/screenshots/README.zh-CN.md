@@ -1,6 +1,6 @@
 # 实际游戏截图索引
 
-46张真实CS2窗口采集。菜单/控制台证据只证明读取和档位，不等于完整效果验证。test-b-retry是重复部署而非最终重启；cloud-off为关闭云同步对照，开启阶段尚未完成。
+48张真实CS2窗口采集。菜单/控制台证据只证明读取和档位，不等于完整效果验收。test-b-retry为重复部署；cloud-on-restarted仅覆盖四项，不代表第二账号55项重启已完成。
 
 | 截图 | 字节数 | SHA-256 前12位 |
 | --- | --- | --- |
@@ -32,6 +32,8 @@
 | [bindings-restarted-03.png](bindings-restarted-03.png) | 288516 | `b09942a11be5` |
 | [cloud-off-first.png](cloud-off-first.png) | 166442 | `71de50989ee5` |
 | [cloud-off-repeat.png](cloud-off-repeat.png) | 174307 | `6bdbb91d9553` |
+| [cloud-on-first.png](cloud-on-first.png) | 170011 | `9e2dda465f1c` |
+| [cloud-on-restarted.png](cloud-on-restarted.png) | 173723 | `e33b2c570557` |
 | [control-advanced-bottom.png](control-advanced-bottom.png) | 481188 | `fd69b0a41fd8` |
 | [control-advanced-top.png](control-advanced-top.png) | 471588 | `c42e27178cf1` |
 | [control-audio.png](control-audio.png) | 293775 | `768578f38bf5` |

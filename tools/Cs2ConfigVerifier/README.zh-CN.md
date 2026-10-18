@@ -42,4 +42,4 @@ python scripts/capture-cs2-client-evidence.py --game-root '<CS2 安装目录>' -
 
 ## 已复核实机记录汇总
 
-`python scripts/render-cs2-runtime-report.py` 将静态目录与已人工复核的 `docs/cs2-feasibility/runtime-observations.json` 合并，生成138行CSV/Markdown；拒绝未知或重复ID、缺失或越界证据路径。它不会根据文件一致性自动判为游戏通过。真实截图和多账号首次重写/重试限制见主报告；重启字段目前对应第一账号，不代表第二账号重启也通过。
+`python scripts/render-cs2-runtime-report.py` 将静态目录与已人工复核的 `docs/cs2-feasibility/runtime-observations.json` 合并，生成138行CSV/Markdown；拒绝未知或重复ID、缺失或越界证据路径。它不会根据文件一致性自动判为游戏通过。真实截图和多账号首次重写/重试限制见主报告；主要重启字段对应第一账号；后续Cloud对照只补齐第二账号四项子集，不代表第二账号全部55项重启通过。

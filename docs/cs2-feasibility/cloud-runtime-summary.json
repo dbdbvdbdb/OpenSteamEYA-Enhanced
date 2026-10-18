@@ -22,10 +22,61 @@
     "snd_mvp_volume": "0.09"
   },
   "CloudOffRepeatExitDifferenceCount": 0,
-  "CloudOnComparisonCompleted": false,
+  "CloudOnComparisonCompleted": true,
   "RemoteRestorationVerified": false,
   "RenderingInputEffectsVerified": false,
   "LocalSelectedFilesRestoredAndHashesVerified": true,
   "AutoexecRestoredAndHashVerified": true,
-  "AwaitingUserCloudOnConfirmation": true
+  "AwaitingUserCloudOnConfirmation": false,
+  "CloudOnComparisonScope": "Four parameters; native read, normal exit and direct restart only. No fresh-cache or remote old-file replay test.",
+  "CloudOnConfirmedByUser": true,
+  "ConflictPromptReported": false,
+  "CloudOnFirstRuntime": {
+    "sensitivity": "1.41",
+    "cl_crosshair_gap": "3",
+    "hud_scaling": "0.91",
+    "snd_mvp_volume": "0.09"
+  },
+  "CloudOnRestartRuntime": {
+    "sensitivity": "1.41",
+    "cl_crosshair_gap": "3",
+    "hud_scaling": "0.91",
+    "snd_mvp_volume": "0.09"
+  },
+  "CloudOnExitDifferenceCountRelativeToStarted": 0,
+  "CloudOnRestartDifferenceCountRelativeToExited": 0,
+  "CloudOnStartOtherWhitelistChanges": [
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_drawoutline",
+      "Before": "false",
+      "After": "1",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_length",
+      "Before": "7",
+      "After": "8",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_thickness",
+      "Before": "4",
+      "After": "2",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshaircolor_g",
+      "Before": "219",
+      "After": "255",
+      "GameStatus": "待实机验证"
+    }
+  ],
+  "SteamUiReportedUpToDateAfterExit": true,
+  "RemoteContentDownloadedAndCompared": false,
+  "CloudSettingLeftEnabled": true,
+  "CausalityLimitation": "Sequential sessions reused client caches; on/off is not an isolated fresh-state experiment. No server-download cause established."
 }
