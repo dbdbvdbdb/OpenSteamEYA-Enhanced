@@ -1,241 +1,289 @@
 [
   {
-    "File": "screenshots/baseline-advanced-bottom.png",
+    "File": "screenshots/baseline-advanced-bottom.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "837aa41633bac28ad2d8754605cdd5fa51f3b7f119c23ef0f1cb1fcfccf4ea48",
     "Bytes": 471381
   },
   {
-    "File": "screenshots/baseline-advanced-top.png",
+    "File": "screenshots/baseline-advanced-top.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "b0c7e773346aa606de64a300a8a0e211b9c5437be7ab6ebd2466659f7c17c03e",
     "Bytes": 462153
   },
   {
-    "File": "screenshots/baseline-convars-01.png",
+    "File": "screenshots/baseline-convars-01.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "87b3631f9850c792b524d17b834626236df5ebba754cd247272fca415608df88",
     "Bytes": 358244
   },
   {
-    "File": "screenshots/baseline-convars-02.png",
+    "File": "screenshots/baseline-convars-02.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "fd90e3bac86ff46257062e86e503c9ad4ea10e6b55d65bc1aa537b5e430b2d74",
     "Bytes": 385724
   },
   {
-    "File": "screenshots/baseline-video.png",
+    "File": "screenshots/baseline-video.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "a0cc7598daae2c06a5b182d19461f7a356179c718067c237dfc73ec265c56919",
     "Bytes": 252889
   },
   {
-    "File": "screenshots/batch-all-advanced-bottom.png",
+    "File": "screenshots/batch-all-advanced-bottom.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "23f4c8a8828ee59c817624ef68d8081174ea8921d3a41d051f3a0c38c723f182",
     "Bytes": 492724
   },
   {
-    "File": "screenshots/batch-all-advanced-top.png",
+    "File": "screenshots/batch-all-advanced-top.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "aca2dab1e99c22062ff40a12ac30d2fd3204d0afa0bfa007e9d52b809a2f81e3",
     "Bytes": 484154
   },
   {
-    "File": "screenshots/batch-all-audio.png",
+    "File": "screenshots/batch-all-audio.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "316971ab0615487886119e92208164ca004e287a2295cd3e99905e18e0c44877",
     "Bytes": 297875
   },
   {
-    "File": "screenshots/batch-all-convars-01.png",
+    "File": "screenshots/batch-all-convars-01.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "6992e688312eae9d758d8ba69b402415bd224f27e471a9faf47c195804257564",
     "Bytes": 403221
   },
   {
-    "File": "screenshots/batch-all-convars-02.png",
+    "File": "screenshots/batch-all-convars-02.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "88badd20d39cdb2d4a42a8bca0175a3c030114c242455def298ea2b3433a057c",
     "Bytes": 463937
   },
   {
-    "File": "screenshots/batch-all-crosshair.png",
+    "File": "screenshots/batch-all-crosshair.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "56ef30527812073acdec0ee8d7195b98e421c5b32dfcde964b0fafe3afee9529",
     "Bytes": 300527
   },
   {
-    "File": "screenshots/batch-all-game.png",
+    "File": "screenshots/batch-all-game.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "8d1afcf53ab2380b8860acb403da207d8ec05fa69835af0e998c440057b696af",
     "Bytes": 277882
   },
   {
-    "File": "screenshots/batch-all-keyboard.png",
+    "File": "screenshots/batch-all-keyboard.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "36738a18b31f625913dc4b1ea464ab2260a9119bf11fbebc2a9cb4f68665055d",
     "Bytes": 275704
   },
   {
-    "File": "screenshots/batch-all-music.png",
+    "File": "screenshots/batch-all-music.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "69d73b949af16ce500918e9fcddd6f9bed02f2f7026037d04478a7323de41746",
     "Bytes": 265666
   },
   {
-    "File": "screenshots/batch-all-radar.png",
+    "File": "screenshots/batch-all-radar.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "f991fd361ef60baf94a1f7d33b0d6f490fa4903eb0d3de73833650ce20277dc8",
     "Bytes": 261721
   },
   {
-    "File": "screenshots/batch-all-video.png",
+    "File": "screenshots/batch-all-video.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "d48b39a5a18ca2dd4d49f72ba484a0d679377dbabfd09d2e73235cc594362274",
     "Bytes": 259255
   },
   {
-    "File": "screenshots/batch-restarted-advanced-bottom.png",
+    "File": "screenshots/batch-restarted-advanced-bottom.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "f0c6d5ea42f5666ecf62bf01477f119fc946559ff2104305812cf2f74ebd0004",
     "Bytes": 261681
   },
   {
-    "File": "screenshots/batch-restarted-advanced-top.png",
+    "File": "screenshots/batch-restarted-advanced-top.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "0f3964842d9447c0c0b5318d4838601fae96716ec5fc2c64094cdbe8b80dd9f3",
     "Bytes": 255162
   },
   {
-    "File": "screenshots/batch-restarted-convars-01.png",
+    "File": "screenshots/batch-restarted-convars-01.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "701bcedab37d6830415c6da5dea4a5968bafc3292fdb234d2d591c6e107d555a",
     "Bytes": 400644
   },
   {
-    "File": "screenshots/batch-restarted-convars-02.png",
+    "File": "screenshots/batch-restarted-convars-02.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "2adcb76bd21cd52ce4cfb161ee391b658701595a2637d62c7b2856bdd94e85da",
     "Bytes": 451500
   },
   {
-    "File": "screenshots/bindings-01.png",
+    "File": "screenshots/bindings-01.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "fb11eb564e46a60831cef96ad78162060b31e70ac1a7b6e644a8b8ffe48b78f6",
     "Bytes": 240801
   },
   {
-    "File": "screenshots/bindings-02.png",
+    "File": "screenshots/bindings-02.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "7d2abc237e554d21012b2f0cda5e4326b8afdfcd2b1819ab2bcc99c6f4b9c90d",
     "Bytes": 285701
   },
   {
-    "File": "screenshots/bindings-03.png",
+    "File": "screenshots/bindings-03.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "710c031248d375a86cbf5ab034d7ce3c987b8dff774d38fb63da1c1ea664e9f0",
     "Bytes": 283622
   },
   {
-    "File": "screenshots/bindings-restarted-01.png",
+    "File": "screenshots/bindings-restarted-01.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "b02ae65b3b84c8b30c4e445073a4e2e3d9b487427088ef52e4f4e19d230890af",
     "Bytes": 235011
   },
   {
-    "File": "screenshots/bindings-restarted-02.png",
+    "File": "screenshots/bindings-restarted-02.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "e53eee625bb2f5875df3bc24bfeaaee598212d7b7eadf3e278a03370e1b6b7e1",
     "Bytes": 276674
   },
   {
-    "File": "screenshots/bindings-restarted-03.png",
+    "File": "screenshots/bindings-restarted-03.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "b09942a11be5f7f1518c4064619cc0fb3d40e6e901b1e3d6c85aa4985dbad028",
     "Bytes": 288516
   },
   {
-    "File": "screenshots/cloud-off-first.png",
+    "File": "screenshots/cloud-off-first.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "71de50989ee59e45c91fb3635006dc023b56ce073bce9eab8e7c61cfa1f507c8",
     "Bytes": 166442
   },
   {
-    "File": "screenshots/cloud-off-repeat.png",
+    "File": "screenshots/cloud-off-repeat.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "6bdbb91d9553b2a77aa2dd97dc91e532872586f59445015c01cceca4dd3a8059",
     "Bytes": 174307
   },
   {
-    "File": "screenshots/cloud-on-first.png",
+    "File": "screenshots/cloud-on-first.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "9e2dda465f1ca87d8d40c80e4db6b6c4ff915d3b7384f234ae4de0bd215d18a7",
     "Bytes": 170011
   },
   {
-    "File": "screenshots/cloud-on-restarted.png",
+    "File": "screenshots/cloud-on-restarted.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "e33b2c570557e8a4060563a080d9397e87d9ac8d7107527fb5d876d20446fd64",
     "Bytes": 173723
   },
   {
-    "File": "screenshots/control-advanced-bottom.png",
+    "File": "screenshots/control-advanced-bottom.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "fd69b0a41fd804c5b04fd5abc330b7cc0d29f248c5a4a24ab17e545a77e3eb3e",
     "Bytes": 481188
   },
   {
-    "File": "screenshots/control-advanced-top.png",
+    "File": "screenshots/control-advanced-top.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "c42e27178cf17a27f5276eefbc8be445385a12fbd6ad4892a32e694ec7a91528",
     "Bytes": 471588
   },
   {
-    "File": "screenshots/control-audio.png",
+    "File": "screenshots/control-audio.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "768578f38bf54d261cda6c38cd84b3b9ef27407462a5053fdb4561b7a602fb74",
     "Bytes": 293775
   },
   {
-    "File": "screenshots/control-keyboard.png",
+    "File": "screenshots/control-keyboard.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "c8a791fa8932b0b63acdeb233a146ab524114685202f3fb85abb4ac3553ae2fa",
     "Bytes": 273596
   },
   {
-    "File": "screenshots/control-native-warning.png",
+    "File": "screenshots/control-native-warning.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "337debf14197b03d47d332d823e0fb75eb81f875670cd0563b43fe7f75df8bc1",
     "Bytes": 394074
   },
   {
-    "File": "screenshots/fsr-msaa-native-combination.png",
+    "File": "screenshots/fsr-msaa-native-combination.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "f296d3cf2f556f274619551f148bb3d2f8d52780ceaa8c9638041e403fe926bc",
     "Bytes": 272095
   },
   {
-    "File": "screenshots/fsr-msaa-restarted.png",
+    "File": "screenshots/fsr-msaa-restarted.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "99c00c23dba8b1a91c589a2e04af7facdb071c119059816cfd3efa511b2f2f95",
     "Bytes": 273431
   },
   {
-    "File": "screenshots/fsr-quality.png",
+    "File": "screenshots/fsr-quality.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "2f94e88f8eed80e954827110760d9d496338f5c23a14886899b797b3ec30dd57",
     "Bytes": 271186
   },
   {
-    "File": "screenshots/fsr-video-environment.png",
+    "File": "screenshots/fsr-video-environment.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "0a8347abd62f2a770939935ba3279b2ce78c74ffd8f6d380edd54ef3fc795a62",
     "Bytes": 136847
   },
   {
-    "File": "screenshots/restarted-console.png",
+    "File": "screenshots/restarted-console.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "0bfd355e82936dff9bbbe18e84d58f1f9206efe23bd322a4e33bca44df45ea23",
     "Bytes": 402540
   },
   {
-    "File": "screenshots/test-b-advanced-bottom.png",
+    "File": "screenshots/test-b-advanced-bottom.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "a0930fa520a09188f42dab589acdc213371d129205f6753a994bc3b321bf3de1",
     "Bytes": 281067
   },
   {
-    "File": "screenshots/test-b-advanced-top.png",
+    "File": "screenshots/test-b-advanced-top.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "72c5d27b9439a49ac8fbb64cd7d9841f5dfceca5b8928e022d6676977c845e6d",
     "Bytes": 278546
   },
   {
-    "File": "screenshots/test-b-convars-01.png",
+    "File": "screenshots/test-b-convars-01.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "cfcf871ec0bcebfba1763157f1b0f5afb630d02a2e636892ff016d18be6b1b51",
     "Bytes": 216083
   },
   {
-    "File": "screenshots/test-b-convars-02.png",
+    "File": "screenshots/test-b-convars-02.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "c942cf140672ed54f78bb59b3c26542916f88e7fa3ea83d17899a74223097b91",
     "Bytes": 256155
   },
   {
-    "File": "screenshots/test-b-retry-convars-01.png",
+    "File": "screenshots/test-b-retry-convars-01.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "345d1d952e97ee03a4fa39fefda5295dc1ec207a557160ac5d0b21574851a9f8",
     "Bytes": 219589
   },
   {
-    "File": "screenshots/test-b-retry-convars-02.png",
+    "File": "screenshots/test-b-retry-convars-02.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "86622dda086086f75058f7da34978a5ba82b5049b6476201372db3068ecdf00e",
     "Bytes": 251884
   },
   {
-    "File": "screenshots/test-b-video.png",
+    "File": "screenshots/test-b-video.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "6486ce7a3458ff09fc40a1d3e08fa684fee9973594aa5b53a47ad4758180e6a9",
     "Bytes": 150747
   },
   {
-    "File": "screenshots/without-autoexec-console.png",
+    "File": "screenshots/without-autoexec-console.jpg",
+    "MimeType": "image/jpeg",
     "Sha256": "0eb057283a9164fd230d4261a57311ec5bfb4640a3fa422c987f234d6a0c90f2",
     "Bytes": 386635
   }

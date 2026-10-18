@@ -9,12 +9,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "1",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -28,15 +28,15 @@
     "RestartChecked": true,
     "AfterRestartValue": "0; native menu later 2",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/fsr-quality.png",
-      "screenshots/fsr-msaa-native-combination.png",
-      "screenshots/fsr-msaa-restarted.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/fsr-quality.jpg",
+      "screenshots/fsr-msaa-native-combination.jpg",
+      "screenshots/fsr-msaa-restarted.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -50,12 +50,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "141",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -69,12 +69,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "51",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -88,12 +88,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "2.3",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -107,12 +107,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.36",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -126,12 +126,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.64",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -145,12 +145,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.49",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -164,12 +164,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.25",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -183,12 +183,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.09",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -202,17 +202,17 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.16; B Cloud-on=0.09",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png",
-      "screenshots/cloud-off-first.png",
-      "screenshots/cloud-off-repeat.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg",
+      "screenshots/cloud-off-first.jpg",
+      "screenshots/cloud-off-repeat.jpg",
       "cloud-runtime-summary.json",
-      "screenshots/cloud-on-first.png",
-      "screenshots/cloud-on-restarted.png",
+      "screenshots/cloud-on-first.jpg",
+      "screenshots/cloud-on-restarted.jpg",
       "runtime-phases/cloud/on/diff-start.json"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Later Cloud-on session: these four targets were queried, normally exited and directly restarted with matching values; full 55-setting B restart remains incomplete. Local backup restored, remote restoration not verified. Do not infer the overwrite was caused by online Cloud. Cloud-on reused caches, so the sequential off/on comparison does not isolate a remote download cause. Four other user crosshair fields were rewritten; see on/diff-start.json."
@@ -227,12 +227,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.04",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -246,12 +246,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.09",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -265,12 +265,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.25",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -284,12 +284,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "true",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -303,12 +303,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "false",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native audio sliders use gain conversion; e.g. volume 0.36 displays 60%, and snd_voipvolume 0.49 displays 70%. No output audio measurement. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -322,17 +322,17 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.95; B Cloud-on=0.91",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png",
-      "screenshots/cloud-off-first.png",
-      "screenshots/cloud-off-repeat.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg",
+      "screenshots/cloud-off-first.jpg",
+      "screenshots/cloud-off-repeat.jpg",
       "cloud-runtime-summary.json",
-      "screenshots/cloud-on-first.png",
-      "screenshots/cloud-on-restarted.png",
+      "screenshots/cloud-on-first.jpg",
+      "screenshots/cloud-on-restarted.jpg",
       "runtime-phases/cloud/on/diff-start.json"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Later Cloud-on session: these four targets were queried, normally exited and directly restarted with matching values; full 55-setting B restart remains incomplete. Local backup restored, remote restoration not verified. Do not infer the overwrite was caused by online Cloud. Cloud-on reused caches, so the sequential off/on comparison does not isolate a remote download cause. Four other user crosshair fields were rewritten; see on/diff-start.json."
@@ -347,12 +347,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.9",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -366,12 +366,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.4",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -385,12 +385,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.8",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -404,12 +404,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "false",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -423,12 +423,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "false",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -442,12 +442,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "false",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -461,14 +461,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "false",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote false to true in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -482,14 +482,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "true",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote true to false in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -503,12 +503,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "80",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -522,14 +522,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "64",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 64 to 68 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -543,14 +543,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "1",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1 to 2.5 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -564,14 +564,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "1",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1 to 0 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -585,14 +585,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "-1",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote -1 to -1.5 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -606,14 +606,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "4",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 4 to 0 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -627,19 +627,19 @@
     "RestartChecked": true,
     "AfterRestartValue": "2; B Cloud-on=3",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png",
-      "screenshots/cloud-off-first.png",
-      "screenshots/cloud-off-repeat.png",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg",
+      "screenshots/cloud-off-first.jpg",
+      "screenshots/cloud-off-repeat.jpg",
       "cloud-runtime-summary.json",
-      "screenshots/cloud-on-first.png",
-      "screenshots/cloud-on-restarted.png",
+      "screenshots/cloud-on-first.jpg",
+      "screenshots/cloud-on-restarted.jpg",
       "runtime-phases/cloud/on/diff-start.json"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 2 to 8 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Later Cloud-on session: these four targets were queried, normally exited and directly restarted with matching values; full 55-setting B restart remains incomplete. Local backup restored, remote restoration not verified. Do not infer the overwrite was caused by online Cloud. Cloud-on reused caches, so the sequential off/on comparison does not isolate a remote download cause. Four other user crosshair fields were rewritten; see on/diff-start.json."
@@ -654,14 +654,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "1",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1 to 3 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -675,14 +675,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "200",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 200 to 0 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -696,14 +696,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "100",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 100 to 255 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -717,14 +717,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "50",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 50 to 0 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -738,14 +738,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "false",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote false to true in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -759,14 +759,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "true",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote true to false in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -780,14 +780,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "1",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1 to 0 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -801,14 +801,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "true",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote true to false in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -822,14 +822,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "2",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. Native crosshair style was static circle; shape-dependent settings require a style-specific behavior test. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 2 to 1 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -843,19 +843,19 @@
     "RestartChecked": true,
     "AfterRestartValue": "1.23; B Cloud-on=1.41",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png",
-      "screenshots/cloud-off-first.png",
-      "screenshots/cloud-off-repeat.png",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg",
+      "screenshots/cloud-off-first.jpg",
+      "screenshots/cloud-off-repeat.jpg",
       "cloud-runtime-summary.json",
-      "screenshots/cloud-on-first.png",
-      "screenshots/cloud-on-restarted.png",
+      "screenshots/cloud-on-first.jpg",
+      "screenshots/cloud-on-restarted.jpg",
       "runtime-phases/cloud/on/diff-start.json"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 1.23 to 1.5 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported. 2026-10-18 DedicatedTestB Cloud off: sensitivity target1.41 first1.5/repeat1.41; gap target3 first4/repeat3; HUD0.91 and MVP0.09 retained. Repeat normal exit matched. Later Cloud-on session: these four targets were queried, normally exited and directly restarted with matching values; full 55-setting B restart remains incomplete. Local backup restored, remote restoration not verified. Do not infer the overwrite was caused by online Cloud. Cloud-on reused caches, so the sequential off/on comparison does not isolate a remote download cause. Four other user crosshair fields were rewritten; see on/diff-start.json."
@@ -870,14 +870,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "0.93",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote 0.93 to 0.8 in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -891,14 +891,14 @@
     "RestartChecked": true,
     "AfterRestartValue": "true",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-convars-02.png",
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-convars-02.jpg",
       "runtime-phases/test-b-first/diff-start.json",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed. B first launch overwrote true to false in the user file and console; repeat deployment returned target. Cause not established; this is not proof that the parameter is unsupported."
   },
@@ -912,15 +912,15 @@
     "RestartChecked": true,
     "AfterRestartValue": "1; later 0",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/fsr-quality.png",
-      "screenshots/fsr-msaa-native-combination.png",
-      "screenshots/fsr-msaa-restarted.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/fsr-quality.jpg",
+      "screenshots/fsr-msaa-native-combination.jpg",
+      "screenshots/fsr-msaa-restarted.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -934,12 +934,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "1",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -953,12 +953,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -972,12 +972,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "1",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -991,12 +991,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "4",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -1010,12 +1010,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -1029,12 +1029,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "1",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -1048,12 +1048,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -1067,12 +1067,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "3",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -1086,15 +1086,15 @@
     "RestartChecked": true,
     "AfterRestartValue": "0; later 2",
     "Evidence": [
-      "screenshots/batch-all-advanced-top.png",
-      "screenshots/batch-all-advanced-bottom.png",
-      "screenshots/batch-restarted-advanced-top.png",
-      "screenshots/batch-restarted-advanced-bottom.png",
-      "screenshots/fsr-quality.png",
-      "screenshots/fsr-msaa-native-combination.png",
-      "screenshots/fsr-msaa-restarted.png",
-      "screenshots/test-b-advanced-top.png",
-      "screenshots/test-b-advanced-bottom.png"
+      "screenshots/batch-all-advanced-top.jpg",
+      "screenshots/batch-all-advanced-bottom.jpg",
+      "screenshots/batch-restarted-advanced-top.jpg",
+      "screenshots/batch-restarted-advanced-bottom.jpg",
+      "screenshots/fsr-quality.jpg",
+      "screenshots/fsr-msaa-native-combination.jpg",
+      "screenshots/fsr-msaa-restarted.jpg",
+      "screenshots/test-b-advanced-top.jpg",
+      "screenshots/test-b-advanced-bottom.jpg"
     ],
     "Notes": "Native video menu recognized the tested tier and retained it after restart. Controlled rendering/frametime comparison and every enum alternative remain unverified. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -1108,12 +1108,12 @@
     "RestartChecked": true,
     "AfterRestartValue": "0",
     "Evidence": [
-      "screenshots/batch-all-convars-01.png",
-      "screenshots/batch-all-convars-02.png",
-      "screenshots/batch-restarted-convars-01.png",
-      "screenshots/batch-restarted-convars-02.png",
-      "screenshots/test-b-retry-convars-01.png",
-      "screenshots/test-b-retry-convars-02.png"
+      "screenshots/batch-all-convars-01.jpg",
+      "screenshots/batch-all-convars-02.jpg",
+      "screenshots/batch-restarted-convars-01.jpg",
+      "screenshots/batch-restarted-convars-02.jpg",
+      "screenshots/test-b-retry-convars-01.jpg",
+      "screenshots/test-b-retry-convars-02.jpg"
     ],
     "Notes": "Console returned deployed value after startup and a second startup with no intervening redeployment. Functional behavior has not been objectively measured for this parameter; menu values alone are not effect verification. DedicatedTestA: restart checked. DedicatedTestB: same saved 55-setting template; 43 convars queried after repeat deployment and 12 video fields matched in file/first native menu; normal exit retained targets. Final B restart console checks were interrupted, not completed."
   },
@@ -1127,8 +1127,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1142,8 +1142,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1157,8 +1157,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1172,8 +1172,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1187,8 +1187,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1202,8 +1202,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1217,8 +1217,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1232,8 +1232,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1247,8 +1247,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1262,8 +1262,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1277,8 +1277,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1292,8 +1292,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1307,8 +1307,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1322,8 +1322,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1337,8 +1337,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1352,8 +1352,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1367,8 +1367,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1382,8 +1382,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1397,8 +1397,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1412,8 +1412,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1427,8 +1427,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1442,8 +1442,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1457,8 +1457,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-01.png",
-      "screenshots/bindings-restarted-01.png"
+      "screenshots/bindings-01.jpg",
+      "screenshots/bindings-restarted-01.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1472,8 +1472,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1487,8 +1487,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1502,8 +1502,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1517,8 +1517,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1532,8 +1532,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1547,8 +1547,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1562,8 +1562,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1577,8 +1577,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1592,8 +1592,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1607,8 +1607,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1622,8 +1622,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1637,8 +1637,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1652,8 +1652,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1667,8 +1667,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1682,8 +1682,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1697,8 +1697,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1712,8 +1712,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1727,8 +1727,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1742,8 +1742,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1757,8 +1757,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1772,8 +1772,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1787,8 +1787,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1802,8 +1802,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-02.png",
-      "screenshots/bindings-restarted-02.png"
+      "screenshots/bindings-02.jpg",
+      "screenshots/bindings-restarted-02.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1817,8 +1817,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1832,8 +1832,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1847,8 +1847,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1862,8 +1862,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1877,8 +1877,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1892,8 +1892,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1907,8 +1907,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1922,8 +1922,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1937,8 +1937,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1952,8 +1952,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1967,8 +1967,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1982,8 +1982,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -1997,8 +1997,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -2012,8 +2012,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -2027,8 +2027,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -2042,8 +2042,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -2057,8 +2057,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -2072,8 +2072,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -2087,8 +2087,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -2102,8 +2102,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   },
@@ -2117,8 +2117,8 @@
     "RestartChecked": true,
     "AfterRestartValue": "+lookatweapon",
     "Evidence": [
-      "screenshots/bindings-03.png",
-      "screenshots/bindings-restarted-03.png"
+      "screenshots/bindings-03.jpg",
+      "screenshots/bindings-restarted-03.jpg"
     ],
     "Notes": "67 keys were assigned the same whitelisted inspection action, queried individually after deployment and restart. No physical gameplay action was triggered; this does not validate all action mappings or custom commands."
   }

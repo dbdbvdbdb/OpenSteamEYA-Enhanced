@@ -3,7 +3,7 @@
   "clientVersion": "2000933",
   "accountAlias": "DedicatedTestA",
   "gameActuallyStarted": true,
-  "evidence": ["screenshots/baseline-convars-01.png", "screenshots/baseline-convars-02.png"],
+  "evidence": ["screenshots/baseline-convars-01.jpg", "screenshots/baseline-convars-02.jpg"],
   "values": {
     "fps_max": "400", "fps_max_ui": "63", "r_fullscreen_gamma": "2.2",
     "volume": "1", "snd_gamevolume": "1", "snd_voipvolume": "1", "snd_musicvolume": "1",

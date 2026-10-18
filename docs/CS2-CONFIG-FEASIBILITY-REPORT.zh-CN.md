@@ -98,7 +98,7 @@
 | 分辨率宽高 | 原生菜单 2560×1440。全屏窗口模式的保存刷新率为 0/0，应用要求正整数刷新率，条件不满足 | 待实机验证；未通过应用部署分辨率，截图逻辑尺寸不能充当实际输出尺寸 |
 | 显示模式、显示器、宽高比、刷新率、Reflex、G-Sync、自动检测等级 | 只读观察；应用未开放这些修改 | 待实机验证；没有解锁、没有修改驱动或系统设置 |
 
-证据：[首次完整高级页](cs2-feasibility/screenshots/batch-all-advanced-bottom.png)、[重启高级页](cs2-feasibility/screenshots/batch-restarted-advanced-bottom.png)、[FSR 与 MSAA 原生组合](cs2-feasibility/screenshots/fsr-msaa-native-combination.png)、[组合重启](cs2-feasibility/screenshots/fsr-msaa-restarted.png)。
+证据：[首次完整高级页](cs2-feasibility/screenshots/batch-all-advanced-bottom.jpg)、[重启高级页](cs2-feasibility/screenshots/batch-restarted-advanced-bottom.jpg)、[FSR 与 MSAA 原生组合](cs2-feasibility/screenshots/fsr-msaa-native-combination.jpg)、[组合重启](cs2-feasibility/screenshots/fsr-msaa-restarted.jpg)。
 
 本机原生中档预设亦含 MSAA2/CMAA0/FSR2。现在除资源证据外，已有原生菜单设置、保存、重启保留证据，支持重新评审应用的保守禁用规则；尚不支持直接宣称渲染算法互斥或全部并行生效。
 
@@ -159,11 +159,11 @@ v0.2.9 此页面保存和部署均明确不推送 Steam Cloud，不能把本地�
 | hud_scaling | 0.91 | 0.91 | 0.91 |
 | snd_mvp_volume | 0.09 | 0.09 | 0.09 |
 
-首轮白名单文件共有6项差异，包括2个目标用户参数和4个其他准星字段；重复部署启动及正常退出差异均0。证据：[关闭首轮截图](cs2-feasibility/screenshots/cloud-off-first.png)、[关闭重复部署截图](cs2-feasibility/screenshots/cloud-off-repeat.png)、[阶段差异](cs2-feasibility/runtime-phases/cloud/off/diff-start.json)、[摘要](cs2-feasibility/cloud-runtime-summary.json)。关闭同步后仍可出现重写，不能将此前失败简单归因于Cloud开启；尚未排除本地缓存或客户端加载机制，也没有证明服务器下载是原因。
+首轮白名单文件共有6项差异，包括2个目标用户参数和4个其他准星字段；重复部署启动及正常退出差异均0。证据：[关闭首轮截图](cs2-feasibility/screenshots/cloud-off-first.jpg)、[关闭重复部署截图](cs2-feasibility/screenshots/cloud-off-repeat.jpg)、[阶段差异](cs2-feasibility/runtime-phases/cloud/off/diff-start.json)、[摘要](cs2-feasibility/cloud-runtime-summary.json)。关闭同步后仍可出现重写，不能将此前失败简单归因于Cloud开启；尚未排除本地缓存或客户端加载机制，也没有证明服务器下载是原因。
 
 关闭阶段结束后先恢复本地配置和autoexec。用户随后确认重新开启Cloud且无冲突提示；重新核对第二账号、新备份并部署相同四项目标后启动游戏。控制台返回1.41/3/0.91/0.09，正常退出后未重新部署，直接重启控制台仍返回相同四值。启动→退出及退出→重启的白名单值差异均0。Steam两次退出后均显示“已是最新”，这是客户端状态，不是远端逐文件内容复核。
 
-开启首轮应用后→启动后另有4个非目标准星字段被重写：drawoutline false→1、length7→8、thickness4→2、green219→255，不能省略为“目录完全未变”。证据：[开启首轮查询](cs2-feasibility/screenshots/cloud-on-first.png)、[直接重启查询](cs2-feasibility/screenshots/cloud-on-restarted.png)、[启动差异](cs2-feasibility/runtime-phases/cloud/on/diff-start.json)、[重启差异](cs2-feasibility/runtime-phases/cloud/on/diff-restart.json)。开/关两轮复用了客户端缓存和先前会话状态，未进行全新缓存隔离，不能据序贯结果归因于Cloud服务器下载。
+开启首轮应用后→启动后另有4个非目标准星字段被重写：drawoutline false→1、length7→8、thickness4→2、green219→255，不能省略为“目录完全未变”。证据：[开启首轮查询](cs2-feasibility/screenshots/cloud-on-first.jpg)、[直接重启查询](cs2-feasibility/screenshots/cloud-on-restarted.jpg)、[启动差异](cs2-feasibility/runtime-phases/cloud/on/diff-start.json)、[重启差异](cs2-feasibility/runtime-phases/cloud/on/diff-restart.json)。开/关两轮复用了客户端缓存和先前会话状态，未进行全新缓存隔离，不能据序贯结果归因于Cloud服务器下载。
 
 两轮均恢复各自新备份的6个选定本地文件与autoexec，散列核对一致；Cloud最终保持用户恢复的开启状态。[关闭阶段恢复](cs2-feasibility/runtime-phases/cloud/restore-result.json)、[开启阶段恢复](cs2-feasibility/runtime-phases/cloud/on/restore-result.json)。未删除远端文件。未证明旧云文件回下载，未下载并逐项比对服务器副本，也未确认远端已恢复测试前内容。四项读取与持久化不替代声音、鼠标和HUD效果验收，更不能代表第二账号全部55项的最终重启。
 
