@@ -1,0 +1,322 @@
+{
+  "Stage": "before",
+  "Utc": "2026-10-18T00:23:15.1173053Z",
+  "Cs2ProcessPresent": false,
+  "Files": [
+    {
+      "Name": "cs2_user_convars_0_slot0.vcfg",
+      "Exists": true,
+      "Sha256": "9EF8DE76051A5743FBDEA9C1A35E951E9FD5F69024D32D2CC853543A2835370C",
+      "Values": [
+        {
+          "Key": "cl_crosshair_drawoutline",
+          "Value": "false"
+        },
+        {
+          "Key": "cl_crosshair_gap",
+          "Value": "0"
+        },
+        {
+          "Key": "cl_crosshair_length",
+          "Value": "7"
+        },
+        {
+          "Key": "cl_crosshair_recoil",
+          "Value": "false"
+        },
+        {
+          "Key": "cl_crosshair_sniper_width",
+          "Value": "1"
+        },
+        {
+          "Key": "cl_crosshair_t",
+          "Value": "false"
+        },
+        {
+          "Key": "cl_crosshair_thickness",
+          "Value": "4"
+        },
+        {
+          "Key": "cl_crosshairalpha",
+          "Value": "255"
+        },
+        {
+          "Key": "cl_crosshaircolor_b",
+          "Value": "255"
+        },
+        {
+          "Key": "cl_crosshaircolor_g",
+          "Value": "219"
+        },
+        {
+          "Key": "cl_crosshaircolor_r",
+          "Value": "0"
+        },
+        {
+          "Key": "cl_crosshairdot",
+          "Value": "false"
+        },
+        {
+          "Key": "cl_crosshairsize",
+          "Value": "1.1"
+        },
+        {
+          "Key": "cl_crosshairthickness",
+          "Value": "1.1"
+        },
+        {
+          "Key": "cl_showloadout",
+          "Value": "true"
+        },
+        {
+          "Key": "cl_sniper_auto_rezoom",
+          "Value": "false"
+        },
+        {
+          "Key": "cl_use_opens_buy_menu",
+          "Value": "false"
+        },
+        {
+          "Key": "sensitivity",
+          "Value": "1.5"
+        },
+        {
+          "Key": "viewmodel_fov",
+          "Value": "68"
+        },
+        {
+          "Key": "viewmodel_offset_x",
+          "Value": "2.5"
+        },
+        {
+          "Key": "viewmodel_offset_y",
+          "Value": "0"
+        },
+        {
+          "Key": "viewmodel_offset_z",
+          "Value": "-1.5"
+        },
+        {
+          "Key": "zoom_sensitivity_ratio",
+          "Value": "0.8"
+        }
+      ]
+    },
+    {
+      "Name": "cs2_user_keys_0_slot0.vcfg",
+      "Exists": true,
+      "Sha256": "51CC55023CAF8AC26BEED7B3A174869E53AB1A5DEB484501E4307CFF867CCC7D",
+      "Values": []
+    },
+    {
+      "Name": "cs2_machine_convars.vcfg",
+      "Exists": true,
+      "Sha256": "8F73C88B7B3ADBE8E5E2F2BEB25C75046F1646E51DC07EB48E9AA31DF58648D6",
+      "Values": [
+        {
+          "Key": "cl_hud_radar_scale",
+          "Value": "1.3"
+        },
+        {
+          "Key": "cl_radar_always_centered",
+          "Value": "true"
+        },
+        {
+          "Key": "cl_radar_icon_scale_min",
+          "Value": "0.6"
+        },
+        {
+          "Key": "cl_radar_rotate",
+          "Value": "true"
+        },
+        {
+          "Key": "cl_radar_scale",
+          "Value": "0.7"
+        },
+        {
+          "Key": "cl_radar_square_with_scoreboard",
+          "Value": "true"
+        },
+        {
+          "Key": "fps_max",
+          "Value": "400"
+        },
+        {
+          "Key": "fps_max_ui$2",
+          "Value": "63"
+        },
+        {
+          "Key": "hud_scaling$3",
+          "Value": "1.1"
+        },
+        {
+          "Key": "mm_dedicated_search_maxping",
+          "Value": "150"
+        },
+        {
+          "Key": "r_fullscreen_gamma",
+          "Value": "2.2"
+        },
+        {
+          "Key": "r_player_visibility_mode",
+          "Value": "1"
+        },
+        {
+          "Key": "snd_gamevolume",
+          "Value": "1"
+        },
+        {
+          "Key": "snd_menumusic_volume$4",
+          "Value": "0"
+        },
+        {
+          "Key": "snd_musicvolume$2",
+          "Value": "1"
+        },
+        {
+          "Key": "snd_mute_losefocus",
+          "Value": "false"
+        },
+        {
+          "Key": "snd_mute_mvp_music_live_players",
+          "Value": "true"
+        },
+        {
+          "Key": "snd_mvp_volume$4",
+          "Value": "0.05"
+        },
+        {
+          "Key": "snd_roundend_volume$4",
+          "Value": "0"
+        },
+        {
+          "Key": "snd_roundstart_volume$4",
+          "Value": "0"
+        },
+        {
+          "Key": "snd_tensecondwarning_volume$4",
+          "Value": "0.05"
+        },
+        {
+          "Key": "snd_voipvolume",
+          "Value": "1"
+        },
+        {
+          "Key": "volume",
+          "Value": "1"
+        }
+      ]
+    },
+    {
+      "Name": "cs2_video.txt",
+      "Exists": true,
+      "Sha256": "9322CC05BE18B4ECC70467FE255546AB92946F7AF5D9462EA3720F1B937ECAE7",
+      "Values": [
+        {
+          "Key": "Version",
+          "Value": "16"
+        },
+        {
+          "Key": "setting.cpu_level",
+          "Value": "3"
+        },
+        {
+          "Key": "setting.gpu_mem_level",
+          "Value": "3"
+        },
+        {
+          "Key": "setting.gpu_level",
+          "Value": "3"
+        },
+        {
+          "Key": "setting.defaultres",
+          "Value": "2560"
+        },
+        {
+          "Key": "setting.defaultresheight",
+          "Value": "1600"
+        },
+        {
+          "Key": "setting.refreshrate_numerator",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.refreshrate_denominator",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.fullscreen",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.coop_fullscreen",
+          "Value": "1"
+        },
+        {
+          "Key": "setting.nowindowborder",
+          "Value": "1"
+        },
+        {
+          "Key": "setting.mat_vsync",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.shaderquality",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.r_texturefilteringquality",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.msaa_samples",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.r_csgo_cmaa_enable",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.videocfg_shadow_quality",
+          "Value": "1"
+        },
+        {
+          "Key": "setting.videocfg_dynamic_shadows",
+          "Value": "1"
+        },
+        {
+          "Key": "setting.videocfg_texture_detail",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.videocfg_particle_detail",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.videocfg_ao_detail",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.videocfg_hdr_detail",
+          "Value": "3"
+        },
+        {
+          "Key": "setting.videocfg_fsr_detail",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.monitor_index",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.r_low_latency",
+          "Value": "0"
+        },
+        {
+          "Key": "setting.aspectratiomode",
+          "Value": "2"
+        }
+      ]
+    }
+  ]
+}

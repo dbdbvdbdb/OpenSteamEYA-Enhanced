@@ -1,0 +1,31 @@
+{
+  "CloudOffConfirmedByUser": true,
+  "OriginalCloudEnabled": true,
+  "AccountAlias": "DedicatedTestB",
+  "Utc": "2026-10-18T00:23:56.4342673Z",
+  "TargetKeys": [
+    "sensitivity",
+    "cl_crosshair_gap",
+    "hud_scaling",
+    "snd_mvp_volume"
+  ],
+  "CloudOffFirstRuntime": {
+    "sensitivity": "1.5",
+    "cl_crosshair_gap": "4",
+    "hud_scaling": "0.91",
+    "snd_mvp_volume": "0.09"
+  },
+  "CloudOffRepeatRuntime": {
+    "sensitivity": "1.41",
+    "cl_crosshair_gap": "3",
+    "hud_scaling": "0.91",
+    "snd_mvp_volume": "0.09"
+  },
+  "CloudOffRepeatExitDifferenceCount": 0,
+  "CloudOnComparisonCompleted": false,
+  "RemoteRestorationVerified": false,
+  "RenderingInputEffectsVerified": false,
+  "LocalSelectedFilesRestoredAndHashesVerified": true,
+  "AutoexecRestoredAndHashVerified": true,
+  "AwaitingUserCloudOnConfirmation": true
+}

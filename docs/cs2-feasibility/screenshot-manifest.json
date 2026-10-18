@@ -130,6 +130,16 @@
     "Bytes": 288516
   },
   {
+    "File": "screenshots/cloud-off-first.png",
+    "Sha256": "71de50989ee59e45c91fb3635006dc023b56ce073bce9eab8e7c61cfa1f507c8",
+    "Bytes": 166442
+  },
+  {
+    "File": "screenshots/cloud-off-repeat.png",
+    "Sha256": "6bdbb91d9553b2a77aa2dd97dc91e532872586f59445015c01cceca4dd3a8059",
+    "Bytes": 174307
+  },
+  {
     "File": "screenshots/control-advanced-bottom.png",
     "Sha256": "fd69b0a41fd804c5b04fd5abc330b7cc0d29f248c5a4a24ab17e545a77e3eb3e",
     "Bytes": 481188

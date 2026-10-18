@@ -1,6 +1,6 @@
 # 实际游戏截图索引
 
-这44张PNG为真实CS2窗口采集，未经过AI生成或图像修改。账号别名为DedicatedTestA/B，未公开含昵称主菜单。菜单/控制台值只支持读取及档位结论，不等同全部渲染、声音和按键动作已生效。第二账号以test-b开头；retry表示首次失败后重复部署，不表示最终重启已验收。
+46张真实CS2窗口采集。菜单/控制台证据只证明读取和档位，不等于完整效果验证。test-b-retry是重复部署而非最终重启；cloud-off为关闭云同步对照，开启阶段尚未完成。
 
 | 截图 | 字节数 | SHA-256 前12位 |
 | --- | --- | --- |
@@ -30,6 +30,8 @@
 | [bindings-restarted-01.png](bindings-restarted-01.png) | 235011 | `b02ae65b3b84` |
 | [bindings-restarted-02.png](bindings-restarted-02.png) | 276674 | `e53eee625bb2` |
 | [bindings-restarted-03.png](bindings-restarted-03.png) | 288516 | `b09942a11be5` |
+| [cloud-off-first.png](cloud-off-first.png) | 166442 | `71de50989ee5` |
+| [cloud-off-repeat.png](cloud-off-repeat.png) | 174307 | `6bdbb91d9553` |
 | [control-advanced-bottom.png](control-advanced-bottom.png) | 481188 | `fd69b0a41fd8` |
 | [control-advanced-top.png](control-advanced-top.png) | 471588 | `c42e27178cf1` |
 | [control-audio.png](control-audio.png) | 293775 | `768578f38bf5` |
