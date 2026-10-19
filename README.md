@@ -10,9 +10,9 @@
 
 **[下载最新版 ↗](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/latest) · [更新记录 ↗](CHANGELOG.md)**
 
-<img src="docs/screenshots/0.2.5/classification-white.png" width="960" alt="白号管理卡片：v0.2.5-beta 隔离测试界面，使用虚构账号与状态">
+<img src="docs/screenshots/0.3.0/classification-white.png" width="960" alt="白号管理卡片：v0.3.0 隔离测试界面，使用虚构账号与状态">
 
-<sub>白号管理 · v0.2.5-beta 真实 WinUI 测试截图，使用虚构数据；不是 v0.2.9 新截图。</sub>
+<sub>白号管理 · v0.3.0 真实 WinUI 测试截图，使用虚构数据。</sub>
 
 </div>
 
@@ -32,15 +32,15 @@ OpenSteamEYA 增强版是一款 Windows 平台的 Steam 账号管理工具，基
 
 **黑号管理**：按来源整理账号，支持搜索、筛选和批量操作。
 
-<img src="docs/screenshots/0.2.5/classification-black.png" width="960" alt="黑号管理列表：v0.2.5-beta 隔离测试界面，账号和 SteamID 为虚构数据">
+<img src="docs/screenshots/0.3.0/classification-black.png" width="960" alt="黑号管理列表：v0.3.0 隔离测试界面，账号和 SteamID 为虚构数据">
 
-*v0.2.5-beta 真实 WinUI 测试截图，使用虚构数据。*
+*v0.3.0 真实 WinUI 测试截图，使用虚构数据。*
 
 **CS2 统一配置**：保存模板与应用到账号分开操作，应用前预览并备份。
 
-<img src="docs/screenshots/0.2.9/cs2-unified-video-advanced-dark.png" width="960" alt="v0.2.9 CS2 统一配置高级视频页面，展示抗锯齿、阴影和纹理选项，使用隔离测试模板">
+<img src="docs/screenshots/0.3.0/cs2-unified-video-advanced-dark.png" width="960" alt="v0.3.0 CS2 统一配置高级视频页面，展示抗锯齿、阴影和纹理选项，使用隔离测试模板">
 
-*v0.2.9 真实 WinUI CI 截图，使用隔离模板；界面展示不代表游戏效果已逐项验收。*
+*v0.3.0 真实 WinUI Native AOT QA 截图，使用隔离模板；界面展示不代表游戏效果已逐项验收。*
 
 [查看更多截图与来源](docs/screenshots/README.md)
 
@@ -66,9 +66,9 @@ OpenSteamEYA 增强版是一款 Windows 平台的 Steam 账号管理工具，基
 
 ## 最近更新
 
-**v0.2.9**：新增独立 CS2 配置模板，支持导入、导出、备份恢复及确认后批量应用；保存模板不再直接修改账号配置，也不自动推送云端。
+**v0.3.0**：移除旧“CS2 配置查看”只读页面，保留统一配置与独立同步功能；已有模板、账号配置和备份不受影响。统一配置仍不自动推送云端。
 
-[查看完整更新记录](CHANGELOG.md) · [v0.2.9 发布说明](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.9)
+[查看完整更新记录](CHANGELOG.md) · [v0.3.0 发布说明](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.3.0)
 
 ## 开源协议与致谢
 
@@ -84,7 +84,7 @@ OpenSteamEYA 增强版是一款 Windows 平台的 Steam 账号管理工具，基
 - [源码编译、测试与下载校验](docs/BUILDING.zh-CN.md)
 - [数据格式与备份边界](docs/FORMATS-AND-BACKUP.zh-CN.md)
 - [启动检查更新说明](docs/UPDATES.zh-CN.md)
-- [下一次更新规划（开发中，未发布）](docs/NEXT-UPDATE-PLAN.zh-CN.md)
+- [v0.3.0 更新实施记录](docs/NEXT-UPDATE-PLAN.zh-CN.md)
 - [整理前的技术更新记录](docs/archive/CHANGELOG-technical.zh-CN.md)
 
 </details>

@@ -23,10 +23,10 @@ dotnet restore ./SteamEyaWinUI/SteamEyaWinUI.csproj -r win-x64 `
 
 pwsh ./scripts/check-data.ps1
 pwsh ./scripts/check-manager-ui.ps1 -NativeAot
-pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.2.9 -ReleaseLabel 0.2.9
+pwsh ./scripts/publish-enhanced.ps1 -NativeAot -Version 0.3.0 -ReleaseLabel 0.3.0
 ```
 
-这里的发布命令在本机打包，不创建 GitHub Release；版本参数示例对应 v0.2.9，发布其他版本时同步核对源码和标签。工具链脚本默认检查环境，缺失组件时按提示安装。
+这里的发布命令在本机打包，不创建 GitHub Release；版本参数示例对应 v0.3.0，发布其他版本时同步核对源码和标签。工具链脚本默认检查环境，缺失组件时按提示安装。
 
 数据测试通过控制台程序执行，`dotnet test` 不能代替它们。WinUI QA 使用隔离的虚构数据，正式包不含 QA 入口；这些检查不证明真实 Steam 登录、CS2 游戏效果或云同步已通过。
 

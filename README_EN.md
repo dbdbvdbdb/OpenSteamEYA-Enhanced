@@ -10,9 +10,9 @@
 
 **[Download ↗](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/latest) · [Changelog ↗](CHANGELOG.md)**
 
-<img src="docs/screenshots/0.2.5/classification-white.png" width="960" alt="White account cards in a real v0.2.5-beta WinUI QA build, using fictional accounts and status data">
+<img src="docs/screenshots/0.3.0/classification-white.png" width="960" alt="White account cards in a real v0.3.0 WinUI QA build, using fictional accounts and status data">
 
-<sub>v0.2.5-beta WinUI QA screenshot with synthetic data; this is not a new v0.2.9 capture.</sub>
+<sub>v0.3.0 WinUI QA screenshot with synthetic data.</sub>
 
 </div>
 
@@ -30,13 +30,13 @@ The original project's Workshop cleanup and other utilities also remain availabl
 
 ## Screenshots
 
-**Black account management** — a real v0.2.5-beta WinUI QA screenshot with fictional account data.
+**Black account management** — a real v0.3.0 WinUI QA screenshot with fictional account data.
 
-<img src="docs/screenshots/0.2.5/classification-black.png" width="960" alt="Black account list in v0.2.5-beta with synthetic account names and Steam IDs">
+<img src="docs/screenshots/0.3.0/classification-black.png" width="960" alt="Black account list in v0.3.0 with synthetic account names and Steam IDs">
 
-**CS2 shared settings** — a real v0.2.9 WinUI CI screenshot with an isolated template. A rendered settings page does not establish in-game effectiveness.
+**CS2 shared settings** — a real v0.3.0 WinUI Native AOT QA screenshot with an isolated template. A rendered settings page does not establish in-game effectiveness.
 
-<img src="docs/screenshots/0.2.9/cs2-unified-video-advanced-dark.png" width="960" alt="v0.2.9 CS2 shared settings page showing advanced video controls in an isolated QA environment">
+<img src="docs/screenshots/0.3.0/cs2-unified-video-advanced-dark.png" width="960" alt="v0.3.0 CS2 shared settings page showing advanced video controls in an isolated QA environment">
 
 [More screenshots and provenance](docs/screenshots/README.md)
 
@@ -62,9 +62,9 @@ Back up your management data before upgrading, then extract the new version to a
 
 ## Recent update
 
-**v0.2.9** adds a persistent CS2 template, import/export, backup recovery and confirmed batch deployment. Saving a template is separate from applying it to accounts, and does not push it to the cloud.
+**v0.3.0** removes the legacy read-only CS2 configuration viewer while retaining shared settings and the separate sync feature. Existing templates, account configurations and backups are unaffected. Shared settings still do not automatically push to Steam Cloud.
 
-[Full changelog (Chinese)](CHANGELOG.md) · [v0.2.9 release notes](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.9)
+[Full changelog (Chinese)](CHANGELOG.md) · [v0.3.0 release notes](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.3.0)
 
 ## License and acknowledgements
 
@@ -81,6 +81,6 @@ Project code uses the [MIT License](LICENSE). Valve assets, original branding an
 - [Formats and backup boundaries (Chinese)](docs/FORMATS-AND-BACKUP.zh-CN.md)
 - [Startup update checks (Chinese)](docs/UPDATES.zh-CN.md) — this repository's releases, including beta; no automatic installation or file replacement.
 - [Archived technical changelog (Chinese)](docs/archive/CHANGELOG-technical.zh-CN.md)
-- [Next update plan (Chinese, in development, not released)](docs/NEXT-UPDATE-PLAN.zh-CN.md)
+- [v0.3.0 implementation record (Chinese)](docs/NEXT-UPDATE-PLAN.zh-CN.md)
 
 </details>
