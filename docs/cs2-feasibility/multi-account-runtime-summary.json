@@ -1,0 +1,166 @@
+{
+  "AccountAlias": "DedicatedTestB",
+  "FirstStartOverwrittenUserSettings": [
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_drawoutline",
+      "Before": "1",
+      "After": "0",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_gap",
+      "Before": "2",
+      "After": "8",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_length",
+      "Before": "4",
+      "After": "0",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_recoil",
+      "Before": "true",
+      "After": "false",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_sniper_width",
+      "Before": "2",
+      "After": "1",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_t",
+      "Before": "true",
+      "After": "false",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_thickness",
+      "Before": "1",
+      "After": "3",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshaircolor_b",
+      "Before": "50",
+      "After": "0",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshaircolor_g",
+      "Before": "100",
+      "After": "255",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshaircolor_r",
+      "Before": "200",
+      "After": "0",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshairdot",
+      "Before": "false",
+      "After": "true",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_showloadout",
+      "Before": "false",
+      "After": "true",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_sniper_auto_rezoom",
+      "Before": "true",
+      "After": "false",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_use_opens_buy_menu",
+      "Before": "true",
+      "After": "false",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "sensitivity",
+      "Before": "1.23",
+      "After": "1.5",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_fov",
+      "Before": "64",
+      "After": "68",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_offset_x",
+      "Before": "1",
+      "After": "2.5",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_offset_y",
+      "Before": "1",
+      "After": "0",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_offset_z",
+      "Before": "-1",
+      "After": "-1.5",
+      "GameStatus": "待实机验证"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "zoom_sensitivity_ratio",
+      "Before": "0.93",
+      "After": "0.8",
+      "GameStatus": "待实机验证"
+    }
+  ],
+  "RepeatDeploymentConsoleTargetsRead": 43,
+  "RepeatDeploymentVideoFileTargetDifferences": 0,
+  "RepeatNormalExitValueDifferences": 0,
+  "RepeatDeploymentUsedSameSavedTemplateAsA": true,
+  "SecondRepeatAppliedSnapshotMissing": true,
+  "ComparisonNote": "Repeat started snapshot compared to first deployment applied snapshot; same saved template was deployed but no second immediate applied snapshot was captured.",
+  "FinalRestartConsoleChecksCompleted": false,
+  "FirstAccountUnchangedDuringInitialBDeployment": true,
+  "FirstAccountAfterInterruptionChanged": true,
+  "InterruptionNote": "A later read-only comparison after the user resumed found 24 differences in account A; source/timing is unknown and those later changes were preserved. Do not attribute these differences to B deployment.",
+  "OverwriteRootCauseConfirmed": false,
+  "CloudOnOffControlledTestComplete": false,
+  "ActualRenderingAndInputEffectsComplete": false,
+  "CloudOnOffLimitedFourSettingComparisonComplete": true,
+  "SecondAccountRestartCheckedSubset": [
+    "sensitivity",
+    "cl_crosshair_gap",
+    "hud_scaling",
+    "snd_mvp_volume"
+  ],
+  "FinalRestartConsoleChecksCompletedNote": "False refers to the earlier full 55-setting batch. Later Cloud-on session queried the four-setting subset after direct restart."
+}

@@ -1,0 +1,3327 @@
+{
+  "Baseline": "453ddafad244b0cc6af7a3a92f3013abc2451375",
+  "Count": 664,
+  "Checks": [
+    {
+      "Name": "template persistence: setting.mat_vsync",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.mat_vsync",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.mat_vsync / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.mat_vsync / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.mat_vsync / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.mat_vsync / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.mat_vsync / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.mat_vsync / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.mat_vsync",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: setting.msaa_samples",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.msaa_samples",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.msaa_samples / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.msaa_samples / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.msaa_samples / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.msaa_samples / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.msaa_samples / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.msaa_samples / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.msaa_samples",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: fps_max",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: fps_max",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: fps_max / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: fps_max / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: fps_max / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: fps_max / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: fps_max / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: fps_max / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: fps_max",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: fps_max_ui",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: fps_max_ui",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: fps_max_ui / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: fps_max_ui / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: fps_max_ui / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: fps_max_ui / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: fps_max_ui / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: fps_max_ui / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: fps_max_ui",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: r_fullscreen_gamma",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: r_fullscreen_gamma",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: r_fullscreen_gamma / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: r_fullscreen_gamma / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: r_fullscreen_gamma / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: r_fullscreen_gamma / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: r_fullscreen_gamma / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: r_fullscreen_gamma / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: r_fullscreen_gamma",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: snd_gamevolume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: snd_gamevolume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_gamevolume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_gamevolume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_gamevolume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_gamevolume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_gamevolume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_gamevolume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: snd_gamevolume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: snd_voipvolume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: snd_voipvolume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_voipvolume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_voipvolume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_voipvolume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_voipvolume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_voipvolume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_voipvolume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: snd_voipvolume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: snd_musicvolume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: snd_musicvolume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_musicvolume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_musicvolume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_musicvolume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_musicvolume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_musicvolume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_musicvolume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: snd_musicvolume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: snd_menumusic_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: snd_menumusic_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_menumusic_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_menumusic_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_menumusic_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_menumusic_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_menumusic_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_menumusic_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: snd_menumusic_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: snd_mvp_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: snd_mvp_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_mvp_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_mvp_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_mvp_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_mvp_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_mvp_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_mvp_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: snd_mvp_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: snd_roundstart_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: snd_roundstart_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_roundstart_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_roundstart_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_roundstart_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_roundstart_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_roundstart_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_roundstart_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: snd_roundstart_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: snd_roundend_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: snd_roundend_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_roundend_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_roundend_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_roundend_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_roundend_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_roundend_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_roundend_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: snd_roundend_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: snd_tensecondwarning_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: snd_tensecondwarning_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_tensecondwarning_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_tensecondwarning_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_tensecondwarning_volume / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_tensecondwarning_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_tensecondwarning_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_tensecondwarning_volume / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: snd_tensecondwarning_volume",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: snd_mute_losefocus",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: snd_mute_losefocus",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_mute_losefocus / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_mute_losefocus / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_mute_losefocus / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_mute_losefocus / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_mute_losefocus / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_mute_losefocus / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: snd_mute_losefocus",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: snd_mute_mvp_music_live_players",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: snd_mute_mvp_music_live_players",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_mute_mvp_music_live_players / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_mute_mvp_music_live_players / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_mute_mvp_music_live_players / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: snd_mute_mvp_music_live_players / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: snd_mute_mvp_music_live_players / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: snd_mute_mvp_music_live_players / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: snd_mute_mvp_music_live_players",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: hud_scaling",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: hud_scaling",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: hud_scaling / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: hud_scaling / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: hud_scaling / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: hud_scaling / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: hud_scaling / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: hud_scaling / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: hud_scaling",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_hud_radar_scale",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_hud_radar_scale",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_hud_radar_scale / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_hud_radar_scale / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_hud_radar_scale / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_hud_radar_scale / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_hud_radar_scale / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_hud_radar_scale / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_hud_radar_scale",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_radar_scale",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_radar_scale",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_radar_scale / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_radar_scale / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_radar_scale / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_radar_scale / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_radar_scale / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_radar_scale / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_radar_scale",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_radar_icon_scale_min",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_radar_icon_scale_min",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_radar_icon_scale_min / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_radar_icon_scale_min / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_radar_icon_scale_min / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_radar_icon_scale_min / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_radar_icon_scale_min / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_radar_icon_scale_min / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_radar_icon_scale_min",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_radar_always_centered",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_radar_always_centered",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_radar_always_centered / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_radar_always_centered / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_radar_always_centered / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_radar_always_centered / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_radar_always_centered / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_radar_always_centered / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_radar_always_centered",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_radar_rotate",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_radar_rotate",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_radar_rotate / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_radar_rotate / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_radar_rotate / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_radar_rotate / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_radar_rotate / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_radar_rotate / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_radar_rotate",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_radar_square_with_scoreboard",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_radar_square_with_scoreboard",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_radar_square_with_scoreboard / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_radar_square_with_scoreboard / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_radar_square_with_scoreboard / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_radar_square_with_scoreboard / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_radar_square_with_scoreboard / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_radar_square_with_scoreboard / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_radar_square_with_scoreboard",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_showloadout",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_showloadout",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_showloadout / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_showloadout / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_showloadout / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_showloadout / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_showloadout / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_showloadout / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_showloadout",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_use_opens_buy_menu",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_use_opens_buy_menu",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_use_opens_buy_menu / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_use_opens_buy_menu / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_use_opens_buy_menu / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_use_opens_buy_menu / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_use_opens_buy_menu / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_use_opens_buy_menu / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_use_opens_buy_menu",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: mm_dedicated_search_maxping",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: mm_dedicated_search_maxping",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: mm_dedicated_search_maxping / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: mm_dedicated_search_maxping / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: mm_dedicated_search_maxping / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: mm_dedicated_search_maxping / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: mm_dedicated_search_maxping / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: mm_dedicated_search_maxping / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: mm_dedicated_search_maxping",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: viewmodel_fov",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: viewmodel_fov",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: viewmodel_fov / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: viewmodel_fov / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: viewmodel_fov / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: viewmodel_fov / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: viewmodel_fov / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: viewmodel_fov / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: viewmodel_fov",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: viewmodel_offset_x",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: viewmodel_offset_x",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: viewmodel_offset_x / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: viewmodel_offset_x / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: viewmodel_offset_x / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: viewmodel_offset_x / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: viewmodel_offset_x / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: viewmodel_offset_x / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: viewmodel_offset_x",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: viewmodel_offset_y",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: viewmodel_offset_y",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: viewmodel_offset_y / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: viewmodel_offset_y / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: viewmodel_offset_y / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: viewmodel_offset_y / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: viewmodel_offset_y / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: viewmodel_offset_y / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: viewmodel_offset_y",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: viewmodel_offset_z",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: viewmodel_offset_z",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: viewmodel_offset_z / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: viewmodel_offset_z / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: viewmodel_offset_z / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: viewmodel_offset_z / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: viewmodel_offset_z / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: viewmodel_offset_z / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: viewmodel_offset_z",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_crosshair_length",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_crosshair_length",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_length / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_length / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_length / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_length / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_length / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_length / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_crosshair_length",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_crosshair_gap",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_crosshair_gap",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_gap / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_gap / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_gap / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_gap / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_gap / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_gap / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_crosshair_gap",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_crosshair_thickness",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_crosshair_thickness",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_thickness / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_thickness / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_thickness / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_thickness / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_thickness / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_thickness / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_crosshair_thickness",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_crosshaircolor_r",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_crosshaircolor_r",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshaircolor_r / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshaircolor_r / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshaircolor_r / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshaircolor_r / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshaircolor_r / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshaircolor_r / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_crosshaircolor_r",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_crosshaircolor_g",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_crosshaircolor_g",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshaircolor_g / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshaircolor_g / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshaircolor_g / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshaircolor_g / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshaircolor_g / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshaircolor_g / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_crosshaircolor_g",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_crosshaircolor_b",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_crosshaircolor_b",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshaircolor_b / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshaircolor_b / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshaircolor_b / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshaircolor_b / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshaircolor_b / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshaircolor_b / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_crosshaircolor_b",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_crosshairdot",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_crosshairdot",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshairdot / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshairdot / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshairdot / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshairdot / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshairdot / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshairdot / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_crosshairdot",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_crosshair_t",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_crosshair_t",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_t / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_t / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_t / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_t / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_t / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_t / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_crosshair_t",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_crosshair_drawoutline",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_crosshair_drawoutline",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_drawoutline / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_drawoutline / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_drawoutline / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_drawoutline / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_drawoutline / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_drawoutline / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_crosshair_drawoutline",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_crosshair_recoil",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_crosshair_recoil",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_recoil / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_recoil / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_recoil / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_recoil / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_recoil / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_recoil / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_crosshair_recoil",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_crosshair_sniper_width",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_crosshair_sniper_width",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_sniper_width / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_sniper_width / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_sniper_width / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_crosshair_sniper_width / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_crosshair_sniper_width / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_crosshair_sniper_width / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_crosshair_sniper_width",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: sensitivity",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: sensitivity",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: sensitivity / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: sensitivity / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: sensitivity / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: sensitivity / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: sensitivity / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: sensitivity / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: sensitivity",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: zoom_sensitivity_ratio",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: zoom_sensitivity_ratio",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: zoom_sensitivity_ratio / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: zoom_sensitivity_ratio / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: zoom_sensitivity_ratio / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: zoom_sensitivity_ratio / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: zoom_sensitivity_ratio / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: zoom_sensitivity_ratio / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: zoom_sensitivity_ratio",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: cl_sniper_auto_rezoom",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: cl_sniper_auto_rezoom",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_sniper_auto_rezoom / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_sniper_auto_rezoom / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_sniper_auto_rezoom / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: cl_sniper_auto_rezoom / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: cl_sniper_auto_rezoom / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: cl_sniper_auto_rezoom / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: cl_sniper_auto_rezoom",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: setting.r_csgo_cmaa_enable",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.r_csgo_cmaa_enable",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.r_csgo_cmaa_enable / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.r_csgo_cmaa_enable / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.r_csgo_cmaa_enable / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.r_csgo_cmaa_enable / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.r_csgo_cmaa_enable / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.r_csgo_cmaa_enable / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.r_csgo_cmaa_enable",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: setting.videocfg_shadow_quality",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.videocfg_shadow_quality",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_shadow_quality / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_shadow_quality / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_shadow_quality / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_shadow_quality / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_shadow_quality / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_shadow_quality / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.videocfg_shadow_quality",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: setting.videocfg_dynamic_shadows",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.videocfg_dynamic_shadows",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_dynamic_shadows / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_dynamic_shadows / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_dynamic_shadows / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_dynamic_shadows / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_dynamic_shadows / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_dynamic_shadows / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.videocfg_dynamic_shadows",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: setting.videocfg_texture_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.videocfg_texture_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_texture_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_texture_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_texture_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_texture_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_texture_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_texture_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.videocfg_texture_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: setting.r_texturefilteringquality",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.r_texturefilteringquality",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.r_texturefilteringquality / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.r_texturefilteringquality / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.r_texturefilteringquality / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.r_texturefilteringquality / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.r_texturefilteringquality / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.r_texturefilteringquality / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.r_texturefilteringquality",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: setting.shaderquality",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.shaderquality",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.shaderquality / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.shaderquality / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.shaderquality / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.shaderquality / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.shaderquality / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.shaderquality / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.shaderquality",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: setting.videocfg_particle_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.videocfg_particle_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_particle_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_particle_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_particle_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_particle_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_particle_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_particle_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.videocfg_particle_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: setting.videocfg_ao_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.videocfg_ao_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_ao_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_ao_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_ao_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_ao_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_ao_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_ao_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.videocfg_ao_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: setting.videocfg_hdr_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.videocfg_hdr_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_hdr_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_hdr_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_hdr_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_hdr_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_hdr_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_hdr_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.videocfg_hdr_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: setting.videocfg_fsr_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: setting.videocfg_fsr_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_fsr_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_fsr_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_fsr_detail / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: setting.videocfg_fsr_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: setting.videocfg_fsr_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: setting.videocfg_fsr_detail / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: setting.videocfg_fsr_detail",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "template persistence: r_player_visibility_mode",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "two-account deployment: r_player_visibility_mode",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: r_player_visibility_mode / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: r_player_visibility_mode / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: r_player_visibility_mode / 101",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "target key/value: r_player_visibility_mode / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve target-specific value: r_player_visibility_mode / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "cloud untouched: r_player_visibility_mode / 202",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "transaction restore: r_player_visibility_mode",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "reproduce merged-video policy gap on unmodified v0.2.9",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "reproduce display metadata/native-file mismatch on v0.2.9",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: a",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: a",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: b",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: b",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: c",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: c",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: d",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: d",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: e",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: e",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: f",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: f",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: g",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: g",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: h",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: h",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: i",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: i",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: j",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: j",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: k",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: k",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: l",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: l",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: m",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: m",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: n",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: n",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: o",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: o",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: p",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: p",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: q",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: q",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: r",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: r",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: s",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: s",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: t",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: t",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: u",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: u",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: v",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: v",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: w",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: w",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: x",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: x",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: y",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: y",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: z",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: z",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: 0",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: 0",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: 1",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: 1",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: 2",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: 2",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: 3",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: 3",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: 4",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: 4",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: 5",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: 5",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: 6",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: 6",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: 7",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: 7",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: 8",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: 8",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: 9",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: 9",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: SPACE",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: SPACE",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: CTRL",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: CTRL",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: SHIFT",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: SHIFT",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: ALT",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: ALT",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: TAB",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: TAB",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: ENTER",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: ENTER",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: BACKSPACE",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: BACKSPACE",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: ESCAPE",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: ESCAPE",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F1",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F1",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F2",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F2",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F3",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F3",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F4",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F4",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F5",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F5",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F6",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F6",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F7",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F7",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F8",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F8",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F9",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F9",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F10",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F10",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F11",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F11",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: F12",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: F12",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: MOUSE1",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: MOUSE1",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: MOUSE2",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: MOUSE2",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: MOUSE3",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: MOUSE3",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: MOUSE4",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: MOUSE4",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: MOUSE5",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: MOUSE5",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: MWHEELUP",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: MWHEELUP",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: MWHEELDOWN",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: MWHEELDOWN",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: UPARROW",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: UPARROW",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: DOWNARROW",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: DOWNARROW",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: LEFTARROW",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: LEFTARROW",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding deployment: RIGHTARROW",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "preserve custom binding: RIGHTARROW",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Bforward",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Bback",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Bleft",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Bright",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Bjump",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Bduck",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Bsprint",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Battack",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Battack2",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Breload",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Buse",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: drop",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: lastinv",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: buymenu",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Bshowscores",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Bvoicerecord",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: player_ping",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: slot1",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: slot2",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: slot3",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: slot4",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: slot5",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: slot6",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: slot7",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: slot8",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: slot9",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: slot10",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: \u002Blookatweapon",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: switchhands",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "binding action template round-trip: toggleconsole",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "file-only evidence cannot claim a game pass",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "no restart observation cannot claim a game pass",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    },
+    {
+      "Name": "missing evidence cannot claim a game pass",
+      "Passed": true,
+      "Scope": "\u9694\u79BB\u6587\u4EF6\u6D4B\u8BD5\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u5B9E\u6D4B"
+    }
+  ],
+  "GeneratedUtc": "2026-10-17T01:46:30.9050512Z"
+}

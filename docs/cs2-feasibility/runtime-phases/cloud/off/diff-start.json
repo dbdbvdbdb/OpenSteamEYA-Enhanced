@@ -1,0 +1,48 @@
+{
+  "BeforeStage": "applied",
+  "AfterStage": "started",
+  "Changes": [
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_drawoutline",
+      "Before": "false",
+      "After": "1",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_gap",
+      "Before": "3",
+      "After": "4",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_length",
+      "Before": "7",
+      "After": "8",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_thickness",
+      "Before": "4",
+      "After": "2",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshaircolor_g",
+      "Before": "219",
+      "After": "255",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "sensitivity",
+      "Before": "1.41",
+      "After": "1.5",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    }
+  ]
+}

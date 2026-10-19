@@ -49,6 +49,9 @@ jobs:
       - name: Executable Native AOT data checks
         shell: pwsh
         run: ./scripts/check-data.ps1
+      - name: CS2 configuration catalog and isolated deployment checks
+        shell: pwsh
+        run: ./scripts/check-cs2-config-feasibility.ps1 -NativeAot
       - name: Real WinUI checks with synthetic accounts
         shell: pwsh
         run: ./scripts/check-manager-ui.ps1 -NativeAot

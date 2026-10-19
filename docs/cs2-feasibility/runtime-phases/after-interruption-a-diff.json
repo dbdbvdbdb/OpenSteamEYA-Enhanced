@@ -1,0 +1,174 @@
+{
+  "BeforeStage": "restored",
+  "AfterStage": "restored",
+  "Changes": [
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_drawoutline",
+      "Before": "0",
+      "After": "1",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_gap",
+      "Before": "8",
+      "After": "4",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_length",
+      "Before": "0",
+      "After": "8",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_recoil",
+      "Before": "false",
+      "After": "true",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshair_thickness",
+      "Before": "3",
+      "After": "2",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_crosshairdot",
+      "Before": "true",
+      "After": "false",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "cl_use_opens_buy_menu",
+      "Before": "false",
+      "After": "true",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_fov",
+      "Before": "68",
+      "After": "60",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_offset_x",
+      "Before": "2.5",
+      "After": "1",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_offset_y",
+      "Before": "0",
+      "After": "1",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_user_convars_0_slot0.vcfg",
+      "Key": "viewmodel_offset_z",
+      "Before": "-1.5",
+      "After": "-1",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_machine_convars.vcfg",
+      "Key": "cl_radar_always_centered",
+      "Before": "true",
+      "After": "false",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_machine_convars.vcfg",
+      "Key": "cl_radar_scale",
+      "Before": "0.7",
+      "After": "0.4",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_machine_convars.vcfg",
+      "Key": "fps_max_ui$2",
+      "Before": "63",
+      "After": "65",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_machine_convars.vcfg",
+      "Key": "mm_dedicated_search_maxping",
+      "Before": "150",
+      "After": "75",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_machine_convars.vcfg",
+      "Key": "snd_musicvolume$2",
+      "Before": "1",
+      "After": "0",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_machine_convars.vcfg",
+      "Key": "snd_roundend_volume$4",
+      "Before": "0",
+      "After": "0.05",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_video.txt",
+      "Key": "setting.msaa_samples",
+      "Before": "4",
+      "After": "0",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_video.txt",
+      "Key": "setting.r_texturefilteringquality",
+      "Before": "3",
+      "After": "5",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_video.txt",
+      "Key": "setting.shaderquality",
+      "Before": "1",
+      "After": "0",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_video.txt",
+      "Key": "setting.videocfg_ao_detail",
+      "Before": "2",
+      "After": "0",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_video.txt",
+      "Key": "setting.videocfg_hdr_detail",
+      "Before": "-1",
+      "After": "3",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_video.txt",
+      "Key": "setting.videocfg_particle_detail",
+      "Before": "2",
+      "After": "0",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    },
+    {
+      "File": "cs2_video.txt",
+      "Key": "setting.videocfg_shadow_quality",
+      "Before": "2",
+      "After": "1",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    }
+  ]
+}

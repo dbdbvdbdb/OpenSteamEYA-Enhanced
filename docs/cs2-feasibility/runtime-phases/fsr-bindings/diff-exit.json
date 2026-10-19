@@ -1,0 +1,13 @@
+{
+  "BeforeStage": "applied",
+  "AfterStage": "exited",
+  "Changes": [
+    {
+      "File": "cs2_video.txt",
+      "Key": "setting.msaa_samples",
+      "Before": "0",
+      "After": "2",
+      "GameStatus": "\u5F85\u5B9E\u673A\u9A8C\u8BC1"
+    }
+  ]
+}

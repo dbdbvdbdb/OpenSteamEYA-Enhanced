@@ -1,0 +1,45 @@
+{
+  "RemoteCloudRestoreVerified": false,
+  "GameClosed": true,
+  "Files": [
+    {
+      "Verified": true,
+      "Hash": "A76ECFC411B2F2EB65E653E8A69E732C8FB552A1FCC78BF46B8D5ABC24106C80",
+      "Name": "cs2_machine_convars.vcfg"
+    },
+    {
+      "Verified": true,
+      "Hash": "87288130B189A679FF29EFCCC17659C165A6F4B838F7A77883A4C8F3951F6D05",
+      "Name": "cs2_user_convars_0_slot0.vcfg"
+    },
+    {
+      "Verified": true,
+      "Hash": "C4CEB4C45290065CA429588918623A4179F3B0DC51FFAD575F3F967F51B627F2",
+      "Name": "cs2_user_keys_0_slot0.vcfg"
+    },
+    {
+      "Verified": true,
+      "Hash": "87288130B189A679FF29EFCCC17659C165A6F4B838F7A77883A4C8F3951F6D05",
+      "Name": "cs2_user_convars_0_slot0.vcfg_lastclouded"
+    },
+    {
+      "Verified": true,
+      "Hash": "C4CEB4C45290065CA429588918623A4179F3B0DC51FFAD575F3F967F51B627F2",
+      "Name": "cs2_user_keys_0_slot0.vcfg_lastclouded"
+    },
+    {
+      "Verified": true,
+      "Hash": "76563EA82FB180842E486C1BD14A4F5688300273B652DA9E8AA4BC3B9BCCC3AE",
+      "Name": "cs2_video.txt"
+    },
+    {
+      "Verified": true,
+      "Hash": "687EBD47F9BC5AA2309E9514BD340F4D1018A51F365A945B6022AFE9320B9742",
+      "Name": "cs2_video.txt.bak"
+    }
+  ],
+  "AutoexecHashVerified": true,
+  "Utc": "2026-10-17T09:29:50.1645770Z",
+  "AutoexecRestored": true,
+  "AccountAlias": "DedicatedTestA"
+}
