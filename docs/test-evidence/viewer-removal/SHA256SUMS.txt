@@ -1,0 +1,2 @@
+07af44d7cc9075c2d0e54cbf1901873c908dd121978a7adec823cef6ab243421  OpenSteamEYA-Enhanced-0.2.9-viewer-removal-preview-win-x64-aot.zip
+967d06324def166cdc237e98d46748b992a8dd9c94e28c9933177bbcd3c5c0c5  OpenSteamEYA-Enhanced-0.2.9-viewer-removal-preview-win-x64-aot.7z

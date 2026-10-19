@@ -1,6 +1,6 @@
 # 安全政策
 
-当前审查基线为 v0.2.4，拟发布 v0.2.4-beta。仅当前增强版接受修复，beta 不代表所有真实登录和 CS2 联网场景已验收。上游和增强版的安全维护独立。
+仅当前增强版接受修复，当前发布状态以[本仓库 Releases](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/latest)为准。发布或 beta 标记不代表所有真实登录、CS2 游戏效果和联网场景已验收。上游和增强版的安全维护独立。
 
 ## 数据边界
 
@@ -10,7 +10,7 @@
 
 不要在公开 Issue、PR 或构建日志提供密码、EYA Token、Steam 会话、共享密钥、真实数据库、备份或个人资料。复现步骤和截图应使用虚构数据。
 
-仓库建立后，如已启用 GitHub Private vulnerability reporting，请使用 Security → Report a vulnerability；否则先通过维护者 GitHub 个人页提供的私下渠道确认接收方式。尚未配置专用安全邮箱或响应时限，不能保证上游收到报告。普通功能问题可通过 Issue 提交。
+如仓库已启用 GitHub Private vulnerability reporting，请使用 Security → Report a vulnerability；否则先通过维护者 GitHub 个人页提供的私下渠道确认接收方式。尚未配置专用安全邮箱或响应时限，不能保证上游收到报告。普通功能问题可通过 Issue 提交。
 
 ## 发现凭据泄露
 

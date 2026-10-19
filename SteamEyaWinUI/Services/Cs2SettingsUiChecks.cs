@@ -14,6 +14,20 @@ internal static partial class ManagerUiChecks
         string steam = Path.Combine(DataRoot, "unified-steam");
         var store = new UnifiedConfigStore(Path.Combine(DataRoot, "unified-template"));
         var nav = FindElements(window.Content).OfType<NavigationView>().Single();
+        var previousLanguage = Localization.Loc.CurrentCode;
+        try
+        {
+            foreach (var language in Localization.Loc.AvailablePacks)
+            {
+                Localization.Loc.SetLanguage(language.Code, persist: false);
+                await Task.Delay(50);
+                var items = nav.MenuItems.OfType<NavigationViewItem>().ToArray();
+                Check(!items.Any(i => i.Tag?.ToString() == "cs2Settings"), "retired CS2 viewer absent in " + language.Code);
+                Check(items.Count(i => i.Tag?.ToString() == "cs2LocalSettings") == 1,
+                    "unified CS2 navigation retained in " + language.Code);
+            }
+        }
+        finally { Localization.Loc.SetLanguage(previousLanguage, persist: false); }
         nav.SelectedItem = nav.MenuItems.OfType<NavigationViewItem>().Single(i => i.Tag?.ToString() == "cs2LocalSettings");
         await Task.Delay(200);
         var page = FindElements(window.Content).OfType<Cs2LocalSettingsPage>().Single();
