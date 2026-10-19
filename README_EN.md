@@ -22,9 +22,9 @@
 | **Shared settings** | **Import and backups** |
 | Edit one template, then confirm deployment to eligible local accounts. | Batch entry, TXT / CSV / JSON import and export, and management-data backups. |
 
-OpenSteamEYA Enhanced is a Windows tool for managing multiple Steam accounts. Its white / black account categories separate account sources; they do not indicate ban status. Accounts can be moved between categories.
+OpenSteamEYA Enhanced is a Windows Steam account manager based on [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA). The original project provides Steam/EYA login, account history and caches, CS2 queries, loadouts and personalization. Enhanced adds independent account management, source-based white / black categories, account cards, batch import/export, data backups and shared CS2 settings. Accounts can be moved between categories; the category names do not indicate ban status.
 
-Existing Steam/EYA login, history, cached accounts, loadouts, personalization and Workshop cleanup remain available. Login and online queries require valid existing credentials; saving a username and password alone does not create an EYA credential.
+The original project's Workshop cleanup and other utilities also remain available. Login and online queries require valid existing credentials; saving a username and password alone does not create an EYA credential.
 
 [简体中文](README.md) · [User guide (Chinese)](docs/RUNNING.zh-CN.md)
 
@@ -81,5 +81,6 @@ Project code uses the [MIT License](LICENSE). Valve assets, original branding an
 - [Formats and backup boundaries (Chinese)](docs/FORMATS-AND-BACKUP.zh-CN.md)
 - [Startup update checks (Chinese)](docs/UPDATES.zh-CN.md) — this repository's releases, including beta; no automatic installation or file replacement.
 - [Archived technical changelog (Chinese)](docs/archive/CHANGELOG-technical.zh-CN.md)
+- [Next update plan (Chinese, not yet implemented)](docs/NEXT-UPDATE-PLAN.zh-CN.md)
 
 </details>

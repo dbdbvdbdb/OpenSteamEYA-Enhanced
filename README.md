@@ -22,9 +22,9 @@
 | 🎛️ **统一配置** | 🗂️ **导入与备份** |
 | 编辑一套模板，确认后应用到多个适用的本机账号。 | 批量添加，支持 TXT / CSV / JSON 导入导出及管理数据备份。 |
 
-OpenSteamEYA Enhanced 是一款 Windows 平台的 Steam 账号管理工具。白号 / 黑号按添加来源分别管理，支持手动转移；分类名称不代表封禁状态。
+OpenSteamEYA 增强版是一款 Windows 平台的 Steam 账号管理工具，基于 [OpenSteamEYA](https://github.com/hvh-software/OpenSteamEYA) 扩展开发。原项目提供 Steam/EYA 登录、历史与缓存账号、CS2 查询、配装和个性化等功能；增强版在此基础上新增独立账号管理、白号 / 黑号来源分类、账号卡片、批量导入导出、数据备份及 CS2 统一配置。白号 / 黑号按添加来源分别管理，支持手动转移；分类名称不代表封禁状态。
 
-保留 Steam/EYA 登录、历史与缓存账号、配装、个性化和创意工坊清理等功能。登录与联网查询需要可用的原登录凭据；单独保存账号密码不会生成 EYA 凭据。
+同时保留原项目的创意工坊清理等实用功能。登录与联网查询需要可用的原登录凭据；单独保存账号密码不会生成 EYA 凭据。
 
 [English](README_EN.md) · [详细使用指南](docs/RUNNING.zh-CN.md)
 
@@ -84,6 +84,7 @@ OpenSteamEYA Enhanced 是一款 Windows 平台的 Steam 账号管理工具。白
 - [源码编译、测试与下载校验](docs/BUILDING.zh-CN.md)
 - [数据格式与备份边界](docs/FORMATS-AND-BACKUP.zh-CN.md)
 - [启动检查更新说明](docs/UPDATES.zh-CN.md)
+- [下一次更新规划（尚未实施）](docs/NEXT-UPDATE-PLAN.zh-CN.md)
 - [整理前的技术更新记录](docs/archive/CHANGELOG-technical.zh-CN.md)
 
 </details>
