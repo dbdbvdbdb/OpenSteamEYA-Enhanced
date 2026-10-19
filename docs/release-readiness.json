@@ -1,5 +1,5 @@
 {
-  "version": "v0.2.4-beta",
+  "version": "v0.3.0",
   "approved": true,
   "reviewedAt": "2026-10-10",
   "reviewedBy": "dbdbvdbdb",
@@ -7,8 +7,22 @@
   "repositoryPublicationApproved": true,
   "releasePublicationRequested": true,
   "items": [
-    { "id": "steamworks-redistribution", "status": "resolved", "reason": "Maintainer review completed; original Valve terms and attribution retained." },
-    { "id": "branding-provenance", "status": "resolved", "reason": "Maintainer review completed; upstream source attribution retained." },
-    { "id": "valve-icons-review", "status": "resolved", "reason": "Maintainer review completed; original Valve asset notice retained." }
-  ]
+    {
+      "id": "steamworks-redistribution",
+      "status": "resolved",
+      "reason": "Maintainer review completed; original Valve terms and attribution retained."
+    },
+    {
+      "id": "branding-provenance",
+      "status": "resolved",
+      "reason": "Maintainer review completed; upstream source attribution retained."
+    },
+    {
+      "id": "valve-icons-review",
+      "status": "resolved",
+      "reason": "Maintainer review completed; original Valve asset notice retained."
+    }
+  ],
+  "publicationAuthorizedAt": "2026-10-19",
+  "publicationBasis": "Maintainer explicitly requested version 0.3.0 and publication. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
 }

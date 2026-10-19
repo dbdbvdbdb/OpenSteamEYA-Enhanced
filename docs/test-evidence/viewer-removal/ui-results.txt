@@ -1,0 +1,324 @@
+PASS original JWT inspection parses synthetic fields in AOT
+PASS original JWT inspection rejects malformed input
+PASS original DPAPI encryptor works with synthetic input in AOT
+PASS Steam CS2 protobuf varint
+PASS Steam CS2 protobuf fixed32
+PASS Steam CS2 protobuf fixed64
+PASS Steam CS2 protobuf boolean
+PASS Steam CS2 protobuf UTF8
+PASS Steam CS2 protobuf bytes and end
+PASS Steam CS2 protobuf rejects truncated payload
+PASS avatar multicolor extraction
+PASS avatar palette cache
+PASS missing custom image falls back to avatar palette
+PASS missing avatar falls back to default gradient
+PASS local image asynchronous softening
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render cards-10-dark
+PASS cards record count
+PASS cards selection preserved
+PASS cards responsive card widths
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render list-10-dark
+PASS list record count
+PASS list selection preserved
+PASS list responsive card widths
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render cards-50-dark
+PASS cards record count
+PASS cards selection preserved
+PASS cards responsive card widths
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render list-50-dark
+PASS list record count
+PASS list selection preserved
+PASS list responsive card widths
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render cards-100-dark
+PASS cards record count
+PASS cards selection preserved
+PASS cards responsive card widths
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render list-100-dark
+PASS list record count
+PASS list selection preserved
+PASS list responsive card widths
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS list title displayed
+PASS list password masked
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render privacy-100
+PASS cards record count
+PASS cards selection preserved
+PASS cards responsive card widths
+PASS cards title displayed
+PASS cards password masked
+PASS privacy identifiers hidden
+PASS cards title displayed
+PASS cards password masked
+PASS privacy identifiers hidden
+PASS cards title displayed
+PASS cards password masked
+PASS privacy identifiers hidden
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render cards-100-light-minimum
+PASS cards record count
+PASS cards selection preserved
+PASS cards responsive card widths
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS cards title displayed
+PASS cards password masked
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render cards-100-light-wide
+PASS search preserves offscreen selection
+PASS clear search restores collection and selection
+PASS show saved password
+PASS hide saved password
+PASS custom reorder persists
+PASS reorder preserves selected identities
+PASS privacy prevents password reveal
+PASS group filter
+PASS combined search and group preserve selection (visible=1, selected=2, syncing=False, query=qa-account-010)
+PASS clear combined filter
+PASS copy login account
+PASS copy password special characters
+PASS native button copy-account
+PASS native button copy-password
+PASS native button copy-id
+PASS selection toolbar appears immediately after privacy mode
+PASS native select-all button selects current visible accounts
+PASS native inverse button clears an all-selected collection
+PASS filtered select-all preserves hidden selections (visible=1, selected=2, hidden=True)
+PASS filtered inverse affects visible records only
+PASS native clear-selection removes hidden and visible selections
+PASS unmapped selection query skips without launching Steam or changing selection
+PASS native skipped-query action assigns unqueried membership
+PASS selected query button respects original global busy state
+PASS multiple-membership first group filter
+PASS multiple-membership second group filter
+PASS default group always shows all accounts including assigned members
+PASS native group menu opens multi-select with existing memberships checked
+PASS native group save removes only unchecked membership and preserves account credentials
+PASS default filter and group metadata remain correct after multi-select save
+PASS native account editor persists multiple groups without changing password
+PASS batch-add opens multiline input with empty submission disabled
+PASS batch-add invalid line keeps dialog open and writes no records
+PASS native batch-add submits literal passwords and skips duplicate login
+PASS native batch-add saves empty password as an unsaved record
+PASS native batch-add closes on successful commit
+PASS native presenter and card share 14px radius
+PASS native hover/selection layers do not paint rectangular overlays
+PASS normal card has no emphasis
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render state-normal
+PASS hover uses rounded soft outline
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render state-hover
+PASS selected outline persists without hover
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render state-selected
+PASS hover and selection compose
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render state-selected-hover
+PASS keyboard focus remains enabled
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render state-keyboard-focus
+PASS unmapped synthetic account cannot trigger Steam login
+PASS right-click menu retains original actions and adds classification move
+PASS right-click menu opens and footer ellipsis is removed
+PASS native 账号详情 dialog opens and closes
+PASS native 卡片背景 dialog opens and closes
+PASS native favorite menu persists to synthetic store
+PASS card nickname appends note in parentheses
+PASS double-tap edits card surface but excludes action buttons
+PASS native 账号信息 dialog opens and closes
+PASS native reveal button invokes original password behavior
+PASS native reveal button hides password
+PASS missing password disables copying and displays correct text
+PASS banner proportion matches five-zone card layout
+PASS long nickname/login use ellipsis
+PASS missing background falls back while valid local background loads
+INFO card geometry DIP: width=564.00; height=378.67; banner=157.92; loginHeight=44.00; corner=14
+PASS card shows remaining cooldown time yellow and flagged GCVAC red
+PASS cooldown and GCVAC use two visible lines with live countdown timer
+PASS visible card remaining cooldown refreshes without querying Steam
+PASS normal cooldown and unflagged GCVAC collapse into only normal
+PASS expired unsigned cooldown sentinel is treated as normal
+PASS missing cooldown and GCVAC remain unknown without fabricated flags
+PASS cooldown-only card hides normal and unflagged GCVAC
+PASS GCVAC-only card hides normal cooldown
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render cooldown-groups-dark
+PASS stopped card stops countdown timer
+PASS compact list also shows yellow cooldown time and red GCVAC
+PASS compact list omits redundant normal and unflagged status alongside anomalies
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render cooldown-groups-list
+PASS expired countdown transitions to only normal and stops timer
+PASS export pixel dimensions render-scale-100
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render render-scale-100
+PASS export pixel dimensions render-scale-125
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render render-scale-125
+PASS export pixel dimensions render-scale-150
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render render-scale-150
+PASS export pixel dimensions render-scale-200
+PASS first card inside screenshot
+PASS actual card pixels captured rather than an empty virtualized list
+PASS render render-scale-200
+PASS history refresh no longer auto-adds all accounts
+PASS black view excludes unrelated history
+PASS render classification-conflict
+PASS cancel conflicting import preserves white ownership
+PASS explicit conflict choice transfers to black
+PASS transfer retains password note favorite and group
+PASS confirmed credentials update password without duplicate
+PASS account has only one category after conflict choice
+PASS known SteamID takes precedence over an earlier name-only candidate
+PASS white import deduplicates by known SteamID even if login name differs
+PASS conflicting known SteamID cannot create a classification residue
+PASS render classification-white
+PASS credential origin survives switching to manual mode
+PASS changed manual identity or token is a new import source
+PASS explicit automatic import retains automatic origin
+PASS native credential checkbox defaults checked
+PASS native checkbox persists choice
+PASS render classification-login
+PASS native black page shows only its own account
+PASS black scope is established before annotation checks
+PASS native black select-all exposes transfer action
+PASS black transfer button does not overlap selection summary
+PASS black group membership persists in canonical manager metadata
+PASS black detail note persists without replacing the credential store
+PASS render classification-black
+PASS render classification-black-light
+PASS history navigation retains full history after black scope
+PASS switching back never leaks the full history into black scope
+PASS deletion requires at least one selected scope
+PASS render classification-delete-options
+PASS cancel deletion changes neither records nor cache
+PASS deletion requires at least one selected scope
+PASS cache-only deletion retains history and manager
+PASS deletion requires at least one selected scope
+PASS records-only deletion retains independent Steam cache
+PASS records deletion removes management and classification membership
+PASS deletion requires at least one selected scope
+PASS combined deletion clears both selected scopes
+PASS deletion leaves unrelated accounts untouched
+INFO Classification screenshots and UI checks use synthetic accounts only; no real Steam authentication or CS2 requests.
+PASS startup update check is asynchronous
+PASS automatic update check runs once per process and suppresses concurrent checks
+PASS new release lights About badge
+PASS About navigation does not repeat startup request
+PASS About displays newer beta with portable download action
+PASS render update-available-dark
+PASS render update-available-light
+PASS network error leaves app usable and removes stale download state
+PASS automatic failure retry does not poll in same launch
+PASS manual check button retries successfully after failure
+PASS current newer build is not offered an older release
+INFO Update UI uses simulated release responses; no downloads or installer execution.
+PASS retired CS2 viewer absent in zh-Hans
+PASS unified CS2 navigation retained in zh-Hans
+PASS retired CS2 viewer absent in en
+PASS unified CS2 navigation retained in en
+PASS retired CS2 viewer absent in zh-Hant
+PASS unified CS2 navigation retained in zh-Hant
+PASS unified CS2 editor has no account selection
+PASS unified CS2 template can be created without Steam accounts
+PASS unified CS2 initial load has no unsaved changes
+PASS render cs2-unified-video-dark
+PASS unified CS2 cards resolve a dark theme background with readable contrast
+PASS unified CS2 MSAA uses the verified four menu choices
+PASS render cs2-unified-video-advanced-dark
+PASS unified CS2 AO control has only current menu values
+PASS unified CS2 category 音频
+PASS unified CS2 category 游戏
+PASS unified CS2 category HUD
+PASS unified CS2 category 准星
+PASS unified CS2 category 鼠标键盘
+PASS unified CS2 separates dirty edits from apply
+PASS unified CS2 category switch preserves draft
+PASS unified CS2 invalid input disables save immediately
+PASS unified CS2 UI operation completes
+PASS unified CS2 save never creates or modifies Steam accounts
+PASS unified CS2 save persists sensitivity across reload
+PASS unified CS2 save persists explicit binding
+PASS unified CS2 saved template is ready to apply
+PASS unified CS2 UI operation completes
+PASS unified CS2 no-account application explains empty targets
+PASS unified CS2 UI operation completes
+PASS unified CS2 confirmation cancellation writes nothing
+PASS unified CS2 UI operation completes
+PASS unified CS2 confirmed bulk apply reports both accounts
+PASS unified CS2 applies same template without deleting unknown fields 123
+PASS unified CS2 applies same template without deleting unknown fields 456
+PASS unified CS2 UI application creates independent account backups
+PASS unified CS2 undo restores saved template
+PASS render cs2-unified-video-light
+PASS render cs2-unified-audio-light
+PASS unified CS2 actions fit narrow window
+PASS render cs2-unified-narrow-light
+PASS unified CS2 search retains matching editable parameter
+PASS unified CS2 rendering absent defaults does not silently add parameters
+PASS unified CS2 UI operation completes
+PASS unified CS2 explicitly adds only the selected missing default parameter
+INFO Unified CS2 UI uses isolated templates and synthetic account directories. No Steam session, credentials or cloud APIs were used. Physical monitor/driver and game-effect validation remains pending.
+INFO actual rasterization scale 1.5

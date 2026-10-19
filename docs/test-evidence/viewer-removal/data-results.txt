@@ -1,0 +1,239 @@
+PASS plaintext and restart persistence
+PASS separate local JSON store
+PASS edit password
+PASS case insensitive duplicate rejection
+PASS txt 100 accounts roundtrip
+PASS txt exact special characters and empty passwords
+PASS txt metadata roundtrip
+PASS txt import result
+PASS csv 100 accounts roundtrip
+PASS csv exact special characters and empty passwords
+PASS csv metadata roundtrip
+PASS csv import result
+PASS json 100 accounts roundtrip
+PASS json exact special characters and empty passwords
+PASS json metadata roundtrip
+PASS json import result
+PASS CSV RFC4180 multiline and escaped quotes
+PASS CSV invalid structure row and safe preview
+PASS legacy TXT first delimiter and error line
+PASS JSON null password rejection
+PASS JSON null login rejection
+PASS CSV duplicate headers rejected
+PASS parser errors contain no input data
+PASS duplicate fill missing including file duplicates
+PASS fill empty password
+PASS skip duplicates
+PASS overwrite duplicates
+PASS SteamID mapping
+PASS login name mapping
+PASS never match nickname
+PASS conflicting identity never auto links
+PASS multiple candidates require confirmation
+PASS manual mapping
+PASS group range export
+PASS selected range export
+PASS optional metadata and mapping isolation in exports
+PASS backup only manager, classification and custom resources
+PASS backup preview counts
+PASS replace restore all metadata and settings
+PASS restore favorite mapping and renamed image
+PASS merge restore deduplicates by login
+PASS delete group retains accounts in default
+PASS delete manager record only
+PASS ZIP path traversal rejected
+PASS failed restore leaves database intact
+PASS corrupt database cannot be overwritten
+PASS corrupt file preserved
+PASS backup preview detects corrupt current database
+PASS valid backup repairs corrupt manager store
+PASS unknown version rejected
+PASS invalid transaction atomic rollback
+PASS concurrent read modify write serialized
+PASS new checkbox preference defaults checked
+PASS legacy records remain white without migration
+PASS black membership and checkbox survive restart
+PASS classification leaves password JSON byte-for-byte unchanged
+PASS classification uses SteamID before login name
+PASS known conflicting SteamID cannot match by name
+PASS repeated classification deduplicates stable identity
+PASS category updates serialize across store instances
+PASS backup restores black classification
+PASS backup preserves password and user metadata
+PASS merge preserves existing explicit category
+PASS legacy backup restores records to white
+PASS corrupt category file cannot be overwritten
+PASS CS2 exact encoding and BOM roundtrip utf-8
+PASS CS2 edit preserves all unrelated bytes utf-8
+PASS CS2 exact encoding and BOM roundtrip utf-8
+PASS CS2 edit preserves all unrelated bytes utf-8
+PASS CS2 exact encoding and BOM roundtrip utf-16
+PASS CS2 edit preserves all unrelated bytes utf-16
+PASS CS2 exact encoding and BOM roundtrip utf-16BE
+PASS CS2 edit preserves all unrelated bytes utf-16BE
+PASS CS2 malformed config blocked
+PASS CS2 directives blocked
+PASS CS2 duplicate keys blocked
+PASS CS2 version suffix matched without rewriting key
+PASS CS2 NaN blocked
+PASS CS2 out of range blocked
+PASS CS2 discovers existing account configs
+PASS CS2 retains actual suffixed key
+PASS CS2 running game blocks save
+PASS CS2 blocked save leaves file intact
+PASS CS2 saves user and bindings with two cloud payloads
+PASS CS2 backup is exact pre-edit copy
+PASS CS2 binding insertion preserves key casing
+PASS CS2 custom commands preserved
+PASS CS2 cloud merge preserves remote-only settings
+PASS CS2 cloud key casing cannot create competing bindings
+PASS CS2 preparing cloud does not mutate mirror
+PASS CS2 stale snapshot blocked
+PASS CS2 restore recovers original config
+PASS CS2 backup path traversal blocked
+PASS CS2 tampered backup blocked
+PASS CS2 machine settings stay local
+PASS CS2 untouched video file remains exact
+PASS CS2 missing mirror reports skipped cloud without losing local save
+PASS CS2 most recent backup is deterministic for rapid saves
+PASS CS2 malformed mirror does not undo successful local save
+PASS CS2 read-only config blocked
+PASS CS2 profile directory mismatch blocked
+PASS CS2 game starting during multi-file save triggers rollback
+PASS CS2 rollback preserves all original files
+PASS Unified CS2 default native files created without Steam or accounts
+PASS Unified CS2 template persists across store instances
+PASS Unified CS2 catalog-driven editor includes advanced video options
+PASS Unified CS2 Reflex disabled without verified driver capability
+PASS Unified CS2 AO uses current menu values 0/2/3
+PASS Unified CS2 HDR uses current performance/quality mapping
+PASS Unified CS2 FSR includes ultra quality and all five verified modes
+PASS Unified CS2 absent legacy crosshair alias not invented
+PASS Unified CS2 bounds follow pinned current game declarations
+PASS Unified CS2 editable parameters have defaults, mappings and evidence
+PASS Unified CS2 save edits template native parameter
+PASS Unified CS2 save inserts binding into exact native node
+PASS Unified CS2 saving automatically backs up previous template
+PASS Unified CS2 stale template snapshot cannot overwrite saved state
+PASS Unified CS2 invalid value cannot be saved
+PASS Unified CS2 invalid AO enum cannot be saved
+PASS Unified CS2 export/import preserves full native files and metadata
+PASS Unified CS2 export cannot overwrite a nonempty folder
+PASS Unified CS2 export cannot overwrite internal generations
+PASS Unified CS2 tampered exported manifest rejected
+PASS Unified CS2 template restore restores old generation
+PASS Unified CS2 template restore path escape rejected
+PASS Unified CS2 verified missing parameter displayed and editable
+PASS Unified CS2 insertion preserves unknown fields and original comments
+PASS Unified CS2 insertion preserves CRLF comments
+PASS Unified CS2 duplicate imported keys rejected
+PASS Unified CS2 lossless insertion into utf-8
+PASS Unified CS2 lossless insertion into utf-16
+PASS Unified CS2 lossless insertion into utf-16BE
+PASS Unified CS2 case-insensitive duplicate keys blocked
+PASS Unified CS2 wrong native file root rejected
+PASS Unified CS2 path traversal rejected
+PASS Unified CS2 alternate file streams rejected
+PASS Unified CS2 running game blocks preview
+PASS Unified CS2 scans applicable accounts and isolates damaged configuration
+PASS Unified CS2 preview changes no account files
+PASS Unified CS2 multi-account success unchanged and failure totals
+PASS Unified CS2 apply changes only recognized values and preserves unknown user keys
+PASS Unified CS2 apply preserves hardware IDs and unknown video parameters
+PASS Unified CS2 apply standard binding while preserving custom target commands
+PASS Unified CS2 cloud mirror and identity files remain byte-for-byte unchanged
+PASS Unified CS2 safe missing convars created but no invented video hardware config
+PASS Unified CS2 per-account backup exactly matches original bytes
+PASS Unified CS2 read-only account remains unchanged
+PASS Unified CS2 restore handles mixed original/applied files without rewriting already-original data
+PASS Unified CS2 account restore creates own backup and restores exact data
+PASS Unified CS2 restore removes only files created by this transaction
+PASS Unified CS2 restore detects newer external or restored content
+PASS Unified CS2 account restore rejects escaped backup path
+PASS Unified CS2 preview-to-apply conflict preserves external changes
+PASS Unified CS2 mid-transaction failure rolls back every committed file for that account
+PASS Unified CS2 failed account does not invalidate other account backups or writes
+PASS Unified CS2 cancellation records all unprocessed accounts as skipped
+PASS Unified CS2 unknown video version cannot expose editable video options
+PASS Unified CS2 resolution selection records validated device and dimensions
+PASS Unified CS2 unsupported hardware mode rejected
+PASS Unified CS2 resolution unsupported at saved refresh rate rejected
+PASS Unified CS2 stale or foreign display binding blocks application
+PASS Unified CS2 hardware mode is revalidated before apply preview
+PASS Unified CS2 conservative FSR/AA interlock blocks unverified combinations
+PASS Unified CS2 unknown original boolean is never silently treated as false
+PASS Unified CS2 one operation handles 100 accounts with safe missing-file creation
+PASS Unified CS2 repeat batch performs no unnecessary writes and reports skipped uninitialized video
+PASS Unified CS2 game starting mid-transaction rolls back prior writes
+PASS Unified CS2 generation hash mismatch rejected on read
+PASS Unified CS2 corrupt generation cannot be silently replaced
+PASS update version precedence v0.2.6-beta > 0.2.5-beta
+PASS update version precedence 0.2.6 > 0.2.6-beta
+PASS update version precedence 0.2.6-beta.10 > 0.2.6-beta.2
+PASS update version precedence 0.2.6-beta.1 > 0.2.6-beta
+PASS update version precedence 0.2.6-rc.1 > 0.2.6-beta.99
+PASS update version precedence 0.10.0 > 0.9.9
+PASS update version precedence 0.2.6-beta.a > 0.2.6-beta.99999999999999999999
+PASS update ignores build metadata
+PASS invalid update version rejected: latest
+PASS invalid update version rejected: 0.2
+PASS invalid update version rejected: 0.2.6.1
+PASS invalid update version rejected: 01.2.6
+PASS invalid update version rejected: 0.2.6-beta.01
+PASS invalid update version rejected: 0.2.6-
+PASS invalid update version rejected: 0.2.6/evil
+PASS invalid update version rejected: 999999999999.2.6
+PASS official releases list includes beta and ignores drafts and sort order
+PASS portable ZIP and GitHub digest parsed with AOT JSON metadata
+PASS release link stays in enhanced repository and notes are parsed
+PASS update request contains no account or authorization data
+PASS same beta not offered again
+PASS older release never offered as downgrade
+PASS stable release upgrades same-number beta
+PASS proxy affects only download link, metadata stays official
+PASS invalid asset URL falls back to official release page
+PASS incomplete upload not offered
+PASS empty release list is not reported as up to date
+PASS malformed API response fails cleanly
+PASS null API entry fails cleanly
+PASS unpublished release ignored
+PASS API failure is not success: Forbidden
+PASS API failure is not success: NotFound
+PASS API failure is not success: TooManyRequests
+PASS API failure is not success: InternalServerError
+PASS cancelled update check exits without a result
+PASS offline update check surfaces a recoverable failure
+PASS paste batch accepts LF/CRLF/CR and blank lines without quotes
+PASS paste trims login but preserves password spaces
+PASS paste preserves quotes backslashes and later separators
+PASS paste supports unsaved password records
+PASS paste validation retains source line numbers
+PASS paste validation never echoes input passwords
+PASS paste mode does not interpret file format headers
+PASS paste reuses atomic import with duplicate skip
+PASS paste duplicate skip preserves password identity mapping and notes
+PASS paste special password persists unchanged
+PASS selected queries are sequential and deduplicate credential identities
+PASS selected queries skip missing credentials and continue after failure
+PASS selected query cancellation stops the remaining queue
+PASS pre-cancelled query does not call Steam adapter
+PASS legacy v1 single group migrates without changing password
+PASS multiple memberships persist uniquely with legacy first group
+PASS grouped account appears in default and each assigned group
+PASS export range includes all members and default contains all accounts
+PASS portable export keeps passwords while isolating all group IDs
+PASS replace backup restore preserves all memberships
+PASS merge backup restore remaps every membership by group name
+PASS deleting one group preserves other memberships and password
+PASS invalid multi-group references are rejected before writing
+PASS failed query adds failure group without replacing manual memberships
+PASS skipped query uses unqueried group rather than failure group
+PASS successful query clears query labels only and preserves credentials and notes
+PASS unprocessed accounts retain original data and memberships
+PASS repeated failures reuse existing group and unique membership
+PASS batch records processed boundary before cancelled and unstarted accounts
+PASS batch retains per-identity success/failure outcomes for group assignment
+PASS batch integration assigns skipped and failed accounts to distinct groups
+PASS batch integration leaves successful duplicates and cancelled/unstarted records without failure labels
+PASS query grouping persists and failure accounts still appear in default
+All 238 checks passed. Only synthetic test accounts used.

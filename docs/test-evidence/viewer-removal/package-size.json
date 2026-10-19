@@ -1,0 +1,11 @@
+{
+  "Mode": "aot",
+  "Version": "0.2.9",
+  "ReleaseLabel": "0.2.9-viewer-removal-preview",
+  "FileCount": 302,
+  "UncompressedBytes": 79212090.0,
+  "ZipBytes": 29954173,
+  "ZipSha256": "07AF44D7CC9075C2D0E54CBF1901873C908DD121978A7ADEC823CEF6AB243421",
+  "SevenZipBytes": 18135601,
+  "SevenZipSha256": "967D06324DEF166CDC237E98D46748B992A8DD9C94E28C9933177BBCD3C5C0C5"
+}

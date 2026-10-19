@@ -161,7 +161,6 @@ public sealed partial class MainWindow : Window
             "cachedAccounts" => typeof(CachedAccountsPage),
             "loadout" => typeof(LoadoutPage),
             "cs2LocalSettings" => typeof(Cs2LocalSettingsPage),
-            "cs2Settings" => typeof(Cs2SettingsPage),
             "personalization" => typeof(PersonalizationPage),
             "settings" => typeof(SettingsPage),
             "about" => typeof(AboutPage),
@@ -216,7 +215,6 @@ public sealed partial class MainWindow : Window
         HistoryNavItem.Content = Loc.T("Nav_History");
         CachedAccountsNavItem.Content = Loc.T("Nav_CachedAccounts");
         LoadoutNavItem.Content = Loc.T("Nav_Loadout");
-        Cs2SettingsNavItem.Content = "CS2 配置查看";
         PersonalizationNavItem.Content = Loc.T("Nav_Personalization");
         SettingsNavItem.Content = Loc.T("Nav_Settings");
         AboutNavItem.Content = Loc.T("Nav_About");

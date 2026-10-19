@@ -4,6 +4,14 @@
 
 日期沿用原更新记录；公开发布时间以各版本的 GitHub Release 为准。带 beta 的条目仍为预发布版。v0.2.0–v0.2.4 是早期本地交付记录，不代表分别发布过 GitHub Release。
 
+## v0.3.0 — 2026-10-19
+
+[GitHub Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.3.0)
+
+- 移除旧“CS2 配置查看”只读页面，保留 CS2 统一配置与设置中的独立同步功能。已有配置、模板和备份不受影响，云同步规则不变。
+- 清理旧查看页专用组件和文本，完善多语言导航回归。
+- 更新仓库主页、真实截图和中英文说明，明确原项目与增强版的区别，精简用户更新记录。
+
 ## v0.2.9 — 2026-10-17 · CS2 统一配置
 
 [GitHub Release](https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/v0.2.9)
