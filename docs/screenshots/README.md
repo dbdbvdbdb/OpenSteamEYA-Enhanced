@@ -8,7 +8,14 @@
 | 黑号列表 | v0.2.5-beta 对应 QA，标题栏数字版本为 v0.2.5 | [查看](0.2.5/classification-black.png) |
 | 统一配置高级视频 | v0.2.9，Windows CI 隔离模板 | [查看](0.2.9/cs2-unified-video-advanced-dark.png) |
 
-旧版账号分类截图的验收背景见 [v0.2.5 功能记录](../FEATURES-0.2.5.zh-CN.md)。新版图片的 CI 来源、源码对应关系和散列见 [v0.2.9 来源说明](0.2.9/SOURCE.md)。本次复用已生成的真实图片，未重新构建应用，未操作本机真实账号。
+旧版账号分类截图的验收背景见 [v0.2.5 功能记录](../FEATURES-0.2.5.zh-CN.md)。v0.2.9 图片的 CI 来源、源码对应关系和散列见 [v0.2.9 来源说明](0.2.9/SOURCE.md)；这些历史图片为此前主页整理时复用的素材。
+
+## 下一版开发截图（未发布）
+
+- [统一配置与导航：深色](unreleased-viewer-removal/unified-dark.png)
+- [统一配置与导航：浅色](unreleased-viewer-removal/unified-light.png)
+
+来自移除旧查看页面后的真实 Native AOT WinUI QA，2026-10-19，使用隔离模板及合成账号目录。未指定新版本号，标题仍显示基线 v0.2.9，不能当作已发布的 v0.2.9 界面。来源与验证边界见[实施报告](../VIEWER-REMOVAL-REPORT.zh-CN.md)。
 
 ## 其他历史界面
 

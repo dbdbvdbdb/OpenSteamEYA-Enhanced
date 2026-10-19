@@ -84,7 +84,7 @@ OpenSteamEYA 增强版是一款 Windows 平台的 Steam 账号管理工具，基
 - [源码编译、测试与下载校验](docs/BUILDING.zh-CN.md)
 - [数据格式与备份边界](docs/FORMATS-AND-BACKUP.zh-CN.md)
 - [启动检查更新说明](docs/UPDATES.zh-CN.md)
-- [下一次更新规划（尚未实施）](docs/NEXT-UPDATE-PLAN.zh-CN.md)
+- [下一次更新规划（开发中，未发布）](docs/NEXT-UPDATE-PLAN.zh-CN.md)
 - [整理前的技术更新记录](docs/archive/CHANGELOG-technical.zh-CN.md)
 
 </details>

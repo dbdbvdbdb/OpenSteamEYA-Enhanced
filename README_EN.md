@@ -81,6 +81,6 @@ Project code uses the [MIT License](LICENSE). Valve assets, original branding an
 - [Formats and backup boundaries (Chinese)](docs/FORMATS-AND-BACKUP.zh-CN.md)
 - [Startup update checks (Chinese)](docs/UPDATES.zh-CN.md) — this repository's releases, including beta; no automatic installation or file replacement.
 - [Archived technical changelog (Chinese)](docs/archive/CHANGELOG-technical.zh-CN.md)
-- [Next update plan (Chinese, not yet implemented)](docs/NEXT-UPDATE-PLAN.zh-CN.md)
+- [Next update plan (Chinese, in development, not released)](docs/NEXT-UPDATE-PLAN.zh-CN.md)
 
 </details>
