@@ -36,8 +36,24 @@ public sealed partial class AccountManagerPage
         var point = card.TransformToVisual(root).TransformPoint(new Windows.Foundation.Point(card.ActualWidth / 2, card.ActualHeight - 8));
         int x = (int)(point.X * width / root.ActualWidth), y = (int)(point.Y * height / root.ActualHeight);
         ManagerUiChecks.Check(x >= 0 && y >= 0 && x < width && y < height, "first card inside screenshot");
-        int offset = (y * width + x) * 4;
-        ManagerUiChecks.Check(pixels[offset] - pixels[offset + 1] >= 3, "actual card pixels captured rather than an empty virtualized list");
+        // QA captures replace the Mica backdrop with a flat colour (see ManagerUiChecks.CaptureAsync),
+        // so "the card painted" means "this spot is not the bare page background". Comparing against
+        // that known colour keeps the check valid across themes and card designs instead of relying on
+        // one hard-coded channel order.
+        int backdrop = root.ActualTheme == ElementTheme.Light ? 243 : 32;
+        bool painted = false;
+        for (int dy = -4; dy <= 4 && !painted; dy++)
+        {
+            for (int dx = -4; dx <= 4 && !painted; dx++)
+            {
+                int sampleX = Math.Clamp(x + dx, 0, width - 1), sampleY = Math.Clamp(y + dy, 0, height - 1);
+                int sample = (sampleY * width + sampleX) * 4;
+                painted = Math.Abs(pixels[sample] - backdrop) >= 6 ||
+                          Math.Abs(pixels[sample + 1] - backdrop) >= 6 ||
+                          Math.Abs(pixels[sample + 2] - backdrop) >= 6;
+            }
+        }
+        ManagerUiChecks.Check(painted, "actual card pixels captured rather than an empty virtualized list");
     }
     internal async Task WaitForVisibleCardAsync()
     {

@@ -220,6 +220,8 @@ internal sealed partial class AccountCard : UserControl
         {
             body.Children.Add(profile);
             body.Children.Add(information);
+            body.Children.Add(CreateCooldownStatus(history,
+                (history?.CsPlayerLevel is { } lv ? "CS2 Lv. " + lv : "CS2 等级未知") + " · 优先状态未知 · "));
             body.Children.Add(actions);
             layout.Children.Add(body);
         }
@@ -332,7 +334,7 @@ internal sealed partial class AccountCard : UserControl
     internal void SetHovered(bool value) { hovered = value; UpdateEmphasis(); }
     private void UpdateEmphasis()
     {
-        emphasis.Opacity = selected ? 1 : hovered ? 0.5 : 0;
+        emphasis.Opacity = selected ? 1 : hovered ? 0.6 : 0;
         selectedBadge.Visibility = selected ? Visibility.Visible : Visibility.Collapsed;
         surface.Background = hovered && !selected ? (dark ? Solid(0xFF2B2D31) : Solid(0xFFFAFBFC)) : surfaceBrush;
     }
