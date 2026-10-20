@@ -4,18 +4,26 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="OpenSteamEYA 增强版">
 
-    <Grid>
+    <Grid x:Name="RootGrid" Background="{ThemeResource PclPageBackgroundBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="48" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- 自定义标题栏（拖动区域） -->
-        <Grid x:Name="AppTitleBar" Background="Transparent">
+        <Grid
+            x:Name="AppTitleBar"
+            Background="{ThemeResource PclSurfaceBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <StackPanel
                 Orientation="Horizontal"
-                Spacing="10"
-                Margin="16,0"
+                Spacing="8"
+                Margin="14,0"
                 VerticalAlignment="Center">
                 <Image
                     Source="ms-appx:///Assets/Logo.png"
@@ -23,120 +31,134 @@
                     Height="18" />
                 <TextBlock
                     Text="OpenSteamEYA 增强版"
-                    Style="{StaticResource CaptionTextBlockStyle}"
+                    FontSize="12"
+                    FontWeight="SemiBold"
+                    Foreground="{ThemeResource PclTextPrimaryBrush}"
                     VerticalAlignment="Center" />
-                <TextBlock
-                    x:Name="TitleVersionText"
-                    Style="{StaticResource CaptionTextBlockStyle}"
-                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                    VerticalAlignment="Center" />
+                <Border
+                    Background="{ThemeResource PclAccentSoftBrush}"
+                    CornerRadius="9"
+                    Padding="7,1"
+                    VerticalAlignment="Center">
+                    <TextBlock
+                        x:Name="TitleVersionText"
+                        FontSize="11"
+                        Foreground="{ThemeResource PclAccentBrush}"
+                        VerticalAlignment="Center" />
+                </Border>
             </StackPanel>
         </Grid>
 
-        <NavigationView
-            x:Name="RootNavigationView"
+        <!-- 顶部横向导航（PCL 风格：白底、底部细分割线、选中项蓝色指示条） -->
+        <Border
             Grid.Row="1"
-            PaneDisplayMode="Left"
-            OpenPaneLength="196"
-            CompactPaneLength="48"
-            IsSettingsVisible="False"
-            IsBackButtonVisible="Collapsed"
-            IsTitleBarAutoPaddingEnabled="False"
-            Background="Transparent"
-            SelectionChanged="RootNavigationView_SelectionChanged">
-            <!-- 导航项文字由 MainWindow.RefreshNavText() 按当前语言在代码里设置（构造时即设、语言切换时刷新）。 -->
-            <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="ManagerNavItem" Content="白号管理" Tag="manager">
-                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE716;" /></NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem x:Name="BlackNavItem" Content="黑号管理" Tag="black"><NavigationViewItem.Icon><FontIcon Glyph="&#xE77B;" /></NavigationViewItem.Icon></NavigationViewItem>
-                <NavigationViewItem
-                    x:Name="LoginNavItem"
-                    Tag="login">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE8D4;" />
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
+            Background="{ThemeResource PclSurfaceBrush}"
+            BorderBrush="{ThemeResource PclBorderBrush}"
+            BorderThickness="0,0,0,1"
+            Padding="6,0">
+            <NavigationView
+                x:Name="RootNavigationView"
+                PaneDisplayMode="Top"
+                OpenPaneLength="196"
+                CompactPaneLength="48"
+                IsSettingsVisible="False"
+                IsBackButtonVisible="Collapsed"
+                IsPaneToggleButtonVisible="False"
+                IsTitleBarAutoPaddingEnabled="False"
+                Background="Transparent"
+                SelectionChanged="RootNavigationView_SelectionChanged">
 
-                <NavigationViewItem
-                    x:Name="HistoryNavItem"
-                    Tag="history">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE81C;" />
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem
-                    x:Name="CachedAccountsNavItem"
-                    Tag="cachedAccounts">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE777;" />
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem
-                    x:Name="LoadoutNavItem"
-                    Tag="loadout">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE7C1;" />
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem
-                    x:Name="PersonalizationNavItem"
-                    Tag="personalization">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE779;" />
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem Content="CS2 统一配置" Tag="cs2LocalSettings"><NavigationViewItem.Icon><FontIcon Glyph="&#xE713;" /></NavigationViewItem.Icon></NavigationViewItem>
-            </NavigationView.MenuItems>
-            <NavigationView.FooterMenuItems>
-                <NavigationViewItem
-                    x:Name="SettingsNavItem"
-                    Tag="settings">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE713;" />
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem
-                    x:Name="AboutNavItem"
-                    Tag="about">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE946;" />
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-            </NavigationView.FooterMenuItems>
+                <!-- 导航项文字由 MainWindow.RefreshNavText() 按当前语言在代码里设置（构造时即设、语言切换时刷新）。 -->
+                <NavigationView.MenuItems>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34" x:Name="ManagerNavItem" Content="白号管理" Tag="manager">
+                        <NavigationViewItem.Icon><FontIcon Glyph="&#xE716;" /></NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34" x:Name="BlackNavItem" Content="黑号管理" Tag="black"><NavigationViewItem.Icon><FontIcon Glyph="&#xE77B;" /></NavigationViewItem.Icon></NavigationViewItem>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34"
+                        x:Name="LoginNavItem"
+                        Tag="login">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE8D4;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34"
+                        x:Name="HistoryNavItem"
+                        Tag="history">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE81C;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34"
+                        x:Name="CachedAccountsNavItem"
+                        Tag="cachedAccounts">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE777;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34"
+                        x:Name="LoadoutNavItem"
+                        Tag="loadout">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE7C1;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34"
+                        x:Name="PersonalizationNavItem"
+                        Tag="personalization">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE779;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34" Content="CS2 配置" Tag="cs2LocalSettings"><NavigationViewItem.Icon><FontIcon Glyph="&#xE713;" /></NavigationViewItem.Icon></NavigationViewItem>
+                </NavigationView.MenuItems>
+                <NavigationView.FooterMenuItems>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34"
+                        x:Name="SettingsNavItem"
+                        Tag="settings">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE713;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34"
+                        x:Name="AboutNavItem"
+                        Tag="about">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE946;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                </NavigationView.FooterMenuItems>
+            </NavigationView>
+        </Border>
 
-                <Frame x:Name="ContentFrame" />
+        <Frame x:Name="ContentFrame" Grid.Row="2" />
 
-                <!-- 全局状态栏 -->
-                <Grid
-                    Grid.Row="1"
-                    Margin="32,4,32,16"
-                    ColumnSpacing="10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ProgressRing
-                        x:Name="BusyRing"
-                        Width="18"
-                        Height="18"
-                        VerticalAlignment="Center"
-                        IsActive="False"
-                        Visibility="Collapsed" />
-                    <InfoBar
-                        x:Name="StatusInfoBar"
-                        Grid.Column="1"
-                        IsOpen="False"
-                        IsClosable="True"
-                        Severity="Informational" />
-                </Grid>
+        <!-- 全局状态栏 -->
+        <Border
+            Grid.Row="3"
+            Background="{ThemeResource PclSurfaceBrush}"
+            BorderBrush="{ThemeResource PclBorderBrush}"
+            BorderThickness="0,1,0,0"
+            Padding="20,6,20,6">
+            <Grid ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ProgressRing
+                    x:Name="BusyRing"
+                    Width="16"
+                    Height="16"
+                    VerticalAlignment="Center"
+                    IsActive="False"
+                    Visibility="Collapsed" />
+                <InfoBar
+                    x:Name="StatusInfoBar"
+                    Grid.Column="1"
+                    IsOpen="False"
+                    IsClosable="True"
+                    Severity="Informational" />
             </Grid>
-        </NavigationView>
+        </Border>
     </Grid>
 </Window>
