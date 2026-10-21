@@ -1,6 +1,7 @@
 #if MANAGER_UI_CHECKS
 using System.IO;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using OpenSteamEya.AccountManagement;
 using SteamEyaWinUI.Pages;
@@ -44,18 +45,15 @@ internal static partial class ManagerUiChecks
             }
             CheckOriginalServicesOffline();
             await WriteFixtureAsync();
-            var palette = await CardBackgroundService.GetAsync(new(), AvatarPath, null, "", new(), true);
-            Check(palette.Primary != palette.Secondary, "avatar multicolor extraction");
-            var cachedPalette = await CardBackgroundService.GetAsync(new(), AvatarPath, null, "", new(), true);
-            Check(palette == cachedPalette, "avatar palette cache");
-            var missingImage = await CardBackgroundService.GetAsync(new() { Background = new() { Mode = "local", ImageFile = "missing.png" } }, AvatarPath, null, "", new(), true);
-            Check(missingImage.ImagePath is null && missingImage.Primary == palette.Primary, "missing custom image falls back to avatar palette");
-            var missingAvatar = await CardBackgroundService.GetAsync(new(), Path.Combine(OutputRoot, "nonexistent-avatar.png"), null, "", new(), true);
-            Check(missingAvatar.ImagePath is null, "missing avatar falls back to default gradient");
+            Check(await CardBackgroundService.GetImageAsync(new(), "", new(), CancellationToken.None) is null, "default background uses the theme gradient");
+            var missingImage = await CardBackgroundService.GetImageAsync(new() { Background = new() { Mode = "local", ImageFile = "missing.png" } }, "", new(), CancellationToken.None);
+            Check(missingImage is null, "missing custom image falls back to the theme gradient");
             Directory.CreateDirectory(ManagedAccounts.Store.ImageDirectory);
-            File.Copy(AvatarPath, Path.Combine(ManagedAccounts.Store.ImageDirectory, "fixture-background.png"));
-            var softImage = await CardBackgroundService.GetAsync(new() { Background = new() { Mode = "local", ImageFile = "fixture-background.png" } }, AvatarPath, null, "", new(), true);
-            Check(softImage.ImagePath is not null && File.Exists(softImage.ImagePath), "local image asynchronous softening");
+            File.Copy(AvatarPath, Path.Combine(ManagedAccounts.Store.ImageDirectory, "fixture-background.png"), true);
+            var localImage = await CardBackgroundService.GetImageAsync(new() { Background = new() { Mode = "local", ImageFile = "fixture-background.png" } }, "", new(), CancellationToken.None);
+            Check(localImage is not null && File.Exists(localImage), "local image available for the card background");
+            Check(CardBackgroundService.ImageBrushFor(localImage, "Uniform") is ImageBrush, "local image builds an image brush");
+            Check(CardBackgroundService.ImageBrushFor(null, "Fill") is null, "without an image the theme gradient stays");
             foreach (int count in new[] { 10, 50, 100 })
             {
                 await page.PrepareUiCheckAsync(count);

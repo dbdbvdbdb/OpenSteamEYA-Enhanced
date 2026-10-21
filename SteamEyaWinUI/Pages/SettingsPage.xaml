@@ -73,6 +73,29 @@
                 </Grid>
             </Border>
 
+            <!-- 自定义主题色 -->
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="10">
+                    <TextBlock
+                        Text="{x:Bind Strings.Get('Settings_ThemeColors_Section'), Mode=OneWay}"
+                        Style="{StaticResource SectionTitleTextStyle}" />
+                    <TextBlock
+                        Text="{x:Bind Strings.Get('Settings_ThemeColors_Desc'), Mode=OneWay}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <StackPanel
+                        x:Name="ThemeColorPanel"
+                        Orientation="Horizontal"
+                        Spacing="8" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button
+                            x:Name="ResetThemeColorsButton"
+                            Content="{x:Bind Strings.Get('Settings_ThemeColors_Reset'), Mode=OneWay}"
+                            Click="ResetThemeColors_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
             <!-- 更新站点：可选直连或代理站，手动检测当前选择站点延迟 -->
             <Border Style="{StaticResource CardBorderStyle}">
                 <StackPanel Spacing="10">

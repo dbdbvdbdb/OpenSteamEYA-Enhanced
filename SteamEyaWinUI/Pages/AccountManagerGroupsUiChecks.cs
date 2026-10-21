@@ -25,7 +25,8 @@ public sealed partial class AccountManagerPage
         SelectTag(GroupFilter, b.Id.ToString()); await Task.Delay(100);
         ManagerUiChecks.Check(visible.Count == 2, "multiple-membership second group filter");
         SelectTag(GroupFilter, "default"); await Task.Delay(100);
-        ManagerUiChecks.Check(visible.Count == document.Accounts.Count, "default group always shows all accounts including assigned members");
+        ManagerUiChecks.Check(visible.Count == document.Accounts.Count(x => !AccountGroups.Ids(x).Any()) && visible.All(x => !AccountGroups.Ids(x.Account).Any()) && visible.All(x => x.Account.Id != record.Id), "default group only lists ungrouped accounts");
+        SelectTag(GroupFilter, "all"); await Task.Delay(100);
         var card = visible.First(x => x.Account.Id == record.Id);
         var menu = (MenuFlyout)card.ContextFlyout; menu.ShowAt(card); await Task.Delay(100);
         Invoke(menu.Items.OfType<MenuFlyoutItem>().Single(x => x.Text == "设置账号分组"));
@@ -37,7 +38,8 @@ public sealed partial class AccountManagerPage
         for (int attempt = 0; AccountGroups.Ids(document.Accounts.First(x => x.Id == record.Id)).Count() != 1 && attempt < 60; attempt++) await Task.Delay(50);
         var saved = document.Accounts.First(x => x.Id == record.Id);
         ManagerUiChecks.Check(saved.GroupIds.SequenceEqual([b.Id]) && saved.Password == password && saved.LinkedKey == mapping, "native group save removes only unchecked membership and preserves account credentials");
-        ManagerUiChecks.Check(visible.Count == document.Accounts.Count && GroupName(saved).Contains("默认分组") && GroupName(saved).Contains(b.Name), "default filter and group metadata remain correct after multi-select save");
+        SelectTag(GroupFilter, "default"); await Task.Delay(100);
+        ManagerUiChecks.Check(!GroupName(saved).Contains("默认分组") && GroupName(saved).Contains(b.Name) && visible.All(x => !AccountGroups.Ids(x.Account).Any()), "default filter and group metadata remain correct after multi-select save");
         var edit = EditAsync(saved); elements = await FindDialogElementsAsync("账号信息");
         groups = elements.OfType<ListView>().Single(x => x.Header?.ToString()?.StartsWith("所属分组") == true);
         groups.SelectedItems.Add(groups.Items.OfType<ListViewItem>().Single(x => (Guid)x.Tag == a.Id));

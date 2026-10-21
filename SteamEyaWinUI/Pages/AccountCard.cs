@@ -47,13 +47,15 @@ internal sealed partial class AccountCard : UserControl
     {
         Account = account; owner = page; key = mappingKey; this.compact = compact;
         dark = ActualTheme != ElementTheme.Light;
-        textBrush = Solid(dark ? 0xFFF2F3F5 : 0xFF1F2329);
-        mutedBrush = Solid(dark ? 0xFFA8ADB8 : 0xFF6B7280);
-        surfaceBrush = Solid(dark ? 0xFF252629 : 0xFFFFFFFF);
-        borderBrush = Solid(dark ? 0xFF3A3D44 : 0xFFE3E6EB);
-        altBrush = Solid(dark ? 0xFF2B2D31 : 0xFFFAFBFC);
-        accentBrush = Solid(dark ? 0xFF4A97FF : 0xFF1370F3);
-        accentSoftBrush = Solid(dark ? 0xFF1D2C44 : 0xFFE8F1FE);
+        var themePalette = ThemePaletteService.Build(ThemePaletteService.Current, dark);
+        Brush FromPalette(string paletteKey) => new SolidColorBrush(themePalette[paletteKey]);
+        textBrush = FromPalette("PclTextPrimaryColor");
+        mutedBrush = FromPalette("PclTextSecondaryColor");
+        surfaceBrush = FromPalette("PclSurfaceColor");
+        borderBrush = FromPalette("PclBorderColor");
+        altBrush = FromPalette("PclSurfaceAltColor");
+        accentBrush = FromPalette("PclAccentColor");
+        accentSoftBrush = FromPalette("PclAccentSoftColor");
 
         bool privacy = owner.IsPrivate;
         var history = ManagedAccounts.History(key); var cached = ManagedAccounts.Cached(key);
@@ -107,14 +109,7 @@ internal sealed partial class AccountCard : UserControl
             CornerRadius = compact
                 ? new CornerRadius(CardRadius - 1)
                 : new CornerRadius(CardRadius - 1, CardRadius - 1, 0, 0),
-            Background = new LinearGradientBrush
-            {
-                StartPoint = new(0, 0), EndPoint = new(1, 1), GradientStops =
-                {
-                    new() { Offset = 0, Color = dark ? Color.FromArgb(255, 26, 38, 56) : Color.FromArgb(255, 232, 241, 254) },
-                    new() { Offset = 1, Color = dark ? Color.FromArgb(255, 32, 30, 46) : Color.FromArgb(255, 245, 248, 253) },
-                },
-            },
+            Background = ThemePaletteService.ArtworkGradient(dark),
         };
         layout.Children.Add(artwork);
 
@@ -237,6 +232,11 @@ internal sealed partial class AccountCard : UserControl
             layout.Children.Add(body);
         }
 
+        ActualThemeChanged += (_, _) =>
+        {
+            if (artwork.Background is not ImageBrush)
+                artwork.Background = ThemePaletteService.ArtworkGradient(ActualTheme != ElementTheme.Light);
+        };
         ContextFlyout = Menu(steamId);
         PointerEntered += (_, _) => SetHovered(true);
         PointerExited += (_, _) => SetHovered(false);
@@ -246,7 +246,7 @@ internal sealed partial class AccountCard : UserControl
             if (!IsCardDoubleTapSource(args.OriginalSource)) return;
             args.Handled = true; await OpenEditorAsync();
         };
-        _ = ApplyBackgroundAsync(avatarPath, avatarUrl, steamId);
+        _ = ApplyBackgroundAsync(steamId);
     }
 
     internal bool IsCardDoubleTapSource(object source)
@@ -389,16 +389,14 @@ internal sealed partial class AccountCard : UserControl
         Add("删除账号", () => owner.DeleteAsync(Account)); return menu;
     }
 
-    private async Task ApplyBackgroundAsync(string? avatarPath, string? avatarUrl, string steamId)
+    private async Task ApplyBackgroundAsync(string steamId)
     {
         try
         {
             if (owner.IsPrivate) return;
-            var palette = await CardBackgroundService.GetAsync(Account, avatarPath, avatarUrl, steamId, owner.Preferences, owner.ActualTheme != ElementTheme.Light, backgroundCancellation.Token);
-            if (stopped) return;
-            var brush = CardBackgroundService.Brush(palette);
-            if (brush is ImageBrush image) image.Stretch = Account.Background.Stretch switch { "Uniform" => Stretch.Uniform, "Fill" => Stretch.Fill, _ => Stretch.UniformToFill };
-            artwork.Background = brush;
+            var image = await CardBackgroundService.GetImageAsync(Account, steamId, owner.Preferences, backgroundCancellation.Token);
+            if (stopped || image is null) return;
+            artwork.Background = CardBackgroundService.ImageBrushFor(image, Account.Background.Stretch);
         }
         catch { } // 取消或不可用图片时保留浅色渐变底
     }

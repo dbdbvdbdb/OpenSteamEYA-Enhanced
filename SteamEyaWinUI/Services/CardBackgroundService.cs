@@ -6,29 +6,28 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using OpenSteamEya.AccountManagement;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
-using Windows.UI;
 
 namespace SteamEyaWinUI.Services;
 
-internal sealed record CardPalette(Color Primary, Color Secondary, Color Accent, string? ImagePath);
-
+// Card artwork no longer derives colors from avatars: the strip uses the theme gradient and is only
+// replaced by a real local image or a Steam profile background.
 internal static class CardBackgroundService
 {
     private static readonly SemaphoreSlim Slots = new(4);
     private static readonly SemaphoreSlim SoftGate = new(1);
-    private static readonly ConcurrentDictionary<string, CardPalette> PaletteCache = new();
     private static readonly ConcurrentDictionary<string, (DateTimeOffset At, string? Path)> ProfileCache = new();
     private static readonly HttpClient Http = new() { Timeout = TimeSpan.FromSeconds(8) };
-    private static readonly CardPalette Fallback = new(Color.FromArgb(255, 40, 58, 82), Color.FromArgb(255, 65, 55, 90), Color.FromArgb(255, 37, 75, 76), null);
 
-    public static async Task<CardPalette> GetAsync(ManagedAccount account, string? avatarPath, string? avatarUrl,
-        string steamId, ManagerPreferences prefs, bool dark, CancellationToken cancellationToken = default)
+    /// <summary>Returns the image that should replace the theme gradient, or null to keep the gradient.</summary>
+    public static async Task<string?> GetImageAsync(ManagedAccount account, string steamId, ManagerPreferences prefs,
+        CancellationToken cancellationToken = default)
     {
         await Slots.WaitAsync(cancellationToken);
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
-            var mode = account.Background.Mode == "default" ? prefs.BackgroundMode : account.Background.Mode;
+            var mode = account.Background.Mode is "default" or "monet" ? prefs.BackgroundMode : account.Background.Mode;
+            if (mode == "monet") mode = "default";
             string? image = null;
             if (mode == "local" && account.Background.ImageFile is { } name)
             {
@@ -36,57 +35,19 @@ internal static class CardBackgroundService
                 if (File.Exists(path)) image = path;
             }
             if (mode == "steam" && steamId.Length == 17) image = await GetProfileBackgroundAsync(steamId, cancellationToken);
-            if (string.IsNullOrEmpty(avatarPath) || !File.Exists(avatarPath)) avatarPath = await DownloadImageAsync(avatarUrl, cancellationToken);
-            var key = (avatarPath ?? "none") + "|" + (avatarPath is not null && File.Exists(avatarPath) ? File.GetLastWriteTimeUtc(avatarPath).Ticks : 0) + "|" + prefs.MonetStrength + "|" + dark;
-            if (!PaletteCache.TryGetValue(key, out var palette))
-            {
-                palette = avatarPath is null ? Fallback : await ExtractAsync(avatarPath, prefs.MonetStrength, dark);
-                PaletteCache[key] = palette;
-            }
             if (image is not null && prefs.Blur > 0) image = await SoftenAsync(image, prefs.Blur, cancellationToken);
-            return palette with { ImagePath = image };
+            return image;
         }
-        catch (Exception ex)
-        {
-#if MANAGER_UI_CHECKS
-            if (ManagerUiChecks.Enabled) await File.WriteAllTextAsync(Path.Combine(ManagerUiChecks.OutputRoot, "background-failure.txt"), ex.ToString());
-#endif
-            _ = ex;
-            return Fallback;
-        } // no credential or parser exception logging in production
+        catch { return null; } // no credential or parser exception logging in production
         finally { Slots.Release(); }
     }
 
-    private static async Task<CardPalette> ExtractAsync(string path, double strength, bool dark)
-    {
-        var file = await StorageFile.GetFileFromPathAsync(path);
-        using var stream = await file.OpenReadAsync();
-        var decoder = await BitmapDecoder.CreateAsync(stream);
-        var pixels = await decoder.GetPixelDataAsync(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Straight,
-            new BitmapTransform { ScaledWidth = 32, ScaledHeight = 32 }, ExifOrientationMode.IgnoreExifOrientation, ColorManagementMode.DoNotColorManage);
-        var bytes = pixels.DetachPixelData();
-        return await Task.Run(() =>
+    public static Brush? ImageBrushFor(string? path, string stretch) =>
+        path is null ? null : new ImageBrush
         {
-            var buckets = new Dictionary<int, (int R, int G, int B, int Count)>();
-            for (int i = 0; i + 3 < bytes.Length; i += 4)
-            {
-                int r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
-                if (bytes[i + 3] < 128 || Math.Max(r, Math.Max(g, b)) < 24 || Math.Min(r, Math.Min(g, b)) > 235) continue;
-                int key = (r / 32 << 6) | (g / 32 << 3) | b / 32;
-                var old = buckets.GetValueOrDefault(key); buckets[key] = (old.R + r, old.G + g, old.B + b, old.Count + 1);
-            }
-            var top = buckets.Values.OrderByDescending(x => x.Count).Take(3).ToList();
-            if (top.Count == 0) return Fallback;
-            Color Make(int index)
-            {
-                var x = top[index % top.Count]; double mix = 0.35 + strength * 0.45;
-                double neutral = dark ? 45 : 185;
-                return Color.FromArgb(255, (byte)(x.R / x.Count * mix + neutral * (1 - mix)),
-                    (byte)(x.G / x.Count * mix + neutral * (1 - mix)), (byte)(x.B / x.Count * mix + neutral * (1 - mix)));
-            }
-            return new CardPalette(Make(0), Make(1), Make(2), null);
-        });
-    }
+            ImageSource = new BitmapImage(new Uri(path)),
+            Stretch = stretch switch { "Uniform" => Stretch.Uniform, "Fill" => Stretch.Fill, _ => Stretch.UniformToFill },
+        };
 
     private static async Task<string?> GetProfileBackgroundAsync(string steamId, CancellationToken cancellationToken)
     {
@@ -161,12 +122,5 @@ internal static class CardBackgroundService
         finally { if (File.Exists(temp)) File.Delete(temp); }
         }
         finally { SoftGate.Release(); }
-    }
-
-    public static Brush Brush(CardPalette palette)
-    {
-        if (palette.ImagePath is { } path) return new ImageBrush { ImageSource = new BitmapImage(new Uri(path)), Stretch = Stretch.UniformToFill };
-        return new LinearGradientBrush { StartPoint = new(0, 0), EndPoint = new(1, 1), GradientStops =
-            { new() { Color = palette.Primary, Offset = 0 }, new() { Color = palette.Secondary, Offset = 0.5 }, new() { Color = palette.Accent, Offset = 1 } } };
     }
 }

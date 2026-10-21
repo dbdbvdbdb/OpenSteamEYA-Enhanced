@@ -109,6 +109,9 @@ internal sealed class AppSettings
     /// <summary>主题：Default（跟随系统）/ Light / Dark。</summary>
     public string Theme { get; set; } = "Default";
 
+    /// <summary>自定义主题色（#RRGGBB，最多 5 个）。空表示使用内置蓝色主题。</summary>
+    public List<string> ThemeColors { get; set; } = [];
+
     /// <summary>
     /// 已解析并持久化的 Steam 安装目录（含 steam.exe 的根目录）。首次启动自动检测后写入，之后直接复用，
     /// 不必每次上号重新检测。null/空表示尚未解析；失效（目录里找不到 steam.exe）时会重新自动检测，

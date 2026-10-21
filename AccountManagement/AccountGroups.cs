@@ -10,8 +10,14 @@ public static class AccountGroups
         account.GroupIds = ids.Distinct().ToList();
         account.GroupId = account.GroupIds.Count > 0 ? account.GroupIds[0] : null;
     }
-    public static bool Matches(ManagedAccount account, string? filter) => filter is null or "all" or "default" ||
-        Guid.TryParse(filter, out var id) && Ids(account).Contains(id);
+    // “默认分组”只包含尚未加入任何分组的账号；账号一旦归入分组就不会再出现在这里。
+    public static bool IsUngrouped(ManagedAccount account) => !Ids(account).Any();
+    public static bool Matches(ManagedAccount account, string? filter) => filter switch
+    {
+        null or "all" => true,
+        "default" => IsUngrouped(account),
+        _ => Guid.TryParse(filter, out var id) && Ids(account).Contains(id),
+    };
     public static bool InExportRange(ManagedAccount account, IReadOnlySet<string> tags) =>
-        tags.Contains("default") || Ids(account).Any(id => tags.Contains(id.ToString()));
+        (tags.Contains("default") && IsUngrouped(account)) || Ids(account).Any(id => tags.Contains(id.ToString()));
 }

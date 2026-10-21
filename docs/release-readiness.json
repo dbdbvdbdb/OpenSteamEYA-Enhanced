@@ -1,5 +1,5 @@
 {
-  "version": "v0.4.1",
+  "version": "v0.4.2",
   "approved": true,
   "reviewedAt": "2026-10-21",
   "reviewedBy": "dbdbvdbdb",
@@ -28,11 +28,16 @@
       "reason": "UI restyle is reimplemented in WinUI 3 from layout and color conventions only; no third-party launcher artwork, icons, fonts, or XAML were copied, and no third-party name or logo is used. The CS2 configuration page restyle added no new asset."
     },
     {
+      "id": "custom-theme-colors",
+      "status": "resolved",
+      "reason": "Theme colors are stored locally in the existing settings file and applied in-process; no generated asset is redistributed and no avatar image is analyzed to derive colors anymore."
+    },
+    {
       "id": "startup-update-check",
       "status": "resolved",
       "reason": "The startup update check requests only the public GitHub Releases API of this repository. It sends no credentials, telemetry, account data, or machine identifiers, and the dialog can be dismissed for the current run."
     }
   ],
   "publicationAuthorizedAt": "2026-10-21",
-  "publicationBasis": "Maintainer requested the About page project link, the CS2 page restyle, and the startup update reminder, and asked for them to ship as a regular version. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
+  "publicationBasis": "Maintainer requested removal of avatar-based card coloring, a custom theme color feature, and corrected default-group membership, and asked for them to ship as a regular version. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
 }

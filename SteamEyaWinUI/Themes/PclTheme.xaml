@@ -24,6 +24,8 @@
             <Color x:Key="PclTextPrimaryColor">#1F2329</Color>
             <Color x:Key="PclTextSecondaryColor">#6B7280</Color>
             <Color x:Key="PclTextTertiaryColor">#9AA1AC</Color>
+            <Color x:Key="PclArtworkStartColor">#E8F1FE</Color>
+            <Color x:Key="PclArtworkEndColor">#F5F8FD</Color>
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
@@ -40,6 +42,8 @@
             <Color x:Key="PclTextPrimaryColor">#1F2329</Color>
             <Color x:Key="PclTextSecondaryColor">#6B7280</Color>
             <Color x:Key="PclTextTertiaryColor">#9AA1AC</Color>
+            <Color x:Key="PclArtworkStartColor">#E8F1FE</Color>
+            <Color x:Key="PclArtworkEndColor">#F5F8FD</Color>
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">
@@ -56,6 +60,8 @@
             <Color x:Key="PclTextPrimaryColor">#F2F3F5</Color>
             <Color x:Key="PclTextSecondaryColor">#A8ADB8</Color>
             <Color x:Key="PclTextTertiaryColor">#7C828D</Color>
+            <Color x:Key="PclArtworkStartColor">#1A2638</Color>
+            <Color x:Key="PclArtworkEndColor">#202E44</Color>
         </ResourceDictionary>
 
     </ResourceDictionary.ThemeDictionaries>

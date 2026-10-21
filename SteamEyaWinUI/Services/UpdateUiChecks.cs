@@ -42,6 +42,34 @@ internal static partial class ManagerUiChecks
                 await window.CheckStartupUpdateDialogAsync(startupUpdate);
             }
 
+            // 设置页主题色截图：临时写入测试配色，截图后恢复用户设置
+            var settings = AppState.SettingsService.Load();
+            var savedColors = settings.ThemeColors;
+            try
+            {
+                settings.ThemeColors = ["#E5484D", "#F5A623", "#3E9D5B", "#8E5BD9"];
+                AppState.SettingsService.Save(settings);
+                ThemePaletteService.SetColors(settings.ThemeColors);
+                window.RefreshThemePalette();
+                var settingsNav = FindElements(window.Content).OfType<NavigationView>().Single();
+                settingsNav.SelectedItem = settingsNav.FooterMenuItems.OfType<NavigationViewItem>().Single(x => x.Tag?.ToString() == "settings");
+                await Task.Delay(800);
+                window.ApplyTheme(ElementTheme.Dark);
+                await Task.Delay(400);
+                await CaptureAsync(window, "settings-theme-dark");
+                window.ApplyTheme(ElementTheme.Light);
+                await Task.Delay(400);
+                await CaptureAsync(window, "settings-theme-light");
+            }
+            finally
+            {
+                settings.ThemeColors = savedColors;
+                AppState.SettingsService.Save(settings);
+                ThemePaletteService.SetColors(savedColors);
+                window.RefreshThemePalette();
+            }
+            
+
             handler.Fail = true;
             await AppState.CheckForUpdatesAsync(isAutomatic: false);
             Check(AppState.UpdateCheckError is not null && !AppState.IsCheckingForUpdates && !download.IsEnabled && aboutItem.InfoBadge is null,

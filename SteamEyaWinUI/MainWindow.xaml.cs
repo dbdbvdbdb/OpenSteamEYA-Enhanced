@@ -45,7 +45,10 @@ public sealed partial class MainWindow : Window
         SetWindowIcon();
         TitleVersionText.Text = $"v{GitHubUpdateService.CurrentVersion}";
 
-        ApplyTheme(ParseTheme(AppState.SettingsService.Load().Theme));
+        var startupSettings = AppState.SettingsService.Load();
+        ThemePaletteService.SetColors(startupSettings.ThemeColors);
+        ApplyTheme(ParseTheme(startupSettings.Theme));
+        RefreshThemePalette();
         RefreshNavText();
         Loc.LanguageChanged += RefreshNavText;
 
@@ -200,6 +203,8 @@ public sealed partial class MainWindow : Window
         {
             root.RequestedTheme = theme;
         }
+
+        ThemePaletteService.Apply();
     }
 
     private static ElementTheme ParseTheme(string theme) => theme switch
@@ -208,6 +213,16 @@ public sealed partial class MainWindow : Window
         "Dark" => ElementTheme.Dark,
         _ => ElementTheme.Default
     };
+
+    /// <summary>
+    /// 用当前自定义主题色重算调色板并立即刷新。令牌（Color 资源）改完后，XAML 里的画刷会自动跟随，
+    /// 但卡片等代码构造的画刷是快照，因此重进当前页面让它们按新颜色重建。
+    /// </summary>
+    public void RefreshThemePalette()
+    {
+        ThemePaletteService.Apply();
+        if (ContentFrame.Content is Page current) ContentFrame.Navigate(current.GetType());
+    }
 
     /// <summary>本地化导航项文字；语言切换时由 Loc.LanguageChanged 再次调用。</summary>
     private void RefreshNavText()

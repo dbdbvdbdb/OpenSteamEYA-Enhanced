@@ -122,8 +122,13 @@ public sealed partial class AccountManagerPage : Page
     internal string DisplayName(ManagedAccount account) => account.Nickname.Length > 0 ? account.Nickname :
         ManagedAccounts.History(resolved.GetValueOrDefault(account.Id))?.PersonaName ??
         ManagedAccounts.Cached(resolved.GetValueOrDefault(account.Id))?.PersonaName ?? "未获取昵称";
-    internal string GroupName(ManagedAccount account) => string.Join(" · ", new[] { "默认分组" }
-        .Concat(document.Groups.Where(x => AccountGroups.Ids(account).Contains(x.Id)).OrderBy(x => x.Order).Select(x => x.Name)));
+    internal string GroupName(ManagedAccount account)
+    {
+        // 已有分组的账号不再同时显示“默认分组”。
+        var names = document.Groups.Where(x => AccountGroups.Ids(account).Contains(x.Id))
+            .OrderBy(x => x.Order).Select(x => x.Name).ToList();
+        return names.Count == 0 ? "默认分组" : string.Join(" · ", names);
+    }
     internal string DisplayCardName(ManagedAccount account) => DisplayName(account) + (account.Note.Length == 0 ? "" :
         "（" + account.Note.Replace("\r\n", " ").Replace('\r', ' ').Replace('\n', ' ') + "）");
 
