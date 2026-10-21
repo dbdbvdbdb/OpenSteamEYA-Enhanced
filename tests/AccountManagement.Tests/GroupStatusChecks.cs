@@ -16,8 +16,8 @@ internal static class GroupStatusChecks
         await store.UpdateAsync(doc => AccountGroups.Set(doc.Accounts[0], [first.Id, second.Id, first.Id]));
         var loaded = (await store.LoadAsync()).Accounts[0];
         check(loaded.GroupIds.SequenceEqual([first.Id, second.Id]) && loaded.GroupId == first.Id, "multiple memberships persist uniquely with legacy first group");
-        check(AccountGroups.Matches(loaded, "default") && AccountGroups.Matches(loaded, first.Id.ToString()) && AccountGroups.Matches(loaded, second.Id.ToString()), "grouped account appears in default and each assigned group");
-        check(AccountGroups.InExportRange(loaded, new HashSet<string> { second.Id.ToString() }) && AccountGroups.InExportRange(loaded, new HashSet<string> { "default" }), "export range includes all members and default contains all accounts");
+        check(!AccountGroups.Matches(loaded, "default") && AccountGroups.Matches(loaded, first.Id.ToString()) && AccountGroups.Matches(loaded, second.Id.ToString()), "grouped account leaves default and appears in each assigned group");
+        check(AccountGroups.InExportRange(loaded, new HashSet<string> { second.Id.ToString() }) && !AccountGroups.InExportRange(loaded, new HashSet<string> { "default" }), "export range follows memberships and default excludes grouped accounts");
         var parsed = ImportExport.Parse(ImportExport.Export([loaded], "json"), "json").Rows[0].Account;
         check(parsed.GroupId is null && parsed.GroupIds.Count == 0 && parsed.Password == account.Password, "portable export keeps passwords while isolating all group IDs");
         var backup = new BackupService(store); var path = Path.Combine(root, "multi-group.zip"); await backup.CreateAsync(path);
@@ -65,6 +65,6 @@ internal static class GroupStatusChecks
             AccountGroups.Ids(batchDoc.Accounts[3]).Contains(batchDoc.Groups.Single(x => x.Name == "失败").Id), "batch integration assigns skipped and failed accounts to distinct groups");
         check(batchDoc.Accounts.Where((_, index) => index is 1 or 2 or 4 or 5).All(x => x.GroupIds.Count == 0), "batch integration leaves successful duplicates and cancelled/unstarted records without failure labels");
         await store.UpdateAsync(current => AccountQueryGrouping.Apply(current, new Dictionary<Guid, AccountQueryDisposition> { [account.Id] = AccountQueryDisposition.Failed }));
-        check((await store.LoadAsync()).Groups.Any(x => x.Name == "失败") && AccountGroups.Matches((await store.LoadAsync()).Accounts[0], "default"), "query grouping persists and failure accounts still appear in default");
+        check((await store.LoadAsync()).Groups.Any(x => x.Name == "失败") && !AccountGroups.Matches((await store.LoadAsync()).Accounts[0], "default"), "query grouping persists and grouped accounts leave default");
     }
 }
