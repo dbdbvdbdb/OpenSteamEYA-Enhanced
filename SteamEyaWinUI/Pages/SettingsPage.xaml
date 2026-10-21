@@ -83,11 +83,20 @@
                         Text="{x:Bind Strings.Get('Settings_ThemeColors_Desc'), Mode=OneWay}"
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                         TextWrapping="Wrap" />
+                    <TextBlock
+                        x:Name="ThemeSummaryText"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
                     <StackPanel
                         x:Name="ThemeColorPanel"
                         Orientation="Horizontal"
-                        Spacing="8" />
+                        Spacing="8"
+                        IsHitTestVisible="False" />
                     <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button
+                            x:Name="OpenThemeEditorButton"
+                            Content="{x:Bind Strings.Get('Settings_ThemeColors_Edit'), Mode=OneWay}"
+                            Click="OpenThemeEditor_Click" />
                         <Button
                             x:Name="ResetThemeColorsButton"
                             Content="{x:Bind Strings.Get('Settings_ThemeColors_Reset'), Mode=OneWay}"

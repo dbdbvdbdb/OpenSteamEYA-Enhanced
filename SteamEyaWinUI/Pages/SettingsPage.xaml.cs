@@ -22,7 +22,6 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
     // 代码设置 ComboBox.SelectedItem 会触发 SelectionChanged，置位以区分“用户选择”与“初始同步”，避免回写/重复应用。
     private bool _syncing;
     private bool _languageItemsBuilt;
-    private readonly List<string> _themeColors = [];
 
     public SettingsPage()
     {
@@ -105,8 +104,7 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
             LanguageComboBox.SelectedItem = FindByTag(LanguageComboBox, Loc.CurrentCode);
             ThemeComboBox.SelectedItem = FindByTag(ThemeComboBox, settings.Theme) ?? ThemeComboBox.Items[0];
             UpdateProxyComboBox.SelectedItem = FindByTag(UpdateProxyComboBox, settings.UpdateProxySite) ?? UpdateProxyComboBox.Items[0];
-            _themeColors.Clear();
-            _themeColors.AddRange(settings.ThemeColors ?? []);
+            ThemeService.LoadFromSettings();
         }
         finally
         {
@@ -164,100 +162,34 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
     private void RenderThemeColors()
     {
         ThemeColorPanel.Children.Clear();
-        foreach (var hex in _themeColors)
+        foreach (var hex in ThemeService.Current.ToColorList())
         {
-            ThemePaletteService.TryParseHex(hex, out var color);
-            var swatch = new Button
+            if (!ThemePaletteService.TryParseHex(hex, out var color)) continue;
+            var swatch = new Border
             {
-                Width = 44,
-                Height = 44,
-                Padding = new Thickness(0),
-                CornerRadius = new CornerRadius(22),
-                BorderThickness = new Thickness(2),
+                Width = 36,
+                Height = 36,
+                CornerRadius = new CornerRadius(18),
                 Background = new SolidColorBrush(color),
-                BorderBrush = (Brush)Application.Current.Resources["PclBorderStrongBrush"],
-                Tag = hex,
+                BorderThickness = new Thickness(1),
+                BorderBrush = (Brush)Application.Current.Resources["PclBorderBrush"],
             };
             ToolTipService.SetToolTip(swatch, hex);
-            swatch.Click += EditThemeColor_Click;
             ThemeColorPanel.Children.Add(swatch);
         }
-        if (_themeColors.Count < ThemePaletteService.MaxColors)
-        {
-            var add = new Button
-            {
-                Width = 44,
-                Height = 44,
-                Padding = new Thickness(0),
-                CornerRadius = new CornerRadius(22),
-                BorderThickness = new Thickness(1),
-                Background = (Brush)Application.Current.Resources["PclAccentSoftBrush"],
-                BorderBrush = (Brush)Application.Current.Resources["PclBorderBrush"],
-                Content = new FontIcon { Glyph = "\uE710", FontSize = 14 },
-            };
-            ToolTipService.SetToolTip(add, Loc.T("Settings_ThemeColors_Add"));
-            add.Click += AddThemeColor_Click;
-            ThemeColorPanel.Children.Add(add);
-        }
-        ResetThemeColorsButton.IsEnabled = _themeColors.Count > 0;
+
+        ThemeSummaryText.Text = ThemeService.Summary();
+        ResetThemeColorsButton.IsEnabled = ThemeService.IsCustom;
     }
 
-    private async void AddThemeColor_Click(object sender, RoutedEventArgs e) =>
-        await PickThemeColorAsync(-1);
+    private void OpenThemeEditor_Click(object sender, RoutedEventArgs e) =>
+        Frame.Navigate(typeof(ThemeEditorPage));
 
-    private async void EditThemeColor_Click(object sender, RoutedEventArgs e)
+    private void ResetThemeColors_Click(object sender, RoutedEventArgs e)
     {
-        if (sender is Button { Tag: string hex }) await PickThemeColorAsync(_themeColors.IndexOf(hex));
-    }
-
-    private async void ResetThemeColors_Click(object sender, RoutedEventArgs e)
-    {
-        _themeColors.Clear();
-        await SaveThemeColorsAsync();
-    }
-
-    private async Task PickThemeColorAsync(int index)
-    {
-        ThemePaletteService.TryParseHex(index >= 0 && index < _themeColors.Count ? _themeColors[index] : null, out var current);
-        if (current.A == 0) current = Color.FromArgb(255, 0x13, 0x70, 0xF3);
-        var picker = new ColorPicker
-        {
-            Color = current,
-            IsAlphaEnabled = false,
-            IsColorChannelTextInputVisible = true,
-            IsColorPreviewVisible = true,
-            IsColorSliderVisible = true,
-        };
-        var dialog = new ContentDialog
-        {
-            XamlRoot = XamlRoot,
-            Title = Loc.T("Settings_ThemeColors_Edit"),
-            Content = picker,
-            PrimaryButtonText = Loc.T("Settings_ThemeColors_Save"),
-            SecondaryButtonText = index >= 0 ? Loc.T("Settings_ThemeColors_Remove") : string.Empty,
-            CloseButtonText = Loc.T("Settings_ThemeColors_Cancel"),
-            DefaultButton = ContentDialogButton.Primary,
-        };
-        var result = await dialog.ShowAsync();
-        if (result == ContentDialogResult.None) return;
-        if (index >= 0 && result == ContentDialogResult.Secondary) _themeColors.RemoveAt(index);
-        else if (index >= 0) _themeColors[index] = ThemePaletteService.ToHex(picker.Color);
-        else if (_themeColors.Count < ThemePaletteService.MaxColors && !_themeColors.Contains(ThemePaletteService.ToHex(picker.Color)))
-            _themeColors.Add(ThemePaletteService.ToHex(picker.Color));
-        await SaveThemeColorsAsync();
-    }
-
-    private async Task SaveThemeColorsAsync()
-    {
-        var settings = AppState.SettingsService.Load();
-        settings.ThemeColors = [.. _themeColors];
-        AppState.SettingsService.Save(settings);
-        ThemePaletteService.SetColors(settings.ThemeColors);
+        ThemeService.Reset();
         RenderThemeColors();
-        MainWindow.Instance?.RefreshThemePalette();
-        await Task.CompletedTask;
     }
-
     private void UpdateProxyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (_syncing || (UpdateProxyComboBox.SelectedItem as ComboBoxItem)?.Tag is not string proxyCode)

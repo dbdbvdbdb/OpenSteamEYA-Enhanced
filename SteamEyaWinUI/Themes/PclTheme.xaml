@@ -8,6 +8,11 @@
         本文件只定义自有的颜色、圆角与控件样式，不包含任何来自 PCL 的素材或代码。
     -->
 
+    <!--
+        语义色令牌：默认值即内置蓝色主题；用户在主题编辑器里改主色/辅助色后，
+        ThemePaletteService 会在运行期覆盖这三套字典里的同名 Color。
+    -->
+
     <ResourceDictionary.ThemeDictionaries>
 
         <ResourceDictionary x:Key="Default">
@@ -15,17 +20,54 @@
             <Color x:Key="PclAccentHoverColor">#2E82F6</Color>
             <Color x:Key="PclAccentPressedColor">#0E5CD4</Color>
             <Color x:Key="PclAccentSoftColor">#E8F1FE</Color>
+            <Color x:Key="PclFocusColor">#1370F3</Color>
             <Color x:Key="PclPageBackgroundColor">#F3F4F6</Color>
             <Color x:Key="PclSurfaceColor">#FFFFFF</Color>
             <Color x:Key="PclSurfaceAltColor">#FAFBFC</Color>
             <Color x:Key="PclSurfaceHoverColor">#F1F3F7</Color>
+            <Color x:Key="PclInputColor">#FDFDFE</Color>
+            <Color x:Key="PclDialogColor">#FFFFFF</Color>
             <Color x:Key="PclBorderColor">#E3E6EB</Color>
             <Color x:Key="PclBorderStrongColor">#D3D8E0</Color>
+            <Color x:Key="PclDividerColor">#EDEFF3</Color>
             <Color x:Key="PclTextPrimaryColor">#1F2329</Color>
             <Color x:Key="PclTextSecondaryColor">#6B7280</Color>
             <Color x:Key="PclTextTertiaryColor">#9AA1AC</Color>
+            <Color x:Key="PclTextDisabledColor">#B9BEC7</Color>
+            <Color x:Key="PclOnAccentColor">#FFFFFF</Color>
+            <Color x:Key="PclSuccessColor">#1E8E4E</Color>
+            <Color x:Key="PclWarningColor">#B26A00</Color>
+            <Color x:Key="PclErrorColor">#C02B2B</Color>
+            <Color x:Key="PclInfoColor">#1F6FD0</Color>
+            <Color x:Key="PclSuccessSoftColor">#E7F6EC</Color>
+            <Color x:Key="PclWarningSoftColor">#FDF3E2</Color>
+            <Color x:Key="PclErrorSoftColor">#FDEDED</Color>
+            <Color x:Key="PclInfoSoftColor">#E8F1FE</Color>
             <Color x:Key="PclArtworkStartColor">#E8F1FE</Color>
             <Color x:Key="PclArtworkEndColor">#F5F8FD</Color>
+
+            <!-- 旧页面使用的 WinUI 画刷别名 -->
+            <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="{ThemeResource PclSurfaceColor}" />
+            <SolidColorBrush x:Key="CardBackgroundFillColorSecondaryBrush" Color="{ThemeResource PclSurfaceAltColor}" />
+            <SolidColorBrush x:Key="CardStrokeColorDefaultBrush" Color="{ThemeResource PclBorderColor}" />
+            <SolidColorBrush x:Key="DividerStrokeColorDefaultBrush" Color="{ThemeResource PclDividerColor}" />
+            <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{ThemeResource PclTextPrimaryColor}" />
+            <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{ThemeResource PclTextSecondaryColor}" />
+            <SolidColorBrush x:Key="TextFillColorTertiaryBrush" Color="{ThemeResource PclTextTertiaryColor}" />
+            <SolidColorBrush x:Key="TextFillColorDisabledBrush" Color="{ThemeResource PclTextDisabledColor}" />
+            <SolidColorBrush x:Key="ControlFillColorDefaultBrush" Color="{ThemeResource PclInputColor}" />
+            <SolidColorBrush x:Key="ControlFillColorSecondaryBrush" Color="{ThemeResource PclSurfaceAltColor}" />
+            <SolidColorBrush x:Key="ControlFillColorTertiaryBrush" Color="{ThemeResource PclSurfaceHoverColor}" />
+            <SolidColorBrush x:Key="ControlStrokeColorDefaultBrush" Color="{ThemeResource PclBorderColor}" />
+            <SolidColorBrush x:Key="ControlStrokeColorSecondaryBrush" Color="{ThemeResource PclBorderColor}" />
+            <SolidColorBrush x:Key="SubtleFillColorSecondaryBrush" Color="{ThemeResource PclSurfaceHoverColor}" />
+            <SolidColorBrush x:Key="SolidBackgroundFillColorBaseBrush" Color="{ThemeResource PclPageBackgroundColor}" />
+            <SolidColorBrush x:Key="SolidBackgroundFillColorBaseAltBrush" Color="{ThemeResource PclSurfaceAltColor}" />
+            <SolidColorBrush x:Key="LayerFillColorDefaultBrush" Color="{ThemeResource PclSurfaceColor}" />
+            <SolidColorBrush x:Key="AccentFillColorDefaultBrush" Color="{ThemeResource PclAccentColor}" />
+            <SolidColorBrush x:Key="AccentFillColorSecondaryBrush" Color="{ThemeResource PclAccentHoverColor}" />
+            <SolidColorBrush x:Key="AccentFillColorTertiaryBrush" Color="{ThemeResource PclAccentPressedColor}" />
+            <SolidColorBrush x:Key="TextOnAccentFillColorPrimaryBrush" Color="{ThemeResource PclOnAccentColor}" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
@@ -33,17 +75,53 @@
             <Color x:Key="PclAccentHoverColor">#2E82F6</Color>
             <Color x:Key="PclAccentPressedColor">#0E5CD4</Color>
             <Color x:Key="PclAccentSoftColor">#E8F1FE</Color>
+            <Color x:Key="PclFocusColor">#1370F3</Color>
             <Color x:Key="PclPageBackgroundColor">#F3F4F6</Color>
             <Color x:Key="PclSurfaceColor">#FFFFFF</Color>
             <Color x:Key="PclSurfaceAltColor">#FAFBFC</Color>
             <Color x:Key="PclSurfaceHoverColor">#F1F3F7</Color>
+            <Color x:Key="PclInputColor">#FDFDFE</Color>
+            <Color x:Key="PclDialogColor">#FFFFFF</Color>
             <Color x:Key="PclBorderColor">#E3E6EB</Color>
             <Color x:Key="PclBorderStrongColor">#D3D8E0</Color>
+            <Color x:Key="PclDividerColor">#EDEFF3</Color>
             <Color x:Key="PclTextPrimaryColor">#1F2329</Color>
             <Color x:Key="PclTextSecondaryColor">#6B7280</Color>
             <Color x:Key="PclTextTertiaryColor">#9AA1AC</Color>
+            <Color x:Key="PclTextDisabledColor">#B9BEC7</Color>
+            <Color x:Key="PclOnAccentColor">#FFFFFF</Color>
+            <Color x:Key="PclSuccessColor">#1E8E4E</Color>
+            <Color x:Key="PclWarningColor">#B26A00</Color>
+            <Color x:Key="PclErrorColor">#C02B2B</Color>
+            <Color x:Key="PclInfoColor">#1F6FD0</Color>
+            <Color x:Key="PclSuccessSoftColor">#E7F6EC</Color>
+            <Color x:Key="PclWarningSoftColor">#FDF3E2</Color>
+            <Color x:Key="PclErrorSoftColor">#FDEDED</Color>
+            <Color x:Key="PclInfoSoftColor">#E8F1FE</Color>
             <Color x:Key="PclArtworkStartColor">#E8F1FE</Color>
             <Color x:Key="PclArtworkEndColor">#F5F8FD</Color>
+
+            <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="{ThemeResource PclSurfaceColor}" />
+            <SolidColorBrush x:Key="CardBackgroundFillColorSecondaryBrush" Color="{ThemeResource PclSurfaceAltColor}" />
+            <SolidColorBrush x:Key="CardStrokeColorDefaultBrush" Color="{ThemeResource PclBorderColor}" />
+            <SolidColorBrush x:Key="DividerStrokeColorDefaultBrush" Color="{ThemeResource PclDividerColor}" />
+            <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{ThemeResource PclTextPrimaryColor}" />
+            <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{ThemeResource PclTextSecondaryColor}" />
+            <SolidColorBrush x:Key="TextFillColorTertiaryBrush" Color="{ThemeResource PclTextTertiaryColor}" />
+            <SolidColorBrush x:Key="TextFillColorDisabledBrush" Color="{ThemeResource PclTextDisabledColor}" />
+            <SolidColorBrush x:Key="ControlFillColorDefaultBrush" Color="{ThemeResource PclInputColor}" />
+            <SolidColorBrush x:Key="ControlFillColorSecondaryBrush" Color="{ThemeResource PclSurfaceAltColor}" />
+            <SolidColorBrush x:Key="ControlFillColorTertiaryBrush" Color="{ThemeResource PclSurfaceHoverColor}" />
+            <SolidColorBrush x:Key="ControlStrokeColorDefaultBrush" Color="{ThemeResource PclBorderColor}" />
+            <SolidColorBrush x:Key="ControlStrokeColorSecondaryBrush" Color="{ThemeResource PclBorderColor}" />
+            <SolidColorBrush x:Key="SubtleFillColorSecondaryBrush" Color="{ThemeResource PclSurfaceHoverColor}" />
+            <SolidColorBrush x:Key="SolidBackgroundFillColorBaseBrush" Color="{ThemeResource PclPageBackgroundColor}" />
+            <SolidColorBrush x:Key="SolidBackgroundFillColorBaseAltBrush" Color="{ThemeResource PclSurfaceAltColor}" />
+            <SolidColorBrush x:Key="LayerFillColorDefaultBrush" Color="{ThemeResource PclSurfaceColor}" />
+            <SolidColorBrush x:Key="AccentFillColorDefaultBrush" Color="{ThemeResource PclAccentColor}" />
+            <SolidColorBrush x:Key="AccentFillColorSecondaryBrush" Color="{ThemeResource PclAccentHoverColor}" />
+            <SolidColorBrush x:Key="AccentFillColorTertiaryBrush" Color="{ThemeResource PclAccentPressedColor}" />
+            <SolidColorBrush x:Key="TextOnAccentFillColorPrimaryBrush" Color="{ThemeResource PclOnAccentColor}" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">
@@ -51,35 +129,85 @@
             <Color x:Key="PclAccentHoverColor">#63A7FF</Color>
             <Color x:Key="PclAccentPressedColor">#2E7FE8</Color>
             <Color x:Key="PclAccentSoftColor">#1D2C44</Color>
+            <Color x:Key="PclFocusColor">#63A7FF</Color>
             <Color x:Key="PclPageBackgroundColor">#1B1C1F</Color>
             <Color x:Key="PclSurfaceColor">#252629</Color>
             <Color x:Key="PclSurfaceAltColor">#2B2D31</Color>
             <Color x:Key="PclSurfaceHoverColor">#32343A</Color>
+            <Color x:Key="PclInputColor">#2A2C31</Color>
+            <Color x:Key="PclDialogColor">#26282C</Color>
             <Color x:Key="PclBorderColor">#3A3D44</Color>
             <Color x:Key="PclBorderStrongColor">#4A4E57</Color>
+            <Color x:Key="PclDividerColor">#303338</Color>
             <Color x:Key="PclTextPrimaryColor">#F2F3F5</Color>
             <Color x:Key="PclTextSecondaryColor">#A8ADB8</Color>
             <Color x:Key="PclTextTertiaryColor">#7C828D</Color>
+            <Color x:Key="PclTextDisabledColor">#5E636B</Color>
+            <Color x:Key="PclOnAccentColor">#FFFFFF</Color>
+            <Color x:Key="PclSuccessColor">#4CCB7E</Color>
+            <Color x:Key="PclWarningColor">#E0A13A</Color>
+            <Color x:Key="PclErrorColor">#F06A6A</Color>
+            <Color x:Key="PclInfoColor">#6FA8F0</Color>
+            <Color x:Key="PclSuccessSoftColor">#16281E</Color>
+            <Color x:Key="PclWarningSoftColor">#2A2113</Color>
+            <Color x:Key="PclErrorSoftColor">#2C1A1A</Color>
+            <Color x:Key="PclInfoSoftColor">#16233A</Color>
             <Color x:Key="PclArtworkStartColor">#1A2638</Color>
             <Color x:Key="PclArtworkEndColor">#202E44</Color>
+
+            <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="{ThemeResource PclSurfaceColor}" />
+            <SolidColorBrush x:Key="CardBackgroundFillColorSecondaryBrush" Color="{ThemeResource PclSurfaceAltColor}" />
+            <SolidColorBrush x:Key="CardStrokeColorDefaultBrush" Color="{ThemeResource PclBorderColor}" />
+            <SolidColorBrush x:Key="DividerStrokeColorDefaultBrush" Color="{ThemeResource PclDividerColor}" />
+            <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{ThemeResource PclTextPrimaryColor}" />
+            <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{ThemeResource PclTextSecondaryColor}" />
+            <SolidColorBrush x:Key="TextFillColorTertiaryBrush" Color="{ThemeResource PclTextTertiaryColor}" />
+            <SolidColorBrush x:Key="TextFillColorDisabledBrush" Color="{ThemeResource PclTextDisabledColor}" />
+            <SolidColorBrush x:Key="ControlFillColorDefaultBrush" Color="{ThemeResource PclInputColor}" />
+            <SolidColorBrush x:Key="ControlFillColorSecondaryBrush" Color="{ThemeResource PclSurfaceAltColor}" />
+            <SolidColorBrush x:Key="ControlFillColorTertiaryBrush" Color="{ThemeResource PclSurfaceHoverColor}" />
+            <SolidColorBrush x:Key="ControlStrokeColorDefaultBrush" Color="{ThemeResource PclBorderColor}" />
+            <SolidColorBrush x:Key="ControlStrokeColorSecondaryBrush" Color="{ThemeResource PclBorderColor}" />
+            <SolidColorBrush x:Key="SubtleFillColorSecondaryBrush" Color="{ThemeResource PclSurfaceHoverColor}" />
+            <SolidColorBrush x:Key="SolidBackgroundFillColorBaseBrush" Color="{ThemeResource PclPageBackgroundColor}" />
+            <SolidColorBrush x:Key="SolidBackgroundFillColorBaseAltBrush" Color="{ThemeResource PclSurfaceAltColor}" />
+            <SolidColorBrush x:Key="LayerFillColorDefaultBrush" Color="{ThemeResource PclSurfaceColor}" />
+            <SolidColorBrush x:Key="AccentFillColorDefaultBrush" Color="{ThemeResource PclAccentColor}" />
+            <SolidColorBrush x:Key="AccentFillColorSecondaryBrush" Color="{ThemeResource PclAccentHoverColor}" />
+            <SolidColorBrush x:Key="AccentFillColorTertiaryBrush" Color="{ThemeResource PclAccentPressedColor}" />
+            <SolidColorBrush x:Key="TextOnAccentFillColorPrimaryBrush" Color="{ThemeResource PclOnAccentColor}" />
         </ResourceDictionary>
 
     </ResourceDictionary.ThemeDictionaries>
 
-    <!-- 画刷 -->
+    <!-- 画刷：实例在启动时创建一次，主题服务会直接改它们的 Color -->
     <SolidColorBrush x:Key="PclAccentBrush" Color="{ThemeResource PclAccentColor}" />
     <SolidColorBrush x:Key="PclAccentHoverBrush" Color="{ThemeResource PclAccentHoverColor}" />
     <SolidColorBrush x:Key="PclAccentPressedBrush" Color="{ThemeResource PclAccentPressedColor}" />
     <SolidColorBrush x:Key="PclAccentSoftBrush" Color="{ThemeResource PclAccentSoftColor}" />
+    <SolidColorBrush x:Key="PclFocusBrush" Color="{ThemeResource PclFocusColor}" />
     <SolidColorBrush x:Key="PclPageBackgroundBrush" Color="{ThemeResource PclPageBackgroundColor}" />
     <SolidColorBrush x:Key="PclSurfaceBrush" Color="{ThemeResource PclSurfaceColor}" />
     <SolidColorBrush x:Key="PclSurfaceAltBrush" Color="{ThemeResource PclSurfaceAltColor}" />
     <SolidColorBrush x:Key="PclSurfaceHoverBrush" Color="{ThemeResource PclSurfaceHoverColor}" />
+    <SolidColorBrush x:Key="PclInputBrush" Color="{ThemeResource PclInputColor}" />
+    <SolidColorBrush x:Key="PclDialogBrush" Color="{ThemeResource PclDialogColor}" />
     <SolidColorBrush x:Key="PclBorderBrush" Color="{ThemeResource PclBorderColor}" />
     <SolidColorBrush x:Key="PclBorderStrongBrush" Color="{ThemeResource PclBorderStrongColor}" />
+    <SolidColorBrush x:Key="PclDividerBrush" Color="{ThemeResource PclDividerColor}" />
     <SolidColorBrush x:Key="PclTextPrimaryBrush" Color="{ThemeResource PclTextPrimaryColor}" />
     <SolidColorBrush x:Key="PclTextSecondaryBrush" Color="{ThemeResource PclTextSecondaryColor}" />
     <SolidColorBrush x:Key="PclTextTertiaryBrush" Color="{ThemeResource PclTextTertiaryColor}" />
+    <SolidColorBrush x:Key="PclTextDisabledBrush" Color="{ThemeResource PclTextDisabledColor}" />
+    <SolidColorBrush x:Key="PclOnAccentBrush" Color="{ThemeResource PclOnAccentColor}" />
+    <SolidColorBrush x:Key="PclSuccessBrush" Color="{ThemeResource PclSuccessColor}" />
+    <SolidColorBrush x:Key="PclWarningBrush" Color="{ThemeResource PclWarningColor}" />
+    <SolidColorBrush x:Key="PclErrorBrush" Color="{ThemeResource PclErrorColor}" />
+    <SolidColorBrush x:Key="PclInfoBrush" Color="{ThemeResource PclInfoColor}" />
+    <SolidColorBrush x:Key="PclSuccessSoftBrush" Color="{ThemeResource PclSuccessSoftColor}" />
+    <SolidColorBrush x:Key="PclWarningSoftBrush" Color="{ThemeResource PclWarningSoftColor}" />
+    <SolidColorBrush x:Key="PclErrorSoftBrush" Color="{ThemeResource PclErrorSoftColor}" />
+    <SolidColorBrush x:Key="PclInfoSoftBrush" Color="{ThemeResource PclInfoSoftColor}" />
 
     <!-- 形状与字号 -->
     <CornerRadius x:Key="PclCardCornerRadius">10</CornerRadius>

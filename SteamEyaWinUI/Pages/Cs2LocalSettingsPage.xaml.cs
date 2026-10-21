@@ -174,7 +174,7 @@ public sealed partial class Cs2LocalSettingsPage : Page
             button.Background = (Brush)Application.Current.Resources[active ? "PclAccentBrush" : "PclSurfaceAltBrush"];
             button.BorderBrush = (Brush)Application.Current.Resources[active ? "PclAccentBrush" : "PclBorderBrush"];
             button.Foreground = active
-                ? new SolidColorBrush(Microsoft.UI.Colors.White)
+                ? (Brush)Application.Current.Resources["PclOnAccentBrush"]
                 : (Brush)Application.Current.Resources["PclTextSecondaryBrush"];
         }
         CategoryTitle.Text = _category;

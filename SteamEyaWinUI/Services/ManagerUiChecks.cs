@@ -89,6 +89,7 @@ internal static partial class ManagerUiChecks
             await CheckClassificationsAsync(window, page);
             await CheckUpdatesAsync(window);
             await CheckCs2SettingsAsync(window);
+            await CheckThemeAsync(window);
             Results.Add("INFO actual rasterization scale " + page.XamlRoot.RasterizationScale);
             await File.WriteAllLinesAsync(Path.Combine(OutputRoot, "results.txt"), Results);
         }
@@ -105,6 +106,59 @@ internal static partial class ManagerUiChecks
     {
         double scale = page.XamlRoot.RasterizationScale;
         window.AppWindow.Resize(new SizeInt32((int)(width * scale), (int)(height * scale)));
+    }
+    private static async Task CheckThemeAsync(MainWindow window)
+    {
+        var before = ThemeService.Current;
+        var previousPage = window.MainFrame.Content?.GetType();
+        var spec = new ThemeSpec("#D6456B", "#E8A13A", ThemeTint.Warm);
+
+        var first = ThemePaletteGenerator.Build(spec, false);
+        var second = ThemePaletteGenerator.Build(spec, false);
+        Check(first.Count >= 25, "theme generator emits the full token set");
+        Check(first.All(pair => second[pair.Key] == pair.Value), "theme generator is deterministic");
+        Check(first[ThemePaletteGenerator.Accent] != ThemePaletteGenerator.Build(ThemeSpec.Default, false)[ThemePaletteGenerator.Accent], "custom theme changes the accent token");
+
+        foreach (bool dark in new[] { false, true })
+        {
+            var palette = ThemePaletteGenerator.Build(spec, dark);
+            string label = dark ? "dark" : "light";
+            Check(ThemePaletteGenerator.Contrast(palette[ThemePaletteGenerator.TextPrimary], palette[ThemePaletteGenerator.Surface]) >= 4.5, "primary text contrast on surfaces (" + label + ")");
+            Check(ThemePaletteGenerator.Contrast(palette[ThemePaletteGenerator.TextPrimary], palette[ThemePaletteGenerator.PageBackground]) >= 4.5, "primary text contrast on page background (" + label + ")");
+            Check(ThemePaletteGenerator.Contrast(palette[ThemePaletteGenerator.TextSecondary], palette[ThemePaletteGenerator.Surface]) >= 3.0, "secondary text contrast (" + label + ")");
+            Check(ThemePaletteGenerator.Contrast(palette[ThemePaletteGenerator.OnAccent], palette[ThemePaletteGenerator.Accent]) >= 4.5, "text on accent contrast (" + label + ")");
+        }
+
+        window.ApplyTheme(ElementTheme.Dark);
+        window.MainFrame.Navigate(typeof(ThemeEditorPage));
+        await Task.Delay(900);
+        var root = (FrameworkElement)window.Content;
+        var buttons = FindElements(root).OfType<Microsoft.UI.Xaml.Controls.Button>().Select(x => x.Name).ToHashSet();
+        Check(buttons.Contains("ApplyButton") && buttons.Contains("CancelButton") && buttons.Contains("ResetButton"), "theme editor exposes apply, cancel and reset");
+        var previews = FindElements(root).OfType<Microsoft.UI.Xaml.Controls.StackPanel>().Where(x => x.Name is "LightPreviewContent" or "DarkPreviewContent").ToList();
+        Check(previews.Count == 2 && previews.All(x => x.Children.Count >= 5), "theme editor previews both light and dark");
+        await CaptureAsync(window, "theme-editor-dark");
+
+        ThemeService.BeginPreview();
+        ThemeService.SetSpec(spec);
+        ThemeService.Repaint(refreshPages: false);
+        await Task.Delay(400);
+        var expected = ThemePaletteGenerator.Build(spec, true)[ThemePaletteGenerator.Accent];
+        Check(((SolidColorBrush)Application.Current.Resources["PclAccentBrush"]).Color == expected, "live preview repaints the shared accent brush");
+        await CaptureAsync(window, "theme-editor-preview");
+
+        ThemeService.CancelPreview();
+        await Task.Delay(300);
+        Check(ThemeService.Current.PrimaryHex == before.PrimaryHex, "cancelling the editor restores the previous theme");
+
+        ThemeService.Commit(spec);
+        var saved = AppState.SettingsService.Load();
+        Check(saved.ThemePrimaryHex == spec.PrimaryHex && saved.ThemeTint == "warm", "theme settings persist the custom palette");
+        ThemeService.Commit(before);
+        Check(AppState.SettingsService.Load().ThemePrimaryHex == before.PrimaryHex, "theme settings restore the previous palette");
+
+        if (previousPage is not null) window.MainFrame.Navigate(previousPage);
+        await Task.Delay(600);
     }
     private static void CheckOriginalServicesOffline()
     {

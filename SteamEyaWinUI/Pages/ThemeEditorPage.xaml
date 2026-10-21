@@ -1,0 +1,117 @@
+<Page
+    x:Class="SteamEyaWinUI.Pages.ThemeEditorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SteamEyaWinUI.Pages"
+    Background="{ThemeResource PclPageBackgroundBrush}">
+
+    <Page.Resources>
+        <Style x:Key="ThemeSwatchButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{ThemeResource PclBorderBrush}" />
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer Padding="32,24,32,20">
+        <StackPanel MaxWidth="900" Spacing="14" HorizontalAlignment="Left">
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="主题编辑器" Style="{StaticResource PclTitleTextStyle}" />
+                <TextBlock Text="选择主色与辅助色，其余界面颜色会自动派生；修改会实时预览。"
+                           Style="{StaticResource PclSubtitleTextStyle}" />
+            </StackPanel>
+
+            <!-- 预设 -->
+            <Border Style="{StaticResource PclCardStyle}">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="快速预设" Style="{StaticResource PclSectionTitleTextStyle}" />
+                    <StackPanel x:Name="PresetPanel" Orientation="Horizontal" Spacing="8" />
+                </StackPanel>
+            </Border>
+
+            <!-- 颜色输入 -->
+            <Border Style="{StaticResource PclCardStyle}">
+                <StackPanel Spacing="14">
+                    <TextBlock Text="颜色" Style="{StaticResource PclSectionTitleTextStyle}" />
+
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="88" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="主色" VerticalAlignment="Center" Style="{StaticResource PclBodyTextStyle}" />
+                        <Border Grid.Column="1" x:Name="PrimarySwatch" Width="36" Height="36" CornerRadius="18"
+                                BorderThickness="1" BorderBrush="{ThemeResource PclBorderBrush}" />
+                        <TextBox Grid.Column="2" x:Name="PrimaryHexBox" MaxLength="7" FontFamily="Consolas"
+                                 PlaceholderText="#1370F3" TextChanged="PrimaryHexBox_TextChanged" />
+                        <Button Grid.Column="3" x:Name="PrimaryPickButton" Content="选择颜色…"
+                                Style="{StaticResource PclSecondaryButtonStyle}" Click="PrimaryPickButton_Click" />
+                    </Grid>
+
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="88" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="辅助色" VerticalAlignment="Center" Style="{StaticResource PclBodyTextStyle}" />
+                        <Border Grid.Column="1" x:Name="SecondarySwatch" Width="36" Height="36" CornerRadius="18"
+                                BorderThickness="1" BorderBrush="{ThemeResource PclBorderBrush}" />
+                        <TextBox Grid.Column="2" x:Name="SecondaryHexBox" MaxLength="7" FontFamily="Consolas"
+                                 PlaceholderText="#6B5CF0" TextChanged="SecondaryHexBox_TextChanged" />
+                        <Button Grid.Column="3" x:Name="SecondaryPickButton" Content="选择颜色…"
+                                Style="{StaticResource PclSecondaryButtonStyle}" Click="SecondaryPickButton_Click" />
+                    </Grid>
+
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="背景倾向" Style="{StaticResource PclBodyTextStyle}" />
+                        <StackPanel Orientation="Horizontal" Spacing="16">
+                            <RadioButton x:Name="TintCool" GroupName="ThemeTint" Content="冷色" Tag="cool" Checked="Tint_Checked" />
+                            <RadioButton x:Name="TintNeutral" GroupName="ThemeTint" Content="中性" Tag="neutral" Checked="Tint_Checked" />
+                            <RadioButton x:Name="TintWarm" GroupName="ThemeTint" Content="暖色" Tag="warm" Checked="Tint_Checked" />
+                        </StackPanel>
+                        <TextBlock Text="主色决定按钮与强调色；辅助色参与卡片渐变；背景倾向只影响底色与边框的冷暖。"
+                                   Style="{StaticResource PclCaptionTextStyle}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- 预览 -->
+            <Border Style="{StaticResource PclCardStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="预览" Style="{StaticResource PclSectionTitleTextStyle}" />
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="LightPreviewCard" Grid.Column="0" CornerRadius="10" Padding="16" BorderThickness="1">
+                            <StackPanel x:Name="LightPreviewContent" Spacing="10" />
+                        </Border>
+
+                        <Border x:Name="DarkPreviewCard" Grid.Column="1" CornerRadius="10" Padding="16" BorderThickness="1">
+                            <StackPanel x:Name="DarkPreviewContent" Spacing="10" />
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- 操作 -->
+            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,4,0,24">
+                <Button x:Name="ApplyButton" Content="应用" Style="{StaticResource PclPrimaryButtonStyle}" Click="ApplyButton_Click" />
+                <Button x:Name="CancelButton" Content="取消" Style="{StaticResource PclSecondaryButtonStyle}" Click="CancelButton_Click" />
+                <Button x:Name="ResetButton" Content="恢复默认主题" Style="{StaticResource PclGhostButtonStyle}" Click="ResetButton_Click" />
+                <TextBlock x:Name="StatusText" VerticalAlignment="Center" Style="{StaticResource PclCaptionTextStyle}" />
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

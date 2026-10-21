@@ -46,7 +46,7 @@ public sealed partial class MainWindow : Window
         TitleVersionText.Text = $"v{GitHubUpdateService.CurrentVersion}";
 
         var startupSettings = AppState.SettingsService.Load();
-        ThemePaletteService.SetColors(startupSettings.ThemeColors);
+        ThemeService.LoadFromSettings();
         ApplyTheme(ParseTheme(startupSettings.Theme));
         RefreshThemePalette();
         RefreshNavText();
@@ -221,9 +221,22 @@ public sealed partial class MainWindow : Window
     public void RefreshThemePalette()
     {
         ThemePaletteService.Apply();
-        if (ContentFrame.Content is Page current) ContentFrame.Navigate(current.GetType());
+        if (Content is not FrameworkElement root) return;
+
+        // WinUI 的主题字典画刷在主题切换时才重新解析；这里先切到反色再切回，
+        // 让旧样式页面（卡片、文本框等系统画刷）立即采用新令牌颜色。
+        var theme = root.RequestedTheme;
+        root.RequestedTheme = theme == ElementTheme.Dark ? ElementTheme.Light : ElementTheme.Dark;
+        root.DispatcherQueue.TryEnqueue(() =>
+        {
+            if (Content is FrameworkElement current) current.RequestedTheme = theme;
+            if (ContentFrame.Content is Page page && page is not Pages.ThemeEditorPage)
+                ContentFrame.Navigate(page.GetType());
+        });
     }
 
+    /// <summary>供 UI 自检切换到其它页面使用。</summary>
+    internal Microsoft.UI.Xaml.Controls.Frame MainFrame => ContentFrame;
     /// <summary>本地化导航项文字；语言切换时由 Loc.LanguageChanged 再次调用。</summary>
     private void RefreshNavText()
     {

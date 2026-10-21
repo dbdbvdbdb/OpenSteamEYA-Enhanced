@@ -20,14 +20,14 @@
                 PointerReleased="DragSource_PointerReleased"
                 PointerCaptureLost="DragSource_PointerCaptureLost"
                 PointerCanceled="DragSource_PointerCanceled">
-                <Border CornerRadius="4" Background="#FF202B3A" BorderThickness="1" BorderBrush="#FF3A4658" />
+                <Border CornerRadius="4" Background="{ThemeResource PclSurfaceBrush}" BorderThickness="1" BorderBrush="{ThemeResource PclBorderBrush}" />
                 <StackPanel Orientation="Horizontal" Spacing="6" Padding="6,0" VerticalAlignment="Center">
                     <Image Width="42" Height="18" Stretch="Uniform">
                         <Image.Source>
                             <imaging:SvgImageSource UriSource="{x:Bind IconUri}" />
                         </Image.Source>
                     </Image>
-                    <TextBlock Text="{x:Bind DisplayName}" FontSize="11" Foreground="#FFCDCDCD" VerticalAlignment="Center" />
+                    <TextBlock Text="{x:Bind DisplayName}" FontSize="11" Foreground="{ThemeResource PclTextSecondaryBrush}" VerticalAlignment="Center" />
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -58,9 +58,9 @@
             Grid.Row="2"
             CornerRadius="8"
             Padding="16"
-            Background="#FF1B2331"
+            Background="{ThemeResource PclPageBackgroundBrush}"
             BorderThickness="1"
-            BorderBrush="#FF32405A">
+            BorderBrush="{ThemeResource PclBorderBrush}">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -81,7 +81,7 @@
 
                 <!-- 可选武器池（未装备的，按阵营）。 -->
                 <StackPanel Grid.Row="1" Spacing="6">
-                    <TextBlock Text="{x:Bind Strings.Get('Loadout_PoolHint'), Mode=OneWay}" FontSize="12" Foreground="#FFAAB4C4" />
+                    <TextBlock Text="{x:Bind Strings.Get('Loadout_PoolHint'), Mode=OneWay}" FontSize="12" Foreground="{ThemeResource PclTextTertiaryBrush}" />
                     <GridView
                         x:Name="PoolGrid"
                         MaxHeight="160"

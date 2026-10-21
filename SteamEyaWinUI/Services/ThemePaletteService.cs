@@ -1,5 +1,3 @@
-using System.Globalization;
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Windows.UI;
@@ -7,94 +5,62 @@ using Windows.UI;
 namespace SteamEyaWinUI.Services;
 
 /// <summary>
-/// Builds the launcher palette from one or more user-picked colors and writes it into the merged
-/// theme dictionary. Derived surfaces stay close to the built-in neutrals so contrast never breaks;
-/// only accents, tints and borders follow the picked colors.
+/// 把 <see cref="ThemeService"/> 当前的主题写入资源字典，并对外提供派生的画刷。
+/// 保留原有静态入口（Build / Apply / ArtworkGradient），供页面与自检代码使用。
 /// </summary>
 internal static class ThemePaletteService
 {
     public const int MaxColors = 5;
-    private static readonly Color DefaultAccent = Color.FromArgb(255, 0x13, 0x70, 0xF3);
 
-    public static IReadOnlyList<Color> Current { get; private set; } = [DefaultAccent];
+    public static IReadOnlyList<Color> Current
+    {
+        get
+        {
+            var spec = ThemeService.Current;
+            return [ThemePaletteGenerator.Parse(spec.PrimaryHex), ThemePaletteGenerator.Parse(spec.SecondaryHex)];
+        }
+    }
 
     public static IReadOnlyList<Color> Parse(IEnumerable<string>? hexColors)
     {
-        if (hexColors is null) return [DefaultAccent];
-        var list = new List<Color>();
-        foreach (var text in hexColors)
-        {
-            if (TryParseHex(text, out var color) && !list.Contains(color)) list.Add(color);
-            if (list.Count == MaxColors) break;
-        }
-        return list.Count == 0 ? [DefaultAccent] : list;
+        var spec = ThemeSpec.FromColors(hexColors);
+        return [ThemePaletteGenerator.Parse(spec.PrimaryHex), ThemePaletteGenerator.Parse(spec.SecondaryHex)];
     }
 
-    public static bool TryParseHex(string? text, out Color color)
-    {
-        color = default;
-        if (string.IsNullOrWhiteSpace(text)) return false;
-        var value = text.Trim();
-        if (value.StartsWith('#')) value = value[1..];
-        if (value.Length == 8) value = value[2..];
-        if (value.Length != 6 || !uint.TryParse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var rgb)) return false;
-        color = Color.FromArgb(255, (byte)(rgb >> 16), (byte)(rgb >> 8), (byte)rgb);
-        return true;
-    }
+    public static bool TryParseHex(string? text, out Color color) => ThemePaletteGenerator.TryParseHex(text, out color);
 
-    public static string ToHex(Color color) => $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+    public static string ToHex(Color color) => ThemePaletteGenerator.ToHex(color);
 
-    /// <summary>Sets the active colors; call <see cref="Apply"/> afterwards to push them into the theme.</summary>
-    public static void SetColors(IEnumerable<string>? hexColors) => Current = Parse(hexColors);
+    /// <summary>兼容旧入口：把颜色写入当前主题（不改持久化设置）。</summary>
+    public static void SetColors(IEnumerable<string>? hexColors) => ThemeService.SetSpec(ThemeSpec.FromColors(hexColors));
 
     public static IReadOnlyDictionary<string, Color> Build(IReadOnlyList<Color> colors, bool dark)
     {
-        var accent = colors.Count > 0 ? colors[0] : DefaultAccent;
-        if (dark) accent = Blend(accent, Colors.White, 0.18);
-        var secondary = colors.Count > 1 ? colors[1] : accent;
-        var tertiary = colors.Count > 2 ? colors[2] : secondary;
-
-        var surface = dark ? Blend(Rgb(0x25, 0x26, 0x29), accent, 0.035) : Blend(Rgb(0xFF, 0xFF, 0xFF), accent, 0.015);
-        var surfaceAlt = dark ? Blend(Rgb(0x2B, 0x2D, 0x31), accent, 0.05) : Blend(Rgb(0xFA, 0xFB, 0xFC), accent, 0.02);
-
-        return new Dictionary<string, Color>
+        var spec = colors.Count switch
         {
-            ["PclAccentColor"] = accent,
-            ["PclAccentHoverColor"] = dark ? Blend(accent, Colors.White, 0.12) : Blend(accent, Colors.White, 0.10),
-            ["PclAccentPressedColor"] = dark ? Blend(accent, Colors.Black, 0.10) : Blend(accent, Colors.Black, 0.16),
-            ["PclAccentSoftColor"] = dark ? Blend(surface, accent, 0.28) : Blend(accent, Colors.White, 0.88),
-            ["PclPageBackgroundColor"] = dark ? Blend(Rgb(0x1B, 0x1C, 0x1F), accent, 0.045) : Blend(Rgb(0xF3, 0xF4, 0xF6), accent, 0.03),
-            ["PclSurfaceColor"] = surface,
-            ["PclSurfaceAltColor"] = surfaceAlt,
-            ["PclSurfaceHoverColor"] = dark ? Blend(Rgb(0x32, 0x34, 0x3A), accent, 0.06) : Blend(Rgb(0xF1, 0xF3, 0xF7), accent, 0.035),
-            ["PclBorderColor"] = dark ? Blend(Rgb(0x3A, 0x3D, 0x44), accent, 0.12) : Blend(Rgb(0xE3, 0xE6, 0xEB), accent, 0.08),
-            ["PclBorderStrongColor"] = dark ? Blend(Rgb(0x4A, 0x4E, 0x57), accent, 0.14) : Blend(Rgb(0xD3, 0xD8, 0xE0), accent, 0.10),
-            ["PclTextPrimaryColor"] = dark ? Rgb(0xF2, 0xF3, 0xF5) : Rgb(0x1F, 0x23, 0x29),
-            ["PclTextSecondaryColor"] = dark ? Rgb(0xA8, 0xAD, 0xB8) : Rgb(0x6B, 0x72, 0x80),
-            ["PclTextTertiaryColor"] = dark ? Rgb(0x7C, 0x82, 0x8D) : Rgb(0x9A, 0xA1, 0xAC),
-            ["PclArtworkStartColor"] = Blend(surface, accent, dark ? 0.22 : 0.12),
-            ["PclArtworkEndColor"] = Blend(surfaceAlt, Blend(secondary, tertiary, 0.5), dark ? 0.30 : 0.18),
+            0 => ThemeSpec.Default,
+            1 => new ThemeSpec(ThemePaletteGenerator.ToHex(colors[0]), ThemePaletteGenerator.DeriveSecondary(colors[0]), ThemeSpec.Default.Tint),
+            _ => new ThemeSpec(ThemePaletteGenerator.ToHex(colors[0]), ThemePaletteGenerator.ToHex(colors[1]), ThemeSpec.Default.Tint),
         };
+        return ThemePaletteGenerator.Build(spec, dark);
     }
 
-    /// <summary>Writes the palette derived from <see cref="Current"/> into the merged PCL theme dictionary.</summary>
+    /// <summary>把当前主题写入三个主题字典，并更新共享画刷实例。</summary>
     public static void Apply()
     {
         if (Application.Current?.Resources is not { } app) return;
-        var theme = app.MergedDictionaries.FirstOrDefault(d =>
-            d.Source?.OriginalString.Contains("Themes/PclTheme.xaml", StringComparison.OrdinalIgnoreCase) == true);
+        var theme = FindThemeDictionary(app);
         if (theme is null) return;
+
         foreach (var (key, dark) in new[] { ("Default", false), ("Light", false), ("Dark", true) })
         {
             if (!theme.ThemeDictionaries.TryGetValue(key, out var value) || value is not ResourceDictionary dictionary) continue;
-            foreach (var (name, color) in Build(Current, dark)) dictionary[name] = color;
+            foreach (var (name, color) in ThemePaletteGenerator.Build(ThemeService.Current, dark)) dictionary[name] = color;
         }
 
-        // The Pcl*Brush instances are created once from ThemeResource colors, so changing a Color entry
-        // afterwards does not repaint them. Mutate the shared brush instances instead: every control that
-        // took a StaticResource/ThemeResource reference keeps pointing at the same object.
+        // Pcl*Brush 实例在字典里只创建一次，改 Color 资源不会重绘它们；直接改共享实例的颜色。
         var isDark = MainWindow.Instance?.Content is FrameworkElement root && root.ActualTheme == ElementTheme.Dark;
-        var palette = Build(Current, isDark);
+        var palette = ThemePaletteGenerator.Build(ThemeService.Current, isDark);
         foreach (var (brushKey, colorKey) in BrushMap)
         {
             if (theme[brushKey] is SolidColorBrush brush && palette.TryGetValue(colorKey, out var color)) brush.Color = color;
@@ -103,13 +69,13 @@ internal static class ThemePaletteService
         ApplySystemAccent(app, palette);
     }
 
-    /// <summary>
-    /// Legacy pages still use WinUI's AccentButtonStyle/NavigationView indicator, which read the system accent.
-    /// Overriding those entries keeps the picked color visible outside the restyled pages.
-    /// </summary>
+    internal static ResourceDictionary? FindThemeDictionary(ResourceDictionary app) =>
+        app.MergedDictionaries.FirstOrDefault(d =>
+            d.Source?.OriginalString.Contains("Themes/PclTheme.xaml", StringComparison.OrdinalIgnoreCase) == true);
+
     private static void ApplySystemAccent(ResourceDictionary app, IReadOnlyDictionary<string, Color> palette)
     {
-        var accent = palette["PclAccentColor"];
+        var accent = palette[ThemePaletteGenerator.Accent];
         foreach (var key in new[]
                  {
                      "SystemAccentColor", "SystemAccentColorLight1", "SystemAccentColorLight2", "SystemAccentColorLight3",
@@ -118,47 +84,59 @@ internal static class ThemePaletteService
         {
             app[key] = accent;
         }
-
-        // WinUI derives its accent brushes from SystemAccentColor*, so overriding the colors is enough and
-        // keeps AccentButtonStyle/NavigationViewIndicator consistent without replacing control templates.
     }
 
     private static readonly (string Brush, string Color)[] BrushMap =
     [
-        ("PclAccentBrush", "PclAccentColor"),
-        ("PclAccentHoverBrush", "PclAccentHoverColor"),
-        ("PclAccentPressedBrush", "PclAccentPressedColor"),
-        ("PclAccentSoftBrush", "PclAccentSoftColor"),
-        ("PclPageBackgroundBrush", "PclPageBackgroundColor"),
-        ("PclSurfaceBrush", "PclSurfaceColor"),
-        ("PclSurfaceAltBrush", "PclSurfaceAltColor"),
-        ("PclSurfaceHoverBrush", "PclSurfaceHoverColor"),
-        ("PclBorderBrush", "PclBorderColor"),
-        ("PclBorderStrongBrush", "PclBorderStrongColor"),
-        ("PclTextPrimaryBrush", "PclTextPrimaryColor"),
-        ("PclTextSecondaryBrush", "PclTextSecondaryColor"),
-        ("PclTextTertiaryBrush", "PclTextTertiaryColor"),
+        ("PclAccentBrush", ThemePaletteGenerator.Accent),
+        ("PclAccentHoverBrush", ThemePaletteGenerator.AccentHover),
+        ("PclAccentPressedBrush", ThemePaletteGenerator.AccentPressed),
+        ("PclAccentSoftBrush", ThemePaletteGenerator.AccentSoft),
+        ("PclFocusBrush", ThemePaletteGenerator.Focus),
+        ("PclPageBackgroundBrush", ThemePaletteGenerator.PageBackground),
+        ("PclSurfaceBrush", ThemePaletteGenerator.Surface),
+        ("PclSurfaceAltBrush", ThemePaletteGenerator.SurfaceAlt),
+        ("PclSurfaceHoverBrush", ThemePaletteGenerator.SurfaceHover),
+        ("PclInputBrush", ThemePaletteGenerator.Input),
+        ("PclDialogBrush", ThemePaletteGenerator.Dialog),
+        ("PclBorderBrush", ThemePaletteGenerator.Border),
+        ("PclBorderStrongBrush", ThemePaletteGenerator.BorderStrong),
+        ("PclDividerBrush", ThemePaletteGenerator.Divider),
+        ("PclTextPrimaryBrush", ThemePaletteGenerator.TextPrimary),
+        ("PclTextSecondaryBrush", ThemePaletteGenerator.TextSecondary),
+        ("PclTextTertiaryBrush", ThemePaletteGenerator.TextTertiary),
+        ("PclTextDisabledBrush", ThemePaletteGenerator.TextDisabled),
+        ("PclOnAccentBrush", ThemePaletteGenerator.OnAccent),
+        ("PclSuccessBrush", ThemePaletteGenerator.Success),
+        ("PclWarningBrush", ThemePaletteGenerator.Warning),
+        ("PclErrorBrush", ThemePaletteGenerator.Error),
+        ("PclInfoBrush", ThemePaletteGenerator.Info),
+        ("PclSuccessSoftBrush", ThemePaletteGenerator.SuccessSoft),
+        ("PclWarningSoftBrush", ThemePaletteGenerator.WarningSoft),
+        ("PclErrorSoftBrush", ThemePaletteGenerator.ErrorSoft),
+        ("PclInfoSoftBrush", ThemePaletteGenerator.InfoSoft),
     ];
 
-    /// <summary>Card artwork gradient; replaced at runtime when the account has a real background image.</summary>
+    /// <summary>卡片顶部渐变；账号设置了真实背景图时会被 ImageBrush 覆盖。</summary>
     public static LinearGradientBrush ArtworkGradient(bool dark)
     {
-        var palette = Build(Current, dark);
-        var secondary = Current.Count > 1 ? Current[1] : Current[0];
+        var palette = ThemePaletteGenerator.Build(ThemeService.Current, dark);
         return new LinearGradientBrush
         {
             StartPoint = new(0, 0),
             EndPoint = new(1, 1),
             GradientStops =
             {
-                new() { Offset = 0, Color = palette["PclArtworkStartColor"] },
-                new() { Offset = 0.55, Color = Blend(palette["PclArtworkStartColor"], palette["PclArtworkEndColor"], 0.6) },
-                new() { Offset = 1, Color = Blend(palette["PclArtworkEndColor"], secondary, 0.25) },
+                new() { Offset = 0, Color = palette[ThemePaletteGenerator.ArtworkStart] },
+                new() { Offset = 0.55, Color = Blend(palette[ThemePaletteGenerator.ArtworkStart], palette[ThemePaletteGenerator.ArtworkEnd], 0.6) },
+                new()
+                {
+                    Offset = 1,
+                    Color = Blend(palette[ThemePaletteGenerator.ArtworkEnd], ThemePaletteGenerator.Parse(ThemeService.Current.SecondaryHex), 0.25),
+                },
             },
         };
     }
-
-    private static Color Rgb(byte r, byte g, byte b) => Color.FromArgb(255, r, g, b);
 
     private static Color Blend(Color a, Color b, double t)
     {

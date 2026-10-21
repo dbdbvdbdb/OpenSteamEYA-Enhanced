@@ -152,7 +152,7 @@ public sealed partial class AccountManagerPage : Page
         Privacy.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources[on ? "PclAccentBrush" : "PclSurfaceAltBrush"];
         Privacy.BorderBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources[on ? "PclAccentBrush" : "PclBorderBrush"];
         Privacy.Foreground = on
-            ? new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White)
+            ? (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["PclOnAccentBrush"]
             : (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["PclTextSecondaryBrush"];
     }
     private async void Privacy_Click(object sender, RoutedEventArgs e)
