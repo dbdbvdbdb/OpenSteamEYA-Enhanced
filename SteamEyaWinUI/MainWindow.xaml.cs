@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Media.Imaging;
 using SteamEyaWinUI.Localization;
 using SteamEyaWinUI.Models;
 using SteamEyaWinUI.Pages;
@@ -289,6 +290,18 @@ public sealed partial class MainWindow : Window
 
     private async Task ShowStartupUpdateDialogAsync(GitHubUpdateInfo update)
     {
+        var dialog = BuildStartupUpdateDialog(update);
+
+        if (await dialog.ShowAsync() != ContentDialogResult.Primary)
+        {
+            return;
+        }
+
+        await InstallUpdateFromStartupAsync(update);
+    }
+
+    private ContentDialog BuildStartupUpdateDialog(GitHubUpdateInfo update)
+    {
         var secondary = (Brush)Application.Current.Resources["PclTextSecondaryBrush"];
         var notes = new StackPanel { Spacing = 3 };
         if (update.Changelog.Count == 0)
@@ -339,13 +352,59 @@ public sealed partial class MainWindow : Window
             DefaultButton = ContentDialogButton.Primary
         };
 
-        if (await dialog.ShowAsync() != ContentDialogResult.Primary)
+        return dialog;
+    }
+
+#if MANAGER_UI_CHECKS
+    /// <summary>QA 专用：弹出真实的启动更新对话框，截图并校验内容后关闭。</summary>
+    internal async Task CheckStartupUpdateDialogAsync(GitHubUpdateInfo update)
+    {
+        var dialog = BuildStartupUpdateDialog(update);
+        var showing = dialog.ShowAsync().AsTask();
+        await Task.Delay(900);
+
+        ManagerUiChecks.Check(!string.IsNullOrWhiteSpace(dialog.Title?.ToString()), "startup update dialog title");
+        var text = FlattenText(dialog.Content);
+        ManagerUiChecks.Check(text.Contains(update.CurrentVersion) && text.Contains(update.LatestVersion), "startup update dialog shows both versions");
+        ManagerUiChecks.Check(text.Contains(Loc.T("UpdateDialog_Notes_Header")), "startup update dialog shows changelog header");
+        ManagerUiChecks.Check(dialog.PrimaryButtonText == Loc.T("UpdateDialog_Now") && dialog.CloseButtonText == Loc.T("UpdateDialog_Later"), "startup update dialog button labels");
+
+        var image = new RenderTargetBitmap();
+        await image.RenderAsync(dialog);
+        ManagerUiChecks.Check(image.PixelWidth > 200 && image.PixelHeight > 100, "startup update dialog renders");
+        await ManagerUiChecks.SaveBitmapAsync(image, "startup-update-dialog");
+
+        dialog.Hide();
+        var result = await showing;
+        ManagerUiChecks.Check(result == ContentDialogResult.None, "startup update dialog dismisses without installing");
+    }
+
+    private static string FlattenText(object? content)
+    {
+        var builder = new System.Text.StringBuilder();
+        if (content is not DependencyObject root)
         {
-            return;
+            return string.Empty;
         }
 
-        await InstallUpdateFromStartupAsync(update);
+        void Walk(DependencyObject node)
+        {
+            if (node is TextBlock block)
+            {
+                builder.AppendLine(block.Text);
+            }
+
+            int count = VisualTreeHelper.GetChildrenCount(node);
+            for (int i = 0; i < count; i++)
+            {
+                Walk(VisualTreeHelper.GetChild(node, i));
+            }
+        }
+
+        Walk(root);
+        return builder.ToString();
     }
+#endif
 
     private async Task InstallUpdateFromStartupAsync(GitHubUpdateInfo update)
     {

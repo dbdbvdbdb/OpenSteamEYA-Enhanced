@@ -37,6 +37,11 @@ internal static partial class ManagerUiChecks
             window.ApplyTheme(ElementTheme.Light);
             await CaptureAsync(window, "update-available-light");
 
+            if (AppState.LatestUpdate is { IsUpdateAvailable: true } startupUpdate)
+            {
+                await window.CheckStartupUpdateDialogAsync(startupUpdate);
+            }
+
             handler.Fail = true;
             await AppState.CheckForUpdatesAsync(isAutomatic: false);
             Check(AppState.UpdateCheckError is not null && !AppState.IsCheckingForUpdates && !download.IsEnabled && aboutItem.InfoBadge is null,

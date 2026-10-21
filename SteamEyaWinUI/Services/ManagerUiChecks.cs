@@ -168,6 +168,21 @@ internal static partial class ManagerUiChecks
         encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, (uint)image.PixelWidth, (uint)image.PixelHeight, 96, 96, bytes);
         await encoder.FlushAsync();
     }
+    /// <summary>Saves a rendered bitmap into the QA run folder so the result can be reviewed later.</summary>
+    internal static async Task SaveBitmapAsync(RenderTargetBitmap image, string name)
+    {
+        var buffer = await image.GetPixelsAsync();
+        var bytes = new byte[buffer.Length];
+        using (var reader = DataReader.FromBuffer(buffer)) reader.ReadBytes(bytes);
+        var path = Path.Combine(OutputRoot, name + ".png");
+        await File.WriteAllBytesAsync(path, []);
+        var file = await StorageFile.GetFileFromPathAsync(path);
+        using var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
+        var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+        encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, (uint)image.PixelWidth, (uint)image.PixelHeight, 96, 96, bytes);
+        await encoder.FlushAsync();
+    }
+
     private static async Task WriteFixtureAsync()
     {
         await File.WriteAllBytesAsync(AvatarPath, []);
