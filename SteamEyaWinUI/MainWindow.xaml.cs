@@ -59,6 +59,7 @@ public sealed partial class MainWindow : Window
         RefreshUpdateBadge();
 
         ConfigureWindowSize();
+        Activated += OnStartupActivated;
 
 #if MANAGER_UI_CHECKS
         if (ManagerUiChecks.Enabled)
@@ -247,6 +248,151 @@ public sealed partial class MainWindow : Window
     private unsafe void OnClosed(object sender, WindowEventArgs args)
     {
         RemoveWindowSubclass(s_hwnd, &SubclassProc, WindowSubclassId);
+    }
+
+    private bool _startupUpdatePromptHandled;
+
+    /// <summary>启动后只自动检查一次更新；有新版时弹窗，用户可选择稍后或立即下载安装。</summary>
+    private async void OnStartupActivated(object sender, WindowActivatedEventArgs args)
+    {
+        if (_startupUpdatePromptHandled)
+        {
+            return;
+        }
+
+        _startupUpdatePromptHandled = true;
+        Activated -= OnStartupActivated;
+
+#if MANAGER_UI_CHECKS
+        if (ManagerUiChecks.Enabled)
+        {
+            return;
+        }
+#endif
+
+        // 等首帧渲染完成再弹窗，避免和主界面初始化抢焦点。
+        await Task.Delay(1200);
+        if (AppState.UpdateCheckedAt.HasValue)
+        {
+            return;
+        }
+
+        await AppState.CheckForUpdatesAsync(isAutomatic: true);
+        var update = AppState.LatestUpdate;
+        if (update is null || !update.IsUpdateAvailable)
+        {
+            return;
+        }
+
+        await ShowStartupUpdateDialogAsync(update);
+    }
+
+    private async Task ShowStartupUpdateDialogAsync(GitHubUpdateInfo update)
+    {
+        var secondary = (Brush)Application.Current.Resources["PclTextSecondaryBrush"];
+        var notes = new StackPanel { Spacing = 3 };
+        if (update.Changelog.Count == 0)
+        {
+            notes.Children.Add(new TextBlock { Text = Loc.T("UpdateDialog_Notes_Empty"), Foreground = secondary, TextWrapping = TextWrapping.Wrap });
+        }
+
+        foreach (var line in update.Changelog.Take(80))
+        {
+            notes.Children.Add(new TextBlock
+            {
+                Text = line,
+                TextWrapping = TextWrapping.Wrap,
+                FontSize = 12,
+                Foreground = secondary
+            });
+        }
+
+        var content = new StackPanel { Spacing = 8, MinWidth = 460 };
+        content.Children.Add(new TextBlock { Text = Loc.Tf("UpdateDialog_Current_Format", update.CurrentVersion), Foreground = secondary });
+        content.Children.Add(new TextBlock
+        {
+            Text = Loc.Tf("UpdateDialog_Latest_Format", update.LatestVersion),
+            FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
+            Foreground = (Brush)Application.Current.Resources["PclAccentBrush"]
+        });
+        content.Children.Add(new TextBlock
+        {
+            Text = Loc.T("UpdateDialog_Notes_Header"),
+            FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
+            Margin = new Thickness(0, 8, 0, 0)
+        });
+        content.Children.Add(new ScrollViewer
+        {
+            MaxHeight = 240,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
+            Content = notes
+        });
+
+        var dialog = new ContentDialog
+        {
+            XamlRoot = Content.XamlRoot,
+            Title = Loc.T("UpdateDialog_Title"),
+            Content = content,
+            PrimaryButtonText = Loc.T("UpdateDialog_Now"),
+            CloseButtonText = Loc.T("UpdateDialog_Later"),
+            DefaultButton = ContentDialogButton.Primary
+        };
+
+        if (await dialog.ShowAsync() != ContentDialogResult.Primary)
+        {
+            return;
+        }
+
+        await InstallUpdateFromStartupAsync(update);
+    }
+
+    private async Task InstallUpdateFromStartupAsync(GitHubUpdateInfo update)
+    {
+        if (string.IsNullOrWhiteSpace(update.ArtifactUrl))
+        {
+            AppState.ShowStatus(Loc.T("About_NoDownloadInfo"), InfoBarSeverity.Warning);
+            return;
+        }
+
+        try
+        {
+            AppState.ShowStatus(Loc.T("About_Update_Downloading"), InfoBarSeverity.Informational);
+            var progress = new Progress<UpdateDownloadProgress>(p =>
+            {
+                string text = p.TotalBytes is > 0
+                    ? Loc.Tf("About_Update_DownloadProgress_Format",
+                        Math.Clamp(p.BytesReceived * 100d / p.TotalBytes.Value, 0d, 100d).ToString("0"),
+                        FormatHelper.FormatFileSize(p.BytesReceived),
+                        FormatHelper.FormatFileSize(p.TotalBytes.Value))
+                    : Loc.T("About_Update_DownloadProgress_Unknown");
+                AppState.ShowStatus(text, InfoBarSeverity.Informational);
+            });
+
+            var installerPath = await AppState.UpdateInstallerService.DownloadInstallerAsync(update, progress, CancellationToken.None);
+            AppState.ShowStatus(Loc.T("About_Update_Downloaded"), InfoBarSeverity.Success);
+
+            if (!AppState.UpdateInstallerService.LaunchInstaller(installerPath))
+            {
+                AppState.ShowStatus(Loc.T("About_Update_InstallerLaunchFailed"), InfoBarSeverity.Error);
+                return;
+            }
+
+            AppState.ShowStatus(Loc.T("About_Update_InstallerLaunched"), InfoBarSeverity.Warning);
+
+            // 安装器已启动：先清掉残留实例，再强制结束当前进程，避免文件占用导致安装失败。
+            var current = System.Diagnostics.Process.GetCurrentProcess();
+            AppState.UpdateInstallerService.ForceCloseOtherInstances(current.ProcessName, current.Id);
+            current.Kill(entireProcessTree: true);
+        }
+        catch (TimeoutException ex)
+        {
+            AppState.ShowStatus(ex.Message, InfoBarSeverity.Warning);
+        }
+        catch (Exception ex)
+        {
+            AppState.ShowStatus(Loc.Tf("About_Update_DownloadFailed_Format", ex.Message), InfoBarSeverity.Error);
+        }
     }
 
     [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall)])]

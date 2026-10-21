@@ -345,27 +345,12 @@
                                 </VisualState>
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="CheckStates">
-                                <VisualState x:Name="Checked">
-                                    <VisualState.Setters>
-                                        <Setter Target="Surface.Background" Value="{ThemeResource PclAccentBrush}" />
-                                        <Setter Target="Surface.BorderBrush" Value="{ThemeResource PclAccentBrush}" />
-                                        <Setter Target="Presenter.Foreground" Value="White" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="CheckedPointerOver">
-                                    <VisualState.Setters>
-                                        <Setter Target="Surface.Background" Value="{ThemeResource PclAccentHoverBrush}" />
-                                        <Setter Target="Surface.BorderBrush" Value="{ThemeResource PclAccentHoverBrush}" />
-                                        <Setter Target="Presenter.Foreground" Value="White" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="CheckedPressed">
-                                    <VisualState.Setters>
-                                        <Setter Target="Surface.Background" Value="{ThemeResource PclAccentPressedBrush}" />
-                                        <Setter Target="Surface.BorderBrush" Value="{ThemeResource PclAccentPressedBrush}" />
-                                        <Setter Target="Presenter.Foreground" Value="White" />
-                                    </VisualState.Setters>
-                                </VisualState>
+                                <!-- 选中态配色由使用方在代码中显式设置：模板状态只保留空壳，
+                                     避免主题切换后 VSM 残留的 Setter 覆盖局部画刷。 -->
+                                <VisualState x:Name="Unchecked" />
+                                <VisualState x:Name="Checked" />
+                                <VisualState x:Name="CheckedPointerOver" />
+                                <VisualState x:Name="CheckedPressed" />
                                 <VisualState x:Name="Indeterminate" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>

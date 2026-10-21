@@ -1,7 +1,7 @@
 {
-  "version": "v0.4.0",
+  "version": "v0.4.1",
   "approved": true,
-  "reviewedAt": "2026-10-20",
+  "reviewedAt": "2026-10-21",
   "reviewedBy": "dbdbvdbdb",
   "reviewBasis": "Maintainer confirmed completion of their own resource review. This record does not claim new license documents or an independent legal certification.",
   "repositoryPublicationApproved": true,
@@ -15,7 +15,7 @@
     {
       "id": "branding-provenance",
       "status": "resolved",
-      "reason": "Maintainer review completed; upstream source attribution retained."
+      "reason": "Maintainer review completed; upstream source attribution retained. The About page now links the upstream repository explicitly."
     },
     {
       "id": "valve-icons-review",
@@ -25,9 +25,14 @@
     {
       "id": "ui-restyle-provenance",
       "status": "resolved",
-      "reason": "UI restyle is reimplemented in WinUI 3 from layout and color conventions only; no third-party launcher artwork, icons, fonts, or XAML were copied, and no third-party name or logo is used. No new third-party asset was added to the repository."
+      "reason": "UI restyle is reimplemented in WinUI 3 from layout and color conventions only; no third-party launcher artwork, icons, fonts, or XAML were copied, and no third-party name or logo is used. The CS2 configuration page restyle added no new asset."
+    },
+    {
+      "id": "startup-update-check",
+      "status": "resolved",
+      "reason": "The startup update check requests only the public GitHub Releases API of this repository. It sends no credentials, telemetry, account data, or machine identifiers, and the dialog can be dismissed for the current run."
     }
   ],
-  "publicationAuthorizedAt": "2026-10-20",
-  "publicationBasis": "Maintainer requested the interface restyle and publication as a new version. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
+  "publicationAuthorizedAt": "2026-10-21",
+  "publicationBasis": "Maintainer requested the About page project link, the CS2 page restyle, and the startup update reminder, and asked for them to ship as a regular version. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
 }

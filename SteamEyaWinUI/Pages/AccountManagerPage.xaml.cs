@@ -44,6 +44,7 @@ public sealed partial class AccountManagerPage : Page
             document = await ManagedAccounts.Store.LoadAsync();
             privacy = document.Preferences.Privacy;
             Privacy.IsChecked = privacy;
+            ApplyPrivacyPill();
             Search.Visibility = GroupFilter.Visibility = privacy ? Visibility.Collapsed : Visibility.Visible;
             resolved.Clear();
             var identities = ManagedAccounts.Identities();
@@ -139,6 +140,15 @@ public sealed partial class AccountManagerPage : Page
         if (syncing) return;
         await SafeAsync(async () => { var tag = (ViewChoice.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? "cards";
             await ManagedAccounts.Store.UpdateAsync(x => x.Preferences.View = tag); document.Preferences.View = tag; Render(); });
+    }
+    private void ApplyPrivacyPill()
+    {
+        bool on = Privacy.IsChecked == true;
+        Privacy.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources[on ? "PclAccentBrush" : "PclSurfaceAltBrush"];
+        Privacy.BorderBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources[on ? "PclAccentBrush" : "PclBorderBrush"];
+        Privacy.Foreground = on
+            ? new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White)
+            : (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["PclTextSecondaryBrush"];
     }
     private async void Privacy_Click(object sender, RoutedEventArgs e)
     {

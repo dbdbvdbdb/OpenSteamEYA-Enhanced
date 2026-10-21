@@ -10,6 +10,7 @@ namespace SteamEyaWinUI.Services;
 internal sealed class GitHubUpdateService
 {
     public const string RepositoryUrl = "https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced";
+    public const string UpstreamRepositoryUrl = "https://github.com/hvh-software/OpenSteamEYA";
     public const string ReleasesUrl = RepositoryUrl + "/releases";
     // /latest excludes prereleases. This project publishes beta versions, so read the release list.
     internal const string ReleasesApiUrl = "https://api.github.com/repos/dbdbvdbdb/OpenSteamEYA-Enhanced/releases?per_page=100";

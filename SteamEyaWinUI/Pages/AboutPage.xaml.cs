@@ -172,6 +172,11 @@ public sealed partial class AboutPage : Page, INotifyPropertyChanged
         await AppState.OpenUrlAsync(GitHubUpdateService.RepositoryUrl);
     }
 
+    private async void OpenUpstreamButton_Click(object sender, RoutedEventArgs e)
+    {
+        await AppState.OpenUrlAsync(GitHubUpdateService.UpstreamRepositoryUrl);
+    }
+
     private void Render()
     {
         var update = AppState.LatestUpdate;

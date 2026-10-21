@@ -134,6 +134,31 @@
                     </Button>
                 </StackPanel>
             </Border>
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock
+                        Text="{x:Bind Strings.Get('About_Project_Section'), Mode=OneWay}"
+                        Style="{StaticResource SectionTitleTextStyle}" />
+                    <TextBlock
+                        Text="{x:Bind Strings.Get('About_Project_Desc'), Mode=OneWay}"
+                        TextWrapping="Wrap"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <TextBlock
+                        Text="https://github.com/hvh-software/OpenSteamEYA"
+                        IsTextSelectionEnabled="True"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <Button
+                        x:Name="OpenUpstreamButton"
+                        HorizontalAlignment="Left"
+                        Click="OpenUpstreamButton_Click">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon Glyph="&#xE774;" FontSize="16" />
+                            <TextBlock Text="{x:Bind Strings.Get('About_Btn_OpenUpstream'), Mode=OneWay}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </Page>

@@ -3,65 +3,114 @@
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
  <Page.Resources>
   <Style x:Key="Cs2SettingCardStyle" TargetType="Grid">
-   <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
-   <Setter Property="CornerRadius" Value="4"/>
+   <Setter Property="Background" Value="{ThemeResource PclSurfaceBrush}"/>
+   <Setter Property="CornerRadius" Value="10"/>
   </Style>
  </Page.Resources>
- <Grid Margin="28,20,28,8" RowSpacing="12">
-  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-  <Grid ColumnSpacing="12">
-   <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-   <StackPanel Spacing="4"><TextBlock Text="CS2 统一配置" FontSize="30" FontWeight="SemiBold"/><TextBlock Text="独立保存一套模板，确认后应用到所有本机 CS2 账号" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/></StackPanel>
-   <ProgressRing x:Name="BusyRing" Grid.Column="1" Width="28" Height="28" IsActive="False"/>
-  </Grid>
-  <StackPanel Grid.Row="1" Spacing="8">
-   <Grid ColumnSpacing="8"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-    <TextBox x:Name="TemplateNameBox" PlaceholderText="我的统一配置" AutomationProperties.Name="配置模板名称" TextChanging="NameChanged"/>
-    <Button x:Name="ImportButton" Grid.Column="1" Content="导入模板"><Button.Flyout><MenuFlyout>
-     <MenuFlyoutItem Text="使用应用默认模板" Click="DefaultClicked"/>
-     <MenuFlyoutItem Text="从配置文件夹导入" Click="ImportFolderClicked"/>
-     <MenuFlyoutItem Text="从本机账号导入一次" Click="ImportAccountClicked"/>
-    </MenuFlyout></Button.Flyout></Button>
-    <Button x:Name="ExportButton" Grid.Column="2" Content="导出模板" Click="ExportClicked"/>
-    <Button x:Name="RestoreButton" Grid.Column="3" Content="恢复备份" Click="RestoreClicked"/>
-   </Grid>
-   <InfoBar x:Name="StatusBar" IsOpen="True" IsClosable="True" Message="正在读取统一模板…"/>
+ <Grid Padding="20,16,20,14" RowSpacing="10">
+  <Grid.RowDefinitions>
+   <RowDefinition Height="Auto"/>
+   <RowDefinition Height="Auto"/>
+   <RowDefinition Height="Auto"/>
+   <RowDefinition Height="Auto"/>
+   <RowDefinition Height="*"/>
+   <RowDefinition Height="Auto"/>
+  </Grid.RowDefinitions>
+
+  <!-- 页头 -->
+  <StackPanel Spacing="2" VerticalAlignment="Center">
+   <TextBlock Text="CS2 统一配置" Style="{StaticResource PclTitleTextStyle}" FontSize="22"/>
+   <TextBlock Text="独立保存一套模板，确认后应用到所有本机 CS2 账号" Style="{StaticResource PclSubtitleTextStyle}" TextWrapping="Wrap"/>
   </StackPanel>
-  <Grid Grid.Row="2" ColumnSpacing="12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="180"/></Grid.ColumnDefinitions>
-   <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled"><StackPanel x:Name="TabsPanel" Orientation="Horizontal" Spacing="4"/></ScrollViewer>
-   <TextBox x:Name="SearchBox" Grid.Column="1" PlaceholderText="搜索设置" TextChanged="SearchChanged" AutomationProperties.Name="搜索 CS2 设置"/>
+
+  <!-- 工具栏 -->
+  <Border Grid.Row="1" Style="{StaticResource PclToolbarCardStyle}">
+   <Grid ColumnSpacing="8">
+    <Grid.ColumnDefinitions>
+     <ColumnDefinition Width="260"/>
+     <ColumnDefinition Width="*"/>
+     <ColumnDefinition Width="Auto"/>
+     <ColumnDefinition Width="Auto"/>
+     <ColumnDefinition Width="Auto"/>
+     <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    <TextBox x:Name="TemplateNameBox" PlaceholderText="我的统一配置" AutomationProperties.Name="配置模板名称" TextChanging="NameChanged"
+             VerticalAlignment="Center"
+             Background="{ThemeResource PclSurfaceAltBrush}" BorderBrush="{ThemeResource PclBorderBrush}"
+             BorderThickness="1" CornerRadius="8" Padding="10,6"/>
+    <Button x:Name="ImportButton" Grid.Column="2" Content="导入模板" Style="{StaticResource PclSecondaryButtonStyle}" VerticalAlignment="Center">
+     <Button.Flyout><MenuFlyout>
+      <MenuFlyoutItem Text="使用应用默认模板" Click="DefaultClicked"/>
+      <MenuFlyoutItem Text="从配置文件夹导入" Click="ImportFolderClicked"/>
+      <MenuFlyoutItem Text="从本机账号导入一次" Click="ImportAccountClicked"/>
+     </MenuFlyout></Button.Flyout>
+    </Button>
+    <Button x:Name="ExportButton" Grid.Column="3" Content="导出模板" Click="ExportClicked" Style="{StaticResource PclSecondaryButtonStyle}" VerticalAlignment="Center"/>
+    <Button x:Name="RestoreButton" Grid.Column="4" Content="恢复备份" Click="RestoreClicked" Style="{StaticResource PclGhostButtonStyle}" VerticalAlignment="Center"/>
+    <ProgressRing x:Name="BusyRing" Grid.Column="5" Width="18" Height="18" IsActive="False" VerticalAlignment="Center" Margin="6,0,0,0"/>
+   </Grid>
+  </Border>
+
+  <InfoBar x:Name="StatusBar" Grid.Row="2" IsOpen="True" IsClosable="True" Message="正在读取统一模板…"/>
+
+  <!-- 分类页签 + 搜索 -->
+  <Grid Grid.Row="3" ColumnSpacing="12">
+   <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="200"/></Grid.ColumnDefinitions>
+   <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" VerticalAlignment="Center">
+    <StackPanel x:Name="TabsPanel" Orientation="Horizontal" Spacing="6"/>
+   </ScrollViewer>
+   <TextBox x:Name="SearchBox" Grid.Column="1" PlaceholderText="搜索设置" TextChanged="SearchChanged" AutomationProperties.Name="搜索 CS2 设置"
+            VerticalAlignment="Center"
+            Background="{ThemeResource PclSurfaceAltBrush}" BorderBrush="{ThemeResource PclBorderBrush}"
+            BorderThickness="1" CornerRadius="8" Padding="10,6"/>
   </Grid>
-  <ScrollViewer x:Name="SettingsScroll" Grid.Row="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-   <StackPanel Spacing="12">
-    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="8" Padding="18,12"><StackPanel Spacing="5">
-     <TextBlock x:Name="CategoryTitle" FontSize="20" FontWeight="SemiBold"/>
-     <TextBlock Text="保存仅更新模板。应用仅覆盖本地已验证参数；Steam Cloud 之后可能同步回旧配置。参数依据及未支持项见开发文档。" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-    </StackPanel></Border>
+
+  <!-- 设置区 -->
+  <ScrollViewer x:Name="SettingsScroll" Grid.Row="4" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+   <StackPanel Spacing="10">
+    <Border Style="{StaticResource PclCardStyle}">
+     <StackPanel Spacing="4">
+      <TextBlock x:Name="CategoryTitle" Style="{StaticResource PclSectionTitleTextStyle}" FontSize="18"/>
+      <TextBlock Text="保存仅更新模板。应用仅覆盖本地已验证参数；Steam Cloud 之后可能同步回旧配置。参数依据及未支持项见开发文档。"
+                 TextWrapping="Wrap" Style="{StaticResource PclCaptionTextStyle}"/>
+     </StackPanel>
+    </Border>
+
     <Expander x:Name="DisplayPanel" Header="基础视频 · 显示设备与分辨率（按需展开）" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
-    <StackPanel Spacing="8">
-     <TextBlock Text="设备列表仅用于校验分辨率，不写入未经验证的 CS2 显示器编号。刷新率、宽高比和显示模式暂保留导入值；需要先导入游戏生成的版本 16 视频配置。" TextWrapping="Wrap"/>
-     <ComboBox x:Name="DisplayBox" Header="显示设备（仅校验模式）" SelectionChanged="DisplayChanged" HorizontalAlignment="Stretch"/>
-     <ComboBox x:Name="ResolutionBox" Header="受设备及当前刷新率支持的分辨率" PlaceholderText="需要游戏生成的已有整数刷新率配置" SelectionChanged="ResolutionChanged" HorizontalAlignment="Stretch"/>
-    </StackPanel>
+     <StackPanel Spacing="8">
+      <TextBlock Text="设备列表仅用于校验分辨率，不写入未经验证的 CS2 显示器编号。刷新率、宽高比和显示模式暂保留导入值；需要先导入游戏生成的版本 16 视频配置。" TextWrapping="Wrap" Style="{StaticResource PclBodyTextStyle}"/>
+      <ComboBox x:Name="DisplayBox" Header="显示设备（仅校验模式）" SelectionChanged="DisplayChanged" HorizontalAlignment="Stretch"/>
+      <ComboBox x:Name="ResolutionBox" Header="受设备及当前刷新率支持的分辨率" PlaceholderText="需要游戏生成的已有整数刷新率配置" SelectionChanged="ResolutionChanged" HorizontalAlignment="Stretch"/>
+     </StackPanel>
     </Expander>
-    <StackPanel x:Name="RowsPanel" Spacing="3"/>
-    <TextBlock x:Name="EmptyText" Text="没有符合搜索条件的设置。" TextWrapping="Wrap" Margin="12"/>
-    <Border x:Name="BindingsPanel" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="8" Padding="16"><StackPanel Spacing="10">
-     <TextBlock Text="键位绑定" FontSize="18" FontWeight="SemiBold"/>
-     <TextBlock Text="选择动作覆盖模板中的指定按键。未改动的自定义命令保留；批量应用只部署已验证的标准动作。" TextWrapping="Wrap"/>
-     <Grid ColumnSpacing="12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-      <ComboBox x:Name="KeyBox" Header="按键" HorizontalAlignment="Stretch" SelectionChanged="KeyChanged"/>
-      <ComboBox x:Name="ActionBox" Grid.Column="1" Header="动作" HorizontalAlignment="Stretch" SelectionChanged="ActionChanged"/>
-     </Grid><TextBlock x:Name="BindingSummary" TextWrapping="Wrap"/>
-    </StackPanel></Border>
+
+    <StackPanel x:Name="RowsPanel" Spacing="6"/>
+
+    <TextBlock x:Name="EmptyText" Text="没有符合搜索条件的设置。" TextWrapping="Wrap" Style="{StaticResource PclCaptionTextStyle}" Margin="12,6"/>
+
+    <Border x:Name="BindingsPanel" Style="{StaticResource PclCardStyle}">
+     <StackPanel Spacing="10">
+      <TextBlock Text="键位绑定" Style="{StaticResource PclSectionTitleTextStyle}" FontSize="18"/>
+      <TextBlock Text="选择动作覆盖模板中的指定按键。未改动的自定义命令保留；批量应用只部署已验证的标准动作。"
+                 TextWrapping="Wrap" Style="{StaticResource PclCaptionTextStyle}"/>
+      <Grid ColumnSpacing="12">
+       <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+       <ComboBox x:Name="KeyBox" Header="按键" HorizontalAlignment="Stretch" SelectionChanged="KeyChanged"/>
+       <ComboBox x:Name="ActionBox" Grid.Column="1" Header="动作" HorizontalAlignment="Stretch" SelectionChanged="ActionChanged"/>
+      </Grid>
+      <TextBlock x:Name="BindingSummary" TextWrapping="Wrap" Style="{StaticResource PclCaptionTextStyle}"/>
+     </StackPanel>
+    </Border>
    </StackPanel>
   </ScrollViewer>
-  <Grid Grid.Row="4" Padding="0,12,0,0" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" ColumnSpacing="10">
+
+  <!-- 底部操作条 -->
+  <Grid Grid.Row="5" Padding="0,10,0,0" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource PclBorderBrush}" ColumnSpacing="8">
    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-   <TextBlock x:Name="DirtyText" Text="没有未保存修改" VerticalAlignment="Center" TextWrapping="Wrap"/>
-   <Button x:Name="UndoButton" Grid.Column="1" Content="撤销修改" Click="UndoClicked"/>
-   <Button x:Name="SaveButton" Grid.Column="2" Content="保存配置" Click="SaveClicked"/>
-   <Button x:Name="ApplyButton" Grid.Column="3" Content="应用到所有账号" Click="ApplyClicked" Style="{StaticResource AccentButtonStyle}"/>
+   <TextBlock x:Name="DirtyText" Text="没有未保存修改" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource PclCaptionTextStyle}"/>
+   <Button x:Name="UndoButton" Grid.Column="1" Content="撤销修改" Click="UndoClicked" Style="{StaticResource PclSecondaryButtonStyle}"/>
+   <Button x:Name="SaveButton" Grid.Column="2" Content="保存配置" Click="SaveClicked" Style="{StaticResource PclSecondaryButtonStyle}"/>
+   <Button x:Name="ApplyButton" Grid.Column="3" Content="应用到所有账号" Click="ApplyClicked" Style="{StaticResource PclPrimaryButtonStyle}"/>
   </Grid>
  </Grid>
 </Page>

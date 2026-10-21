@@ -34,7 +34,13 @@ public sealed partial class Cs2LocalSettingsPage : Page
         InitializeComponent(); NavigationCacheMode = NavigationCacheMode.Required;
         foreach (string category in new[] { "视频", "音频", "游戏", "HUD", "准星", "鼠标键盘", "键位绑定" })
         {
-            var button = new ToggleButton { Content = category, Tag = category, MinWidth = 62, Padding = new Thickness(12, 8, 12, 8) };
+            var button = new ToggleButton
+            {
+                Content = category,
+                Tag = category,
+                MinWidth = 62,
+                Style = (Style)Application.Current.Resources["PclPillToggleStyle"]
+            };
             button.Click += (_, _) => { _category = category; Render(); };
             TabsPanel.Children.Add(button);
         }
@@ -160,7 +166,17 @@ public sealed partial class Cs2LocalSettingsPage : Page
     private void Render()
     {
         if (RowsPanel is null) return;
-        foreach (var button in TabsPanel.Children.OfType<ToggleButton>()) button.IsChecked = button.Tag?.ToString() == _category;
+        foreach (var button in TabsPanel.Children.OfType<ToggleButton>())
+        {
+            bool active = button.Tag?.ToString() == _category;
+            button.IsChecked = active;
+            // 显式着色，避免主题切换后复用的模板状态残留把未选页签也画成主色。
+            button.Background = (Brush)Application.Current.Resources[active ? "PclAccentBrush" : "PclSurfaceAltBrush"];
+            button.BorderBrush = (Brush)Application.Current.Resources[active ? "PclAccentBrush" : "PclBorderBrush"];
+            button.Foreground = active
+                ? new SolidColorBrush(Microsoft.UI.Colors.White)
+                : (Brush)Application.Current.Resources["PclTextSecondaryBrush"];
+        }
         CategoryTitle.Text = _category;
         DisplayPanel.Visibility = _category == "视频" ? Visibility.Visible : Visibility.Collapsed;
         BindingsPanel.Visibility = _category == "键位绑定" ? Visibility.Visible : Visibility.Collapsed;
@@ -197,9 +213,10 @@ public sealed partial class Cs2LocalSettingsPage : Page
         var grid = new Grid { Padding = new Thickness(16, 12, 16, 12), ColumnSpacing = 16, MinHeight = 78, Style = (Style)Resources["Cs2SettingCardStyle"], Tag = "setting-row:" + row.Key };
         grid.ColumnDefinitions.Add(new() { Width = new GridLength(1, GridUnitType.Star) }); grid.ColumnDefinitions.Add(new() { Width = new GridLength(250) });
         var label = new StackPanel { Spacing = 4, VerticalAlignment = VerticalAlignment.Center };
-        label.Children.Add(new TextBlock { Text = spec.Label, FontSize = 15, TextWrapping = TextWrapping.Wrap });
-        label.Children.Add(new TextBlock { Text = $"当前：{row.Original ?? "未配置"} · 模板参考：{spec.DefaultValue ?? "无"}", FontSize = 12, Opacity = .7, TextWrapping = TextWrapping.Wrap });
-        label.Children.Add(new TextBlock { Text = row.Issue ?? spec.Description, FontSize = 12, Opacity = .7, TextWrapping = TextWrapping.Wrap });
+        var secondary = (Brush)Application.Current.Resources["PclTextSecondaryBrush"];
+        label.Children.Add(new TextBlock { Text = spec.Label, FontSize = 14, TextWrapping = TextWrapping.Wrap });
+        label.Children.Add(new TextBlock { Text = $"当前：{row.Original ?? "未配置"} · 模板参考：{spec.DefaultValue ?? "无"}", FontSize = 12, Foreground = secondary, TextWrapping = TextWrapping.Wrap });
+        label.Children.Add(new TextBlock { Text = row.Issue ?? spec.Description, FontSize = 12, Foreground = secondary, TextWrapping = TextWrapping.Wrap });
         ToolTipService.SetToolTip(label, $"{spec.EnglishName}\n{row.Key}\n{spec.FileName} / {spec.Section}\n{spec.Evidence}\n{spec.Compatibility}\n{spec.DefaultOrigin}");
         grid.Children.Add(label);
         var error = new TextBlock { Text = row.Error ?? "", TextWrapping = TextWrapping.Wrap, Foreground = (Brush)Application.Current.Resources["SystemFillColorCriticalBrush"], FontSize = 12 };
