@@ -90,6 +90,7 @@ internal static partial class ManagerUiChecks
             await CheckUpdatesAsync(window);
             await CheckCs2SettingsAsync(window);
             await CheckThemeAsync(window);
+            await CheckUpdaterAsync();
             Results.Add("INFO actual rasterization scale " + page.XamlRoot.RasterizationScale);
             await File.WriteAllLinesAsync(Path.Combine(OutputRoot, "results.txt"), Results);
         }
@@ -159,6 +160,35 @@ internal static partial class ManagerUiChecks
 
         if (previousPage is not null) window.MainFrame.Navigate(previousPage);
         await Task.Delay(600);
+    }
+    private static async Task CheckUpdaterAsync()
+    {
+        Check(PortableUpdateService.IsSafeRelative("app/sub/file.txt"), "updater accepts safe relative path");
+        Check(!PortableUpdateService.IsSafeRelative("../evil.txt"), "updater rejects parent traversal");
+        Check(!PortableUpdateService.IsSafeRelative("C:\\evil.txt"), "updater rejects rooted path");
+        Check(PortableUpdateService.SanitizeVersion("v0.4.5") == "0.4.5", "updater sanitizes version tag");
+
+        var exe = Path.Combine(AppContext.BaseDirectory, PortableUpdateService.UpdaterFileName);
+        Check(File.Exists(exe), "update helper is shipped with the app");
+        if (!File.Exists(exe))
+        {
+            return;
+        }
+
+        var log = Path.Combine(OutputRoot, "updater-self-test.log");
+        var startInfo = new System.Diagnostics.ProcessStartInfo(exe, "--self-test --log \"" + log + "\"")
+        {
+            UseShellExecute = false,
+            CreateNoWindow = true,
+        };
+
+        using var process = System.Diagnostics.Process.Start(startInfo)!;
+        await process.WaitForExitAsync();
+        var output = File.Exists(log) ? await File.ReadAllTextAsync(log) : "";
+        var summary = output.Split('\n').FirstOrDefault(l => l.Contains("self-test summary"))?.Trim() ?? "<missing>";
+        Info("updater " + summary);
+        Check(process.ExitCode == 0, "update helper self-test exits cleanly");
+        Check(output.Contains("PASS=") && output.Contains("FAIL=0"), "update helper self-test reports no failures");
     }
     private static void CheckOriginalServicesOffline()
     {

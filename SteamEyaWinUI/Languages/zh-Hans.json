@@ -689,6 +689,12 @@
     "Cm_Proto_WireTypeMismatch_Format": "protobuf wire type 不匹配：实际 {0}，期望 {1}。",
     "Cm_Proto_Incomplete": "protobuf 数据不完整。",
     "Cached_Card_CachedAt_Caption_Format": "缓存时间 {0}",
-    "Cached_Card_Delete": "删除该缓存账号"
+    "Cached_Card_Delete": "删除该缓存账号",
+    "UpdateDialog_Download": "仅下载",
+    "Update_Downloaded_Format": "{0} 的更新包已下载并校验完成，可稍后从关于页安装。",
+    "Update_Ready_Title": "更新已就绪",
+    "Update_Ready_Content_Format": "v{0} 已下载并校验完成。点“立即重启”会关闭当前程序、替换文件并自动重新启动。",
+    "Update_Ready_Apply": "立即重启",
+    "Update_NoUpdater": "当前版本缺少更新程序，请到发布页下载完整包替换。"
   }
 }

@@ -9,6 +9,8 @@ namespace SteamEyaWinUI.Services;
 
 internal sealed class GitHubUpdateService
 {
+    public const string RepositoryOwner = "dbdbvdbdb";
+    public const string RepositoryName = "OpenSteamEYA-Enhanced";
     public const string RepositoryUrl = "https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced";
     public const string UpstreamRepositoryUrl = "https://github.com/hvh-software/OpenSteamEYA";
     public const string ReleasesUrl = RepositoryUrl + "/releases";
@@ -83,9 +85,10 @@ internal sealed class GitHubUpdateService
         client.DefaultRequestHeaders.Add("X-GitHub-Api-Version", "2026-03-10");
         return client;
     }
-    private static GitHubProxySite ResolveSite(string? code) => ProxySites.FirstOrDefault(s =>
+    internal static GitHubProxySite ResolveSite(string? code) => ProxySites.FirstOrDefault(s =>
         string.Equals(s.Code, code, StringComparison.OrdinalIgnoreCase)) ?? ProxySites[0];
-    private static string BuildUrl(GitHubProxySite site, string url) => site.UrlPrefix is null ? url : site.UrlPrefix + url;
+    internal static string BuildUrl(GitHubProxySite site, string url) => site.UrlPrefix is null ? url : site.UrlPrefix + url;
+    internal static string ApplyProxy(string? proxyCode, string url) => BuildUrl(ResolveSite(proxyCode), url);
     private static string GetCurrentVersion()
     {
         var assembly = typeof(GitHubUpdateService).Assembly;

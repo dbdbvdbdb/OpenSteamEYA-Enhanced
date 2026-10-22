@@ -113,6 +113,7 @@ jobs:
             artifacts/OpenSteamEYA-Enhanced-${{ steps.meta.outputs.label }}-win-x64-aot.zip
             artifacts/OpenSteamEYA-Enhanced-${{ steps.meta.outputs.label }}-win-x64-aot.7z
             artifacts/SHA256SUMS.txt
+            artifacts/update.json
           if-no-files-found: error
           retention-days: 14
       - name: Create release (draft unless this publication was requested)
@@ -132,7 +133,7 @@ jobs:
           if ($LASTEXITCODE -ne 0 -or $repo -ne $env:GH_REPO) { throw 'Repository authentication failed.' }
           $zip = "./artifacts/OpenSteamEYA-Enhanced-$env:RELEASE_LABEL-win-x64-aot.zip"
           $seven = "./artifacts/OpenSteamEYA-Enhanced-$env:RELEASE_LABEL-win-x64-aot.7z"
-          $releaseArgs = @('release','create',$env:RELEASE_TAG,$zip,$seven,'./artifacts/SHA256SUMS.txt',
+          $releaseArgs = @('release','create',$env:RELEASE_TAG,$zip,$seven,'./artifacts/SHA256SUMS.txt','./artifacts/update.json',
             '--target',$env:RELEASE_COMMIT,'--title',"OpenSteamEYA Enhanced $env:RELEASE_TAG",
             '--notes-file',"./docs/releases/$env:RELEASE_TAG.md")
           if ($env:RELEASE_LABEL.Contains('-')) { $releaseArgs += @('--prerelease','--latest=false') } else { $releaseArgs += '--latest=true' }

@@ -1,5 +1,5 @@
 {
-    "version":  "v0.4.4",
+    "version":  "v0.4.5",
     "approved":  true,
     "reviewedAt":  "2026-10-22",
     "reviewedBy":  "dbdbvdbdb",
@@ -46,8 +46,13 @@
                       "id":  "account-snapshot-index",
                       "status":  "resolved",
                       "reason":  "The account list now derives from a single in-memory snapshot. No data format, credential handling, or on-disk layout changed."
+                  },
+                  {
+                      "id":  "portable-self-update",
+                      "status":  "resolved",
+                      "reason":  "The portable updater stages downloads under %LOCALAPPDATA%, verifies size, SHA-256 and the GitHub asset digest before extraction, replaces files only inside the user-chosen application folder, backs up replaced files and rolls back on failure. It requests no elevation, sends no telemetry and does not bypass code signing: no signing certificate is claimed."
                   }
               ],
     "publicationAuthorizedAt":  "2026-10-22",
-    "publicationBasis":  "Maintainer asked for targeted performance work on account list rendering. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
+    "publicationBasis":  "Maintainer asked for in-app overwrite updates for the portable build, with download verification, an external updater process, rollback and UI states. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
 }

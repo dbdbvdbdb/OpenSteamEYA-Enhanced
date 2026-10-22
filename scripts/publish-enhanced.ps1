@@ -52,6 +52,16 @@ $licenses = Join-Path $stagingDirectory 'third-party-licenses'
 New-Item -ItemType Directory -Force -Path $licenses | Out-Null
 Copy-Item -LiteralPath (Join-Path $projectRoot 'third-party-licenses/counter-strike-icons-LICENSE.txt') -Destination $licenses
 & (Join-Path $PSScriptRoot 'copy-package-licenses.ps1') -PublishDirectory $stagingDirectory
+# Ship the updater beside the app so an installed copy can replace itself after exit.
+$updaterOutput = Join-Path $artifactRoot ('.updater-' + $mode + '-' + [guid]::NewGuid().ToString('N'))
+$updaterArguments = @('publish', (Join-Path $projectRoot 'OSEUpdater/OSEUpdater.csproj'), '-c', 'Release', '-r', 'win-x64', '-p:Platform=x64',
+    "-p:Version=$Version", "-p:FileVersion=$Version.0", "-p:AssemblyVersion=$Version.0", "-p:PublishAot=$($NativeAot.IsPresent.ToString().ToLowerInvariant())",
+    "-p:InformationalVersion=v$ReleaseLabel", '-o', $updaterOutput)
+if (-not $NativeAot) { $updaterArguments += '-p:PublishTrimmed=false' }
+& dotnet @updaterArguments
+if ($LASTEXITCODE -ne 0) { throw 'Updater publish failed.' }
+Copy-Item -LiteralPath (Join-Path $updaterOutput 'OSEUpdater.exe') -Destination $stagingDirectory
+Remove-Item -LiteralPath $updaterOutput -Recurse -Force
 & (Join-Path $PSScriptRoot 'assert-portable-package.ps1') -PublishDirectory $stagingDirectory
 if (Test-Path -LiteralPath $releaseDirectory) {
     # Archive instead of recursive deletion. Both resolved paths must stay in artifacts.
@@ -92,6 +102,26 @@ if ($sevenZip -and (Test-Path -LiteralPath $sevenZipPath)) { $metrics.SevenZipBy
 $checksumLines = @((Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToLowerInvariant() + '  ' + (Split-Path -Leaf $zipPath))
 if ($sevenZip -and (Test-Path -LiteralPath $sevenZipPath)) { $checksumLines += (Get-FileHash -LiteralPath $sevenZipPath -Algorithm SHA256).Hash.ToLowerInvariant() + '  ' + (Split-Path -Leaf $sevenZipPath) }
 $checksumLines | Set-Content -LiteralPath (Join-Path $artifactRoot 'SHA256SUMS.txt') -Encoding ascii
+# Update manifest consumed by the in-app updater (see docs/UPDATE-SYSTEM.md).
+$zipHash = (Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$zipSize = (Get-Item -LiteralPath $zipPath).Length
+$zipName = Split-Path -Leaf $zipPath
+$releaseTag = 'v' + $ReleaseLabel
+$manifest = [ordered]@{
+    schema = 1
+    version = $ReleaseLabel
+    tag = $releaseTag
+    minVersion = '0.4.0'
+    publishedAt = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+    assetName = $zipName
+    size = $zipSize
+    sha256 = $zipHash
+    url = 'https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/download/' + $releaseTag + '/' + $zipName
+    notesUrl = 'https://github.com/dbdbvdbdb/OpenSteamEYA-Enhanced/releases/tag/' + $releaseTag
+    mandatory = $false
+}
+$manifest | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $artifactRoot 'update.json') -Encoding utf8
+$manifest | ConvertTo-Json -Depth 4 | Write-Output
 & (Join-Path $PSScriptRoot 'assert-portable-package.ps1') -PublishDirectory $releaseDirectory -ZipPath $zipPath
 $metrics | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $artifactRoot "size-$mode.json")
 $metrics | ConvertTo-Json | Write-Output

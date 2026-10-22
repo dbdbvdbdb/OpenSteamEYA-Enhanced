@@ -313,15 +313,31 @@ public sealed partial class MainWindow : Window
             return;
         }
 
+        var skipped = AppState.SettingsService.Load().SkippedUpdateVersion;
+        if (string.Equals(skipped, update.LatestVersion, StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
         await ShowStartupUpdateDialogAsync(update);
     }
 
     private async Task ShowStartupUpdateDialogAsync(GitHubUpdateInfo update)
     {
         var dialog = BuildStartupUpdateDialog(update);
-
-        if (await dialog.ShowAsync() != ContentDialogResult.Primary)
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.None)
         {
+            // 用户选择“暂不更新”：记住该版本，后续启动不再为同一版本弹窗，关于页仍可更新。
+            var settings = AppState.SettingsService.Load();
+            settings.SkippedUpdateVersion = update.LatestVersion;
+            AppState.SettingsService.Save(settings);
+            return;
+        }
+
+        if (result == ContentDialogResult.Secondary)
+        {
+            await DownloadUpdateOnlyAsync(update);
             return;
         }
 
@@ -376,6 +392,7 @@ public sealed partial class MainWindow : Window
             Title = Loc.T("UpdateDialog_Title"),
             Content = content,
             PrimaryButtonText = Loc.T("UpdateDialog_Now"),
+            SecondaryButtonText = Loc.T("UpdateDialog_Download"),
             CloseButtonText = Loc.T("UpdateDialog_Later"),
             DefaultButton = ContentDialogButton.Primary
         };
@@ -434,43 +451,13 @@ public sealed partial class MainWindow : Window
     }
 #endif
 
-    private async Task InstallUpdateFromStartupAsync(GitHubUpdateInfo update)
+    private async Task DownloadUpdateOnlyAsync(GitHubUpdateInfo update)
     {
-        if (string.IsNullOrWhiteSpace(update.ArtifactUrl))
-        {
-            AppState.ShowStatus(Loc.T("About_NoDownloadInfo"), InfoBarSeverity.Warning);
-            return;
-        }
-
         try
         {
             AppState.ShowStatus(Loc.T("About_Update_Downloading"), InfoBarSeverity.Informational);
-            var progress = new Progress<UpdateDownloadProgress>(p =>
-            {
-                string text = p.TotalBytes is > 0
-                    ? Loc.Tf("About_Update_DownloadProgress_Format",
-                        Math.Clamp(p.BytesReceived * 100d / p.TotalBytes.Value, 0d, 100d).ToString("0"),
-                        FormatHelper.FormatFileSize(p.BytesReceived),
-                        FormatHelper.FormatFileSize(p.TotalBytes.Value))
-                    : Loc.T("About_Update_DownloadProgress_Unknown");
-                AppState.ShowStatus(text, InfoBarSeverity.Informational);
-            });
-
-            var installerPath = await AppState.UpdateInstallerService.DownloadInstallerAsync(update, progress, CancellationToken.None);
-            AppState.ShowStatus(Loc.T("About_Update_Downloaded"), InfoBarSeverity.Success);
-
-            if (!AppState.UpdateInstallerService.LaunchInstaller(installerPath))
-            {
-                AppState.ShowStatus(Loc.T("About_Update_InstallerLaunchFailed"), InfoBarSeverity.Error);
-                return;
-            }
-
-            AppState.ShowStatus(Loc.T("About_Update_InstallerLaunched"), InfoBarSeverity.Warning);
-
-            // 安装器已启动：先清掉残留实例，再强制结束当前进程，避免文件占用导致安装失败。
-            var current = System.Diagnostics.Process.GetCurrentProcess();
-            AppState.UpdateInstallerService.ForceCloseOtherInstances(current.ProcessName, current.Id);
-            current.Kill(entireProcessTree: true);
+            var pending = await PreparePortableUpdateAsync(update, CancellationToken.None);
+            AppState.ShowStatus(Loc.Tf("Update_Downloaded_Format", pending.Version), InfoBarSeverity.Success);
         }
         catch (TimeoutException ex)
         {
@@ -480,6 +467,80 @@ public sealed partial class MainWindow : Window
         {
             AppState.ShowStatus(Loc.Tf("About_Update_DownloadFailed_Format", ex.Message), InfoBarSeverity.Error);
         }
+    }
+
+    private async Task InstallUpdateFromStartupAsync(GitHubUpdateInfo update)
+    {
+        if (!PortableUpdateService.SelfUpdateSupported)
+        {
+            AppState.ShowStatus(Loc.T("Update_NoUpdater"), InfoBarSeverity.Warning);
+            return;
+        }
+
+        try
+        {
+            var pending = await PreparePortableUpdateAsync(update, CancellationToken.None);
+            AppState.ShowStatus(Loc.T("About_Update_Downloaded"), InfoBarSeverity.Success);
+            if (!await ConfirmApplyAsync(pending))
+            {
+                return;
+            }
+
+            ApplyPortableUpdate(pending);
+        }
+        catch (TimeoutException ex)
+        {
+            AppState.ShowStatus(ex.Message, InfoBarSeverity.Warning);
+        }
+        catch (Exception ex)
+        {
+            AppState.ShowStatus(Loc.Tf("About_Update_DownloadFailed_Format", ex.Message), InfoBarSeverity.Error);
+        }
+    }
+
+    private async Task<PortableUpdate> PreparePortableUpdateAsync(GitHubUpdateInfo update, CancellationToken token)
+    {
+        var progress = new Progress<UpdateDownloadProgress>(p =>
+        {
+            string text = p.TotalBytes is > 0
+                ? Loc.Tf("About_Update_DownloadProgress_Format",
+                    Math.Clamp(p.BytesReceived * 100d / p.TotalBytes.Value, 0d, 100d).ToString("0"),
+                    FormatHelper.FormatFileSize(p.BytesReceived),
+                    FormatHelper.FormatFileSize(p.TotalBytes.Value))
+                : Loc.T("About_Update_DownloadProgress_Unknown");
+            AppState.ShowStatus(text, InfoBarSeverity.Informational);
+        });
+
+        var proxy = AppState.SettingsService.Load().UpdateProxySite;
+        return await AppState.PortableUpdateService.PrepareAsync(update, proxy, progress, token);
+    }
+
+    private async Task<bool> ConfirmApplyAsync(PortableUpdate pending)
+    {
+        var dialog = new ContentDialog
+        {
+            XamlRoot = Content.XamlRoot,
+            Title = Loc.T("Update_Ready_Title"),
+            Content = Loc.Tf("Update_Ready_Content_Format", pending.Version),
+            PrimaryButtonText = Loc.T("Update_Ready_Apply"),
+            CloseButtonText = Loc.T("Common_Cancel"),
+            DefaultButton = ContentDialogButton.Primary,
+        };
+
+        return await dialog.ShowAsync() == ContentDialogResult.Primary;
+    }
+
+    internal bool ApplyPortableUpdate(PortableUpdate pending)
+    {
+        if (!AppState.PortableUpdateService.TryLaunchUpdater(pending, "SteamEyaWinUI.exe", out var error))
+        {
+            AppState.ShowStatus(error, InfoBarSeverity.Error);
+            return false;
+        }
+
+        AppState.ShowStatus(Loc.T("About_Update_InstallerLaunched"), InfoBarSeverity.Warning);
+        System.Diagnostics.Process.GetCurrentProcess().Kill(entireProcessTree: true);
+        return true;
     }
 
     [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall)])]

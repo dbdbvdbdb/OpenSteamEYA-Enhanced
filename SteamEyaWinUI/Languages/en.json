@@ -689,6 +689,12 @@
     "Cm_Proto_UnsupportedWireType_Format": "Unsupported protobuf wire type: {0}",
     "Cm_Proto_VarintTooLong": "The protobuf varint is too long.",
     "Cm_Proto_WireTypeMismatch_Format": "protobuf wire type mismatch: actual {0}, expected {1}.",
-    "Cm_Proto_Incomplete": "The protobuf data is incomplete."
+    "Cm_Proto_Incomplete": "The protobuf data is incomplete.",
+    "UpdateDialog_Download": "Download only",
+    "Update_Downloaded_Format": "The {0} package was downloaded and verified. You can install it later from the About page.",
+    "Update_Ready_Title": "Update ready",
+    "Update_Ready_Content_Format": "v{0} was downloaded and verified. Choose \"Restart now\" to close this app, replace files and start again automatically.",
+    "Update_Ready_Apply": "Restart now",
+    "Update_NoUpdater": "This build has no update helper. Download the full package from the releases page."
   }
 }

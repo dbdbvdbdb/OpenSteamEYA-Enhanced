@@ -26,6 +26,7 @@ internal static class AppState
     public static GitHubUpdateService UpdateService { get; } = new();
 #endif
     public static UpdateInstallerService UpdateInstallerService { get; } = new();
+    public static PortableUpdateService PortableUpdateService { get; } = new();
     public static SettingsService SettingsService { get; } = new();
     public static Cs2CloudService Cs2CloudService { get; } = new();
 

@@ -76,10 +76,10 @@ public sealed partial class AboutPage : Page, INotifyPropertyChanged
             return;
         }
 
-        // 若最新产物不是安装器，退化为打开发布页。
-        if (!url.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) &&
-            !string.Equals(update.ArtifactType, "exe-installer", StringComparison.OrdinalIgnoreCase))
+        // 便携包自更新需要随包的 OSEUpdater；缺失时退化为打开发布页。
+        if (!PortableUpdateService.SelfUpdateSupported)
         {
+            AppState.ShowStatus(Loc.T("Update_NoUpdater"), InfoBarSeverity.Warning);
             await AppState.OpenUrlAsync(url);
             return;
         }
@@ -117,22 +117,16 @@ public sealed partial class AboutPage : Page, INotifyPropertyChanged
                 Render();
             });
 
-            var installerPath = await AppState.UpdateInstallerService.DownloadInstallerAsync(
-                update, progress, _downloadCts.Token);
+            var pending = await AppState.PortableUpdateService.PrepareAsync(
+                update, AppState.SettingsService.Load().UpdateProxySite, progress, _downloadCts.Token);
             AppState.ShowStatus(Loc.T("About_Update_Downloaded"), InfoBarSeverity.Success);
 
-            if (!AppState.UpdateInstallerService.LaunchInstaller(installerPath))
+            if (MainWindow.Instance is { } window && window.ApplyPortableUpdate(pending))
             {
-                AppState.ShowStatus(Loc.T("About_Update_InstallerLaunchFailed"), InfoBarSeverity.Error);
                 return;
             }
 
-            AppState.ShowStatus(Loc.T("About_Update_InstallerLaunched"), InfoBarSeverity.Warning);
-
-            // 安装器已启动：先清掉残留实例，再强制结束当前进程，避免文件占用导致安装失败。
-            var current = Process.GetCurrentProcess();
-            AppState.UpdateInstallerService.ForceCloseOtherInstances(current.ProcessName, current.Id);
-            current.Kill(entireProcessTree: true);
+            AppState.ShowStatus(Loc.T("Update_NoUpdater"), InfoBarSeverity.Warning);
         }
         catch (OperationCanceledException)
         {

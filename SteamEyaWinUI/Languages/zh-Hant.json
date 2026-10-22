@@ -689,6 +689,12 @@
     "Cm_Proto_UnsupportedWireType_Format": "不支援的 protobuf wire type：{0}",
     "Cm_Proto_VarintTooLong": "protobuf varint 過長。",
     "Cm_Proto_WireTypeMismatch_Format": "protobuf wire type 不符：實際 {0}，預期 {1}。",
-    "Cm_Proto_Incomplete": "protobuf 資料不完整。"
+    "Cm_Proto_Incomplete": "protobuf 資料不完整。",
+    "UpdateDialog_Download": "僅下載",
+    "Update_Downloaded_Format": "{0} 的更新套件已下載並驗證完成，可稍後從關於頁安裝。",
+    "Update_Ready_Title": "更新已就緒",
+    "Update_Ready_Content_Format": "v{0} 已下載並驗證完成。點「立即重新啟動」會關閉目前程式、取代檔案並自動重新啟動。",
+    "Update_Ready_Apply": "立即重新啟動",
+    "Update_NoUpdater": "目前版本缺少更新程式，請到發佈頁下載完整套件取代。"
   }
 }

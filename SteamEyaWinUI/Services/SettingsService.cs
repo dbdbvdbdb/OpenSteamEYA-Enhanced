@@ -154,6 +154,9 @@ internal sealed class AppSettings
 
     /// <summary>更新检查使用的 GitHub 站点代码（direct / gh-proxy.org / v4.gh-proxy.org / v6.gh-proxy.org / cdn.gh-proxy.org），与 GitHubUpdateService.ProxySites 保持一致；未知值回退 direct。</summary>
     public string UpdateProxySite { get; set; } = "direct";
+
+    /// <summary>用户选择“暂不更新”的版本；同一版本不再自动弹窗。</summary>
+    public string SkippedUpdateVersion { get; set; } = "";
 }
 
 // 与账号历史一致用 source generator：JsonSerializerDefaults.Web（camelCase、大小写不敏感），AOT 下可读写。
