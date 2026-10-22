@@ -3,11 +3,16 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $testOutput = Join-Path $projectRoot 'artifacts/ui-check'
 if ($NativeAot) { $testOutput = Join-Path $projectRoot 'artifacts/ui-check-aot' }
-$arguments = @('publish',(Join-Path $projectRoot 'SteamEyaWinUI/SteamEyaWinUI.csproj'),'-c','Release','-r','win-x64','-p:Platform=x64','-p:EnableManagerUiChecks=true','-o',$testOutput,"-p:PublishAot=$($NativeAot.IsPresent.ToString().ToLowerInvariant())")
+$arguments = @('publish',(Join-Path $projectRoot 'SteamEyaWinUI/SteamEyaWinUI.csproj'),'-c','Release','-r','win-x64','-p:Platform=x64','-p:EnableManagerUiChecks=true','-o',$testOutput,"-p:PublishAot=$($NativeAot.IsPresent.ToString().ToLowerInvariant())","-p:SelfContained=$($NativeAot.IsPresent.ToString().ToLowerInvariant())")
 if (-not $NativeAot) { $arguments += '-p:PublishTrimmed=false' }
 else { $arguments += '-p:RestoreLockedMode=true' }
 & dotnet @arguments
 if ($LASTEXITCODE -ne 0) { throw 'QA build failed.' }
+$updaterOutput = Join-Path $projectRoot 'artifacts/ui-check-updater'
+$updaterArguments = @('publish',(Join-Path $projectRoot 'OSEUpdater/OSEUpdater.csproj'),'-c','Release','-r','win-x64','-p:Platform=x64',"-p:PublishAot=$($NativeAot.IsPresent.ToString().ToLowerInvariant())","-p:SelfContained=$($NativeAot.IsPresent.ToString().ToLowerInvariant())",'-o',$updaterOutput)
+& dotnet @updaterArguments
+if ($LASTEXITCODE -ne 0) { throw 'QA updater build failed.' }
+foreach ($file in (Get-ChildItem -LiteralPath $updaterOutput -File -Filter 'OSEUpdater.*')) { Copy-Item -LiteralPath $file.FullName -Destination $testOutput -Force }
 if ($NativeAot) {
     & (Join-Path $PSScriptRoot 'assert-native-aot.ps1') -PublishDirectory $testOutput
     # Match the production directory's removal of unused WebView2 files.
@@ -22,7 +27,7 @@ if ($NativeAot) {
 }
 $checkArgument = if ($Cs2Only) { '--cs2-settings-ui-check' } else { '--manager-ui-check' }
 $process = Start-Process -FilePath (Join-Path $testOutput 'SteamEyaWinUI.exe') -ArgumentList $checkArgument -WindowStyle Hidden -PassThru
-if (-not $process.WaitForExit(120000)) { throw 'QA did not finish within 120 seconds. Inspect the test process before retrying.' }
+if (-not $process.WaitForExit(240000)) { throw 'QA did not finish within 240 seconds. Inspect the test process before retrying.' }
 $runDirectory = Get-Content -LiteralPath (Join-Path $testOutput 'ui-check-results/latest-run.txt')
 $failureFile = Join-Path $runDirectory 'failure.txt'
 if (Test-Path -LiteralPath $failureFile) {
