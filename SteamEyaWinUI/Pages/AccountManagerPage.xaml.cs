@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Navigation;
 using OpenSteamEya.AccountManagement;
 using SteamEyaWinUI.Services;
@@ -19,21 +20,59 @@ public sealed partial class AccountManagerPage : Page
     private bool syncing = true;
     private bool privacy;
     private readonly SemaphoreSlim refreshGate = new(1);
+    private AccountSnapshot snapshot = AccountSnapshot.Empty;
+    private DispatcherQueueTimer? searchDebounce;
+    private bool reloadQueued;
+    private bool needsAnotherReload;
+    private bool offscreen;
     internal ManagerPreferences Preferences => document.Preferences;
     internal bool IsPrivate => privacy;
+    internal AccountSnapshot Snapshot => snapshot;
 
     public AccountManagerPage()
     {
         InitializeComponent(); Cards.ItemsSource = visible;
-        AccountClassification.Changed += () => DispatcherQueue.TryEnqueue(() => _ = SafeAsync(ReloadAsync));
-        AppState.HistoryChanged += steamId => DispatcherQueue.TryEnqueue(() => _ = SafeAsync(ReloadAsync));
-        AppState.CachedLoginAccountsRefreshed += () => DispatcherQueue.TryEnqueue(() => _ = SafeAsync(ReloadAsync));
+        AccountClassification.Changed += QueueReload;
+        AppState.HistoryChanged += _ => QueueReload();
+        AppState.CachedLoginAccountsRefreshed += QueueReload;
         AppState.BusyChanged += _ => DispatcherQueue.TryEnqueue(UpdateSelectionToolbar);
         ActualThemeChanged += (_, _) => { if (!syncing) Render(); };
     }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)
-    { base.OnNavigatedTo(e); await SafeAsync(ReloadAsync); }
+    {
+        base.OnNavigatedTo(e);
+        offscreen = false;
+        await SafeAsync(ReloadAsync);
+    }
+
+    protected override void OnNavigatedFrom(NavigationEventArgs e)
+    {
+        base.OnNavigatedFrom(e);
+        offscreen = true;
+        searchDebounce?.Stop();
+    }
+
+    /// <summary>
+    /// Collapses bursts of global change notifications into one reload per dispatcher turn,
+    /// and does nothing while the page is off-screen (it reloads on navigate-back instead).
+    /// </summary>
+    private void QueueReload()
+    {
+        if (offscreen || !IsLoaded) return;
+        if (reloadQueued) { needsAnotherReload = true; return; }
+        reloadQueued = true;
+        DispatcherQueue.TryEnqueue(async () =>
+        {
+            reloadQueued = false;
+            do
+            {
+                needsAnotherReload = false;
+                await SafeAsync(ReloadAsync);
+            }
+            while (needsAnotherReload && !offscreen && IsLoaded);
+        });
+    }
 
     private async Task ReloadAsync()
     {
@@ -47,7 +86,8 @@ public sealed partial class AccountManagerPage : Page
             ApplyPrivacyPill();
             Search.Visibility = GroupFilter.Visibility = privacy ? Visibility.Collapsed : Visibility.Visible;
             resolved.Clear();
-            var identities = ManagedAccounts.Identities();
+            snapshot = await ManagedAccounts.SnapshotAsync();
+            var identities = ManagedAccounts.Identities(snapshot);
             var categories = await AccountClassification.Categories.LoadAsync();
             document.Accounts.RemoveAll(x => categories.IsBlack(x.LoginName, x.SteamId));
             foreach (var account in document.Accounts)
@@ -80,6 +120,7 @@ public sealed partial class AccountManagerPage : Page
     private void Render()
     {
         if (syncing) return;
+        if (offscreen || !IsLoaded) return;
         syncing = true;
         try
         {
@@ -90,15 +131,15 @@ public sealed partial class AccountManagerPage : Page
             IEnumerable<ManagedAccount> accounts = document.Accounts.Where(x =>
                 AccountGroups.Matches(x, group) &&
                 (search.Length == 0 || new[] { x.LoginName, x.SteamId, x.Nickname, x.Note,
-                    ManagedAccounts.History(resolved.GetValueOrDefault(x.Id))?.PersonaName ?? "" }
+                    snapshot.HistoryFor(resolved.GetValueOrDefault(x.Id))?.PersonaName ?? "" }
                     .Any(v => v.Contains(search, StringComparison.OrdinalIgnoreCase))));
             string sort = document.Preferences.Sort;
             accounts = sort switch
             {
                 "nickname" => accounts.OrderBy(x => DisplayName(x), StringComparer.CurrentCultureIgnoreCase),
                 "login" => accounts.OrderBy(x => x.LoginName, StringComparer.OrdinalIgnoreCase),
-                "recent" => accounts.OrderByDescending(x => x.LastUsedAt ?? ManagedAccounts.History(resolved.GetValueOrDefault(x.Id))?.LastLoginAt),
-                "level" => accounts.OrderByDescending(x => ManagedAccounts.History(resolved.GetValueOrDefault(x.Id))?.CsPlayerLevel ?? -1),
+                "recent" => accounts.OrderByDescending(x => x.LastUsedAt ?? snapshot.HistoryFor(resolved.GetValueOrDefault(x.Id))?.LastLoginAt),
+                "level" => accounts.OrderByDescending(x => snapshot.HistoryFor(resolved.GetValueOrDefault(x.Id))?.CsPlayerLevel ?? -1),
                 "favorite" => accounts.OrderByDescending(x => x.Favorite).ThenBy(x => x.Order),
                 _ => accounts.OrderBy(x => x.Order)
             };
@@ -120,8 +161,8 @@ public sealed partial class AccountManagerPage : Page
     }
 
     internal string DisplayName(ManagedAccount account) => account.Nickname.Length > 0 ? account.Nickname :
-        ManagedAccounts.History(resolved.GetValueOrDefault(account.Id))?.PersonaName ??
-        ManagedAccounts.Cached(resolved.GetValueOrDefault(account.Id))?.PersonaName ?? "未获取昵称";
+        snapshot.HistoryFor(resolved.GetValueOrDefault(account.Id))?.PersonaName ??
+        snapshot.CachedFor(resolved.GetValueOrDefault(account.Id))?.PersonaName ?? "未获取昵称";
     internal string GroupName(ManagedAccount account)
     {
         // 已有分组的账号不再同时显示“默认分组”。
@@ -132,7 +173,22 @@ public sealed partial class AccountManagerPage : Page
     internal string DisplayCardName(ManagedAccount account) => DisplayName(account) + (account.Note.Length == 0 ? "" :
         "（" + account.Note.Replace("\r\n", " ").Replace('\r', ' ').Replace('\n', ' ') + "）");
 
-    private void FilterChanged(object sender, TextChangedEventArgs e) { if (!syncing) Render(); }
+    private void FilterChanged(object sender, TextChangedEventArgs e)
+    {
+        if (syncing) return;
+        searchDebounce ??= CreateSearchDebounce();
+        searchDebounce.Stop();
+        searchDebounce.Start();
+    }
+
+    private DispatcherQueueTimer CreateSearchDebounce()
+    {
+        var timer = DispatcherQueue.CreateTimer();
+        timer.Interval = TimeSpan.FromMilliseconds(200);
+        timer.IsRepeating = false;
+        timer.Tick += (_, _) => { timer.Stop(); if (!syncing && !offscreen && IsLoaded) Render(); };
+        return timer;
+    }
     private void SelectionFilterChanged(object sender, SelectionChangedEventArgs e) { if (!syncing) Render(); }
     private async void SortChanged(object sender, SelectionChangedEventArgs e)
     {

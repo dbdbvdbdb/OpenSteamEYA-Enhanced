@@ -42,12 +42,42 @@ internal static class CardBackgroundService
         finally { Slots.Release(); }
     }
 
-    public static Brush? ImageBrushFor(string? path, string stretch) =>
-        path is null ? null : new ImageBrush
+    private const int BackgroundCacheLimit = 24;
+    private static readonly Dictionary<string, BitmapImage> BackgroundCache = new(StringComparer.OrdinalIgnoreCase);
+    private static readonly Queue<string> BackgroundOrder = new();
+
+    /// <summary>
+    /// Decodes a background at 480 logical pixels wide and shares the decoded bitmap between
+    /// cards. The same file is never decoded twice, and stale entries are evicted oldest-first.
+    /// </summary>
+    public static Brush? ImageBrushFor(string? path, string stretch)
+    {
+        if (path is null) return null;
+        if (!BackgroundCache.TryGetValue(path, out var image))
         {
-            ImageSource = new BitmapImage(new Uri(path)),
+            try
+            {
+                image = new BitmapImage
+                {
+                    UriSource = new Uri(path),
+                    DecodePixelWidth = 480,
+                    DecodePixelType = DecodePixelType.Logical,
+                };
+            }
+            catch { return null; }
+            BackgroundCache[path] = image;
+            BackgroundOrder.Enqueue(path);
+            while (BackgroundOrder.Count > BackgroundCacheLimit && BackgroundOrder.TryDequeue(out var oldest))
+            {
+                if (!string.Equals(oldest, path, StringComparison.OrdinalIgnoreCase)) BackgroundCache.Remove(oldest);
+            }
+        }
+        return new ImageBrush
+        {
+            ImageSource = image,
             Stretch = stretch switch { "Uniform" => Stretch.Uniform, "Fill" => Stretch.Fill, _ => Stretch.UniformToFill },
         };
+    }
 
     private static async Task<string?> GetProfileBackgroundAsync(string steamId, CancellationToken cancellationToken)
     {

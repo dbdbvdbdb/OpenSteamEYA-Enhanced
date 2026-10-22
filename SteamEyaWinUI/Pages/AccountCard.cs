@@ -58,7 +58,7 @@ internal sealed partial class AccountCard : UserControl
         accentSoftBrush = FromPalette("PclAccentSoftColor");
 
         bool privacy = owner.IsPrivate;
-        var history = ManagedAccounts.History(key); var cached = ManagedAccounts.Cached(key);
+        var history = page.Snapshot.HistoryFor(key); var cached = page.Snapshot.CachedFor(key);
         string steamId = history?.SteamId ?? cached?.SteamId ?? account.SteamId;
         string? avatarPath = history?.AvatarPath ?? cached?.AvatarPath;
         string? avatarUrl = history?.AvatarUrl ?? cached?.AvatarUrl;

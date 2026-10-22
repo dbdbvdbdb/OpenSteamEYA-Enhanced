@@ -1,7 +1,7 @@
 {
-    "version":  "v0.5.0",
+    "version":  "v0.4.4",
     "approved":  true,
-    "reviewedAt":  "2026-10-21",
+    "reviewedAt":  "2026-10-22",
     "reviewedBy":  "dbdbvdbdb",
     "reviewBasis":  "Maintainer confirmed completion of their own resource review. This record does not claim new license documents or an independent legal certification.",
     "repositoryPublicationApproved":  true,
@@ -41,8 +41,13 @@
                       "id":  "theme-system",
                       "status":  "resolved",
                       "reason":  "Generated palettes are computed in-process from two user-chosen colors; no third-party palette, asset, or font is redistributed. Theme settings stay in the local settings file and are never uploaded."
+                  },
+                  {
+                      "id":  "account-snapshot-index",
+                      "status":  "resolved",
+                      "reason":  "The account list now derives from a single in-memory snapshot. No data format, credential handling, or on-disk layout changed."
                   }
               ],
-    "publicationAuthorizedAt":  "2026-10-21",
-    "publicationBasis":  "Maintainer asked for a full theme system rework: semantic color tokens, a palette generator, a theme editor, persistence and global coverage. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
+    "publicationAuthorizedAt":  "2026-10-22",
+    "publicationBasis":  "Maintainer asked for targeted performance work on account list rendering. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
 }

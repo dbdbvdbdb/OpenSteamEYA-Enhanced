@@ -229,9 +229,10 @@ public sealed partial class AccountManagerPage
     internal async Task CheckFilterSelectionAsync()
     {
         var saved = selected.ToHashSet(); Search.Text = "qa-account-000";
-        await Task.Delay(100);
+        for (int attempt = 0; visible.Count != 1 && attempt < 40; attempt++) await Task.Delay(50);
         ManagerUiChecks.Check(visible.Count == 1 && selected.SetEquals(saved), "search preserves offscreen selection");
-        Search.Text = ""; await Task.Delay(100);
+        Search.Text = "";
+        for (int attempt = 0; visible.Count != document.Accounts.Count && attempt < 40; attempt++) await Task.Delay(50);
         ManagerUiChecks.Check(visible.Count == 100 && selected.SetEquals(saved), "clear search restores collection and selection");
         var card = visible.First(x => x.Account.Password.Length > 0);
         card.TogglePassword(); ManagerUiChecks.Check(card.VisiblePassword == card.Account.Password, "show saved password");
@@ -252,8 +253,13 @@ public sealed partial class AccountManagerPage
         for (int attempt = 0; visible.Count != 1 && attempt < 40; attempt++) await Task.Delay(50);
         ManagerUiChecks.Check(visible.Count == 1 && selected.Count == 2,
             $"combined search and group preserve selection (visible={visible.Count}, selected={selected.Count}, syncing={syncing}, query={Search.Text})");
-        Search.Text = ""; SelectTag(GroupFilter, "all"); await Task.Delay(100);
+        Search.Text = ""; SelectTag(GroupFilter, "all");
+        for (int attempt = 0; visible.Count != 100 && attempt < 40; attempt++) await Task.Delay(50);
         ManagerUiChecks.Check(visible.Count == 100, "clear combined filter");
+        var swReload = System.Diagnostics.Stopwatch.StartNew();
+        await ReloadAsync();
+        swReload.Stop();
+        ManagerUiChecks.Info($"perf reload({visible.Count} cards) = {swReload.ElapsedMilliseconds} ms");
     }
     private static IEnumerable<DependencyObject> Walk(DependencyObject root)
     {
