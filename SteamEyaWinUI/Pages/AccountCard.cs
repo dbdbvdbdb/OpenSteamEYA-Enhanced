@@ -24,6 +24,7 @@ internal sealed partial class AccountCard : UserControl
     private readonly Border emphasis;
     private readonly Border selectedBadge;
     private readonly Grid artwork;
+    private readonly Grid scrim;
     private readonly TextBlock password;
     private readonly Button revealButton;
     private readonly bool compact;
@@ -102,16 +103,18 @@ internal sealed partial class AccountCard : UserControl
         root.Children.Add(selectedBadge);
         Content = root;
 
-        // 账号背景作为卡片顶部的一条窄横幅保留（可用“设置账号背景”替换），不再压暗整张卡片。
+        // 头像取色背景铺满整张卡片：底色由头像调色板派生的渐变，或本地/Steam 背景图。
         artwork = new Grid
         {
-            Height = compact ? double.NaN : 84,
-            CornerRadius = compact
-                ? new CornerRadius(CardRadius - 1)
-                : new CornerRadius(CardRadius - 1, CardRadius - 1, 0, 0),
+            CornerRadius = new CornerRadius(CardRadius - 1),
             Background = ThemePaletteService.ArtworkGradient(dark),
+            Opacity = dark ? 0.55 : 0.38,
+            IsHitTestVisible = false,
         };
         layout.Children.Add(artwork);
+
+        scrim = new Grid { CornerRadius = new CornerRadius(CardRadius - 1), IsHitTestVisible = false, Background = Solid(0x00000000) };
+        layout.Children.Add(scrim);
 
         var profile = new Grid
         {
@@ -210,33 +213,22 @@ internal sealed partial class AccountCard : UserControl
         details.Style = (Style)Application.Current.Resources["PclSecondaryButtonStyle"];
         details.HorizontalAlignment = HorizontalAlignment.Stretch; Grid.SetColumn(details, 1); actions.Children.Add(details);
 
-        var body = new StackPanel { Spacing = 8, Padding = new Thickness(compact ? 12 : 14, compact ? 12 : 0, compact ? 12 : 14, compact ? 12 : 14) };
+        var body = new StackPanel { Spacing = 8, Padding = new Thickness(compact ? 12 : 14) };
+        body.Children.Add(profile);
+        body.Children.Add(information);
         if (compact)
         {
-            body.Children.Add(profile);
-            body.Children.Add(information);
             body.Children.Add(CreateCooldownStatus(history,
                 (history?.CsPlayerLevel is { } lv ? "CS2 Lv. " + lv : "CS2 等级未知") + " · 优先状态未知 · "));
-            body.Children.Add(actions);
-            layout.Children.Add(body);
         }
         else
         {
-            artwork.Children.Add(profile);
-            body.Children.Add(information);
             body.Children.Add(statusGrid);
-            body.Children.Add(actions);
-            layout.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            layout.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            Grid.SetRow(body, 1);
-            layout.Children.Add(body);
         }
+        body.Children.Add(actions);
+        layout.Children.Add(body);
 
-        ActualThemeChanged += (_, _) =>
-        {
-            if (artwork.Background is not ImageBrush)
-                artwork.Background = ThemePaletteService.ArtworkGradient(ActualTheme != ElementTheme.Light);
-        };
+        ActualThemeChanged += (_, _) => _ = ApplyBackgroundAsync(steamId, avatarPath, avatarUrl);
         ContextFlyout = Menu(steamId);
         PointerEntered += (_, _) => SetHovered(true);
         PointerExited += (_, _) => SetHovered(false);
@@ -246,7 +238,7 @@ internal sealed partial class AccountCard : UserControl
             if (!IsCardDoubleTapSource(args.OriginalSource)) return;
             args.Handled = true; await OpenEditorAsync();
         };
-        _ = ApplyBackgroundAsync(steamId);
+        _ = ApplyBackgroundAsync(steamId, avatarPath, avatarUrl);
     }
 
     internal bool IsCardDoubleTapSource(object source)
@@ -389,15 +381,21 @@ internal sealed partial class AccountCard : UserControl
         Add("删除账号", () => owner.DeleteAsync(Account)); return menu;
     }
 
-    private async Task ApplyBackgroundAsync(string steamId)
+    private async Task ApplyBackgroundAsync(string steamId, string? avatarPath, string? avatarUrl)
     {
         try
         {
             if (owner.IsPrivate) return;
-            var image = await CardBackgroundService.GetImageAsync(Account, steamId, owner.Preferences, backgroundCancellation.Token);
-            if (stopped || image is null) return;
-            artwork.Background = CardBackgroundService.ImageBrushFor(image, Account.Background.Stretch);
+            var palette = await CardBackgroundService.GetAsync(Account, avatarPath, avatarUrl, steamId,
+                owner.Preferences, dark, backgroundCancellation.Token);
+            if (stopped) return;
+            var hasImage = palette.ImagePath is not null;
+            artwork.Background = CardBackgroundService.Brush(palette);
+            artwork.Opacity = hasImage ? 1 : dark ? 0.55 : 0.34;
+            scrim.Background = hasImage
+                ? Solid(dark ? 0xA62A2C31 : 0xA6FFFFFF)
+                : Solid(0x00000000);
         }
-        catch { } // 取消或不可用图片时保留浅色渐变底
+        catch { } // 取消或不可用图片时保留主题渐变底
     }
 }

@@ -45,15 +45,17 @@ internal static partial class ManagerUiChecks
             }
             CheckOriginalServicesOffline();
             await WriteFixtureAsync();
-            Check(await CardBackgroundService.GetImageAsync(new(), "", new(), CancellationToken.None) is null, "default background uses the theme gradient");
-            var missingImage = await CardBackgroundService.GetImageAsync(new() { Background = new() { Mode = "local", ImageFile = "missing.png" } }, "", new(), CancellationToken.None);
-            Check(missingImage is null, "missing custom image falls back to the theme gradient");
+            var gradient = await CardBackgroundService.GetAsync(new(), null, null, "", new(), false, CancellationToken.None);
+            Check(gradient.ImagePath is null && CardBackgroundService.Brush(gradient) is LinearGradientBrush, "default background uses the theme gradient");
+            var fallback = await CardBackgroundService.GetAsync(new() { Background = new() { Mode = "local", ImageFile = "missing.png" } }, null, null, "", new(), false, CancellationToken.None);
+            Check(fallback.ImagePath is null, "missing custom image falls back to the theme gradient");
+            var emptyMonet = await CardBackgroundService.GetAsync(new() { Background = new() { Mode = "monet" } }, null, null, "", new(), false, CancellationToken.None);
+            Check(CardBackgroundService.Brush(emptyMonet) is LinearGradientBrush, "avatar palette without an avatar falls back to the theme gradient");
             Directory.CreateDirectory(ManagedAccounts.Store.ImageDirectory);
             File.Copy(AvatarPath, Path.Combine(ManagedAccounts.Store.ImageDirectory, "fixture-background.png"), true);
-            var localImage = await CardBackgroundService.GetImageAsync(new() { Background = new() { Mode = "local", ImageFile = "fixture-background.png" } }, "", new(), CancellationToken.None);
-            Check(localImage is not null && File.Exists(localImage), "local image available for the card background");
-            Check(CardBackgroundService.ImageBrushFor(localImage, "Uniform") is ImageBrush, "local image builds an image brush");
-            Check(CardBackgroundService.ImageBrushFor(null, "Fill") is null, "without an image the theme gradient stays");
+            var localImage = await CardBackgroundService.GetAsync(new() { Background = new() { Mode = "local", ImageFile = "fixture-background.png" } }, null, null, "", new(), false, CancellationToken.None);
+            Check(localImage.ImagePath is not null && File.Exists(localImage.ImagePath), "local image available for the card background");
+            Check(CardBackgroundService.Brush(localImage) is ImageBrush, "local image builds an image brush");
             foreach (int count in new[] { 10, 50, 100 })
             {
                 await page.PrepareUiCheckAsync(count);
@@ -89,6 +91,7 @@ internal static partial class ManagerUiChecks
             await CheckClassificationsAsync(window, page);
             await CheckUpdatesAsync(window);
             await CheckCs2SettingsAsync(window);
+            await CheckNavigationAsync(window);
             await CheckThemeAsync(window);
             await CheckUpdaterAsync();
             Results.Add("INFO actual rasterization scale " + page.XamlRoot.RasterizationScale);
@@ -244,11 +247,7 @@ internal static partial class ManagerUiChecks
         if (activePage is AccountManagerPage manager && !name.StartsWith("classification-"))
             manager.VerifyCapturedCardPixels(root, image.PixelWidth, image.PixelHeight, bytes);
         Check(image.PixelWidth > 500 && image.PixelHeight > 500 && bytes.Any(x => x != 0), "render " + name);
-        var path = Path.Combine(OutputRoot, name + ".png"); await File.WriteAllBytesAsync(path, []);
-        var file = await StorageFile.GetFileFromPathAsync(path); using var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
-        var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
-        encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, (uint)image.PixelWidth, (uint)image.PixelHeight, 96, 96, bytes);
-        await encoder.FlushAsync();
+        await WritePngAsync(Path.Combine(OutputRoot, name + ".png"), bytes, (uint)image.PixelWidth, (uint)image.PixelHeight);
     }
     /// <summary>Saves a rendered bitmap into the QA run folder so the result can be reviewed later.</summary>
     internal static async Task SaveBitmapAsync(RenderTargetBitmap image, string name)
@@ -256,24 +255,38 @@ internal static partial class ManagerUiChecks
         var buffer = await image.GetPixelsAsync();
         var bytes = new byte[buffer.Length];
         using (var reader = DataReader.FromBuffer(buffer)) reader.ReadBytes(bytes);
-        var path = Path.Combine(OutputRoot, name + ".png");
-        await File.WriteAllBytesAsync(path, []);
-        var file = await StorageFile.GetFileFromPathAsync(path);
-        using var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
-        var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
-        encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, (uint)image.PixelWidth, (uint)image.PixelHeight, 96, 96, bytes);
-        await encoder.FlushAsync();
+        await WritePngAsync(Path.Combine(OutputRoot, name + ".png"), bytes, (uint)image.PixelWidth, (uint)image.PixelHeight);
     }
 
-    private static async Task WriteFixtureAsync()
+
+    // 用内存流编码 PNG 再落盘：受限目录下 StorageFile 会抛 UnauthorizedAccessException。
+    private static async Task WritePngAsync(string path, byte[] bgra, uint width, uint height)
     {
-        await File.WriteAllBytesAsync(AvatarPath, []);
-        var file = await StorageFile.GetFileFromPathAsync(AvatarPath); using var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
-        var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+        using var memory = new InMemoryRandomAccessStream();
+        var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, memory);
+        encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, width, height, 96, 96, bgra);
+        await encoder.FlushAsync();
+        memory.Seek(0);
+        using var reader = new DataReader(memory.GetInputStreamAt(0));
+        await reader.LoadAsync((uint)memory.Size);
+        var png = new byte[memory.Size];
+        reader.ReadBytes(png);
+        await File.WriteAllBytesAsync(path, png);
+    }    private static async Task WriteFixtureAsync()
+    {
+        // 通过内存流编码，避免 StorageFile 在受限目录下抛 UnauthorizedAccessException。
+        using var memory = new InMemoryRandomAccessStream();
+        var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, memory);
         var pixels = new byte[64 * 64 * 4];
         for (int i = 0; i < pixels.Length; i += 4)
         { pixels[i] = (byte)(i / 4 % 64 < 32 ? 200 : 70); pixels[i + 1] = 110; pixels[i + 2] = (byte)(i / 4 % 64 < 32 ? 45 : 180); pixels[i + 3] = 255; }
         encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, 64, 64, 96, 96, pixels); await encoder.FlushAsync();
+        memory.Seek(0);
+        using var reader = new DataReader(memory.GetInputStreamAt(0));
+        await reader.LoadAsync((uint)memory.Size);
+        var bytes = new byte[memory.Size];
+        reader.ReadBytes(bytes);
+        await File.WriteAllBytesAsync(AvatarPath, bytes);
     }
     private static async Task CheckClipboardAsync(AccountManagerPage page)
     {

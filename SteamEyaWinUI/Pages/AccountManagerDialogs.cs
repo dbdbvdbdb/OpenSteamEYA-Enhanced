@@ -251,8 +251,8 @@ public sealed partial class AccountManagerPage
     internal async Task BackgroundAsync(ManagedAccount account)
     {
         if (privacy) return;
-        var form = Form(); var mode = Choice("背景模式", "跟随默认设置", "Steam 个人资料背景", "本地自定义图片");
-        string[] modes = ["default", "steam", "local"]; mode.SelectedIndex = Math.Max(0, Array.IndexOf(modes, account.Background.Mode));
+        var form = Form(); var mode = Choice("背景模式", "跟随默认设置", "头像取色（莫奈）", "Steam 个人资料背景", "本地自定义图片");
+        string[] modes = ["default", "monet", "steam", "local"]; mode.SelectedIndex = Math.Max(0, Array.IndexOf(modes, account.Background.Mode));
         var stretch = Choice("图片显示方式", "裁切填满", "完整显示", "拉伸填满");
         string[] stretches = ["UniformToFill", "Uniform", "Fill"]; stretch.SelectedIndex = Math.Max(0, Array.IndexOf(stretches, account.Background.Stretch));
         var pathText = Text(account.Background.ImageFile is null ? "未设置本地背景" : "已设置本地背景");
@@ -260,7 +260,7 @@ public sealed partial class AccountManagerPage
         var choose = new Button { Content = "选择 PNG/JPG/JPEG/WEBP" };
         choose.Click += async (_, _) => await SafeAsync(async () => { newPath = await PickOpenAsync(".png", ".jpg", ".jpeg", ".webp"); if (newPath is not null) pathText.Text = newPath; });
         var remove = new CheckBox { Content = "删除自定义背景并恢复默认" };
-        foreach (var element in new UIElement[] { Text("资料背景或本地图片无法获取时，自动回退到主题渐变背景。"), mode, stretch, choose, pathText, remove }) form.Children.Add(element);
+        foreach (var element in new UIElement[] { Text("头像取色会用头像的主色生成整张卡片的渐变；资料背景或本地图片无法获取时，自动回退到主题渐变背景。"), mode, stretch, choose, pathText, remove }) form.Children.Add(element);
         if (await Dialog("卡片背景", form, "保存").ShowAsync() != ContentDialogResult.Primary) return;
         string? image = account.Background.ImageFile;
         if (newPath is not null)
@@ -272,7 +272,7 @@ public sealed partial class AccountManagerPage
             image = Guid.NewGuid().ToString("N") + Path.GetExtension(newPath).ToLowerInvariant();
             Directory.CreateDirectory(ManagedAccounts.Store.ImageDirectory);
             await Task.Run(() => File.Copy(newPath, Path.Combine(ManagedAccounts.Store.ImageDirectory, image)));
-            mode.SelectedIndex = 2;
+            mode.SelectedIndex = 3;
         }
         if (remove.IsChecked == true) { image = null; mode.SelectedIndex = 0; }
         var oldImage = account.Background.ImageFile;
@@ -320,7 +320,9 @@ public sealed partial class AccountManagerPage
         string[] sorts = ["custom", "nickname", "login", "recent", "level", "favorite"]; sort.SelectedIndex = Math.Max(0, Array.IndexOf(sorts, prefs.Sort));
         var groupDisplay = Choice("分组显示方式", "筛选显示", "按分组排列"); groupDisplay.SelectedIndex = prefs.GroupDisplay == "sections" ? 1 : 0;
         var favorite = new CheckBox { Content = "优先显示收藏账号", IsChecked = prefs.FavoritesFirst };
-        var mode = Choice("默认背景模式", "跟随主题", "Steam 个人资料背景"); mode.SelectedIndex = prefs.BackgroundMode == "steam" ? 1 : 0;
+        var mode = Choice("默认背景模式", "跟随主题", "头像取色（莫奈）", "Steam 个人资料背景");
+        string[] modes = ["default", "monet", "steam"]; mode.SelectedIndex = Math.Max(0, Array.IndexOf(modes, prefs.BackgroundMode));
+        var monet = new Slider { Header = "头像取色强度", Minimum = 0, Maximum = 1, StepFrequency = 0.05, Value = prefs.MonetStrength };
         var brightness = new Slider { Header = "背景亮度", Minimum = 0.1, Maximum = 0.9, Value = prefs.Brightness };
         var blur = new Slider { Header = "背景柔化强度", Minimum = 0, Maximum = 32, Value = prefs.Blur };
         var full = new CheckBox { Content = "显示完整 SteamID", IsChecked = prefs.FullSteamId };
@@ -328,13 +330,13 @@ public sealed partial class AccountManagerPage
         var privateMode = new CheckBox { Content = "隐私模式（保留为启动设置）", IsChecked = prefs.Privacy };
         var folder = new Button { Content = "打开密码数据目录" }; folder.Click += async (_, _) => await SafeAsync(() =>
         { Directory.CreateDirectory(ManagedAccounts.Store.Root); System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", ManagedAccounts.Store.Root) { UseShellExecute = true }); return Task.CompletedTask; });
-        foreach (var element in new UIElement[] { view, sort, groupDisplay, favorite, mode, brightness, blur, full, hide, privateMode,
+        foreach (var element in new UIElement[] { view, sort, groupDisplay, favorite, mode, monet, brightness, blur, full, hide, privateMode,
             Text("密码数据位置：" + ManagedAccounts.Store.Root), Text("本地文件、导出和备份包含明文密码。目录固定在当前用户 LocalAppData，避免漫游同步。"), folder }) form.Children.Add(element);
         if (await Dialog("白号管理设置", Scroll(form), "保存").ShowAsync() != ContentDialogResult.Primary) return;
         await ManagedAccounts.Store.UpdateAsync(doc => doc.Preferences = new()
         { View = view.SelectedIndex == 1 ? "list" : "cards", Sort = sorts[sort.SelectedIndex], FavoritesFirst = favorite.IsChecked == true,
-            GroupDisplay = groupDisplay.SelectedIndex == 1 ? "sections" : "filter", BackgroundMode = mode.SelectedIndex == 1 ? "steam" : "default",
-            Brightness = brightness.Value, Blur = blur.Value, FullSteamId = full.IsChecked == true, HidePasswords = hide.IsChecked == true, Privacy = privateMode.IsChecked == true });
+            GroupDisplay = groupDisplay.SelectedIndex == 1 ? "sections" : "filter", BackgroundMode = modes[mode.SelectedIndex],
+            MonetStrength = monet.Value, Brightness = brightness.Value, Blur = blur.Value, FullSteamId = full.IsChecked == true, HidePasswords = hide.IsChecked == true, Privacy = privateMode.IsChecked == true });
         await ReloadAsync();
     }
 }

@@ -99,6 +99,8 @@ public sealed partial class LoadoutPage : Page, INotifyPropertyChanged
         public CsLoadoutGroup Group;
     }
 
+    private static Brush Res(string key) => (Brush)Application.Current.Resources[key];
+
     private static SolidColorBrush Brush(byte a, byte r, byte g, byte b) =>
         new(Windows.UI.Color.FromArgb(a, r, g, b));
 
@@ -131,7 +133,7 @@ public sealed partial class LoadoutPage : Page, INotifyPropertyChanged
                 FontSize = 15,
                 FontWeight = FontWeights.SemiBold,
                 // 装备区在固定深色面板上，标题用固定浅色而非主题色。
-                Foreground = Brush(0xFF, 0xE6, 0xEA, 0xF0),
+                Foreground = Res("PclTextPrimaryBrush"),
                 Margin = new Thickness(0, row == 0 ? 0 : 6, 0, 4)
             };
             Grid.SetRow(header, row);
@@ -155,7 +157,7 @@ public sealed partial class LoadoutPage : Page, INotifyPropertyChanged
         var bg = new Border
         {
             CornerRadius = new CornerRadius(4),
-            Background = Brush(0xFF, 0x24, 0x36, 0x4F),
+            Background = Brush(0xFF, 0x1E, 0x28, 0x36),
             BorderThickness = new Thickness(1),
             BorderBrush = Brush(0x33, 0xFF, 0xFF, 0xFF)
         };
@@ -453,8 +455,8 @@ public sealed partial class LoadoutPage : Page, INotifyPropertyChanged
         drag.GhostCaption = caption;
         drag.Ghost = new Border
         {
-            Background = Brush(0xE6, 0x20, 0x2B, 0x3A),
-            BorderBrush = Brush(0xFF, 0x3A, 0x46, 0x58),
+            Background = Brush(0xE6, 0x1E, 0x28, 0x36),
+            BorderBrush = Brush(0x33, 0xFF, 0xFF, 0xFF),
             BorderThickness = new Thickness(1),
             CornerRadius = new CornerRadius(4),
             Padding = new Thickness(8, 4, 8, 4),
@@ -504,7 +506,7 @@ public sealed partial class LoadoutPage : Page, INotifyPropertyChanged
         _dropTarget = target;
         if (target is not null)
         {
-            target.Bg.BorderBrush = Brush(0xFF, 0x4C, 0xC2, 0xFF);
+            target.Bg.BorderBrush = Res("PclAccentBrush");
             target.Bg.BorderThickness = new Thickness(2);
         }
     }

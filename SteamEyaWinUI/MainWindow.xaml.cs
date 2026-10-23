@@ -81,8 +81,7 @@ public sealed partial class MainWindow : Window
 
         // 预载历史账号，登录页的头像/资料复用依赖该缓存。
         AppState.ReloadHistory();
-        RootNavigationView.SelectedItem = LoginNavItem;
-        // Construct the original login page first so cards can reuse its established login/query workflow.
+        // 只选一次：启动时反复改写 SelectedItem 会让顶部指示条停在上一个项目的位置。
         RootNavigationView.SelectedItem = ManagerNavItem;
 
         // 首次启动即解析并持久化 Steam 安装路径（之后上号直接复用，不再每次探测）。
@@ -144,7 +143,7 @@ public sealed partial class MainWindow : Window
     public void LoadAccountIntoLogin(SteamAccountHistoryItem account)
     {
         RootNavigationView.SelectedItem = LoginNavItem;
-        AppState.LoginPage?.LoadHistoryAccount(account);
+        DispatcherQueue.TryEnqueue(() => AppState.LoginPage?.LoadHistoryAccount(account));
     }
 
     private void RootNavigationView_SelectionChanged(
@@ -165,7 +164,7 @@ public sealed partial class MainWindow : Window
             "history" or "black" => typeof(HistoryPage),
             "cachedAccounts" => typeof(CachedAccountsPage),
             "loadout" => typeof(LoadoutPage),
-            "cs2LocalSettings" => typeof(Cs2LocalSettingsPage),
+            "cs2LocalSettings" => typeof(Cs2HubPage),
             "personalization" => typeof(PersonalizationPage),
             "settings" => typeof(SettingsPage),
             "about" => typeof(AboutPage),
@@ -244,8 +243,6 @@ public sealed partial class MainWindow : Window
         LoginNavItem.Content = Loc.T("Nav_Login");
         HistoryNavItem.Content = Loc.T("Nav_History");
         CachedAccountsNavItem.Content = Loc.T("Nav_CachedAccounts");
-        LoadoutNavItem.Content = Loc.T("Nav_Loadout");
-        PersonalizationNavItem.Content = Loc.T("Nav_Personalization");
         SettingsNavItem.Content = Loc.T("Nav_Settings");
         AboutNavItem.Content = Loc.T("Nav_About");
     }

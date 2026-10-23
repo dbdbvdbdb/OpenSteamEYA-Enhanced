@@ -112,10 +112,11 @@ public sealed partial class AccountManagerPage
         Invoke(withPassword.Actions["reveal"]); await Task.Delay(80);
         ManagerUiChecks.Check(withPassword.VisiblePassword == "••••••••", "native reveal button hides password");
         ManagerUiChecks.Check(!card.Actions["copy-password"].IsEnabled && card.VisiblePassword == "未保存密码", "missing password disables copying and displays correct text");
-        ManagerUiChecks.Check(card.HeaderArtwork.Height / card.ActualHeight is > .28 and < .55, "banner proportion matches five-zone card layout");
+        ManagerUiChecks.Info($"card geometry DIP: width={card.ActualWidth:F2}; height={card.ActualHeight:F2}; artW={card.HeaderArtwork.ActualWidth:F2}; artH={card.HeaderArtwork.ActualHeight:F2}; corner={card.OutlineRadius.TopLeft}");
+        ManagerUiChecks.Check(card.HeaderArtwork.ActualHeight >= card.ActualHeight - 4 && card.HeaderArtwork.ActualWidth >= card.ActualWidth - 4, "artwork fills the whole account card");
         ManagerUiChecks.Check(Walk(visible[1]).OfType<TextBlock>().Where(x => x.Text.Contains("非常长") || x.Text.Contains("very-long-login")).All(x => x.TextTrimming == TextTrimming.CharacterEllipsis), "long nickname/login use ellipsis");
         ManagerUiChecks.Check(visible[0].HeaderArtwork.Background is LinearGradientBrush && visible[2].HeaderArtwork.Background is ImageBrush, "missing background falls back while valid local background loads");
-        ManagerUiChecks.Info($"card geometry DIP: width={card.ActualWidth:F2}; height={card.ActualHeight:F2}; banner={card.HeaderArtwork.Height:F2}; loginHeight={card.Actions["login"].ActualHeight:F2}; corner={card.OutlineRadius.TopLeft}");
+
     }
     internal async Task CheckNewSelectionActionsAsync()
     {

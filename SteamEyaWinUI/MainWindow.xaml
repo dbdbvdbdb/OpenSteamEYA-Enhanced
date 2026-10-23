@@ -70,10 +70,6 @@
 
                 <!-- 导航项文字由 MainWindow.RefreshNavText() 按当前语言在代码里设置（构造时即设、语言切换时刷新）。 -->
                 <NavigationView.MenuItems>
-                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34" x:Name="ManagerNavItem" Content="白号管理" Tag="manager">
-                        <NavigationViewItem.Icon><FontIcon Glyph="&#xE716;" /></NavigationViewItem.Icon>
-                    </NavigationViewItem>
-                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34" x:Name="BlackNavItem" Content="黑号管理" Tag="black"><NavigationViewItem.Icon><FontIcon Glyph="&#xE77B;" /></NavigationViewItem.Icon></NavigationViewItem>
                     <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34"
                         x:Name="LoginNavItem"
                         Tag="login">
@@ -81,6 +77,10 @@
                             <FontIcon Glyph="&#xE8D4;" />
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34" x:Name="ManagerNavItem" Content="白号管理" Tag="manager">
+                        <NavigationViewItem.Icon><FontIcon Glyph="&#xE716;" /></NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34" x:Name="BlackNavItem" Content="黑号管理" Tag="black"><NavigationViewItem.Icon><FontIcon Glyph="&#xE77B;" /></NavigationViewItem.Icon></NavigationViewItem>
 
                     <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34"
                         x:Name="HistoryNavItem"
@@ -94,20 +94,6 @@
                         Tag="cachedAccounts">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE777;" />
-                        </NavigationViewItem.Icon>
-                    </NavigationViewItem>
-                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34"
-                        x:Name="LoadoutNavItem"
-                        Tag="loadout">
-                        <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xE7C1;" />
-                        </NavigationViewItem.Icon>
-                    </NavigationViewItem>
-                    <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34"
-                        x:Name="PersonalizationNavItem"
-                        Tag="personalization">
-                        <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xE779;" />
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
                     <NavigationViewItem FontSize="13" Padding="8,0" MinHeight="34" Height="34" Content="CS2 配置" Tag="cs2LocalSettings"><NavigationViewItem.Icon><FontIcon Glyph="&#xE713;" /></NavigationViewItem.Icon></NavigationViewItem>
