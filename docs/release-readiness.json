@@ -1,5 +1,5 @@
 {
-    "version":  "v0.4.6",
+    "version":  "v0.4.7",
     "approved":  true,
     "reviewedAt":  "2026-10-23",
     "reviewedBy":  "dbdbvdbdb",
@@ -56,8 +56,13 @@
                       "id":  "avatar-color-background",
                       "status":  "resolved",
                       "reason":  "Avatar palette extraction runs locally on the user avatar already stored for the card; no image or derived color is uploaded, and the feature can be switched off per account or in preferences."
+                  },
+                  {
+                      "id":  "in-app-update-self-exit",
+                      "status":  "resolved",
+                      "reason":  "The app now exits through a documented shutdown path instead of killing its own process tree, and a bounded fallback exit guarantees the standalone updater is never left waiting."
                   }
               ],
     "publicationAuthorizedAt":  "2026-10-23",
-    "publicationBasis":  "Maintainer requested restoring avatar color-derived card backgrounds across the whole card, fixing the navigation indicator, folding loadout and personalization into the CS2 page, and moving login first. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
+    "publicationBasis":  "Maintainer reported the in-app update failing on v0.4.5 and asked for a fix release. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
 }

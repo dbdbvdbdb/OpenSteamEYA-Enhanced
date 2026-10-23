@@ -536,7 +536,33 @@ public sealed partial class MainWindow : Window
         }
 
         AppState.ShowStatus(Loc.T("About_Update_InstallerLaunched"), InfoBarSeverity.Warning);
-        System.Diagnostics.Process.GetCurrentProcess().Kill(entireProcessTree: true);
+
+        // 更新器已带着 --pid 启动，正在等本进程退出。这里必须正常退出：
+        // Process.Kill(entireProcessTree: true) 在“要杀的进程树包含自己”时会抛
+        // InvalidOperationException，正是旧版本报出的
+        // “Cannot be used to terminate a process tree containing the calling process.”。
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            try
+            {
+                Close();
+            }
+            catch (Exception ex)
+            {
+                AppLog.Error("关闭主窗口失败。", ex);
+            }
+
+            Microsoft.UI.Xaml.Application.Current.Exit();
+        });
+
+        // 兜底：若 UI 线程因等待对话框等原因没有立刻退出，1.5 秒后强制结束进程，
+        // 避免更新器一直等待 --pid 直到超时。
+        _ = Task.Run(async () =>
+        {
+            await Task.Delay(1500);
+            Environment.Exit(0);
+        });
+
         return true;
     }
 
