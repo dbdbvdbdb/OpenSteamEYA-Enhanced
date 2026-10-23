@@ -1,5 +1,5 @@
 {
-    "version":  "v0.4.7",
+    "version":  "v0.4.8",
     "approved":  true,
     "reviewedAt":  "2026-10-23",
     "reviewedBy":  "dbdbvdbdb",
@@ -61,8 +61,13 @@
                       "id":  "in-app-update-self-exit",
                       "status":  "resolved",
                       "reason":  "The app now exits through a documented shutdown path instead of killing its own process tree, and a bounded fallback exit guarantees the standalone updater is never left waiting."
+                  },
+                  {
+                      "id":  "update-runner-isolation",
+                      "status":  "resolved",
+                      "reason":  "The updater now runs from %LOCALAPPDATA%\\SteamEYA\\updates\\runner instead of the install directory, so the packaged copy can be replaced; a self-path guard skips any executable that is currently running. No new distribution channel or credential is introduced."
                   }
               ],
     "publicationAuthorizedAt":  "2026-10-23",
-    "publicationBasis":  "Maintainer reported the in-app update failing on v0.4.5 and asked for a fix release. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
+    "publicationBasis":  "Maintainer reported the in-app update failing at the final replace step; this release fixes the updater replacing itself and keeps the same data and asset posture. No new third-party content was added."
 }

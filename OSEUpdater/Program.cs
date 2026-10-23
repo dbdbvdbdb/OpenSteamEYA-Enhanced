@@ -67,6 +67,7 @@ internal static class Program
     private const int ExitTargetNotWritable = 4;
     private const int ExitSelfTestFailed = 5;
     private const string StagingSuffix = ".ose-new";
+    internal static string? SelfPathOverride;
     private static readonly StringBuilder Transcript = new();
 
     private static int Main(string[] args)
@@ -169,6 +170,9 @@ internal static class Program
             return ExitTargetNotWritable;
         }
 
+        // 上次失败可能留下 *.ose-new 中间文件，先清掉，避免占空间或干扰判断。
+        CleanupStaleStaging(target, files);
+
         if (!Apply(files, target, backup, options.FailAfter, options.Version, out var applied, out var created, out var error))
         {
             Write("apply failed: " + error);
@@ -197,6 +201,26 @@ internal static class Program
         catch (InvalidOperationException)
         {
             return true;
+        }
+    }
+
+    private static void CleanupStaleStaging(string target, List<SourceFile> files)
+    {
+        foreach (var file in files)
+        {
+            var staging = Path.Combine(target, file.Relative) + StagingSuffix;
+            try
+            {
+                if (File.Exists(staging))
+                {
+                    File.Delete(staging);
+                    Write("removed stale staging: " + file.Relative);
+                }
+            }
+            catch (Exception ex)
+            {
+                Write("stale staging cleanup skipped: " + file.Relative + ": " + ex.Message);
+            }
         }
     }
 
@@ -277,6 +301,16 @@ internal static class Program
 
                 var destinationDirectory = Path.GetDirectoryName(destination)!;
                 Directory.CreateDirectory(destinationDirectory);
+
+                // 更新器自己可能就在目标目录里：运行中的 exe 不能被覆盖，
+                // 否则 File.Move 会抛“拒绝访问”。跳过它，由下一次更新替换。
+                var self = SelfPathOverride ?? Environment.ProcessPath;
+                if (!string.IsNullOrEmpty(self) &&
+                    string.Equals(Path.GetFullPath(destination), Path.GetFullPath(self), StringComparison.OrdinalIgnoreCase))
+                {
+                    Write("skip running updater: " + file.Relative);
+                    continue;
+                }
 
                 var backupPath = Path.Combine(backup, file.Relative);
                 if (File.Exists(destination))

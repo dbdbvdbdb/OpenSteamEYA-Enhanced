@@ -15,6 +15,7 @@ internal static class SelfTest
         {
             CheckReplacePreservesExtras(root);
             CheckRollbackRestoresPrevious(root);
+            CheckSkipsRunningUpdater(root);
             CheckPathGuards();
         }
         catch (Exception ex)
@@ -51,8 +52,7 @@ internal static class SelfTest
         Check(!Directory.EnumerateFiles(target, "*.ose-new", SearchOption.AllDirectories).Any(), "no staging leftovers");
     }
 
-    private static void CheckRollbackRestoresPrevious(string root)
-    {
+    private static void CheckRollbackRestoresPrevious(string root)    {
         var (source, target, backup) = BuildTrees(root, "rollback");
         var files = new List<Program.SourceFile>();
         foreach (var path in Directory.EnumerateFiles(source, "*", SearchOption.AllDirectories))
@@ -67,6 +67,32 @@ internal static class SelfTest
         Check(Read(Path.Combine(target, "app.txt")) == "old-app", "rollback restores replaced file");
         Check(Read(Path.Combine(target, "sub", "core.txt")) == "old-core", "rollback restores nested file");
         Check(!File.Exists(Path.Combine(target, "added.txt")), "rollback removes newly created file");
+    }
+
+    private static void CheckSkipsRunningUpdater(string root)
+    {
+        var (source, target, backup) = BuildTrees(root, "self");
+        Write(Path.Combine(source, "OSEUpdater.exe"), "new-updater");
+        Write(Path.Combine(target, "OSEUpdater.exe"), "running-updater");
+        var files = new List<Program.SourceFile>
+        {
+            new("OSEUpdater.exe", Path.Combine(source, "OSEUpdater.exe"), new FileInfo(Path.Combine(source, "OSEUpdater.exe")).Length),
+        };
+
+        var selfPath = Path.Combine(target, "OSEUpdater.exe");
+        Program.SelfPathOverride = selfPath;
+        try
+        {
+            var ok = Program.Apply(files, target, backup, 0, "1.2.3", out var applied, out var created, out var error);
+            Check(ok, "apply succeeds when the running updater is part of the package: " + error);
+            Check(Read(selfPath) == "running-updater", "running updater file is left untouched");
+            Check(applied.Count == 0 && created.Count == 0, "skipped updater is not counted as applied");
+            Check(!File.Exists(selfPath + ".ose-new"), "no staging leftover for the running updater");
+        }
+        finally
+        {
+            Program.SelfPathOverride = null;
+        }
     }
 
     private static void CheckPathGuards()

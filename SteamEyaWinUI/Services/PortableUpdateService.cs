@@ -145,6 +145,28 @@ internal sealed class PortableUpdateService
             return false;
         }
 
+        // 从安装目录以外启动更新器：更新器自己也在待替换的文件列表里，
+        // 正在运行的 exe 无法被覆盖，会以“拒绝访问”失败。把它（以及
+        // 它的同目录依赖）复制到 updates\runner 下再启动。
+        string runner;
+        try
+        {
+            var runnerDirectory = Path.Combine(UpdatesDirectory, "runner");
+            Directory.CreateDirectory(runnerDirectory);
+            foreach (var file in Directory.EnumerateFiles(AppDirectory, "OSEUpdater*"))
+            {
+                File.Copy(file, Path.Combine(runnerDirectory, Path.GetFileName(file)), overwrite: true);
+            }
+
+            runner = Path.Combine(runnerDirectory, UpdaterFileName);
+        }
+        catch (Exception ex)
+        {
+            error = "准备更新程序失败：" + ex.Message;
+            AppLog.Error("准备更新程序失败。", ex);
+            return false;
+        }
+
         var backup = Path.Combine(BackupDirectory, pending.Version);
         var log = Path.Combine(LogDirectory, "update-" + pending.Version + ".log");
         var current = Process.GetCurrentProcess();
@@ -164,7 +186,7 @@ internal sealed class PortableUpdateService
             Directory.CreateDirectory(LogDirectory);
             Process.Start(new ProcessStartInfo
             {
-                FileName = updater,
+                FileName = runner,
                 Arguments = arguments,
                 WorkingDirectory = AppDirectory,
                 UseShellExecute = false,
