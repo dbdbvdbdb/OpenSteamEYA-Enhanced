@@ -143,6 +143,11 @@ internal static partial class ManagerUiChecks
         Check(previews.Count == 2 && previews.All(x => x.Children.Count >= 5), "theme editor previews both light and dark");
         await CaptureAsync(window, "theme-editor-dark");
 
+        var caption = window.AppWindow.TitleBar;
+        var captionForeground = caption?.ButtonForegroundColor;
+        Check(captionForeground is { A: 255 } && captionForeground != caption!.ButtonBackgroundColor,
+            "caption buttons use an explicit foreground distinct from the title bar");
+
         ThemeService.BeginPreview();
         ThemeService.SetSpec(spec);
         ThemeService.Repaint(refreshPages: false);

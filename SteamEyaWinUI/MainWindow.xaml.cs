@@ -204,6 +204,48 @@ public sealed partial class MainWindow : Window
         }
 
         ThemePaletteService.Apply();
+        ApplyCaptionColors();
+    }
+
+    /// <summary>
+    /// 自定义标题栏后，最小化/最大化/关闭三个按钮由系统绘制，默认会跟随窗口主题；
+    /// 浅色主题下若系统仍按深色绘制，就会出现「按钮和标题栏同色」看不见的问题。
+    /// 这里显式给它们上我们自己的令牌色，保证两种主题都清晰可辨。
+    /// </summary>
+    private void ApplyCaptionColors()
+    {
+        try
+        {
+            var titleBar = AppWindow.TitleBar;
+            if (titleBar is null) return;
+
+            var dark = (Content as FrameworkElement)?.ActualTheme == ElementTheme.Dark;
+            var primary = ThemeColor("PclTextPrimaryColor", dark ? 0xFFF2F3F5 : 0xFF1F2329);
+            var secondary = ThemeColor("PclTextTertiaryColor", dark ? 0xFF7C828D : 0xFF9AA1AC);
+            var hover = ThemeColor("PclSurfaceAltColor", dark ? 0xFF2B2D31 : 0xFFFAFBFC);
+            var pressed = ThemeColor("PclBorderStrongColor", dark ? 0xFF4A4E57 : 0xFFD3D8E0);
+
+            titleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
+            titleBar.ButtonInactiveBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
+            titleBar.ButtonForegroundColor = primary;
+            titleBar.ButtonInactiveForegroundColor = secondary;
+            titleBar.ButtonHoverBackgroundColor = hover;
+            titleBar.ButtonHoverForegroundColor = primary;
+            titleBar.ButtonPressedBackgroundColor = pressed;
+            titleBar.ButtonPressedForegroundColor = primary;
+        }
+        catch
+        {
+            // 旧系统或特殊桌面环境下 TitleBar 可能不可定制，忽略即可。
+        }
+    }
+
+    /// <summary>从主题字典里取一个已解析的颜色，取不到时用回退色。</summary>
+    private static Windows.UI.Color ThemeColor(string key, uint fallback)
+    {
+        if (Application.Current.Resources.TryGetValue(key, out var value) && value is Windows.UI.Color color) return color;
+        return Windows.UI.Color.FromArgb(
+            (byte)(fallback >> 24), (byte)(fallback >> 16), (byte)(fallback >> 8), (byte)fallback);
     }
 
     private static ElementTheme ParseTheme(string theme) => theme switch
@@ -220,6 +262,7 @@ public sealed partial class MainWindow : Window
     public void RefreshThemePalette()
     {
         ThemePaletteService.Apply();
+        ApplyCaptionColors();
         if (Content is not FrameworkElement root) return;
 
         // WinUI 的主题字典画刷在主题切换时才重新解析；这里先切到反色再切回，

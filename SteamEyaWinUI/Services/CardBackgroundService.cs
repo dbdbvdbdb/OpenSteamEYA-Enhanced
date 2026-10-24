@@ -79,7 +79,7 @@ internal static class CardBackgroundService
             if (top.Count == 0) return Fallback;
             Color Make(int index)
             {
-                var x = top[index % top.Count]; double mix = 0.35 + strength * 0.45;
+                var x = top[index % top.Count]; double mix = 0.56 + strength * 0.34;
                 double neutral = dark ? 45 : 185;
                 return Color.FromArgb(255, (byte)(x.R / x.Count * mix + neutral * (1 - mix)),
                     (byte)(x.G / x.Count * mix + neutral * (1 - mix)), (byte)(x.B / x.Count * mix + neutral * (1 - mix)));

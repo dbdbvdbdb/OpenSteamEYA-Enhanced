@@ -1,7 +1,7 @@
 {
-    "version":  "v0.4.8",
+    "version":  "v0.4.9",
     "approved":  true,
-    "reviewedAt":  "2026-10-23",
+    "reviewedAt":  "2026-10-24",
     "reviewedBy":  "dbdbvdbdb",
     "reviewBasis":  "Maintainer confirmed completion of their own resource review. This record does not claim new license documents or an independent legal certification.",
     "repositoryPublicationApproved":  true,
@@ -66,8 +66,13 @@
                       "id":  "update-runner-isolation",
                       "status":  "resolved",
                       "reason":  "The updater now runs from %LOCALAPPDATA%\\SteamEYA\\updates\\runner instead of the install directory, so the packaged copy can be replaced; a self-path guard skips any executable that is currently running. No new distribution channel or credential is introduced."
+                  },
+                  {
+                      "id":  "caption-button-contrast",
+                      "status":  "resolved",
+                      "reason":  "Caption button colors are set from the app own theme tokens at runtime; no system bitmap, third-party asset, or downloaded resource is involved."
                   }
               ],
-    "publicationAuthorizedAt":  "2026-10-23",
-    "publicationBasis":  "Maintainer reported the in-app update failing at the final replace step; this release fixes the updater replacing itself and keeps the same data and asset posture. No new third-party content was added."
+    "publicationAuthorizedAt":  "2026-10-24",
+    "publicationBasis":  "Maintainer requested a fix for invisible caption buttons in the light theme and a less washed-out avatar color background on account cards. Existing resource review and attribution remain unchanged; this does not claim new legal evidence or new live-account acceptance."
 }
