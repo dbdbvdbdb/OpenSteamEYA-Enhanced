@@ -41,6 +41,7 @@ internal static class ThemeService
     /// <summary>把当前主题写入资源字典；<paramref name="refreshPages"/> 会重建当前页以刷新代码里缓存的画刷。</summary>
     public static void Repaint(bool refreshPages = true)
     {
+        ThemePaletteService.InvalidatePaletteCache();
         ThemePaletteService.Apply();
         if (refreshPages) MainWindow.Instance?.RefreshThemePalette();
         Changed?.Invoke();

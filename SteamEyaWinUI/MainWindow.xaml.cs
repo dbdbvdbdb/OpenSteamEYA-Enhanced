@@ -173,7 +173,7 @@ public sealed partial class MainWindow : Window
 
         if (ContentFrame.CurrentSourcePageType != pageType || pageType == typeof(HistoryPage))
         {
-            ContentFrame.Navigate(pageType, pageName, new EntranceNavigationTransitionInfo());
+            ContentFrame.Navigate(pageType, pageName, new SuppressNavigationTransitionInfo());
             ContentFrame.BackStack.Clear();
         }
     }
@@ -273,7 +273,7 @@ public sealed partial class MainWindow : Window
         {
             if (Content is FrameworkElement current) current.RequestedTheme = theme;
             if (ContentFrame.Content is Page page && page is not Pages.ThemeEditorPage)
-                ContentFrame.Navigate(page.GetType());
+                ContentFrame.Navigate(page.GetType(), null, new SuppressNavigationTransitionInfo());
         });
     }
 

@@ -7,10 +7,24 @@ namespace SteamEyaWinUI.Pages;
 
 internal sealed partial class AccountCard
 {
-    private DispatcherTimer? cooldownTimer;
+    private Action? cooldownRefresh;
+    private bool cooldownLive;
+
+    /// <summary>卡片当前是否还有正在走的冷却（由页面共享的 1s 计时器驱动）。</summary>
+    internal bool HasLiveCooldown => !stopped && cooldownLive;
+
 #if MANAGER_UI_CHECKS
-    internal bool HasActiveCooldownTimer => cooldownTimer?.IsEnabled == true;
+    internal bool HasActiveCooldownTimer => HasLiveCooldown;
 #endif
+
+    /// <summary>页面计时器每秒调一次；返回是否仍需继续计时。</summary>
+    internal bool TickCooldown()
+    {
+        if (!HasLiveCooldown || cooldownRefresh is null) return false;
+        cooldownRefresh();
+        return HasLiveCooldown;
+    }
+
     private TextBlock CreateCooldownStatus(SteamAccountHistoryItem? history, string? prefix = null)
     {
         var label = Label("", prefix is null ? 12 : 11, false, Muted);
@@ -45,16 +59,11 @@ internal sealed partial class AccountCard
             }
             label.MaxLines = prefix is null ? values.Count : 1;
             ToolTipService.SetToolTip(label, string.Join("\n", values.Select(x => x.Text)));
-            if (history?.HasLiveCooldown != true) cooldownTimer?.Stop();
+            cooldownLive = history?.HasLiveCooldown == true;
         }
+
+        cooldownRefresh = Update;
         Update();
-        if (history?.HasLiveCooldown == true)
-        {
-            cooldownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            cooldownTimer.Tick += (_, _) => { if (stopped) cooldownTimer.Stop(); else Update(); };
-            Loaded += (_, _) => { if (!stopped && history.HasLiveCooldown) cooldownTimer.Start(); };
-            Unloaded += (_, _) => cooldownTimer.Stop();
-        }
         return label;
     }
 }

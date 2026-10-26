@@ -88,7 +88,7 @@ internal static class CardBackgroundService
         });
     }
 
-    private const int BackgroundCacheLimit = 24;
+    private const int BackgroundCacheLimit = 16;
     private static readonly Dictionary<string, BitmapImage> BackgroundCache = new(StringComparer.OrdinalIgnoreCase);
     private static readonly Queue<string> BackgroundOrder = new();
 
@@ -106,7 +106,7 @@ internal static class CardBackgroundService
                 image = new BitmapImage
                 {
                     UriSource = new Uri(path),
-                    DecodePixelWidth = 720,
+                    DecodePixelWidth = 520,
                     DecodePixelType = DecodePixelType.Logical,
                 };
             }

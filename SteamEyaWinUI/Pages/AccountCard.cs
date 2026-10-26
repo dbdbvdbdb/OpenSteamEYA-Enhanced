@@ -42,13 +42,16 @@ internal sealed partial class AccountCard : UserControl
     private readonly Brush accentBrush;
     private readonly Brush accentSoftBrush;
 
-    public void Stop() { stopped = true; backgroundCancellation.Cancel(); cooldownTimer?.Stop(); }
+    public void Stop() { stopped = true; backgroundCancellation.Cancel(); }
 
     public AccountCard(AccountManagerPage page, ManagedAccount account, string? mappingKey, bool compact)
     {
         Account = account; owner = page; key = mappingKey; this.compact = compact;
+#if MANAGER_UI_CHECKS
+        Services.UiCheckPerf.CardCreated();
+#endif
         dark = ActualTheme != ElementTheme.Light;
-        var themePalette = ThemePaletteService.Build(ThemePaletteService.Current, dark);
+        var themePalette = ThemePaletteService.Palette(dark);
         Brush FromPalette(string paletteKey) => new SolidColorBrush(themePalette[paletteKey]);
         textBrush = FromPalette("PclTextPrimaryColor");
         mutedBrush = FromPalette("PclTextSecondaryColor");

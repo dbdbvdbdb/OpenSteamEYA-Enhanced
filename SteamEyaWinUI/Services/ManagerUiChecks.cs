@@ -67,6 +67,7 @@ internal static partial class ManagerUiChecks
                 await page.WaitForVisibleCardAsync(); await CaptureAsync(window, $"list-{count}-dark");
                 await page.VerifyUiCheckAsync("list", false);
             }
+            await MeasurePerfAsync(window, page);
             await page.SwitchUiCheckAsync("cards", true);
             await page.WaitForVisibleCardAsync(); await CaptureAsync(window, "privacy-100");
             await page.VerifyUiCheckAsync("cards", true);
@@ -105,6 +106,67 @@ internal static partial class ManagerUiChecks
         yield return root;
         for (int i = 0; i < Microsoft.UI.Xaml.Media.VisualTreeHelper.GetChildrenCount(root); i++)
             foreach (var child in FindElements(Microsoft.UI.Xaml.Media.VisualTreeHelper.GetChild(root, i))) yield return child;
+    }
+    private static T FindByName<T>(AccountManagerPage page, string name) where T : Microsoft.UI.Xaml.FrameworkElement =>
+        FindElements(page.Content).OfType<T>().First(x => x.Name == name);
+    private static async Task<double> WaitForRenderAsync(int sinceCount, int timeoutMs)
+    {
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        while (watch.ElapsedMilliseconds < timeoutMs && UiCheckPerf.RenderCount <= sinceCount) await Task.Delay(10);
+        return watch.Elapsed.TotalMilliseconds;
+    }
+
+    private static async Task MeasurePerfAsync(MainWindow window, AccountManagerPage page)
+    {
+        UiCheckPerf.Reset();
+        var proc = System.Diagnostics.Process.GetCurrentProcess();
+        proc.Refresh();
+        Info("mem startup_mb=" + proc.PrivateMemorySize64 / 1048576 + " ws_mb=" + proc.WorkingSet64 / 1048576 + " managed_mb=" + GC.GetTotalMemory(true) / 1048576);
+
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        await page.PrepareUiCheckAsync(100);
+        await page.WaitForVisibleCardAsync();
+        Info("perf prepare_100_ms=" + watch.Elapsed.TotalMilliseconds.ToString("0.0") + " | " + UiCheckPerf.Snapshot());
+
+        proc.Refresh();
+        Info("mem after_100_mb=" + proc.PrivateMemorySize64 / 1048576 + " ws_mb=" + proc.WorkingSet64 / 1048576 + " managed_mb=" + GC.GetTotalMemory(true) / 1048576);
+
+        UiCheckPerf.Reset();
+        var search = FindByName<Microsoft.UI.Xaml.Controls.TextBox>(page, "Search");
+        search.Text = "q";
+        var searchMs = await WaitForRenderAsync(0, 6000);
+        Info("perf search_ms=" + searchMs.ToString("0.0") + " | " + UiCheckPerf.Snapshot());
+        search.Text = string.Empty;
+        await WaitForRenderAsync(UiCheckPerf.RenderCount, 6000);
+
+        UiCheckPerf.Reset();
+        var sort = FindByName<Microsoft.UI.Xaml.Controls.ComboBox>(page, "SortChoice");
+        var sortIndex = sort.SelectedIndex;
+        sort.SelectedIndex = sortIndex == 0 ? 1 : 0;
+        var sortMs = await WaitForRenderAsync(0, 6000);
+        Info("perf sort_ms=" + sortMs.ToString("0.0") + " | " + UiCheckPerf.Snapshot());
+        sort.SelectedIndex = sortIndex;
+        await WaitForRenderAsync(UiCheckPerf.RenderCount, 6000);
+
+        UiCheckPerf.Reset();
+        var privacy = FindByName<Microsoft.UI.Xaml.Controls.Primitives.ToggleButton>(page, "Privacy");
+        var privacyWatch = System.Diagnostics.Stopwatch.StartNew();
+        page.TogglePrivacyForCheck(true);
+        while (privacyWatch.ElapsedMilliseconds < 6000 && !page.IsPrivate) await Task.Delay(10);
+        var privacyMs = privacyWatch.Elapsed.TotalMilliseconds;
+        Info("perf privacy_on_ms=" + privacyMs.ToString("0.0") + " | " + UiCheckPerf.Snapshot());
+        privacy.IsChecked = false;
+        await WaitForRenderAsync(UiCheckPerf.RenderCount, 6000);
+
+        for (int i = 0; i < 5; i++)
+        {
+            await page.SwitchUiCheckAsync("list", false);
+            await page.SwitchUiCheckAsync("cards", false);
+        }
+        await Task.Delay(400);
+        proc.Refresh();
+        Info("mem after_cycles_mb=" + proc.PrivateMemorySize64 / 1048576 + " ws_mb=" + proc.WorkingSet64 / 1048576 + " managed_mb=" + GC.GetTotalMemory(true) / 1048576);
+        Info("perf counters_total=" + UiCheckPerf.Snapshot());
     }
     private static void Resize(MainWindow window, AccountManagerPage page, int width, int height)
     {

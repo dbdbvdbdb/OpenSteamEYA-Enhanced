@@ -24,6 +24,15 @@ public sealed partial class AccountManagerPage : Page
     private DispatcherQueueTimer? searchDebounce;
     private bool reloadQueued;
     private bool needsAnotherReload;
+    private Microsoft.UI.Dispatching.DispatcherQueueTimer? reloadThrottle;
+    // 计划 T6：只有列数变化或宽度变化超过 2px 才重排。
+    private double lastWidth = -1;
+    private int lastColumnCount = -1;
+    private bool sizeCoalesce;
+
+
+    // 计划 T4：全页只用一个 1 秒计时器，卡片不再各自起 Timer。
+    private readonly DispatcherTimer cooldownTicker = new() { Interval = TimeSpan.FromSeconds(1) };
     private bool offscreen;
     internal ManagerPreferences Preferences => document.Preferences;
     internal bool IsPrivate => privacy;
@@ -37,6 +46,7 @@ public sealed partial class AccountManagerPage : Page
         AppState.CachedLoginAccountsRefreshed += QueueReload;
         AppState.BusyChanged += _ => DispatcherQueue.TryEnqueue(UpdateSelectionToolbar);
         ActualThemeChanged += (_, _) => { if (!syncing) Render(); };
+        cooldownTicker.Tick += (_, _) => TickCooldowns();
     }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -51,6 +61,45 @@ public sealed partial class AccountManagerPage : Page
         base.OnNavigatedFrom(e);
         offscreen = true;
         searchDebounce?.Stop();
+        reloadThrottle?.Stop();
+        reloadQueued = false;
+        needsAnotherReload = false;
+        cooldownTicker.Stop();
+        DispatcherQueue.TryEnqueue(ReleaseCards);
+    }
+
+    /// <summary>离页时丢弃已构建的卡片，避免页面不可见还持有整棵可视化树（计划 T1）。</summary>
+    private void ReleaseCards()
+    {
+        if (Cards.Items.Count == 0) return;
+        syncing = true;
+        try
+        {
+            Cards.Items.Clear();
+        }
+        catch (System.Runtime.InteropServices.COMException ex)
+        {
+            AppLog.Warn("释放账号卡片失败，控件可能正在卸载：" + ex.Message);
+        }
+        finally { syncing = false; }
+    }
+
+    private void TickCooldowns()
+    {
+        bool keepRunning = false;
+        foreach (var card in visible)
+        {
+            if (card.TickCooldown()) keepRunning = true;
+        }
+
+        if (!keepRunning) cooldownTicker.Stop();
+    }
+
+    private void RestartCooldownTickerIfNeeded()
+    {
+        if (offscreen || !IsLoaded) return;
+        if (!visible.Any(card => card.HasLiveCooldown)) return;
+        if (!cooldownTicker.IsEnabled) cooldownTicker.Start();
     }
 
     /// <summary>
@@ -60,18 +109,41 @@ public sealed partial class AccountManagerPage : Page
     private void QueueReload()
     {
         if (offscreen || !IsLoaded) return;
-        if (reloadQueued) { needsAnotherReload = true; return; }
+        needsAnotherReload = true;
         reloadQueued = true;
-        DispatcherQueue.TryEnqueue(async () =>
+        reloadThrottle ??= CreateReloadThrottle();
+        // 尾随节流：连续通知不断重置窗口，最后一次通知后 350ms 才真正刷新（计划 T3）。
+        reloadThrottle.Stop();
+        reloadThrottle.Start();
+    }
+
+    private Microsoft.UI.Dispatching.DispatcherQueueTimer CreateReloadThrottle()
+    {
+        var timer = DispatcherQueue.CreateTimer();
+        timer.Interval = TimeSpan.FromMilliseconds(350);
+        timer.IsRepeating = false;
+        timer.Tick += async (_, _) => await FlushQueuedReloadAsync();
+        return timer;
+    }
+
+    private async Task FlushQueuedReloadAsync()
+    {
+        reloadThrottle?.Stop();
+        if (offscreen || !IsLoaded)
         {
             reloadQueued = false;
-            do
-            {
-                needsAnotherReload = false;
-                await SafeAsync(ReloadAsync);
-            }
-            while (needsAnotherReload && !offscreen && IsLoaded);
-        });
+            needsAnotherReload = false;
+            return;
+        }
+
+        do
+        {
+            needsAnotherReload = false;
+            await SafeAsync(ReloadAsync);
+        }
+        while (needsAnotherReload && !offscreen && IsLoaded);
+
+        reloadQueued = false;
     }
 
     private async Task ReloadAsync()
@@ -122,6 +194,9 @@ public sealed partial class AccountManagerPage : Page
         if (syncing) return;
         if (offscreen || !IsLoaded) return;
         syncing = true;
+#if MANAGER_UI_CHECKS
+        var perfWatch = System.Diagnostics.Stopwatch.StartNew();
+#endif
         try
         {
             foreach (var old in visible) old.Stop();
@@ -157,7 +232,15 @@ public sealed partial class AccountManagerPage : Page
             Summary.Text = $"{document.Accounts.Count} 个账号 · 当前 {visible.Count} 个 · 已选 {selected.Count} 个";
             UpdateSelectionToolbar();
         }
-        finally { syncing = false; }
+        finally
+        {
+            syncing = false;
+#if MANAGER_UI_CHECKS
+            perfWatch.Stop();
+            UiCheckPerf.Render(perfWatch.Elapsed.TotalMilliseconds, visible.Count);
+#endif
+        RestartCooldownTickerIfNeeded();
+    }
     }
 
     internal string DisplayName(ManagedAccount account) => account.Nickname.Length > 0 ? account.Nickname :
@@ -211,6 +294,15 @@ public sealed partial class AccountManagerPage : Page
             ? (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["PclOnAccentBrush"]
             : (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["PclTextSecondaryBrush"];
     }
+#if MANAGER_UI_CHECKS
+    /// <summary>供 UI 自检模拟点击隐私胶囊（Click 事件不能由 IsChecked 程序化触发）。</summary>
+    internal void TogglePrivacyForCheck(bool enabled)
+    {
+        Privacy.IsChecked = enabled;
+        Privacy_Click(Privacy, new RoutedEventArgs());
+    }
+#endif
+
     private async void Privacy_Click(object sender, RoutedEventArgs e)
     {
         await SafeAsync(async () =>
@@ -229,7 +321,25 @@ public sealed partial class AccountManagerPage : Page
         Summary.Text = $"{document.Accounts.Count} 个账号 · 当前 {visible.Count} 个 · 已选 {selected.Count} 个";
         UpdateSelectionToolbar();
     }
-    private void CardsSizeChanged(object sender, SizeChangedEventArgs e) => UpdateWidths();
+    private void CardsSizeChanged(object sender, SizeChangedEventArgs e)
+{
+    // 计划 T6：宽度变化只有跨过列数或 2px 阈值时才需要重排，避免拖动窗口时反复整卡重排。
+    int columns = ColumnCount(e.NewSize.Width);
+    bool columnChanged = columns != lastColumnCount;
+    bool widthChanged = Math.Abs(e.NewSize.Width - lastWidth) > 2;
+    lastWidth = e.NewSize.Width;
+    if (!columnChanged && !widthChanged) return;
+    lastColumnCount = columns;
+    if (sizeCoalesce) return;
+    sizeCoalesce = true;
+    DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+    {
+        sizeCoalesce = false;
+        UpdateWidths();
+    });
+}
+
+private static int ColumnCount(double width) => width < 800 ? 1 : width < 1600 ? 2 : 3;
     private void UpdateWidths()
     {
         double width = Math.Max(280, Cards.ActualWidth - 24);

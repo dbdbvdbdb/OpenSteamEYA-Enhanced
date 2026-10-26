@@ -52,6 +52,9 @@ internal static class ThemePaletteGenerator
     /// <summary>内置蓝色主题的派生结果，供“恢复默认”与回归测试使用。</summary>
     public static IReadOnlyDictionary<string, Color> Build(ThemeSpec spec, bool dark)
     {
+#if MANAGER_UI_CHECKS
+        UiCheckPerf.PaletteBuilt();
+#endif
         var primary = Parse(spec.PrimaryHex);
         var secondary = Parse(spec.SecondaryHex);
 
