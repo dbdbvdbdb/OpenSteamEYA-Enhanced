@@ -14,7 +14,7 @@
     <UseWindowsForms>false</UseWindowsForms>
     <UseWPF>false</UseWPF>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
-    <Version>0.4.9</Version>
-    <FileVersion>0.4.9.0</FileVersion>
+    <Version>0.4.10</Version>
+    <FileVersion>0.4.10.0</FileVersion>
   </PropertyGroup>
 </Project>
