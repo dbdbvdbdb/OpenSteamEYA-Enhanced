@@ -1,0 +1,66 @@
+name: Perf measurement (Native AOT)
+
+on:
+  workflow_dispatch:
+    inputs:
+      rounds:
+        description: '正式轮数（不含预热）'
+        required: true
+        default: '5'
+      accounts:
+        description: '虚构账号数量'
+        required: true
+        default: '100'
+
+permissions:
+  contents: read
+
+jobs:
+  measure:
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68
+        with:
+          global-json-file: global.json
+      - name: Locked restore (AOT)
+        shell: pwsh
+        run: |
+          dotnet restore ./SteamEyaWinUI/SteamEyaWinUI.csproj -r win-x64 -p:Platform=x64 -p:PublishAot=true --locked-mode
+          if ($LASTEXITCODE -ne 0) { throw 'Locked restore failed.' }
+      - name: Publish AOT perf build
+        shell: pwsh
+        run: |
+          dotnet publish ./SteamEyaWinUI/SteamEyaWinUI.csproj -c Release -r win-x64 -p:Platform=x64 `
+            -p:PublishAot=true -p:EnablePerfHarness=true -p:EnableManagerUiChecks=true `
+            -p:RestoreLockedMode=true -o ./artifacts/perf-dist --no-restore
+          if ($LASTEXITCODE -ne 0) { throw 'AOT publish failed.' }
+          if (-not (Test-Path ./artifacts/perf-dist/SteamEyaWinUI.exe)) { throw 'Perf build missing exe.' }
+      - name: Run measurement
+        shell: pwsh
+        run: |
+          $dir = Join-Path $env:RUNNER_TEMP 'perf-out'
+          New-Item -ItemType Directory -Force $dir | Out-Null
+          $exe = './artifacts/perf-dist/SteamEyaWinUI.exe'
+          $p = Start-Process $exe -ArgumentList @(
+            '--perf-run',
+            '--perf-rounds=${{ github.event.inputs.rounds }}',
+            '--perf-accounts=${{ github.event.inputs.accounts }}',
+            "--perf-dir=$dir"
+          ) -PassThru -RedirectStandardOutput (Join-Path $env:RUNNER_TEMP 'perf.stdout.log') -RedirectStandardError (Join-Path $env:RUNNER_TEMP 'perf.stderr.log')
+          if (-not $p.WaitForExit(1800000)) { $p.Kill(); throw 'Perf run timed out.' }
+          if (-not (Test-Path (Join-Path $dir 'measure.csv'))) { throw 'measure.csv missing.' }
+          Write-Output "perf exit=$($p.ExitCode)"
+      - name: Upload measurement
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: perf-aot-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/perf-out/**
+            ${{ runner.temp }}/perf.stdout.log
+            ${{ runner.temp }}/perf.stderr.log
+          if-no-files-found: error

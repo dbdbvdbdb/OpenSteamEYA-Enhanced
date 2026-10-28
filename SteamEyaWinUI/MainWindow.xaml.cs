@@ -65,6 +65,15 @@ public sealed partial class MainWindow : Window
         ConfigureWindowSize();
         Activated += OnStartupActivated;
 
+#if PERF_HARNESS
+        if (PerfHarness.Enabled)
+        {
+            ApplyTheme(ElementTheme.Dark);
+            _ = PerfHarness.RunAsync(this);
+            return;
+        }
+#endif
+
 #if MANAGER_UI_CHECKS
         if (ManagerUiChecks.Enabled)
         {
@@ -194,6 +203,12 @@ public sealed partial class MainWindow : Window
         BusyRing.IsActive = isBusy;
         BusyRing.Visibility = isBusy ? Visibility.Visible : Visibility.Collapsed;
     }
+
+    internal NavigationView Nav => RootNavigationView;
+
+    internal NavigationViewItem ManagerNav => ManagerNavItem;
+
+    internal NavigationViewItem SettingsNav => SettingsNavItem;
 
     /// <summary>把主题套用到内容根（无打包下 Application.RequestedTheme 不可后置，故走根元素 RequestedTheme）。</summary>
     public void ApplyTheme(ElementTheme theme)

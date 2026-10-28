@@ -43,6 +43,9 @@
   <PropertyGroup Condition="'$(EnableManagerUiChecks)' == 'true'">
     <DefineConstants>$(DefineConstants);MANAGER_UI_CHECKS</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(EnablePerfHarness)' == 'true'">
+    <DefineConstants>$(DefineConstants);PERF_HARNESS</DefineConstants>
+  </PropertyGroup>
 
   <ItemGroup>
     <Content Include="Assets\AppIcon.ico" CopyToOutputDirectory="PreserveNewest" />

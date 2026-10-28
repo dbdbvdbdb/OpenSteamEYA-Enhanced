@@ -57,7 +57,7 @@ public sealed partial class AccountManagerPage : Page
     /// Collapses bursts of global change notifications into one reload per dispatcher turn,
     /// and does nothing while the page is off-screen (it reloads on navigate-back instead).
     /// </summary>
-    private void QueueReload()
+    internal void QueueReload()
     {
         if (offscreen || !IsLoaded) return;
         if (reloadQueued) { needsAnotherReload = true; return; }
@@ -73,6 +73,26 @@ public sealed partial class AccountManagerPage : Page
             while (needsAnotherReload && !offscreen && IsLoaded);
         });
     }
+
+#if PERF_HARNESS
+    /// <summary>
+    /// 性能测量专用：等到排队中的刷新与正在跑的 Reload/Render 全部结束后再返回，
+    /// 避免上一个场景的收尾工作被算进下一个场景的计时。页面已经离页时立即返回。
+    /// </summary>
+    internal async Task WaitForIdleAsync(int timeoutMs = 8_000)
+    {
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        while (watch.ElapsedMilliseconds < timeoutMs)
+        {
+            if (!offscreen && IsLoaded && !reloadQueued && refreshGate.CurrentCount == 1 && !syncing)
+            {
+                return;
+            }
+
+            await Task.Delay(15);
+        }
+    }
+#endif
 
     private async Task ReloadAsync()
     {
@@ -122,6 +142,9 @@ public sealed partial class AccountManagerPage : Page
         if (syncing) return;
         if (offscreen || !IsLoaded) return;
         syncing = true;
+#if MANAGER_UI_CHECKS
+        var perfWatch = System.Diagnostics.Stopwatch.StartNew();
+#endif
         try
         {
             foreach (var old in visible) old.Stop();
@@ -157,7 +180,14 @@ public sealed partial class AccountManagerPage : Page
             Summary.Text = $"{document.Accounts.Count} 个账号 · 当前 {visible.Count} 个 · 已选 {selected.Count} 个";
             UpdateSelectionToolbar();
         }
-        finally { syncing = false; }
+        finally
+        {
+#if MANAGER_UI_CHECKS
+            perfWatch.Stop();
+            UiCheckPerf.Render(perfWatch.Elapsed.TotalMilliseconds, visible.Count);
+#endif
+            syncing = false;
+        }
     }
 
     internal string DisplayName(ManagedAccount account) => account.Nickname.Length > 0 ? account.Nickname :
@@ -220,6 +250,14 @@ public sealed partial class AccountManagerPage : Page
             await ReloadAsync();
         });
     }
+#if MANAGER_UI_CHECKS
+    /// <summary>仅供 UI 自检模拟点击隐私胶囊（Click 事件不能用 IsChecked 程序化触发）。</summary>
+    internal void TogglePrivacyForCheck(bool enabled)
+    {
+        Privacy.IsChecked = enabled;
+        Privacy_Click(Privacy, new RoutedEventArgs());
+    }
+#endif
     private void CardsSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (syncing) return;

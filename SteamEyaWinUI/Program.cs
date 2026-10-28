@@ -14,6 +14,9 @@ public static class Program
     [STAThread]
     private static int Main(string[] args)
     {
+#if PERF_HARNESS
+        PerfHarness.Configure(args);
+#endif
 #if MANAGER_UI_CHECKS
         ManagerUiChecks.Configure(args);
 #endif
