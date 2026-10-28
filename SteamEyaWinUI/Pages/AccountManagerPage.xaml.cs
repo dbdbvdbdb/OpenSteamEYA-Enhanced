@@ -106,7 +106,7 @@ public sealed partial class AccountManagerPage : Page
     /// Collapses bursts of global change notifications into one reload per dispatcher turn,
     /// and does nothing while the page is off-screen (it reloads on navigate-back instead).
     /// </summary>
-    private void QueueReload()
+    internal void QueueReload()
     {
         if (offscreen || !IsLoaded) return;
         needsAnotherReload = true;

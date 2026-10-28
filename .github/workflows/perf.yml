@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       rounds:
-        description: '姝ｅ紡杞暟锛堜笉鍚鐑級'
+        description: '正式轮数（不含预热）'
         required: true
         default: '5'
       accounts:
-        description: '铏氭瀯璐﹀彿鏁伴噺'
+        description: '虚构账号数量'
         required: true
         default: '100'
 
