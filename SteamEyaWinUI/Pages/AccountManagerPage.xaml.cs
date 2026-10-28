@@ -146,6 +146,27 @@ public sealed partial class AccountManagerPage : Page
         reloadQueued = false;
     }
 
+#if PERF_HARNESS
+    /// <summary>
+    /// 性能测量专用：等到尾随节流窗口、排队中的刷新与正在跑的 Reload/Render 全部结束后再返回，
+    /// 避免上一个场景的收尾工作被算进下一个场景的计时。页面已经离页时立即返回。
+    /// </summary>
+    internal async Task WaitForIdleAsync(int timeoutMs = 8_000)
+    {
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        while (watch.ElapsedMilliseconds < timeoutMs)
+        {
+            if (!offscreen && IsLoaded && reloadThrottle?.IsRunning != true && !reloadQueued && !needsAnotherReload &&
+                refreshGate.CurrentCount == 1 && !syncing)
+            {
+                return;
+            }
+
+            await Task.Delay(15);
+        }
+    }
+#endif
+
     private async Task ReloadAsync()
     {
         await refreshGate.WaitAsync();
