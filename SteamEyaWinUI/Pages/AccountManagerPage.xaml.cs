@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Navigation;
 using OpenSteamEya.AccountManagement;
+using SteamEyaWinUI.Models;
 using SteamEyaWinUI.Services;
 
 namespace SteamEyaWinUI.Pages;
@@ -13,7 +14,8 @@ namespace SteamEyaWinUI.Pages;
 public sealed partial class AccountManagerPage : Page
 {
     private ManagerDocument document = new();
-    private readonly ObservableCollection<AccountCard> visible = [];
+    // 条目是轻量 view-model；控件由 ItemTemplate 按需创建。整体替换集合而不是逐条增删，避免 100 次集合变更通知。
+    private ObservableCollection<ManagedAccountCardItem> visible = [];
     private readonly HashSet<Guid> selected = [];
     private HashSet<Guid>? dragSelection;
     private readonly Dictionary<Guid, string?> resolved = [];
@@ -42,7 +44,7 @@ public sealed partial class AccountManagerPage : Page
 
     public AccountManagerPage()
     {
-        InitializeComponent(); Cards.ItemsSource = visible;
+        InitializeComponent();
         AccountClassification.Changed += QueueReload;
         AppState.HistoryChanged += _ => QueueReload();
         AppState.CachedLoginAccountsRefreshed += QueueReload;
@@ -78,11 +80,12 @@ public sealed partial class AccountManagerPage : Page
     {
         // 回调运行时页面可能已经重新进入（并在本次渲染之后），此时清理会清空刚渲染的卡片（计划 V0-P1）。
         if (generation != navigationGeneration || !offscreen) return;
-        if (Cards.Items.Count == 0) return;
+        if (visible.Count == 0) return;
         syncing = true;
         try
         {
-            Cards.Items.Clear();
+            Cards.ItemsSource = null;
+            visible = [];
         }
         catch (System.Runtime.InteropServices.COMException ex)
         {
@@ -94,9 +97,9 @@ public sealed partial class AccountManagerPage : Page
     private void TickCooldowns()
     {
         bool keepRunning = false;
-        foreach (var card in visible)
+        foreach (var item in visible)
         {
-            if (card.TickCooldown()) keepRunning = true;
+            if (item.TickCooldown()) keepRunning = true;
         }
 
         if (!keepRunning) cooldownTicker.Stop();
@@ -105,7 +108,7 @@ public sealed partial class AccountManagerPage : Page
     private void RestartCooldownTickerIfNeeded()
     {
         if (offscreen || !IsLoaded) return;
-        if (!visible.Any(card => card.HasLiveCooldown)) return;
+        if (!visible.Any(item => item.HasLiveCooldown)) return;
         if (!cooldownTicker.IsEnabled) cooldownTicker.Start();
     }
 
@@ -227,8 +230,6 @@ public sealed partial class AccountManagerPage : Page
 #endif
         try
         {
-            foreach (var old in visible) old.Stop();
-            visible.Clear();
             var group = (GroupFilter.SelectedItem as ComboBoxItem)?.Tag?.ToString();
             string search = Search.Text.Trim();
             IEnumerable<ManagedAccount> accounts = document.Accounts.Where(x =>
@@ -251,11 +252,24 @@ public sealed partial class AccountManagerPage : Page
             if (document.Preferences.FavoritesFirst) accounts = accounts.OrderByDescending(x => x.Favorite);
             bool compact = document.Preferences.View == "list";
             Cards.CanReorderItems = Cards.CanDragItems = sort == "custom" && !document.Preferences.FavoritesFirst && document.Preferences.GroupDisplay != "sections";
+            // 只建轻量条目；控件留给 ItemTemplate 在容器实现时创建（item 级虚拟化）。
+            var items = new List<ManagedAccountCardItem>();
             foreach (var account in accounts)
-                visible.Add(new AccountCard(this, account, resolved.GetValueOrDefault(account.Id), compact));
-            UpdateWidths();
-            foreach (var card in visible.Where(x => selected.Contains(x.Account.Id))) Cards.SelectedItems.Add(card);
-            foreach (var card in visible) card.SetSelected(selected.Contains(card.Account.Id));
+            {
+                var mapping = resolved.GetValueOrDefault(account.Id);
+                var history = snapshot.HistoryFor(mapping);
+#if MANAGER_UI_CHECKS
+                if (ManagerUiChecks.Enabled) history = ManagerUiChecks.StatusFixtures.GetValueOrDefault(account.Id) ?? history;
+#endif
+                items.Add(new ManagedAccountCardItem(this, account, mapping, compact, history) { IsSelected = selected.Contains(account.Id) });
+            }
+            double cardWidth = ComputeCardWidth();
+            foreach (var item in items) item.CardWidth = cardWidth;
+            // 一次性替换：不逐条 Clear/Add，避免每个账号一次集合变更通知与一次布局失效。
+            visible = new ObservableCollection<ManagedAccountCardItem>(items);
+            Cards.ItemsSource = visible;
+            Cards.SelectedItems.Clear();
+            foreach (var item in visible.Where(x => x.IsSelected)) Cards.SelectedItems.Add(item);
             EmptyText.Visibility = visible.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
             Summary.Text = $"{document.Accounts.Count} 个账号 · 当前 {visible.Count} 个 · 已选 {selected.Count} 个";
             UpdateSelectionToolbar();
@@ -267,8 +281,8 @@ public sealed partial class AccountManagerPage : Page
             perfWatch.Stop();
             UiCheckPerf.Render(perfWatch.Elapsed.TotalMilliseconds, visible.Count);
 #endif
-        RestartCooldownTickerIfNeeded();
-    }
+            RestartCooldownTickerIfNeeded();
+        }
     }
 
     internal string DisplayName(ManagedAccount account) => account.Nickname.Length > 0 ? account.Nickname :
@@ -344,37 +358,60 @@ public sealed partial class AccountManagerPage : Page
     private void CardsSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (syncing) return;
-        foreach (var item in e.RemovedItems.OfType<AccountCard>().Where(visible.Contains)) selected.Remove(item.Account.Id);
-        foreach (var item in e.AddedItems.OfType<AccountCard>().Where(visible.Contains)) selected.Add(item.Account.Id);
-        foreach (var card in visible) card.SetSelected(selected.Contains(card.Account.Id));
+        foreach (var item in e.RemovedItems.OfType<ManagedAccountCardItem>().Where(visible.Contains))
+        {
+            item.IsSelected = false; selected.Remove(item.Account.Id);
+        }
+        foreach (var item in e.AddedItems.OfType<ManagedAccountCardItem>().Where(visible.Contains))
+        {
+            item.IsSelected = true; selected.Add(item.Account.Id);
+        }
+        foreach (var card in RealizedCards()) card.SetSelected(card.Item?.IsSelected == true);
         Summary.Text = $"{document.Accounts.Count} 个账号 · 当前 {visible.Count} 个 · 已选 {selected.Count} 个";
         UpdateSelectionToolbar();
     }
     private void CardsSizeChanged(object sender, SizeChangedEventArgs e)
-{
-    // 计划 T6：宽度变化只有跨过列数或 2px 阈值时才需要重排，避免拖动窗口时反复整卡重排。
-    int columns = ColumnCount(e.NewSize.Width);
-    bool columnChanged = columns != lastColumnCount;
-    bool widthChanged = Math.Abs(e.NewSize.Width - lastWidth) > 2;
-    lastWidth = e.NewSize.Width;
-    if (!columnChanged && !widthChanged) return;
-    lastColumnCount = columns;
-    if (sizeCoalesce) return;
-    sizeCoalesce = true;
-    DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
     {
-        sizeCoalesce = false;
-        UpdateWidths();
-    });
-}
+        // 计划 T6：宽度变化只有跨过列数或 2px 阈值时才需要重排，避免拖动窗口时反复整卡重排。
+        int columns = ColumnCount(e.NewSize.Width);
+        bool columnChanged = columns != lastColumnCount;
+        bool widthChanged = Math.Abs(e.NewSize.Width - lastWidth) > 2;
+        lastWidth = e.NewSize.Width;
+        if (!columnChanged && !widthChanged) return;
+        lastColumnCount = columns;
+        if (sizeCoalesce) return;
+        sizeCoalesce = true;
+        DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+        {
+            sizeCoalesce = false;
+            UpdateWidths();
+        });
+    }
 
-private static int ColumnCount(double width) => width < 800 ? 1 : width < 1600 ? 2 : 3;
-    private void UpdateWidths()
+    private static int ColumnCount(double width) => width < 800 ? 1 : width < 1600 ? 2 : 3;
+    private double ComputeCardWidth()
     {
         double width = Math.Max(280, Cards.ActualWidth - 24);
         int columns = Preferences.View == "list" ? 1 : width < 800 ? 1 : width < 1600 ? 2 : Math.Max(3, (int)(width / 520));
-        foreach (var card in visible) card.Width = Math.Max(260, width / columns - 14);
+        return Math.Max(260, width / columns - 14);
     }
+    private void UpdateWidths()
+    {
+        // 宽度写到条目上：容器在滚动中重新实现时卡片直接按最近一次布局取宽，不会先按默认宽度闪一下。
+        double cardWidth = ComputeCardWidth();
+        foreach (var item in visible) item.CardWidth = cardWidth;
+        foreach (var card in RealizedCards()) card.Width = cardWidth;
+    }
+
+    /// <summary>当前真正构建了控件树的卡片（虚拟化窗口内的那几张）。</summary>
+    internal IEnumerable<AccountCard> RealizedCards()
+    {
+        foreach (var item in visible)
+        {
+            if (Cards.ContainerFromItem(item) is GridViewItem container && CardIn(container) is { } card) yield return card;
+        }
+    }
+
     private async void CardsDragCompleted(ListViewBase sender, DragItemsCompletedEventArgs args)
     {
         FinishReorder();

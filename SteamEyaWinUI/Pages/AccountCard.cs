@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
@@ -5,6 +6,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using OpenSteamEya.AccountManagement;
+using SteamEyaWinUI.Models;
 using SteamEyaWinUI.Services;
 using Windows.UI;
 
@@ -13,45 +15,112 @@ namespace SteamEyaWinUI.Pages;
 /// <summary>
 /// 账号卡片。视觉语言参考 PCL 风格的扁平卡片：浅色/深色主题自适应、细边框、圆角、蓝色强调，
 /// 不使用任何 PCL 的界面素材或代码。
+/// 卡片由 GridView 的 ItemTemplate 按需创建：构造时只有空壳，<see cref="Item"/> 绑定后才构建整棵子树；
+/// 条目被回收/换绑时先 <see cref="Stop"/>，不会把旧条目的事件与后台任务带进新卡片。
 /// </summary>
 internal sealed partial class AccountCard : UserControl
 {
     internal const double CardRadius = 10;
-    public ManagedAccount Account { get; }
-    private readonly AccountManagerPage owner;
-    private readonly string? key;
-    private readonly Border surface;
-    private readonly Border emphasis;
-    private readonly Border selectedBadge;
-    private readonly Grid artwork;
-    private readonly Grid scrim;
-    private readonly TextBlock password;
-    private readonly Button revealButton;
-    private readonly bool compact;
-    private bool stopped, revealed, selected, hovered;
-    private readonly CancellationTokenSource backgroundCancellation = new();
+
+    public static readonly DependencyProperty ItemProperty = DependencyProperty.Register(
+        nameof(Item), typeof(ManagedAccountCardItem), typeof(AccountCard),
+        new PropertyMetadata(null, (d, _) => ((AccountCard)d).Rebuild()));
+
+    /// <summary>当前绑定的轻量条目。控件树由它构建，换值即重建。</summary>
+    public ManagedAccountCardItem? Item
+    {
+        get => (ManagedAccountCardItem?)GetValue(ItemProperty);
+        set => SetValue(ItemProperty, value);
+    }
+
+    public ManagedAccount Account => Item!.Account;
+    private AccountManagerPage owner = null!;
+    private string? key;
+    private Border surface = null!;
+    private Border emphasis = null!;
+    private Border selectedBadge = null!;
+    private Grid artwork = null!;
+    private Grid scrim = null!;
+    private TextBlock password = null!;
+    private Button revealButton = null!;
+    private bool compact;
+    private bool stopped, selected, hovered;
+    private CancellationTokenSource backgroundCancellation = new();
+    private ManagedAccountCardItem? boundItem;
+    private int buildGeneration;
     internal readonly Dictionary<string, Button> Actions = [];
 
     // 主题调色板（与 Themes/PclTheme.xaml 中的令牌保持一致）。
-    private readonly bool dark;
-    private readonly Brush textBrush;
-    private readonly Brush mutedBrush;
-    private readonly Brush surfaceBrush;
-    private readonly Brush borderBrush;
-    private readonly Brush altBrush;
-    private readonly Brush accentBrush;
-    private readonly Brush accentSoftBrush;
+    private bool dark;
+    private Brush textBrush = null!;
+    private Brush mutedBrush = null!;
+    private Brush surfaceBrush = null!;
+    private Brush borderBrush = null!;
+    private Brush altBrush = null!;
+    private Brush accentBrush = null!;
+    private Brush accentSoftBrush = null!;
 
-    public void Stop() { stopped = true; backgroundCancellation.Cancel(); }
-
-    public AccountCard(AccountManagerPage page, ManagedAccount account, string? mappingKey, bool compact)
+    public AccountCard()
     {
-        Account = account; owner = page; key = mappingKey; this.compact = compact;
+        // 事件只在构造时订阅一次：换绑条目不会叠加处理器。
+        ActualThemeChanged += (_, _) => { if (Item is not null) _ = ApplyBackgroundAsync(); };
+        PointerEntered += (_, _) => SetHovered(true);
+        PointerExited += (_, _) => SetHovered(false);
+        DoubleTapped += async (_, args) =>
+        {
+            if (Item is null || !IsCardDoubleTapSource(args.OriginalSource)) return;
+            args.Handled = true; await OpenEditorAsync();
+        };
+        Unloaded += (_, _) => Stop();
+        // 容器回收后可能带着同一份条目重新出现，而 DP 值没变、不会触发 Rebuild：
+        // 这里补一次重建，保证"被回收过的卡片再次可见时控件树是完整的"。
+        Loaded += (_, _) =>
+        {
+            if (Item is not null && stopped) Rebuild();
+        };
+    }
+
+    /// <summary>丢弃已构建的控件树与后台任务（容器回收或页面离页时调用）。</summary>
+    public void Stop()
+    {
+        stopped = true;
+        backgroundCancellation.Cancel();
+        if (boundItem is not null) boundItem.PropertyChanged -= OnItemPropertyChanged;
+        boundItem = null;
+    }
+
+    private void OnItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(ManagedAccountCardItem.CooldownText)) RefreshCooldown();
+    }
+
+    /// <summary>按当前 <see cref="Item"/> 重新构建整张卡片。</summary>
+    internal void Rebuild()
+    {
+        // 换绑前先收尾上一轮：取消后台取图与条目事件，避免旧条目的回调改写新卡片。
+        if (boundItem is not null) Stop();
+
+        stopped = false;
+        selected = false; hovered = false;
+        Actions.Clear();
+        buildGeneration++;
+        backgroundCancellation = new CancellationTokenSource();
+        if (Item is not { } item)
+        {
+            Content = null;
+            return;
+        }
+
+        boundItem = item; item.PropertyChanged += OnItemPropertyChanged;
+        owner = item.Owner; key = item.MappingKey; compact = item.Compact;
 #if MANAGER_UI_CHECKS
         Services.UiCheckPerf.CardCreated();
 #endif
         dark = ActualTheme != ElementTheme.Light;
         var themePalette = ThemePaletteService.Palette(dark);
+#if MANAGER_UI_CHECKS
+        Services.UiCheckPerf.PaletteBuilt();
+#endif
         Brush FromPalette(string paletteKey) => new SolidColorBrush(themePalette[paletteKey]);
         textBrush = FromPalette("PclTextPrimaryColor");
         mutedBrush = FromPalette("PclTextSecondaryColor");
@@ -61,16 +130,15 @@ internal sealed partial class AccountCard : UserControl
         accentBrush = FromPalette("PclAccentColor");
         accentSoftBrush = FromPalette("PclAccentSoftColor");
 
-        bool privacy = owner.IsPrivate;
-        var history = page.Snapshot.HistoryFor(key); var cached = page.Snapshot.CachedFor(key);
+        bool privacy = item.IsPrivate;
+        var account = item.Account;
+        var history = item.History; var cached = owner.Snapshot.CachedFor(key);
         string steamId = history?.SteamId ?? cached?.SteamId ?? account.SteamId;
         string? avatarPath = history?.AvatarPath ?? cached?.AvatarPath;
         string? avatarUrl = history?.AvatarUrl ?? cached?.AvatarUrl;
 #if MANAGER_UI_CHECKS
-        if (ManagerUiChecks.Enabled) history = ManagerUiChecks.StatusFixtures.GetValueOrDefault(account.Id) ?? history;
         if (ManagerUiChecks.Enabled && !account.LoginName.Contains("missing-avatar")) avatarPath = ManagerUiChecks.AvatarPath;
 #endif
-        revealed = !owner.Preferences.HidePasswords && !privacy;
 
         var root = new Grid { UseLayoutRounding = true };
         var layout = new Grid { CornerRadius = new CornerRadius(CardRadius - 1) };
@@ -104,7 +172,6 @@ internal sealed partial class AccountCard : UserControl
             Margin = new Thickness(8), IsHitTestVisible = false, Visibility = Visibility.Collapsed,
         };
         root.Children.Add(selectedBadge);
-        Content = root;
 
         // 头像取色背景铺满整张卡片：底色由头像调色板派生的渐变，或本地/Steam 背景图。
         artwork = new Grid
@@ -186,13 +253,13 @@ internal sealed partial class AccountCard : UserControl
         Grid.SetColumn(copyAccount, 3); infoGrid.Children.Add(copyAccount);
         var passLabel = Label("登录密码", compact ? 10 : 11, false, mutedBrush); Grid.SetRow(passLabel, 1); infoGrid.Children.Add(passLabel);
         password = Label(PasswordText(), compact ? 12 : 13); Grid.SetRow(password, 1); Grid.SetColumn(password, 1); infoGrid.Children.Add(password);
-        revealButton = IconButton("reveal", "\uE890", revealed ? "隐藏密码" : "显示密码", () => { TogglePassword(); return Task.CompletedTask; });
-        revealButton.IsEnabled = account.Password.Length > 0 && !privacy;
+        revealButton = IconButton("reveal", "\uE890", item.PasswordRevealed ? "隐藏密码" : "显示密码", () => { TogglePassword(); return Task.CompletedTask; });
+        revealButton.IsEnabled = item.HasPassword && !privacy;
         revealButton.Background = Solid(0x00000000); revealButton.BorderThickness = new Thickness(0);
         Grid.SetRow(revealButton, 1); Grid.SetColumn(revealButton, 2); infoGrid.Children.Add(revealButton);
         var copyPassword = ActionButton("copy-password", "复制", "复制登录密码", () => CopyAsync(account.Password));
         copyPassword.Padding = new Thickness(6, 0, 6, 0);
-        copyPassword.IsEnabled = account.Password.Length > 0 && !privacy; Grid.SetRow(copyPassword, 1); Grid.SetColumn(copyPassword, 3); infoGrid.Children.Add(copyPassword);
+        copyPassword.IsEnabled = item.HasPassword && !privacy; Grid.SetRow(copyPassword, 1); Grid.SetColumn(copyPassword, 3); infoGrid.Children.Add(copyPassword);
         information.Child = infoGrid;
 
         var statusGrid = new Grid { ColumnSpacing = 6 };
@@ -202,7 +269,7 @@ internal sealed partial class AccountCard : UserControl
         var primeTile = StatusTile("优先状态", "未知", "\uE83D"); Grid.SetColumn(primeTile, 1); statusGrid.Children.Add(primeTile);
         if (!compact)
         {
-            var cooldownTile = StatusTile("冷却状态", CreateCooldownStatus(history), "\uE823");
+            var cooldownTile = StatusTile("冷却状态", CreateCooldownStatus(), "\uE823");
             Grid.SetColumn(cooldownTile, 2); statusGrid.Children.Add(cooldownTile);
         }
 
@@ -221,7 +288,7 @@ internal sealed partial class AccountCard : UserControl
         body.Children.Add(information);
         if (compact)
         {
-            body.Children.Add(CreateCooldownStatus(history,
+            body.Children.Add(CreateCooldownStatus(
                 (history?.CsPlayerLevel is { } lv ? "CS2 Lv. " + lv : "CS2 等级未知") + " · 优先状态未知 · "));
         }
         else
@@ -231,22 +298,17 @@ internal sealed partial class AccountCard : UserControl
         body.Children.Add(actions);
         layout.Children.Add(body);
 
-        ActualThemeChanged += (_, _) => _ = ApplyBackgroundAsync(steamId, avatarPath, avatarUrl);
-        ContextFlyout = Menu(steamId);
-        PointerEntered += (_, _) => SetHovered(true);
-        PointerExited += (_, _) => SetHovered(false);
+        Content = root;
+        Width = item.CardWidth > 0 ? item.CardWidth : double.NaN;
+        selected = item.IsSelected;
+        UpdateEmphasis();
         ToolTipService.SetToolTip(this, "双击编辑账号信息；右键打开账号菜单");
-        DoubleTapped += async (_, args) =>
-        {
-            if (!IsCardDoubleTapSource(args.OriginalSource)) return;
-            args.Handled = true; await OpenEditorAsync();
-        };
-        _ = ApplyBackgroundAsync(steamId, avatarPath, avatarUrl);
+        _ = ApplyBackgroundAsync();
     }
 
     internal bool IsCardDoubleTapSource(object source)
     {
-        if (owner.IsPrivate) return false;
+        if (Item is null || owner.IsPrivate) return false;
         for (var element = source as DependencyObject; element is not null; element = VisualTreeHelper.GetParent(element))
         {
             if (element is ButtonBase || element is TextBox || element is PasswordBox) return false;
@@ -255,12 +317,14 @@ internal sealed partial class AccountCard : UserControl
         return false;
     }
 
-    internal Task OpenEditorAsync() => owner.SafeAsync(() => owner.EditAsync(Account));
+    internal Task OpenEditorAsync() => Item is null
+        ? Task.CompletedTask
+        : owner.SafeAsync(() => owner.EditAsync(Account));
 
     private static SolidColorBrush Solid(uint argb) => new(Color.FromArgb(
         (byte)(argb >> 24), (byte)(argb >> 16), (byte)(argb >> 8), (byte)argb));
 
-    // 供 AccountCardStatus.cs 复用的调色板/工厂（旧实现的静态成员在重写时移到这里）。
+    // 供 AccountCardStatus.cs 复用的调色板/工厂。
     private static SolidColorBrush Brush(byte a, byte r, byte g, byte b) => new(Color.FromArgb(a, r, g, b));
     private Brush Muted => mutedBrush;
     private Brush White => Solid(0xFFFFFFFF);
@@ -315,13 +379,30 @@ internal sealed partial class AccountCard : UserControl
         };
     }
 
-    private string PasswordText() => owner.IsPrivate ? "密码 ••••••" : Account.Password.Length == 0 ? "未保存密码" : revealed ? Account.Password : "••••••••";
+    private string PasswordText()
+    {
+        var item = Item;
+        if (item is null) return "";
+        if (item.IsPrivate) return "密码 ••••••";
+        if (!item.HasPassword) return "未保存密码";
+        return item.PasswordRevealed ? item.PasswordPlain ?? "" : item.PasswordMasked;
+    }
 
     internal void TogglePassword()
     {
-        if (owner.IsPrivate || Account.Password.Length == 0) return;
-        revealed = !revealed; password.Text = PasswordText();
-        AutomationProperties.SetName(revealButton, revealed ? "隐藏密码" : "显示密码"); ToolTipService.SetToolTip(revealButton, revealed ? "隐藏密码" : "显示密码");
+        var item = Item;
+        if (item is null || item.IsPrivate || !item.HasPassword) return;
+        item.PasswordRevealed = !item.PasswordRevealed;
+        RefreshPassword();
+    }
+
+    /// <summary>按条目状态重写密码文本与揭示按钮的提示（不重建控件）。</summary>
+    private void RefreshPassword()
+    {
+        if (Item is not { } item) return;
+        password.Text = PasswordText();
+        AutomationProperties.SetName(revealButton, item.PasswordRevealed ? "隐藏密码" : "显示密码");
+        ToolTipService.SetToolTip(revealButton, item.PasswordRevealed ? "隐藏密码" : "显示密码");
     }
 
     internal string VisiblePassword => password.Text;
@@ -329,6 +410,7 @@ internal sealed partial class AccountCard : UserControl
     internal void SetHovered(bool value) { hovered = value; UpdateEmphasis(); }
     private void UpdateEmphasis()
     {
+        if (surface is null) return;
         emphasis.Opacity = selected ? 1 : hovered ? 0.6 : 0;
         selectedBadge.Visibility = selected ? Visibility.Visible : Visibility.Collapsed;
         surface.Background = hovered && !selected ? (dark ? Solid(0xFF2B2D31) : Solid(0xFFFAFBFC)) : surfaceBrush;
@@ -360,38 +442,50 @@ internal sealed partial class AccountCard : UserControl
         ClipboardService.Copy(text); AppState.ShowStatus("已复制。", InfoBarSeverity.Success); return Task.CompletedTask;
     }
 
-    private MenuFlyout Menu(string steamId)
+    /// <summary>
+    /// 构建这张卡片的右键菜单（14 项，保持原有文案与顺序）。菜单不再挂在卡片上：
+    /// 由页面在 ContextRequested 时按被点中的条目即时创建，避免 100 张卡片各持一个 MenuFlyout。
+    /// </summary>
+    internal MenuFlyout CreateMenu()
     {
+        if (Item is not { } item) return new MenuFlyout();
+        var account = item.Account;
+        var steamId = item.History?.SteamId ?? item.Owner.Snapshot.CachedFor(key)?.SteamId ?? account.SteamId;
         var menu = new MenuFlyout();
         void Add(string title, Func<Task> action, bool enabled = true)
-        { var item = new MenuFlyoutItem { Text = title, IsEnabled = enabled }; item.Click += async (_, _) => await owner.SafeAsync(action); menu.Items.Add(item); }
-        Add("复制登录账号", () => CopyAsync(Account.LoginName), !owner.IsPrivate);
-        Add("复制登录密码", () => CopyAsync(Account.Password), !owner.IsPrivate && Account.Password.Length > 0);
+        { var entry = new MenuFlyoutItem { Text = title, IsEnabled = enabled }; entry.Click += async (_, _) => await owner.SafeAsync(action); menu.Items.Add(entry); }
+        Add("复制登录账号", () => CopyAsync(account.LoginName), !owner.IsPrivate);
+        Add("复制登录密码", () => CopyAsync(account.Password), !owner.IsPrivate && account.Password.Length > 0);
         Add("复制 SteamID", () => CopyAsync(steamId), !owner.IsPrivate && steamId.Length > 0);
         menu.Items.Add(new MenuFlyoutSeparator());
-        Add("一键登录", () => owner.LoginAsync(Account, key), key is not null && !AppState.IsBusy);
+        Add("一键登录", () => owner.LoginAsync(account, key), key is not null && !AppState.IsBusy);
         Add("查询 CS2 状态", () => owner.QueryAsync(key), ManagedAccounts.History(key) is not null && !AppState.IsBusy);
-        Add("查看账号详情", () => owner.DetailsAsync(Account, key));
+        Add("查看账号详情", () => owner.DetailsAsync(account, key));
         menu.Items.Add(new MenuFlyoutSeparator());
-        Add("编辑账号信息", () => owner.EditAsync(Account), !owner.IsPrivate);
-        Add("修改账号密码", () => owner.EditAsync(Account), !owner.IsPrivate);
-        Add("设置账号背景", () => owner.BackgroundAsync(Account), !owner.IsPrivate);
-        Add("设置账号分组", () => owner.MoveGroupAsync(Account));
-        Add(Account.Favorite ? "从收藏中移除" : "加入收藏", () => owner.ChangeAsync(Account, x => x.Favorite = !x.Favorite));
-        Add("手动关联原账号", () => owner.LinkAsync(Account), !owner.IsPrivate);
+        Add("编辑账号信息", () => owner.EditAsync(account), !owner.IsPrivate);
+        Add("修改账号密码", () => owner.EditAsync(account), !owner.IsPrivate);
+        Add("设置账号背景", () => owner.BackgroundAsync(account), !owner.IsPrivate);
+        Add("设置账号分组", () => owner.MoveGroupAsync(account));
+        Add(account.Favorite ? "从收藏中移除" : "加入收藏", () => owner.ChangeAsync(account, x => x.Favorite = !x.Favorite));
+        Add("手动关联原账号", () => owner.LinkAsync(account), !owner.IsPrivate);
         menu.Items.Add(new MenuFlyoutSeparator());
-        Add("转到黑号管理", () => owner.MoveToBlackAsync(Account), !owner.IsPrivate);
-        Add("删除账号", () => owner.DeleteAsync(Account)); return menu;
+        Add("转到黑号管理", () => owner.MoveToBlackAsync(account), !owner.IsPrivate);
+        Add("删除账号", () => owner.DeleteAsync(account)); return menu;
     }
 
-    private async Task ApplyBackgroundAsync(string steamId, string? avatarPath, string? avatarUrl)
+    private async Task ApplyBackgroundAsync()
     {
+        if (Item is not { } item) return;
+        var generation = buildGeneration;
         try
         {
             if (owner.IsPrivate) return;
-            var palette = await CardBackgroundService.GetAsync(Account, avatarPath, avatarUrl, steamId,
+            var steamId = item.History?.SteamId ?? owner.Snapshot.CachedFor(key)?.SteamId ?? item.Account.SteamId;
+            var avatarPath = item.History?.AvatarPath ?? owner.Snapshot.CachedFor(key)?.AvatarPath;
+            var avatarUrl = item.History?.AvatarUrl ?? owner.Snapshot.CachedFor(key)?.AvatarUrl;
+            var palette = await CardBackgroundService.GetAsync(item.Account, avatarPath, avatarUrl, steamId,
                 owner.Preferences, dark, backgroundCancellation.Token);
-            if (stopped) return;
+            if (stopped || generation != buildGeneration) return;
             var hasImage = palette.ImagePath is not null;
             artwork.Background = CardBackgroundService.Brush(palette);
             artwork.Opacity = hasImage ? 1 : dark ? 0.55 : 0.34;

@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Automation.Peers;
 using Microsoft.UI.Xaml.Automation.Provider;
 using OpenSteamEya.AccountManagement;
+using SteamEyaWinUI.Models;
 using SteamEyaWinUI.Services;
 
 namespace SteamEyaWinUI.Pages;
@@ -30,9 +31,42 @@ public sealed partial class AccountManagerPage
         selected.Add(fixture.Accounts[0].Id); selected.Add(fixture.Accounts[^1].Id);
         await ReloadAsync();
     }
+
+    // ---- 虚拟化下的取卡片工具：条目只是数据，卡片控件由容器实现时才存在 ----
+
+    /// <summary>条目当前已实现的卡片；容器未实现（或已回收）时为 null。</summary>
+    private AccountCard? Realized(ManagedAccountCardItem item) =>
+        // 容器由 ItemTemplate 生成：Content 是条目本身，控件树根在这张容器的可视子树里。
+        Cards.ContainerFromItem(item) is GridViewItem container ? CardIn(container) : null;
+
+    /// <summary>等到条目真正构建出卡片控件树；必要时先滚到可见位置。</summary>
+    private async Task<AccountCard> RealizeCardAsync(ManagedAccountCardItem item, bool scrollIntoView = true)
+    {
+        if (Realized(item) is { } realized) return realized;
+        if (scrollIntoView) Cards.ScrollIntoView(item);
+        for (int attempt = 0; attempt < 80; attempt++)
+        {
+            await Task.Delay(50);
+            if (Realized(item) is { } card)
+            {
+                for (int settle = 0; settle < 20 && (card.ActualWidth <= 250 || card.ActualHeight <= 100); settle++) await Task.Delay(30);
+                UpdateLayout();
+                return card;
+            }
+        }
+        throw new InvalidOperationException("card container was not realized for item " + item.Account.LoginName);
+    }
+
+    private async Task<TextBlock> CooldownLabelAsync(ManagedAccountCardItem item) =>
+        Walk(await RealizeCardAsync(item)).OfType<TextBlock>().First(x => x.Name == "AccountCooldownStatus");
+
     internal void VerifyCapturedCardPixels(FrameworkElement root, int width, int height, byte[] pixels)
     {
-        var card = visible[0];
+        if (Realized(visible[0]) is not { } card)
+        {
+            ManagerUiChecks.Check(false, "first card realized for pixel verification");
+            return;
+        }
         var point = card.TransformToVisual(root).TransformPoint(new Windows.Foundation.Point(card.ActualWidth / 2, card.ActualHeight - 8));
         int x = (int)(point.X * width / root.ActualWidth), y = (int)(point.Y * height / root.ActualHeight);
         ManagerUiChecks.Check(x >= 0 && y >= 0 && x < width && y < height, "first card inside screenshot");
@@ -57,12 +91,15 @@ public sealed partial class AccountManagerPage
     }
     internal async Task WaitForVisibleCardAsync()
     {
+        if (visible.Count == 0) return;
         Cards.ScrollIntoView(visible[0]);
         for (int i = 0; i < 60; i++)
         {
             UpdateLayout();
-            if (visible[0].IsLoaded && visible[0].ActualWidth > 250 && visible[0].ActualHeight > 100 &&
-                Cards.ContainerFromItem(visible[0]) is GridViewItem { ActualHeight: > 100 })
+            var container = Cards.ContainerFromItem(visible[0]) as GridViewItem;
+            var card = container?.ContentTemplateRoot as AccountCard;
+            if (container is { ActualHeight: > 100 } && card is not null &&
+                card.IsLoaded && card.ActualWidth > 250 && card.ActualHeight > 100)
             { await Task.Delay(180); return; }
             await Task.Delay(50);
         }
@@ -71,28 +108,29 @@ public sealed partial class AccountManagerPage
     internal async Task CheckCardStatesAsync(Func<string, Task> capture)
     {
         await WaitForVisibleCardAsync();
-        var card = visible[0]; var container = (GridViewItem)Cards.ContainerFromItem(card);
+        var item = visible[0];
+        var card = await RealizeCardAsync(item, false);
+        var container = (GridViewItem)Cards.ContainerFromItem(item);
         var presenter = Walk(container).OfType<ListViewItemPresenter>().First();
         ManagerUiChecks.Check(container.CornerRadius.TopLeft == AccountCard.CardRadius && presenter.CornerRadius.TopLeft == AccountCard.CardRadius && card.OutlineRadius.TopLeft == AccountCard.CardRadius, "native presenter and card share 14px radius");
         ManagerUiChecks.Check(!presenter.SelectionCheckMarkVisualEnabled && new[] { presenter.PointerOverBackground, presenter.SelectedBackground, presenter.SelectedPointerOverBackground, presenter.PointerOverBorderBrush, presenter.SelectedBorderBrush, presenter.SelectedPointerOverBorderBrush }.All(x => x is SolidColorBrush { Color.A: 0 }), "native hover/selection layers do not paint rectangular overlays");
-        Cards.SelectedItems.Remove(card); card.SetHovered(false);
+        Cards.SelectedItems.Remove(item); card.SetHovered(false);
         ManagerUiChecks.Check(card.EmphasisOpacity == 0, "normal card has no emphasis"); await capture("state-normal");
         card.SetHovered(true); await Task.Delay(180); ManagerUiChecks.Check(Math.Abs(card.EmphasisOpacity - .6) < .001, "hover uses rounded soft outline"); await capture("state-hover");
-        Cards.SelectedItems.Add(card); card.SetHovered(false);
+        Cards.SelectedItems.Add(item); card.SetHovered(false);
         ManagerUiChecks.Check(card.IsSelectedCard && card.EmphasisOpacity == 1, "selected outline persists without hover"); await capture("state-selected");
         card.SetHovered(true); ManagerUiChecks.Check(card.EmphasisOpacity == 1, "hover and selection compose"); await capture("state-selected-hover");
         card.SetHovered(false); ManagerUiChecks.Check(container.Focus(FocusState.Keyboard) && container.UseSystemFocusVisuals, "keyboard focus remains enabled"); await capture("state-keyboard-focus");
         ManagerUiChecks.Check(!card.Actions["login"].IsEnabled, "unmapped synthetic account cannot trigger Steam login");
-        foreach (var retainedMenu in new[] { (MenuFlyout)card.ContextFlyout })
-        {
-            var items = retainedMenu.Items.OfType<MenuFlyoutItem>().Select(x => x.Text).ToList();
-            ManagerUiChecks.Check(items.Count == 14 && items.Contains("设置账号背景") && items.Contains("设置账号分组") && items.Contains("删除账号") && items.Contains("转到黑号管理"), "right-click menu retains original actions and adds classification move");
-        }
-        card.ContextFlyout.ShowAt(card); await Task.Delay(150);
-        ManagerUiChecks.Check(Microsoft.UI.Xaml.Media.VisualTreeHelper.GetOpenPopupsForXamlRoot(XamlRoot).Count > 0 && !card.Actions.ContainsKey("more"), "right-click menu opens and footer ellipsis is removed");
-        card.ContextFlyout.Hide();
+        // 右键菜单走真实路径：从容器解析卡片 → 建菜单 → 弹出（模板化后卡片本身不再持有 ContextFlyout）。
+        var menu = OpenCardMenuForCheck(container);
+        ManagerUiChecks.Check(menu is not null, "right-click resolves the card from its item container");
+        await Task.Delay(150);
+        var items = menu!.Items.OfType<MenuFlyoutItem>().Select(x => x.Text).ToList();
+        ManagerUiChecks.Check(items.Count == 14 && items.Contains("设置账号背景") && items.Contains("设置账号分组") && items.Contains("删除账号") && items.Contains("转到黑号管理"), "right-click menu retains original actions and adds classification move");
+        ManagerUiChecks.Check(VisualTreeHelper.GetOpenPopupsForXamlRoot(XamlRoot).Count > 0 && !card.Actions.ContainsKey("more"), "right-click menu opens and footer ellipsis is removed");
+        menu.Hide(); await Task.Delay(80);
         await CheckNativeDialogAsync(() => Invoke(card.Actions["details"]), "账号详情");
-        var menu = (MenuFlyout)card.ContextFlyout;
         menu.ShowAt(card); await Task.Delay(150);
         var backgroundItem = menu.Items.OfType<MenuFlyoutItem>().First(x => x.Text == "设置账号背景");
         await CheckNativeDialogAsync(() => Invoke(backgroundItem), "卡片背景");
@@ -101,12 +139,14 @@ public sealed partial class AccountManagerPage
         bool wasFavorite = card.Account.Favorite; Invoke(favoriteItem);
         for (int attempt = 0; document.Accounts.First(x => x.Id == card.Account.Id).Favorite == wasFavorite && attempt < 40; attempt++) await Task.Delay(50);
         ManagerUiChecks.Check(document.Accounts.First(x => x.Id == card.Account.Id).Favorite != wasFavorite, "native favorite menu persists to synthetic store");
-        card = visible[0]; await WaitForVisibleCardAsync();
+        await WaitForVisibleCardAsync();
+        card = await RealizeCardAsync(visible[0], false);
         var title = Walk(card).OfType<TextBlock>().First(x => x.Text.StartsWith("测试账号"));
         ManagerUiChecks.Check(title.Text.Contains("（仅用于自动渲染测试）"), "card nickname appends note in parentheses");
         ManagerUiChecks.Check(card.IsDoubleTapEnabled && card.IsCardDoubleTapSource(title) && !card.IsCardDoubleTapSource(card.Actions["login"]) && !card.IsCardDoubleTapSource(card.Actions["copy-account"]), "double-tap edits card surface but excludes action buttons");
         await CheckNativeDialogAsync(() => _ = card.OpenEditorAsync(), "账号信息");
-        var withPassword = visible.First(x => x.Account.Password.Length > 0);
+        var withPasswordItem = visible.First(x => x.Account.Password.Length > 0);
+        var withPassword = await RealizeCardAsync(withPasswordItem);
         Invoke(withPassword.Actions["reveal"]); await Task.Delay(80);
         ManagerUiChecks.Check(withPassword.VisiblePassword == withPassword.Account.Password, "native reveal button invokes original password behavior");
         Invoke(withPassword.Actions["reveal"]); await Task.Delay(80);
@@ -114,8 +154,8 @@ public sealed partial class AccountManagerPage
         ManagerUiChecks.Check(!card.Actions["copy-password"].IsEnabled && card.VisiblePassword == "未保存密码", "missing password disables copying and displays correct text");
         ManagerUiChecks.Info($"card geometry DIP: width={card.ActualWidth:F2}; height={card.ActualHeight:F2}; artW={card.HeaderArtwork.ActualWidth:F2}; artH={card.HeaderArtwork.ActualHeight:F2}; corner={card.OutlineRadius.TopLeft}");
         ManagerUiChecks.Check(card.HeaderArtwork.ActualHeight >= card.ActualHeight - 4 && card.HeaderArtwork.ActualWidth >= card.ActualWidth - 4, "artwork fills the whole account card");
-        ManagerUiChecks.Check(Walk(visible[1]).OfType<TextBlock>().Where(x => x.Text.Contains("非常长") || x.Text.Contains("very-long-login")).All(x => x.TextTrimming == TextTrimming.CharacterEllipsis), "long nickname/login use ellipsis");
-        ManagerUiChecks.Check(visible[0].HeaderArtwork.Background is LinearGradientBrush && visible[2].HeaderArtwork.Background is ImageBrush, "missing background falls back while valid local background loads");
+        ManagerUiChecks.Check(Walk(await RealizeCardAsync(visible[1], false)).OfType<TextBlock>().Where(x => x.Text.Contains("非常长") || x.Text.Contains("very-long-login")).All(x => x.TextTrimming == TextTrimming.CharacterEllipsis), "long nickname/login use ellipsis");
+        ManagerUiChecks.Check((await RealizeCardAsync(visible[0], false)).HeaderArtwork.Background is LinearGradientBrush && (await RealizeCardAsync(visible[2], false)).HeaderArtwork.Background is ImageBrush, "missing background falls back while valid local background loads");
 
     }
     internal async Task CheckNewSelectionActionsAsync()
@@ -200,7 +240,7 @@ public sealed partial class AccountManagerPage
     private static void Invoke(MenuFlyoutItem item) => ((IInvokeProvider)new MenuFlyoutItemAutomationPeer(item).GetPattern(PatternInterface.Invoke)).Invoke();
     internal async Task CheckCardClipboardAsync()
     {
-        var card = visible.First(x => x.Account.Password.Length > 0);
+        var card = await RealizeCardAsync(visible.First(x => x.Account.Password.Length > 0));
         foreach (var (action, expected) in new[] { ("copy-account", card.Account.LoginName), ("copy-password", card.Account.Password), ("copy-id", card.Account.SteamId) })
         {
             await ManagerUiChecks.CheckClipboardTextAsync(() => Invoke(card.Actions[action]), expected, "native button " + action);
@@ -213,19 +253,18 @@ public sealed partial class AccountManagerPage
         Search.Visibility = GroupFilter.Visibility = privateMode ? Visibility.Collapsed : Visibility.Visible;
         await ReloadAsync();
     }
-    internal Task VerifyUiCheckAsync(string mode, bool privateMode)
+    internal async Task VerifyUiCheckAsync(string mode, bool privateMode)
     {
         ManagerUiChecks.Check(visible.Count == document.Accounts.Count, mode + " record count");
         ManagerUiChecks.Check(selected.Count == 2 && Cards.SelectedItems.Count == 2, mode + " selection preserved");
-        ManagerUiChecks.Check(visible.All(x => x.Width >= 260), mode + " responsive card widths");
-        foreach (var card in visible.Take(3))
+        ManagerUiChecks.Check(visible.All(x => x.CardWidth >= 260), mode + " responsive card widths");
+        foreach (var item in visible.Take(3))
         {
-            var texts = Walk(card).OfType<TextBlock>().Where(x => x.Visibility == Visibility.Visible).Select(x => x.Text).ToList();
+            var texts = Walk(await RealizeCardAsync(item, false)).OfType<TextBlock>().Where(x => x.Visibility == Visibility.Visible).Select(x => x.Text).ToList();
             ManagerUiChecks.Check(texts.Any(x => x.Contains(privateMode ? "隐私账号" : "测试账号")), mode + " title displayed");
             ManagerUiChecks.Check(texts.All(x => !x.Contains("synthetic-pass-")), mode + " password masked");
             if (privateMode) ManagerUiChecks.Check(texts.All(x => !x.Contains("qa-account-") && !x.Contains("测试账号") && !x.Contains("仅用于自动渲染测试")), "privacy identifiers hidden");
         }
-        return Task.CompletedTask;
     }
     internal async Task CheckFilterSelectionAsync()
     {
@@ -235,14 +274,15 @@ public sealed partial class AccountManagerPage
         Search.Text = "";
         for (int attempt = 0; visible.Count != document.Accounts.Count && attempt < 40; attempt++) await Task.Delay(50);
         ManagerUiChecks.Check(visible.Count == 100 && selected.SetEquals(saved), "clear search restores collection and selection");
-        var card = visible.First(x => x.Account.Password.Length > 0);
+        var card = await RealizeCardAsync(visible.First(x => x.Account.Password.Length > 0));
         card.TogglePassword(); ManagerUiChecks.Check(card.VisiblePassword == card.Account.Password, "show saved password");
         card.TogglePassword(); ManagerUiChecks.Check(card.VisiblePassword == "••••••••", "hide saved password");
         var firstId = visible[0].Account.Id; BeginReorder(); visible.Move(0, 3); FinishReorder(); await PersistVisibleOrderAsync();
         ManagerUiChecks.Check(visible[3].Account.Id == firstId && (await ManagedAccounts.Store.LoadAsync()).Accounts.First(x => x.Id == firstId).Order == 3, "custom reorder persists");
         ManagerUiChecks.Check(selected.SetEquals(saved), "reorder preserves selected identities");
         await SwitchUiCheckAsync("cards", true);
-        card = visible.First(x => x.Account.Password.Length > 0); card.TogglePassword();
+        card = await RealizeCardAsync(visible.First(x => x.Account.Password.Length > 0));
+        card.TogglePassword();
         ManagerUiChecks.Check(!card.VisiblePassword.Contains("synthetic-pass-"), "privacy prevents password reveal");
         await SwitchUiCheckAsync("cards", false);
         var group = new ManagedGroup { Name = "合成分组" };

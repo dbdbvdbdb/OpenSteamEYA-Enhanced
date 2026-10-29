@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using OpenSteamEya.AccountManagement;
@@ -9,6 +10,11 @@ namespace SteamEyaWinUI.Pages;
 
 public sealed partial class AccountManagerPage
 {
+#if MANAGER_UI_CHECKS
+    /// <summary>自检用：最近一次由右键路径创建的卡片菜单（正常构建下不持有该引用）。</summary>
+    internal MenuFlyout? LastCardMenu { get; private set; }
+#endif
+
     private void UpdateSelectionToolbar()
     {
         SelectionActions.Visibility = selected.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
@@ -20,18 +26,19 @@ public sealed partial class AccountManagerPage
         syncing = true;
         try
         {
-            foreach (var card in visible)
+            foreach (var item in visible)
             {
-                if (invert && selected.Contains(card.Account.Id)) selected.Remove(card.Account.Id);
-                else selected.Add(card.Account.Id);
+                if (invert && selected.Contains(item.Account.Id)) selected.Remove(item.Account.Id);
+                else selected.Add(item.Account.Id);
             }
             Cards.SelectedItems.Clear();
-            foreach (var card in visible)
+            foreach (var item in visible)
             {
-                bool isSelected = selected.Contains(card.Account.Id);
-                if (isSelected) Cards.SelectedItems.Add(card);
-                card.SetSelected(isSelected);
+                bool isSelected = selected.Contains(item.Account.Id);
+                item.IsSelected = isSelected;
+                if (isSelected) Cards.SelectedItems.Add(item);
             }
+            foreach (var card in RealizedCards()) card.SetSelected(card.Item?.IsSelected == true);
             Summary.Text = $"{document.Accounts.Count} 个账号 · 当前 {visible.Count} 个 · 已选 {selected.Count} 个";
             UpdateSelectionToolbar();
         }
@@ -42,7 +49,8 @@ public sealed partial class AccountManagerPage
     private void ClearSelection_Click(object sender, RoutedEventArgs e)
     {
         selected.Clear(); Cards.SelectedItems.Clear();
-        foreach (var card in visible) card.SetSelected(false);
+        foreach (var item in visible) item.IsSelected = false;
+        foreach (var card in RealizedCards()) card.SetSelected(false);
         Summary.Text = $"{document.Accounts.Count} 个账号 · 当前 {visible.Count} 个 · 已选 0 个";
         UpdateSelectionToolbar();
     }
@@ -78,16 +86,57 @@ public sealed partial class AccountManagerPage
         }
         finally { AppState.EndBusyOperation(); }
     }
+
     private void CardsContextRequested(UIElement sender, ContextRequestedEventArgs args)
     {
-        // Also expose the right-click menu when keyboard focus is on the native item container.
-        for (var source = args.OriginalSource as DependencyObject; source is not null; source = VisualTreeHelper.GetParent(source))
-        {
-            var card = source as AccountCard ?? (source as GridViewItem)?.Content as AccountCard;
-            if (card is null) continue;
-            if (args.TryGetPosition(card, out var position)) card.ContextFlyout.ShowAt(card, new Microsoft.UI.Xaml.Controls.Primitives.FlyoutShowOptions { Position = position });
-            else card.ContextFlyout.ShowAt(card);
-            args.Handled = true; return;
-        }
+        // 菜单不再挂在卡片上：由被点中的条目即时创建，避免 100 张卡片各持一个 MenuFlyout。
+        // 事件源可能是卡片内部元素，也可能是 GridViewItem（容器的 Content 现在是轻量条目）。
+        if (FindContextCard(args.OriginalSource) is not { } card) return;
+        ShowCardMenu(card, card.CreateMenu(), args);
     }
+
+    private void ShowCardMenu(AccountCard card, MenuFlyout menu, ContextRequestedEventArgs? args)
+    {
+#if MANAGER_UI_CHECKS
+        LastCardMenu = menu;
+#endif
+        if (args is not null && args.TryGetPosition(card, out var position)) menu.ShowAt(card, new FlyoutShowOptions { Position = position });
+        else menu.ShowAt(card);
+        if (args is not null) args.Handled = true;
+    }
+
+    /// <summary>从右键事件源向上/向下解析出卡片（容器的 Content 现在是条目，不能直接强转）。</summary>
+    internal AccountCard? FindContextCard(object? originalSource)
+    {
+        for (var source = originalSource as DependencyObject; source is not null; source = VisualTreeHelper.GetParent(source))
+        {
+            if (source is AccountCard card) return card;
+            if (source is GridViewItem container) return CardIn(container);
+        }
+        return null;
+    }
+
+    /// <summary>容器（GridViewItem）当前实现的卡片；未实现/已回收时为 null。</summary>
+    internal static AccountCard? CardIn(DependencyObject container)
+    {
+        // 容器由 ItemTemplate 生成：Content 是条目本身，控件树在容器的可视子树里，
+        // 且 ContentTemplateRoot 不会从 ListViewItemPresenter 冒泡到 GridViewItem，只能向下找。
+        if (container is AccountCard direct) return direct;
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(container); i++)
+        {
+            if (CardIn(VisualTreeHelper.GetChild(container, i)) is { } found) return found;
+        }
+        return null;
+    }
+
+#if MANAGER_UI_CHECKS
+    /// <summary>自检用：走与真实右键完全相同的解析/建菜单/弹出路径（区别只是不依赖指针事件）。</summary>
+    internal MenuFlyout? OpenCardMenuForCheck(DependencyObject source)
+    {
+        if (FindContextCard(source) is not { } card) return null;
+        var menu = card.CreateMenu();
+        ShowCardMenu(card, menu, null);
+        return menu;
+    }
+#endif
 }

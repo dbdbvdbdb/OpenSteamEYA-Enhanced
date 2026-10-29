@@ -27,8 +27,8 @@ public sealed partial class AccountManagerPage
         SelectTag(GroupFilter, "default"); await Task.Delay(100);
         ManagerUiChecks.Check(visible.Count == document.Accounts.Count(x => !AccountGroups.Ids(x).Any()) && visible.All(x => !AccountGroups.Ids(x.Account).Any()) && visible.All(x => x.Account.Id != record.Id), "default group only lists ungrouped accounts");
         SelectTag(GroupFilter, "all"); await Task.Delay(100);
-        var card = visible.First(x => x.Account.Id == record.Id);
-        var menu = (MenuFlyout)card.ContextFlyout; menu.ShowAt(card); await Task.Delay(100);
+        var card = await RealizeCardAsync(visible.First(x => x.Account.Id == record.Id));
+        var menu = OpenCardMenuForCheck(card)!; await Task.Delay(100);
         Invoke(menu.Items.OfType<MenuFlyoutItem>().Single(x => x.Text == "设置账号分组"));
         var elements = await FindDialogElementsAsync("设置账号分组");
         var groups = elements.OfType<ListView>().Single(x => x.Header?.ToString()?.StartsWith("所属分组") == true);
@@ -60,39 +60,40 @@ public sealed partial class AccountManagerPage
             doc.Accounts[1].Nickname = "合成账号 B"; doc.Accounts[1].Note = "正常状态测试";
         });
         await ReloadAsync(); await WaitForVisibleCardAsync();
-        TextBlock Status(AccountCard card) => Walk(card).OfType<TextBlock>().First(x => x.Name == "AccountCooldownStatus");
-        var cooling = Status(visible[0]); var time = cooling.Inlines.OfType<Run>().First(); var vac = cooling.Inlines.OfType<Run>().Last();
+        var cooling = await CooldownLabelAsync(visible[0]);
+        var time = cooling.Inlines.OfType<Run>().First(); var vac = cooling.Inlines.OfType<Run>().Last();
         bool Yellow(Brush brush) => brush is SolidColorBrush { Color: { R: 240, G: 196, B: 92 } };
         bool Red(Brush brush) => brush is SolidColorBrush { Color: { R: 242, G: 111, B: 123 } };
         ManagerUiChecks.Check(Yellow(time.Foreground) && time.Text != "存在冷却" && Red(vac.Foreground) && vac.Text.Contains("GCVAC"), "card shows remaining cooldown time yellow and flagged GCVAC red");
-        ManagerUiChecks.Check(cooling.ActualHeight > 20 && cooling.MaxLines == 2 && visible[0].HasActiveCooldownTimer, "cooldown and GCVAC use two visible lines with live countdown timer");
+        ManagerUiChecks.Check(cooling.ActualHeight > 20 && cooling.MaxLines == 2 && (await RealizeCardAsync(visible[0], false)).HasActiveCooldownTimer, "cooldown and GCVAC use two visible lines with live countdown timer");
         string before = time.Text; await Task.Delay(1250);
         ManagerUiChecks.Check(before != time.Text, "visible card remaining cooldown refreshes without querying Steam");
-        var normal = Status(visible[1]).Inlines.OfType<Run>().ToList();
+        var normal = (await CooldownLabelAsync(visible[1])).Inlines.OfType<Run>().ToList();
         ManagerUiChecks.Check(normal.Count == 1 && normal[0].Text == "正常" && !Yellow(normal[0].Foreground) && !Red(normal[0].Foreground), "normal cooldown and unflagged GCVAC collapse into only normal");
-        ManagerUiChecks.Check(Status(visible[2]).Inlines.OfType<Run>().First().Text == "正常", "expired unsigned cooldown sentinel is treated as normal");
-        var unknown = Status(visible[3]).Inlines.OfType<Run>().ToList();
+        ManagerUiChecks.Check((await CooldownLabelAsync(visible[2])).Inlines.OfType<Run>().First().Text == "正常", "expired unsigned cooldown sentinel is treated as normal");
+        var unknown = (await CooldownLabelAsync(visible[3])).Inlines.OfType<Run>().ToList();
         ManagerUiChecks.Check(unknown.Count == 1 && unknown[0].Text == "未知" && !Red(unknown[0].Foreground), "missing cooldown and GCVAC remain unknown without fabricated flags");
         ManagerUiChecks.StatusFixtures[accounts[2].Id] = new() { CooldownSeconds = 3605, GcVacBanned = false };
         ManagerUiChecks.StatusFixtures[accounts[3].Id] = new() { CooldownSeconds = 0, GcVacBanned = true };
         await ReloadAsync(); await WaitForVisibleCardAsync();
-        var onlyCooldown = Status(visible[2]).Inlines.OfType<Run>().ToList();
-        var onlyVac = Status(visible[3]).Inlines.OfType<Run>().ToList();
+        var onlyCooldown = (await CooldownLabelAsync(visible[2])).Inlines.OfType<Run>().ToList();
+        var onlyVac = (await CooldownLabelAsync(visible[3])).Inlines.OfType<Run>().ToList();
         ManagerUiChecks.Check(onlyCooldown.Count == 1 && Yellow(onlyCooldown[0].Foreground) && !onlyCooldown[0].Text.Contains("GCVAC"), "cooldown-only card hides normal and unflagged GCVAC");
         ManagerUiChecks.Check(onlyVac.Count == 1 && Red(onlyVac[0].Foreground) && onlyVac[0].Text.StartsWith("GCVAC"), "GCVAC-only card hides normal cooldown");
         await capture("cooldown-groups-dark");
-        visible[0].Stop(); ManagerUiChecks.Check(!visible[0].HasActiveCooldownTimer, "stopped card stops countdown timer");
+        var first = await RealizeCardAsync(visible[0], false); first.Stop(); ManagerUiChecks.Check(!first.HasActiveCooldownTimer, "stopped card stops countdown timer");
         await SwitchUiCheckAsync("list", false); await WaitForVisibleCardAsync();
-        var compact = Status(visible[0]).Inlines.OfType<Run>().ToList();
+        var compact = (await CooldownLabelAsync(visible[0])).Inlines.OfType<Run>().ToList();
         ManagerUiChecks.Check(Yellow(compact[1].Foreground) && Red(compact[^1].Foreground), "compact list also shows yellow cooldown time and red GCVAC");
-        ManagerUiChecks.Check(Status(visible[1]).Inlines.OfType<Run>().Count() == 2 && Status(visible[2]).Inlines.OfType<Run>().Count() == 2 &&
-            Status(visible[3]).Inlines.OfType<Run>().Count() == 2, "compact list omits redundant normal and unflagged status alongside anomalies");
+        ManagerUiChecks.Check((await CooldownLabelAsync(visible[1])).Inlines.OfType<Run>().Count() == 2 &&
+            (await CooldownLabelAsync(visible[2])).Inlines.OfType<Run>().Count() == 2 &&
+            (await CooldownLabelAsync(visible[3])).Inlines.OfType<Run>().Count() == 2, "compact list omits redundant normal and unflagged status alongside anomalies");
         await capture("cooldown-groups-list");
         await SwitchUiCheckAsync("cards", false); await WaitForVisibleCardAsync();
         ManagerUiChecks.StatusFixtures[accounts[2].Id] = new() { CooldownSeconds = 3, GcVacBanned = false, CsStatusUpdatedAt = DateTimeOffset.Now };
         Render(); await WaitForVisibleCardAsync(); await Task.Delay(3250);
-        var expired = Status(visible[2]).Inlines.OfType<Run>().ToList();
-        ManagerUiChecks.Check(expired.Count == 1 && expired[0].Text == "正常" && !visible[2].HasActiveCooldownTimer, "expired countdown transitions to only normal and stops timer");
+        var expired = (await CooldownLabelAsync(visible[2])).Inlines.OfType<Run>().ToList();
+        ManagerUiChecks.Check(expired.Count == 1 && expired[0].Text == "正常" && !(await RealizeCardAsync(visible[2], false)).HasActiveCooldownTimer, "expired countdown transitions to only normal and stops timer");
     }
 }
 #endif
