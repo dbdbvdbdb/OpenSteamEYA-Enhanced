@@ -11,6 +11,10 @@ on:
         description: '铏氭瀯璐﹀彿鏁伴噺'
         required: true
         default: '100'
+      mode:
+        description: 'perf-mode: standard or scale'
+        required: true
+        default: 'standard'
 
 permissions:
   contents: read
@@ -48,6 +52,7 @@ jobs:
           $exe = './artifacts/perf-dist/SteamEyaWinUI.exe'
           $p = Start-Process $exe -ArgumentList @(
             '--perf-run',
+            '--perf-mode=${{ github.event.inputs.mode }}',
             '--perf-rounds=${{ github.event.inputs.rounds }}',
             '--perf-accounts=${{ github.event.inputs.accounts }}',
             "--perf-dir=$dir"
