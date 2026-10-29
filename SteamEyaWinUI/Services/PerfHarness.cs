@@ -840,8 +840,8 @@ internal static class PerfHarness
 
     private static void WriteOutputs(List<string> log)
     {
-        // heights 只关心卡片高度，按设计说明不写 measure.csv / memory.csv 的常规行。
-        if (_mode != "heights")
+        // heights 只关心卡片高度，Rows/Memory 为空，写出来是只有表头的文件：CI 用 measure.csv 判断“跑完了”，
+        // 恒写表头既不伪造数据也不会让 heights 运行被判失败。
         {
             var csv = new StringBuilder(
                 "scenario,round,action_ms,stable_ms,renders_delta,cards_delta,gc0,gc1,gc2,gc_pause_ms,ui_block_ms,note\n");
