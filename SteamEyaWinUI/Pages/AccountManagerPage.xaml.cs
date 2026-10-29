@@ -26,6 +26,12 @@ public sealed partial class AccountManagerPage : Page
     private DispatcherQueueTimer? searchDebounce;
     private bool reloadQueued;
     private bool needsAnotherReload;
+    private bool flushRunning;
+    // 测量用：用户动作发生到刷新计算真正开始的间隔（节流等待 + 存储写入），以及一次重新计算自身的耗时。
+    private long userReloadSinceTicks = -1;
+#if MANAGER_UI_CHECKS
+    private readonly List<(double WaitMs, double WorkMs)> reloadTimings = [];
+#endif
     private Microsoft.UI.Dispatching.DispatcherQueueTimer? reloadThrottle;
     // 计划 T6：只有列数变化或宽度变化超过 2px 才重排。
     private double lastWidth = -1;
@@ -112,6 +118,26 @@ public sealed partial class AccountManagerPage : Page
         if (!cooldownTicker.IsEnabled) cooldownTicker.Start();
     }
 
+    /// <summary>记录"用户动作已发生"的时刻，用于把一次刷新的等待时间与计算时间分开统计（测量用）。</summary>
+    private void MarkUserReloadRequest()
+    {
+        if (userReloadSinceTicks < 0) userReloadSinceTicks = Environment.TickCount64;
+    }
+
+    /// <summary>
+    /// 用户主动触发的刷新（隐私、排序、视图、分组等）：立即执行，不进尾随节流窗口。
+    /// 节流只服务于后台通知的突发合并（<see cref="QueueReload"/>）。
+    /// </summary>
+    internal void ReloadNow()
+    {
+        if (offscreen || !IsLoaded) return;
+        MarkUserReloadRequest();
+        reloadThrottle?.Stop();
+        reloadQueued = false;
+        needsAnotherReload = true;
+        if (!flushRunning) _ = FlushQueuedReloadAsync();
+    }
+
     /// <summary>
     /// Collapses bursts of global change notifications into one reload per dispatcher turn,
     /// and does nothing while the page is off-screen (it reloads on navigate-back instead).
@@ -119,6 +145,7 @@ public sealed partial class AccountManagerPage : Page
     internal void QueueReload()
     {
         if (offscreen || !IsLoaded) return;
+        MarkUserReloadRequest();
         needsAnotherReload = true;
         reloadQueued = true;
         reloadThrottle ??= CreateReloadThrottle();
@@ -138,22 +165,32 @@ public sealed partial class AccountManagerPage : Page
 
     private async Task FlushQueuedReloadAsync()
     {
+        if (flushRunning) return;
+        flushRunning = true;
         reloadThrottle?.Stop();
-        if (offscreen || !IsLoaded)
+        try
+        {
+            if (offscreen || !IsLoaded)
+            {
+                reloadQueued = false;
+                needsAnotherReload = false;
+                return;
+            }
+
+            do
+            {
+                needsAnotherReload = false;
+                await SafeAsync(ReloadAsync);
+            }
+            while (needsAnotherReload && !offscreen && IsLoaded);
+        }
+        finally
         {
             reloadQueued = false;
-            needsAnotherReload = false;
-            return;
+            flushRunning = false;
+            // 循环退出与新的立即刷新可能刚好交错：这里补一次，保证"立即"不会丢。
+            if (needsAnotherReload && !offscreen && IsLoaded) _ = FlushQueuedReloadAsync();
         }
-
-        do
-        {
-            needsAnotherReload = false;
-            await SafeAsync(ReloadAsync);
-        }
-        while (needsAnotherReload && !offscreen && IsLoaded);
-
-        reloadQueued = false;
     }
 
 #if PERF_HARNESS
@@ -175,10 +212,43 @@ public sealed partial class AccountManagerPage : Page
             await Task.Delay(15);
         }
     }
+
+    /// <summary>
+    /// 测量专用：取走本窗口内每次刷新的"等待"（用户动作到计算开始）与"计算"（重新读取并重建条目）耗时。
+    /// 一次测量里可能有多次刷新（例如 S9 连点两次隐私），所以返回列表而不是单值。
+    /// </summary>
+    internal List<(double WaitMs, double WorkMs)> TakeReloadTimings()
+    {
+#if MANAGER_UI_CHECKS
+        var value = new List<(double, double)>(reloadTimings);
+        reloadTimings.Clear();
+        return value;
+#else
+        return [];
+#endif
+    }
+
+    /// <summary>测量专用：条目对象（虚拟化后）或卡片对象（旧实现）都能取到账号 Id。</summary>
+    internal static Guid AccountIdOfItem(object? item) => item switch
+    {
+        ManagedAccountCardItem entry => entry.Account.Id,
+        AccountCard card => card.Account.Id,
+        _ => Guid.Empty,
+    };
+
+    /// <summary>测量专用：条目当前已实现的卡片（未实现/已回收返回 null）。</summary>
+    internal AccountCard? CardOf(ManagedAccountCardItem item) =>
+        Cards.ContainerFromItem(item) is GridViewItem container ? CardIn(container) : null;
 #endif
 
     private async Task ReloadAsync()
     {
+#if MANAGER_UI_CHECKS
+        var since = userReloadSinceTicks;
+        userReloadSinceTicks = -1;
+        var waitMs = since >= 0 ? Environment.TickCount64 - since : -1;
+        var workWatch = System.Diagnostics.Stopwatch.StartNew();
+#endif
         await refreshGate.WaitAsync();
         try
         {
@@ -205,6 +275,9 @@ public sealed partial class AccountManagerPage : Page
             syncing = false; Render();
         }
         finally { syncing = false; refreshGate.Release(); }
+#if MANAGER_UI_CHECKS
+        reloadTimings.Add((waitMs, workWatch.Elapsed.TotalMilliseconds));
+#endif
         if (eagerSettings) { eagerSettings = false; await ManagerSettingsAsync(); }
         if (pendingTool is { } tool)
         {
@@ -258,6 +331,10 @@ public sealed partial class AccountManagerPage : Page
             {
                 var mapping = resolved.GetValueOrDefault(account.Id);
                 var history = snapshot.HistoryFor(mapping);
+#if PERF_HARNESS
+                // 测量专用：heights 模式注入的状态变体（走这一条，不需要 --manager-ui-check 也能生效）。
+                if (PerfHarness.TryGetStatusFixture(account.Id, out var perfHistory)) history = perfHistory;
+#endif
 #if MANAGER_UI_CHECKS
                 if (ManagerUiChecks.Enabled) history = ManagerUiChecks.StatusFixtures.GetValueOrDefault(account.Id) ?? history;
 #endif
@@ -349,10 +426,11 @@ public sealed partial class AccountManagerPage : Page
     {
         await SafeAsync(async () =>
         {
+            MarkUserReloadRequest();
             var enabled = Privacy.IsChecked == true;
             await ManagedAccounts.Store.UpdateAsync(doc => doc.Preferences.Privacy = enabled);
-            // 隐私切换只需要一次合并后的刷新，走尾随节流队列，避免整页同步重载阻塞点击（计划 V0-P2）。
-            QueueReload();
+            // 隐私是用户主动操作：立即刷新（不进 350ms 尾随节流）；节流只留给后台通知（计划 V1-P3）。
+            ReloadNow();
         });
     }
     private void CardsSelectionChanged(object sender, SelectionChangedEventArgs e)

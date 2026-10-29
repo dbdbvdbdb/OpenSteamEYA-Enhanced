@@ -88,6 +88,11 @@ internal static partial class ManagerUiChecks
             await Task.Delay(1000);
             await page.CheckCardStatesAsync(name => CaptureAsync(window, name));
             await page.CheckCooldownStatusAsync(name => CaptureAsync(window, name));
+            // 虚拟化专项：滚动一致性、隐私回收后遮蔽、过期异步丢弃、滚动后选择保持、快速进出。
+            // 这些检查需要足够多的账号才能观察“只实现一屏”，所以先铺 100 个，随后照常切回 4 个的卡片状态检查。
+            await page.PrepareUiCheckAsync(100);
+            await page.WaitForVisibleCardAsync();
+            await page.CheckVirtualizationAsync(window);
             foreach (double scale in new[] { 1.0, 1.25, 1.5, 2.0 }) await CaptureAsync(window, "render-scale-" + (int)(scale * 100), scale);
             await CheckClassificationsAsync(window, page);
             await CheckUpdatesAsync(window);

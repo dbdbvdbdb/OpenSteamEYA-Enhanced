@@ -12,7 +12,7 @@ on:
         required: true
         default: '100'
       mode:
-        description: 'perf-mode: standard or scale'
+        description: 'measurement mode: standard / scale / soak / heights'
         required: true
         default: 'standard'
 
@@ -52,9 +52,9 @@ jobs:
           $exe = './artifacts/perf-dist/SteamEyaWinUI.exe'
           $p = Start-Process $exe -ArgumentList @(
             '--perf-run',
-            '--perf-mode=${{ github.event.inputs.mode }}',
             '--perf-rounds=${{ github.event.inputs.rounds }}',
             '--perf-accounts=${{ github.event.inputs.accounts }}',
+            '--perf-mode=${{ github.event.inputs.mode }}',
             "--perf-dir=$dir"
           ) -PassThru -RedirectStandardOutput (Join-Path $env:RUNNER_TEMP 'perf.stdout.log') -RedirectStandardError (Join-Path $env:RUNNER_TEMP 'perf.stderr.log')
           if (-not $p.WaitForExit(1800000)) { $p.Kill(); throw 'Perf run timed out.' }

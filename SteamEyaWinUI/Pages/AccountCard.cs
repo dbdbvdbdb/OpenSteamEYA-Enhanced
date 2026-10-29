@@ -485,7 +485,14 @@ internal sealed partial class AccountCard : UserControl
             var avatarUrl = item.History?.AvatarUrl ?? owner.Snapshot.CachedFor(key)?.AvatarUrl;
             var palette = await CardBackgroundService.GetAsync(item.Account, avatarPath, avatarUrl, steamId,
                 owner.Preferences, dark, backgroundCancellation.Token);
-            if (stopped || generation != buildGeneration) return;
+            if (stopped || generation != buildGeneration)
+            {
+#if MANAGER_UI_CHECKS
+                // 容器被复用/回收后，旧条目的取图结果必须丢掉；自检据此证明"过期异步不上屏"。
+                if (generation != buildGeneration) Services.UiCheckPerf.StaleBackgroundDropped();
+#endif
+                return;
+            }
             var hasImage = palette.ImagePath is not null;
             artwork.Background = CardBackgroundService.Brush(palette);
             artwork.Opacity = hasImage ? 1 : dark ? 0.55 : 0.34;

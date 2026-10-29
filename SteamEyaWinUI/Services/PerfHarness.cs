@@ -14,10 +14,12 @@ namespace SteamEyaWinUI.Services;
 
 /// <summary>
 /// 性能测量脚手架（仅在 EnablePerfHarness=true 时编译进来）。
-/// 用法：SteamEyaWinUI.exe --perf-run [--perf-mode=standard|scale] [--perf-rounds=3] [--perf-accounts=100]
+/// 用法：SteamEyaWinUI.exe --perf-run [--perf-mode=standard|scale|soak|heights] [--perf-rounds=3] [--perf-accounts=100]
 ///       [--perf-dir=&lt;目录&gt;] [--perf-label=&lt;标签&gt;]
 /// mode=scale 只跑 V1 前置测量：账号数缩放（进页面耗时）与离页释放实验，不跑 S1–S9。
-/// 输出：&lt;dir&gt;\measure.csv、memory.csv、environment.json、summary.txt、log.txt
+/// mode=soak 反复进出账号管理页，测 30 次进入的私有内存斜率（memory.csv 增列 soak_cycle）。
+/// mode=heights 注入 4 类状态变体，测列表/卡片两视图的卡片高度一致性与每屏实建卡片数（heights.csv）。
+/// 输出：&lt;dir&gt;\measure.csv、memory.csv、environment.json、summary.txt、log.txt（heights 另出 heights.csv）
 /// </summary>
 internal static class PerfHarness
 {
@@ -31,7 +33,27 @@ internal static class PerfHarness
     private static readonly List<(string Scenario, int Round, double ActionMs, double? StableMs, int Renders,
         int Cards, int Gc0, int Gc1, int Gc2, double GcPauseMs, double UiBlockMs, string Note)> Rows = [];
 
-    private static readonly List<(string Point, long Private, long WorkingSet, long Managed)> Memory = [];
+    private static readonly List<(string Point, long Private, long WorkingSet, long Managed, int Cycle)> Memory = [];
+
+    // soak / heights 两模式的专用状态：只在对应模式下填充，standard/scale 输出保持原样。
+    private static readonly List<double> SoakPrivateMb = [];
+    private static readonly List<(int Cycle, double BeforeMb, double AfterMb, string Loh)> SoakGcSamples = [];
+    private static int _soakCycles;
+    private static readonly List<(string View, int Pass, int Index, string ItemId, int Variant, double CardHeight,
+        double ContainerHeight, bool Realized, bool Clipped)> Heights = [];
+    private static readonly List<(string View, int ItemCount, int Renders, int CardsCreated)> HeightViews = [];
+
+    // 每次测量的帧间隔分布（P95 与超过 33ms 的帧数），只记录探针采样数 ≥3 的窗口。
+    private static readonly List<(string Scenario, int Round, int Samples, double P50, double P95, double Max,
+        int Over33)> ProbeRows = [];
+
+    // 每次测量里"用户动作 → 刷新计算开始"的等待与"刷新计算自身"的耗时（毫秒），用于把 S9 拆成两段。
+    private static readonly List<(string Scenario, int Round, int Index, double WaitMs, double WorkMs, int Renders)>
+        ReloadRows = [];
+
+    // heights 模式注入的状态变体：走页面自己的钩子，不依赖 --manager-ui-check。
+    private static readonly Dictionary<Guid, Models.SteamAccountHistoryItem> StatusFixtures = [];
+
     private static DispatcherQueue? _dispatcher;
 
     // environment.json 里的启动基线必须来自启动瞬间，不能等到 WriteOutputs 再取（那时已加载 100 张卡片）。
@@ -43,6 +65,7 @@ internal static class PerfHarness
     private static DispatcherQueueTimer? _probeTimer;
     private static long _probeLastTicks;
     private static double _probeMaxBlockMs;
+    private static readonly List<long> _probeGaps = [];
     private const int ProbeIntervalMs = 16;
 
     private static readonly Stopwatch RunWatch = new();
@@ -64,7 +87,7 @@ internal static class PerfHarness
             : dir[("--perf-dir=".Length)..];
         _label = ReadText(args, "--perf-label=", "");
         var mode = ReadText(args, "--perf-mode=", "standard").Trim().ToLowerInvariant();
-        _mode = mode is "scale" ? "scale" : "standard";
+        _mode = mode is "scale" or "soak" or "heights" ? mode : "standard";
         Directory.CreateDirectory(_baseDir);
     }
 
@@ -125,6 +148,24 @@ internal static class PerfHarness
             if (_mode == "scale")
             {
                 await RunScaleAsync(window, page, cards, log);
+                StopUiProbe();
+                WriteOutputs(log);
+                Note("done dir=" + _baseDir);
+                return;
+            }
+
+            if (_mode == "soak")
+            {
+                await RunSoakAsync(window, page, cards, log);
+                StopUiProbe();
+                WriteOutputs(log);
+                Note("done dir=" + _baseDir);
+                return;
+            }
+
+            if (_mode == "heights")
+            {
+                await RunHeightsAsync(page, cards, log);
                 StopUiProbe();
                 WriteOutputs(log);
                 Note("done dir=" + _baseDir);
@@ -366,6 +407,290 @@ internal static class PerfHarness
         GC.Collect(2, GCCollectionMode.Forced, true);
     }
 
+    /// <summary>
+    /// soak（--perf-mode=soak）：反复进出账号管理页，观察私有内存斜率是否收敛。
+    /// 每轮＝切设置页 → 切回（Frame 重建页面与全部卡片）→ 等刷新/渲染完成 → 采样一行。
+    /// 第 10/20/30 轮额外请求一次 LOH 压缩 + 强制 GC 再采样，用来区分“可回收垃圾”与“常驻高水位”；
+    /// 短跑（cycles&lt;10）把采样点退化为末轮，否则冒烟拿不到任何 GC 对照数据。
+    /// </summary>
+    private static async Task RunSoakAsync(MainWindow window, AccountManagerPage page, GridView cards, List<string> log)
+    {
+        void Note(string text)
+        {
+            log.Add(text);
+            Console.WriteLine("[perf] " + text);
+        }
+
+        var cycles = Math.Max(1, _rounds);
+        _soakCycles = cycles;
+        Note("soak mode: accounts=" + _accounts + " cycles=" + cycles);
+        Note("after_seed cards=" + cards.Items.Count + " private=" + Mb(Memory[^1].Private) + "MB");
+        if (cycles < 10)
+        {
+            Note("soak note: cycles<10, GC 采样点退化为末轮 cycle=" + cycles + "（正式口径为 10/20/30）");
+        }
+
+        for (var i = 1; i <= cycles; i++)
+        {
+            await page.WaitForIdleAsync();
+            window.Nav.SelectedItem = window.SettingsNav;
+            await SettleAsync(200);
+
+            ResetProbe();
+            var gc0 = GC.CollectionCount(0);
+            var gc1 = GC.CollectionCount(1);
+            var gc2 = GC.CollectionCount(2);
+            var pauseBefore = GC.GetTotalPauseDuration();
+            var (rendersBefore, cardsBefore) = SnapshotCounters();
+            var watch = Stopwatch.StartNew();
+            window.Nav.SelectedItem = window.ManagerNav;
+            page = await WaitForManagerAsync(window, 15_000) ?? page;
+            await page.WaitForIdleAsync();
+            var actionMs = watch.Elapsed.TotalMilliseconds;
+            var stableMs = await SettleAsync(0);
+
+            var uiBlockMs = TakeProbeMax();
+            var (rendersAfter, cardsAfter) = SnapshotCounters();
+            var gcPauseMs = (GC.GetTotalPauseDuration() - pauseBefore).TotalMilliseconds;
+            CaptureMemory("soak_enter_" + i, i);
+            var snapshot = Memory[^1];
+            var memoryInfo = GC.GetGCMemoryInfo();
+            SoakPrivateMb.Add(snapshot.Private / 1024.0 / 1024.0);
+            Rows.Add(("S0_enter_manager", i, actionMs, stableMs, rendersAfter - rendersBefore, cardsAfter - cardsBefore,
+                GC.CollectionCount(0) - gc0, GC.CollectionCount(1) - gc1, GC.CollectionCount(2) - gc2, gcPauseMs,
+                uiBlockMs, "soak cycle=" + i + " accounts=" + _accounts));
+            Note("cycle=" + i + " private=" + Mb(snapshot.Private) + "MB ws=" + Mb(snapshot.WorkingSet) + "MB managed=" +
+                 Mb(snapshot.Managed) + "MB heap=" + Mb(memoryInfo.HeapSizeBytes) + "MB fragmented=" +
+                 Mb(memoryInfo.FragmentedBytes) + "MB committed=" + Mb(memoryInfo.TotalCommittedBytes) + "MB" +
+                 " renders=" + (rendersAfter - rendersBefore) + " cards=" + (cardsAfter - cardsBefore) + " enter_ms=" +
+                 actionMs.ToString("0.0", CultureInfo.InvariantCulture));
+
+            // 每 5 次进入打一行斜率：最近 5 次的平均单次私有内存增量。
+            if (i % 5 == 0 && SoakPrivateMb.Count > 1)
+            {
+                var span = Math.Min(5, SoakPrivateMb.Count - 1);
+                var delta = SoakPrivateMb[^1] - SoakPrivateMb[^(span + 1)];
+                Note("slope last" + span + ": avg=" +
+                     (delta / span).ToString("+0.00;-0.00", CultureInfo.InvariantCulture) + " MB/cycle (private " +
+                     SoakPrivateMb[^(span + 1)].ToString("0.0", CultureInfo.InvariantCulture) + "MB -> " +
+                     SoakPrivateMb[^1].ToString("0.0", CultureInfo.InvariantCulture) + "MB)");
+            }
+
+            if (i % 10 == 0 || (cycles < 10 && i == cycles))
+            {
+                var beforeMb = SoakPrivateMb[^1];
+                var loh = TryCompactLoh();
+                ForceGc();
+                await SettleAsync(120);
+                CaptureMemory("soak_after_gc_" + i, i);
+                var afterMb = Memory[^1].Private / 1024.0 / 1024.0;
+                SoakGcSamples.Add((i, beforeMb, afterMb, loh));
+                Note("after_gc cycle=" + i + " loh=" + loh + " before=" +
+                     beforeMb.ToString("0.0", CultureInfo.InvariantCulture) + "MB after=" +
+                     afterMb.ToString("0.0", CultureInfo.InvariantCulture) + "MB drop=" +
+                     (beforeMb - afterMb).ToString("0.00", CultureInfo.InvariantCulture) + "MB");
+            }
+
+            cards = FindFirst<GridView>(page, "Cards") ?? cards;
+        }
+
+        var sequence = new List<string>();
+        for (var i = 0; i < SoakPrivateMb.Count; i++)
+        {
+            sequence.Add((i + 1) + "=" + SoakPrivateMb[i].ToString("0.0", CultureInfo.InvariantCulture));
+        }
+        Note("soak private sequence: " + string.Join(" ", sequence));
+    }
+
+    /// <summary>请求下一次 GC 压缩 LOH。属性不可用（或读回不一致）时如实降级，不伪造效果。</summary>
+    private static string TryCompactLoh()
+    {
+        try
+        {
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+            return GCSettings.LargeObjectHeapCompactionMode == GCLargeObjectHeapCompactionMode.CompactOnce
+                ? "requested-confirmed"
+                : "set-but-readback-mismatch";
+        }
+        catch (Exception ex)
+        {
+            return "LOH compaction unavailable (" + ex.GetType().Name + ")";
+        }
+    }
+
+    /// <summary>
+    /// heights（--perf-mode=heights）：给账号注入 4 类状态变体（2 行冷却+GC 封禁 / 1 行冷却 / 正常 / 未知），
+    /// 然后列表与卡片两视图各滚两遍，逐批（8 个）记录已实现卡片的 ActualHeight 与容器 ActualHeight，
+    /// 用来看“同一屏内卡片高度是否一致”以及每屏真实创建了多少张卡片。
+    /// </summary>
+    private static async Task RunHeightsAsync(AccountManagerPage page, GridView cards, List<string> log)
+    {
+        void Note(string text)
+        {
+            log.Add(text);
+            Console.WriteLine("[perf] " + text);
+        }
+
+        Note("heights mode: accounts=" + _accounts);
+
+#if MANAGER_UI_CHECKS
+        var variantById = await InjectStatusFixturesAsync();
+        Note("fixtures enabled=" + ManagerUiChecks.Enabled + " injected=" + variantById.Count +
+             " variants=1:2line 2:1line 3:normal 4:unknown");
+
+        // 注入后先让页面按新变体重建一次卡片，避免旧卡片（无 fixture）混进第一遍测量。
+        page.QueueReload();
+        await page.WaitForIdleAsync();
+        await SettleAsync(200);
+
+        foreach (var view in new[] { "list", "cards" })
+        {
+            var (rendersBefore, cardsBefore) = SnapshotCounters();
+            await page.SwitchUiCheckAsync(view, false);
+            await page.WaitForIdleAsync();
+            await SettleAsync(150);
+            cards = FindFirst<GridView>(page, "Cards") ?? cards;
+            var (rendersAfter, cardsAfter) = SnapshotCounters();
+            HeightViews.Add((view, cards.Items.Count, rendersAfter - rendersBefore, cardsAfter - cardsBefore));
+            Note("view=" + view + " items=" + cards.Items.Count + " renders_delta=" + (rendersAfter - rendersBefore) +
+                 " cards_created_delta=" + (cardsAfter - cardsBefore));
+            await MeasureHeightsAsync(page, cards, view, variantById, log);
+        }
+#else
+        Note("heights skipped: MANAGER_UI_CHECKS not compiled in");
+        await Task.CompletedTask;
+        _ = page;
+        _ = cards;
+#endif
+    }
+
+#if MANAGER_UI_CHECKS
+    /// <summary>
+    /// 按下标 i%4 注入变体：0→2 行（冷却 + GC 封禁，最坏）、1→1 行（仅冷却）、2→正常、3→不注入（未知）。
+    /// 变体号按 1..4 记录到 heights.csv；键是账号 Id，即使渲染顺序变化也不会错配。
+    /// </summary>
+    private static async Task<Dictionary<Guid, int>> InjectStatusFixturesAsync()
+    {
+        var variantById = new Dictionary<Guid, int>();
+        var document = await ManagedAccounts.Store.LoadAsync();
+        var ordered = document.Accounts.OrderBy(x => x.Order).ToList();
+        StatusFixtures.Clear();
+        for (var i = 0; i < ordered.Count; i++)
+        {
+            var account = ordered[i];
+            var variant = i % 4 + 1;
+            variantById[account.Id] = variant;
+            switch (variant)
+            {
+                case 1:
+                    StatusFixtures[account.Id] = new Models.SteamAccountHistoryItem
+                    {
+                        CooldownSeconds = 3605, GcVacBanned = true, CsStatusUpdatedAt = DateTimeOffset.Now,
+                    };
+                    break;
+                case 2:
+                    StatusFixtures[account.Id] = new Models.SteamAccountHistoryItem
+                    {
+                        CooldownSeconds = 3605, GcVacBanned = false, CsStatusUpdatedAt = DateTimeOffset.Now,
+                    };
+                    break;
+                case 3:
+                    StatusFixtures[account.Id] = new Models.SteamAccountHistoryItem
+                    {
+                        CooldownSeconds = 0, GcVacBanned = false,
+                    };
+                    break;
+                default:
+                    StatusFixtures.Remove(account.Id);
+                    break;
+            }
+        }
+
+        return variantById;
+    }
+#endif
+
+    private static async Task MeasureHeightsAsync(AccountManagerPage page, GridView cards, string view,
+        Dictionary<Guid, int> variantById, List<string> log)
+    {
+        void Note(string text)
+        {
+            log.Add(text);
+            Console.WriteLine("[perf] " + text);
+        }
+
+        const int Batch = 8;
+        const int Passes = 3;
+        var total = cards.Items.Count;
+        for (var pass = 0; pass < Passes; pass++)
+        {
+            if (pass > 0 && total > 0)
+            {
+                // 第二遍回顶部重走同一批（一致性对照），第三遍从底部回扫（验证回收后再实现的高度稳定性）。
+                cards.ScrollIntoView(cards.Items[pass == 1 ? 0 : total - 1]);
+                await SettleAsync(200);
+            }
+
+            var realized = 0;
+            var clipped = 0;
+            for (var start = 0; start < total; start += Batch)
+            {
+                var end = Math.Min(start + Batch, total);
+                for (var i = start; i < end; i++)
+                {
+                    cards.ScrollIntoView(cards.Items[i]);
+                }
+
+                await SettleAsync(60);
+                for (var i = start; i < end; i++)
+                {
+                    var item = cards.Items[i];
+                    var id = AccountManagerPage.AccountIdOfItem(item);
+                    var variant = id != Guid.Empty
+                        ? variantById.GetValueOrDefault(id, 0)
+                        : i % 4 + 1;
+                    var container = cards.ContainerFromItem(item) as FrameworkElement;
+                    var cardHeight = double.NaN;
+                    var containerHeight = double.NaN;
+                    var clippedNow = false;
+                    var isRealized = false;
+                    if (container is not null)
+                    {
+                        containerHeight = container.ActualHeight;
+                        var card = item is Models.ManagedAccountCardItem entry
+                            ? page.CardOf(entry)
+                            : FindAll(container).OfType<AccountCard>().FirstOrDefault();
+                        if (card is not null && card.ActualHeight > 0)
+                        {
+                            cardHeight = card.ActualHeight;
+                            isRealized = true;
+                            realized++;
+                            // 裁切判定：卡片自身 Clip 比自身尺寸小（说明布局被容器夹断，滚动时会“跳”）。
+                            if (card.Clip is { } clip &&
+                                (clip.Bounds.Height < card.ActualHeight - 0.5 || clip.Bounds.Width < card.ActualWidth - 0.5))
+                            {
+                                clippedNow = true;
+                                clipped++;
+                            }
+                        }
+                    }
+
+                    Heights.Add((view, pass, i, ShortId(id), variant, cardHeight, containerHeight, isRealized,
+                        clippedNow));
+                }
+            }
+
+            Note("heights view=" + view + " pass=" + pass + " realized=" + realized + "/" + total +
+                 " clipped=" + clipped);
+        }
+    }
+
+    /// <summary>测量专用：heights 注入的状态变体（页面 Render 时查这里，与 --manager-ui-check 无关）。</summary>
+    internal static bool TryGetStatusFixture(Guid id, out Models.SteamAccountHistoryItem item) =>
+        StatusFixtures.TryGetValue(id, out item!);
+
+    private static string ShortId(Guid id) => id == Guid.Empty ? "" : id.ToString("N")[..8];
+
     /// <summary>先等到上一场景完全静默，再开始计时，避免场景间互相污染。</summary>
     private static async Task MeasureAsync(AccountManagerPage page, string scenario, Func<Task> action, List<string> log)
     {
@@ -392,6 +717,8 @@ internal static class PerfHarness
             var stableMs = await SettleAsync(0);
 
             var uiBlockMs = TakeProbeMax();
+            var probe = TakeProbeStats();
+            var timings = page.TakeReloadTimings();
             var (rendersAfter, cardsAfter) = SnapshotCounters();
             var gcPauseMs = (GC.GetTotalPauseDuration() - pauseBefore).TotalMilliseconds;
             if (!measured)
@@ -404,13 +731,30 @@ internal static class PerfHarness
             Rows.Add((scenario, i, actionMs, stableMs, rendersAfter - rendersBefore, cardsAfter - cardsBefore,
                 GC.CollectionCount(0) - gc0, GC.CollectionCount(1) - gc1, GC.CollectionCount(2) - gc2, gcPauseMs,
                 uiBlockMs, ""));
+            if (probe.Samples >= 3)
+            {
+                ProbeRows.Add((scenario, i, probe.Samples, probe.P50, probe.P95, probe.Max, probe.Over33));
+            }
+
+            for (var t = 0; t < timings.Count; t++)
+            {
+                ReloadRows.Add((scenario, i, t + 1, timings[t].WaitMs, timings[t].WorkMs, rendersAfter - rendersBefore));
+            }
+
             log.Add("[perf] " + scenario + " #" + i +
                     " action=" + actionMs.ToString("0.0", CultureInfo.InvariantCulture) + "ms" +
                     " stable=" + (stableMs?.ToString("0.0", CultureInfo.InvariantCulture) ?? "-") + "ms" +
                     " renders=" + (rendersAfter - rendersBefore) + " cards=" + (cardsAfter - cardsBefore) +
                     " gc=" + (GC.CollectionCount(0) - gc0) + "/" + (GC.CollectionCount(1) - gc1) + "/" +
                     (GC.CollectionCount(2) - gc2) + " gc_pause=" + gcPauseMs.ToString("0.0", CultureInfo.InvariantCulture) +
-                    "ms ui_block=" + uiBlockMs.ToString("0.0", CultureInfo.InvariantCulture) + "ms");
+                    "ms ui_block=" + uiBlockMs.ToString("0.0", CultureInfo.InvariantCulture) + "ms" +
+                    " ui_p95=" + probe.P95.ToString("0.0", CultureInfo.InvariantCulture) + "ms" +
+                    " ui_over33=" + probe.Over33 +
+                    (timings.Count > 0
+                        ? " reloads=" + string.Join("/", timings.Select(x =>
+                            x.WaitMs.ToString("0", CultureInfo.InvariantCulture) + "+" +
+                            x.WorkMs.ToString("0", CultureInfo.InvariantCulture)))
+                        : ""));
         }
     }
 
@@ -433,6 +777,7 @@ internal static class PerfHarness
         {
             var now = Environment.TickCount64;
             var gap = now - _probeLastTicks - ProbeIntervalMs;
+            _probeGaps.Add(gap);
             if (gap > _probeMaxBlockMs)
             {
                 _probeMaxBlockMs = gap;
@@ -452,15 +797,39 @@ internal static class PerfHarness
     private static void ResetProbe()
     {
         _probeMaxBlockMs = 0;
+        _probeGaps.Clear();
         _probeLastTicks = Environment.TickCount64;
     }
 
+    /// <summary>取走本窗口的最大阻塞；采样序列留给 <see cref="TakeProbeStats"/> 取分布。</summary>
     private static double TakeProbeMax()
     {
         var value = _probeMaxBlockMs;
         _probeMaxBlockMs = 0;
         _probeLastTicks = Environment.TickCount64;
         return value;
+    }
+
+    /// <summary>取走本窗口的帧间隔分布（P50/P95/最大/超过 33ms 的帧数），并清空采样。</summary>
+    private static (int Samples, double P50, double P95, double Max, int Over33) TakeProbeStats()
+    {
+        var gaps = _probeGaps.ToArray();
+        _probeGaps.Clear();
+        _probeLastTicks = Environment.TickCount64;
+        if (gaps.Length == 0)
+        {
+            return (0, 0, 0, 0, 0);
+        }
+
+        Array.Sort(gaps);
+        static double Percentile(long[] sorted, double p)
+        {
+            var index = (int)Math.Ceiling(p * sorted.Length) - 1;
+            return sorted[Math.Clamp(index, 0, sorted.Length - 1)];
+        }
+
+        return (gaps.Length, Percentile(gaps, 0.50), Percentile(gaps, 0.95), gaps[^1],
+            gaps.Count(x => x > 33));
     }
 
     /// <summary>等待 UI 线程排空：连续两次低优先级回调 + 一次渲染帧。</summary>
@@ -523,11 +892,13 @@ internal static class PerfHarness
         }
     }
 
-    private static void CaptureMemory(string point)
+    private static void CaptureMemory(string point) => CaptureMemory(point, 0);
+
+    private static void CaptureMemory(string point, int cycle)
     {
         using var process = Process.GetCurrentProcess();
         process.Refresh();
-        Memory.Add((point, process.PrivateMemorySize64, process.WorkingSet64, GC.GetTotalMemory(false)));
+        Memory.Add((point, process.PrivateMemorySize64, process.WorkingSet64, GC.GetTotalMemory(false), cycle));
     }
 
     private static string GcCounters() =>
@@ -536,36 +907,97 @@ internal static class PerfHarness
 
     private static string Mb(long bytes) => (bytes / 1024.0 / 1024.0).ToString("0.0", CultureInfo.InvariantCulture);
 
+    private static string Px(double value) =>
+        double.IsNaN(value) ? "" : value.ToString("0.00", CultureInfo.InvariantCulture);
+
     private static void WriteOutputs(List<string> log)
     {
-        var csv = new StringBuilder(
-            "scenario,round,action_ms,stable_ms,renders_delta,cards_delta,gc0,gc1,gc2,gc_pause_ms,ui_block_ms,note\n");
-        foreach (var row in Rows)
+        // heights 只关心卡片高度，Rows/Memory 为空，写出来是只有表头的文件：CI 用 measure.csv 判断“跑完了”，
+        // 恒写表头既不伪造数据也不会让 heights 运行被判失败。
         {
-            csv.Append(row.Scenario).Append(',').Append(row.Round).Append(',')
-                .Append(row.ActionMs.ToString("0.0", CultureInfo.InvariantCulture)).Append(',')
-                .Append(row.StableMs?.ToString("0.0", CultureInfo.InvariantCulture) ?? "").Append(',')
-                .Append(row.Renders).Append(',').Append(row.Cards).Append(',')
-                .Append(row.Gc0).Append(',').Append(row.Gc1).Append(',').Append(row.Gc2).Append(',')
-                .Append(row.GcPauseMs.ToString("0.0", CultureInfo.InvariantCulture)).Append(',')
-                .Append(row.UiBlockMs.ToString("0.0", CultureInfo.InvariantCulture)).Append(',')
-                .Append(row.Note).Append('\n');
+            var csv = new StringBuilder(
+                "scenario,round,action_ms,stable_ms,renders_delta,cards_delta,gc0,gc1,gc2,gc_pause_ms,ui_block_ms,note\n");
+            foreach (var row in Rows)
+            {
+                csv.Append(row.Scenario).Append(',').Append(row.Round).Append(',')
+                    .Append(row.ActionMs.ToString("0.0", CultureInfo.InvariantCulture)).Append(',')
+                    .Append(row.StableMs?.ToString("0.0", CultureInfo.InvariantCulture) ?? "").Append(',')
+                    .Append(row.Renders).Append(',').Append(row.Cards).Append(',')
+                    .Append(row.Gc0).Append(',').Append(row.Gc1).Append(',').Append(row.Gc2).Append(',')
+                    .Append(row.GcPauseMs.ToString("0.0", CultureInfo.InvariantCulture)).Append(',')
+                    .Append(row.UiBlockMs.ToString("0.0", CultureInfo.InvariantCulture)).Append(',')
+                    .Append(row.Note).Append('\n');
+            }
+
+            // soak 的 memory.csv 增列 soak_cycle，standard/scale 的输出保持原有列不变。
+            var soak = _mode == "soak";
+            var mem = new StringBuilder(soak
+                ? "point,private_mb,working_set_mb,managed_mb,soak_cycle\n"
+                : "point,private_mb,working_set_mb,managed_mb\n");
+            foreach (var row in Memory)
+            {
+                mem.Append(row.Point).Append(',')
+                    .Append(Mb(row.Private)).Append(',')
+                    .Append(Mb(row.WorkingSet)).Append(',')
+                    .Append(Mb(row.Managed));
+                if (soak)
+                {
+                    mem.Append(',').Append(row.Cycle > 0 ? row.Cycle.ToString(CultureInfo.InvariantCulture) : "");
+                }
+
+                mem.Append('\n');
+            }
+
+            File.WriteAllText(Path.Combine(_baseDir, "measure.csv"), csv.ToString());
+            File.WriteAllText(Path.Combine(_baseDir, "memory.csv"), mem.ToString());
+
+            // 帧间隔分布与"等待/计算"分离计时：与 measure.csv 一样恒写（只有表头也不会让运行判失败）。
+            var probeCsv = new StringBuilder("scenario,round,samples,p50_ms,p95_ms,max_ms,over33\n");
+            foreach (var row in ProbeRows)
+            {
+                probeCsv.Append(row.Scenario).Append(',').Append(row.Round).Append(',').Append(row.Samples).Append(',')
+                    .Append(row.P50.ToString("0.0", CultureInfo.InvariantCulture)).Append(',')
+                    .Append(row.P95.ToString("0.0", CultureInfo.InvariantCulture)).Append(',')
+                    .Append(row.Max.ToString("0.0", CultureInfo.InvariantCulture)).Append(',')
+                    .Append(row.Over33).Append('\n');
+            }
+
+            var reloadCsv = new StringBuilder("scenario,round,index,wait_ms,work_ms,renders\n");
+            foreach (var row in ReloadRows)
+            {
+                reloadCsv.Append(row.Scenario).Append(',').Append(row.Round).Append(',').Append(row.Index).Append(',')
+                    .Append(row.WaitMs.ToString("0.0", CultureInfo.InvariantCulture)).Append(',')
+                    .Append(row.WorkMs.ToString("0.0", CultureInfo.InvariantCulture)).Append(',')
+                    .Append(row.Renders).Append('\n');
+            }
+
+            File.WriteAllText(Path.Combine(_baseDir, "ui_probe.csv"), probeCsv.ToString());
+            File.WriteAllText(Path.Combine(_baseDir, "reload.csv"), reloadCsv.ToString());
         }
 
-        var mem = new StringBuilder("point,private_mb,working_set_mb,managed_mb\n");
-        foreach (var row in Memory)
+        if (Heights.Count > 0)
         {
-            mem.Append(row.Point).Append(',')
-                .Append(Mb(row.Private)).Append(',')
-                .Append(Mb(row.WorkingSet)).Append(',')
-                .Append(Mb(row.Managed)).Append('\n');
+            File.WriteAllText(Path.Combine(_baseDir, "heights.csv"), BuildHeightsCsv());
         }
 
-        File.WriteAllText(Path.Combine(_baseDir, "measure.csv"), csv.ToString());
-        File.WriteAllText(Path.Combine(_baseDir, "memory.csv"), mem.ToString());
         File.WriteAllText(Path.Combine(_baseDir, "log.txt"), string.Join(Environment.NewLine, log));
         File.WriteAllText(Path.Combine(_baseDir, "environment.json"), BuildEnvironmentJson());
         File.WriteAllText(Path.Combine(_baseDir, "summary.txt"), BuildSummary());
+    }
+
+    private static string BuildHeightsCsv()
+    {
+        var csv = new StringBuilder(
+            "view,pass,index,item_id,variant,card_height,container_height,realized,clipped\n");
+        foreach (var row in Heights)
+        {
+            csv.Append(row.View).Append(',').Append(row.Pass).Append(',').Append(row.Index).Append(',')
+                .Append(row.ItemId).Append(',').Append(row.Variant).Append(',')
+                .Append(Px(row.CardHeight)).Append(',').Append(Px(row.ContainerHeight)).Append(',')
+                .Append(row.Realized ? "1" : "0").Append(',').Append(row.Clipped ? "1" : "0").Append('\n');
+        }
+
+        return csv.ToString();
     }
 
     private static string BuildSummary()
@@ -581,7 +1013,188 @@ internal static class PerfHarness
                                " p95=" + p95.ToString("0.0", CultureInfo.InvariantCulture));
         }
 
+        if (_mode == "soak")
+        {
+            AppendSoakSummary(builder);
+        }
+        else if (_mode == "heights")
+        {
+            AppendHeightsSummary(builder);
+        }
+
         return builder.ToString();
+    }
+
+    /// <summary>
+    /// soak 结论：分段平均单次增量（1–10/11–20/21–30）、每次强制 GC 的回落量、以及斜率/基线判定。
+    /// 判定口径：斜率逐段递减且 GC 后回落到同一基线 → 高水位封顶；斜率不降且段间基线抬高 → 疑似泄漏。
+    /// </summary>
+    private static void AppendSoakSummary(StringBuilder builder)
+    {
+        builder.AppendLine();
+        builder.AppendLine("soak: cycles=" + _soakCycles + " accounts=" + _accounts);
+        if (SoakPrivateMb.Count > 0)
+        {
+            var sequence = new List<string>();
+            for (var i = 0; i < SoakPrivateMb.Count; i++)
+            {
+                sequence.Add((i + 1) + "=" + SoakPrivateMb[i].ToString("0.0", CultureInfo.InvariantCulture));
+            }
+
+            builder.AppendLine("soak_private_mb: " + string.Join(" ", sequence));
+        }
+
+        var means = new List<double>();
+        void Segment(int from, int to)
+        {
+            to = Math.Min(to, SoakPrivateMb.Count);
+            if (from > to || to - from < 1)
+            {
+                return;
+            }
+
+            var mean = (SoakPrivateMb[to - 1] - SoakPrivateMb[from - 1]) / (to - from);
+            means.Add(mean);
+            builder.AppendLine("soak_segment_" + from + "_" + to + ": n=" + (to - from) + " avg=" +
+                               mean.ToString("+0.00;-0.00", CultureInfo.InvariantCulture) + " MB/enter");
+        }
+
+        Segment(1, 10);
+        Segment(11, 20);
+        Segment(21, 30);
+
+        foreach (var sample in SoakGcSamples)
+        {
+            builder.AppendLine("soak_after_gc cycle=" + sample.Cycle + " loh=" + sample.Loh + " before=" +
+                               sample.BeforeMb.ToString("0.0", CultureInfo.InvariantCulture) + "MB after=" +
+                               sample.AfterMb.ToString("0.0", CultureInfo.InvariantCulture) + "MB drop=" +
+                               (sample.BeforeMb - sample.AfterMb).ToString("0.00", CultureInfo.InvariantCulture) +
+                               "MB");
+        }
+
+        var spread = double.NaN;
+        if (SoakGcSamples.Count >= 2)
+        {
+            spread = SoakGcSamples[^1].AfterMb - SoakGcSamples[0].AfterMb;
+            builder.AppendLine("soak_gc_baseline_spread: " +
+                               spread.ToString("+0.0;-0.0", CultureInfo.InvariantCulture) + "MB");
+        }
+
+        var decreasing = means.Count >= 2 &&
+                         means.Zip(means.Skip(1), (a, b) => b <= a - 0.02).All(x => x);
+        var baselineSame = SoakGcSamples.Count >= 2 && Math.Abs(spread) <= 3.0;
+        string verdict;
+        if (means.Count < 2)
+        {
+            verdict = "证据不足：cycles=" + _soakCycles + " 只够一段（正式口径 ≥30 次，GC 采样点 10/20/30），" +
+                      "当前段均值 " +
+                      (means.Count == 1 ? means[0].ToString("+0.00;-0.00", CultureInfo.InvariantCulture) + " MB/enter" : "n/a");
+        }
+        else if (decreasing && (SoakGcSamples.Count < 2 || baselineSame))
+        {
+            verdict = "高水位封顶：斜率逐段递减" +
+                      (SoakGcSamples.Count >= 2 ? "，且强制 GC 后回落到同一基线" : "（GC 采样不足，基线未对照）");
+        }
+        else if (!decreasing && SoakGcSamples.Count >= 2 && spread > 3.0)
+        {
+            verdict = "疑似泄漏：斜率未递减且强制 GC 后基线逐段抬高";
+        }
+        else
+        {
+            verdict = "混合信号：斜率" + (decreasing ? "递减" : "未递减") + "，GC 后基线" +
+                      (SoakGcSamples.Count >= 2 ? (baselineSame ? "一致" : "抬高") : "样本不足");
+        }
+
+        builder.AppendLine("soak_verdict: " + verdict);
+    }
+
+    /// <summary>heights 结论：每视图每变体的 min/median/max/去重值个数、整视图一致性（容差 0.5px）、每屏实建卡片数。</summary>
+    private static void AppendHeightsSummary(StringBuilder builder)
+    {
+        builder.AppendLine();
+        builder.AppendLine("heights: accounts=" + _accounts);
+        foreach (var view in HeightViews)
+        {
+            builder.AppendLine("heights_view=" + view.View + " items=" + view.ItemCount + " renders_delta=" +
+                               view.Renders + " cards_created_delta=" + view.CardsCreated);
+        }
+
+        foreach (var viewGroup in Heights.GroupBy(x => x.View))
+        {
+            foreach (var variantGroup in viewGroup.GroupBy(x => x.Variant).OrderBy(x => x.Key))
+            {
+                var values = variantGroup.Where(x => x.Realized).Select(x => x.CardHeight).OrderBy(x => x).ToList();
+                if (values.Count == 0)
+                {
+                    builder.AppendLine("heights view=" + viewGroup.Key + " variant=" + variantGroup.Key + " n=0");
+                    continue;
+                }
+
+                var containers = variantGroup.Where(x => !double.IsNaN(x.ContainerHeight))
+                    .Select(x => x.ContainerHeight).OrderBy(x => x).ToList();
+                builder.AppendLine("heights view=" + viewGroup.Key + " variant=" + variantGroup.Key + " n=" +
+                                   values.Count + " min=" + Px(values[0]) + " median=" +
+                                   Px(values[values.Count / 2]) + " max=" + Px(values[^1]) + " distinct=" +
+                                   CountDistinct(values, 0.5) + (containers.Count == 0
+                                       ? ""
+                                       : " container_min=" + Px(containers[0]) + " container_max=" + Px(containers[^1])));
+            }
+
+            var realized = viewGroup.Where(x => x.Realized).Select(x => x.CardHeight).ToList();
+            if (realized.Count == 0)
+            {
+                builder.AppendLine("heights_consistency view=" + viewGroup.Key + " realized=0");
+                continue;
+            }
+
+            var min = realized.Min();
+            var max = realized.Max();
+            builder.AppendLine("heights_consistency view=" + viewGroup.Key + " consistent=" +
+                               (max - min <= 0.5 ? "true" : "false") + " min=" + Px(min) + " max=" + Px(max) +
+                               " distinct=" + CountDistinct(realized.OrderBy(x => x).ToList(), 0.5) +
+                               " tolerance=0.5");
+
+            // 稳定性：同一 index 在 3 遍里的最大高度差（回收后重新实现不应改变布局）。
+            var stability = viewGroup.Where(x => x.Realized)
+                .GroupBy(x => x.Index)
+                .Select(g => g.Max(x => x.CardHeight) - g.Min(x => x.CardHeight))
+                .DefaultIfEmpty(0)
+                .Max();
+            var clipped = viewGroup.Count(x => x.Clipped);
+            var twoLine = viewGroup.Where(x => x.Realized)
+                .GroupBy(x => x.Variant)
+                .ToDictionary(g => g.Key, g => g.Max(x => x.CardHeight));
+            var twoLinePresent = twoLine.Count >= 2 && twoLine.Values.Max() - twoLine.Values.Min() > 0.5;
+            builder.AppendLine("heights_stability view=" + viewGroup.Key + " max_height_delta_across_passes=" +
+                               Px(stability) + " tolerance=0.5");
+            builder.AppendLine("heights_clip view=" + viewGroup.Key + " clipped=" + clipped);
+            builder.AppendLine("heights_twoline view=" + viewGroup.Key + " variant_max_height=" +
+                               string.Join(" ", twoLine.OrderBy(x => x.Key)
+                                   .Select(x => x.Key + ":" + Px(x.Value))) +
+                               " two_line_distinguishable=" + (twoLinePresent ? "true" : "false"));
+        }
+    }
+
+    /// <summary>按 0.5px 容差数不同的高度值个数（用来量化“高度有几种”）。</summary>
+    private static int CountDistinct(List<double> sorted, double tolerance)
+    {
+        if (sorted.Count == 0)
+        {
+            return 0;
+        }
+
+        var count = 1;
+        var anchor = sorted[0];
+        foreach (var value in sorted)
+        {
+            if (value - anchor > tolerance)
+            {
+                count++;
+                anchor = value;
+            }
+        }
+
+        return count;
     }
 
     private static string BuildEnvironmentJson()
