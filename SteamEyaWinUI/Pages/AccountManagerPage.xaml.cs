@@ -106,7 +106,7 @@ public sealed partial class AccountManagerPage : Page
     /// Collapses bursts of global change notifications into one reload per dispatcher turn,
     /// and does nothing while the page is off-screen (it reloads on navigate-back instead).
     /// </summary>
-    private void QueueReload()
+    internal void QueueReload()
     {
         if (offscreen || !IsLoaded) return;
         needsAnotherReload = true;
@@ -145,6 +145,27 @@ public sealed partial class AccountManagerPage : Page
 
         reloadQueued = false;
     }
+
+#if PERF_HARNESS
+    /// <summary>
+    /// 测量专用：等到尾随节流窗口、排队的刷新与可能的渲染全部结束后再返回，
+    /// 否则下一次测量会从尾随节流中途开始，或者量到的其实是页面已经离页时的残留状态。
+    /// </summary>
+    internal async Task WaitForIdleAsync(int timeoutMs = 8_000)
+    {
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        while (watch.ElapsedMilliseconds < timeoutMs)
+        {
+            if (!offscreen && IsLoaded && reloadThrottle?.IsRunning != true && !reloadQueued && !needsAnotherReload &&
+                refreshGate.CurrentCount == 1 && !syncing)
+            {
+                return;
+            }
+
+            await Task.Delay(15);
+        }
+    }
+#endif
 
     private async Task ReloadAsync()
     {
