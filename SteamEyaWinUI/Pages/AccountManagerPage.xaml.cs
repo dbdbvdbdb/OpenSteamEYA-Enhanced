@@ -34,6 +34,8 @@ public sealed partial class AccountManagerPage : Page
     // 计划 T4：全页只用一个 1 秒计时器，卡片不再各自起 Timer。
     private readonly DispatcherTimer cooldownTicker = new() { Interval = TimeSpan.FromSeconds(1) };
     private bool offscreen;
+    // 页面是 NavigationCacheMode=Required 的常驻实例：每次进入/离开都自增，用来识别过期的离页释放回调（计划 V0-P1）。
+    private int navigationGeneration;
     internal ManagerPreferences Preferences => document.Preferences;
     internal bool IsPrivate => privacy;
     internal AccountSnapshot Snapshot => snapshot;
@@ -52,6 +54,8 @@ public sealed partial class AccountManagerPage : Page
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
+        // 重新进入页面即作废上一轮离页时排队的释放回调，避免它在本次重新渲染之后才执行并清空卡片（计划 V0-P1）。
+        navigationGeneration++;
         offscreen = false;
         await SafeAsync(ReloadAsync);
     }
@@ -65,12 +69,15 @@ public sealed partial class AccountManagerPage : Page
         reloadQueued = false;
         needsAnotherReload = false;
         cooldownTicker.Stop();
-        DispatcherQueue.TryEnqueue(ReleaseCards);
+        var generation = navigationGeneration;
+        DispatcherQueue.TryEnqueue(() => ReleaseCards(generation));
     }
 
     /// <summary>离页时丢弃已构建的卡片，避免页面不可见还持有整棵可视化树（计划 T1）。</summary>
-    private void ReleaseCards()
+    private void ReleaseCards(int generation)
     {
+        // 回调运行时页面可能已经重新进入（并在本次渲染之后），此时清理会清空刚渲染的卡片（计划 V0-P1）。
+        if (generation != navigationGeneration || !offscreen) return;
         if (Cards.Items.Count == 0) return;
         syncing = true;
         try
@@ -330,7 +337,8 @@ public sealed partial class AccountManagerPage : Page
         {
             var enabled = Privacy.IsChecked == true;
             await ManagedAccounts.Store.UpdateAsync(doc => doc.Preferences.Privacy = enabled);
-            await ReloadAsync();
+            // 隐私切换只需要一次合并后的刷新，走尾随节流队列，避免整页同步重载阻塞点击（计划 V0-P2）。
+            QueueReload();
         });
     }
     private void CardsSelectionChanged(object sender, SelectionChangedEventArgs e)
