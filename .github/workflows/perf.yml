@@ -15,12 +15,17 @@ on:
         description: 'measurement mode: standard / scale / soak / heights'
         required: true
         default: 'standard'
+      trial:
+        description: 'build a shippable AOT package without the measurement harness (T11trial)'
+        required: false
+        default: 'false'
 
 permissions:
   contents: read
 
 jobs:
   measure:
+    if: github.event.inputs.trial != 'true'
     runs-on: windows-2025-vs2026
     timeout-minutes: 90
     steps:
@@ -68,4 +73,45 @@ jobs:
             ${{ runner.temp }}/perf-out/**
             ${{ runner.temp }}/perf.stdout.log
             ${{ runner.temp }}/perf.stderr.log
+          if-no-files-found: error
+
+  trial:
+    if: github.event.inputs.trial == 'true'
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68
+        with:
+          global-json-file: global.json
+      - name: Locked restore (AOT)
+        shell: pwsh
+        run: |
+          dotnet restore ./SteamEyaWinUI/SteamEyaWinUI.csproj -r win-x64 -p:Platform=x64 -p:PublishAot=true --locked-mode
+          if ($LASTEXITCODE -ne 0) { throw 'Locked restore failed.' }
+      - name: Publish trial build (no harness)
+        shell: pwsh
+        run: |
+          dotnet publish ./SteamEyaWinUI/SteamEyaWinUI.csproj -c Release -r win-x64 -p:Platform=x64 `
+            -p:PublishAot=true -p:EnablePerfHarness=false -p:EnableManagerUiChecks=false `
+            -p:RestoreLockedMode=true -o ./artifacts/trial-dist --no-restore
+          if ($LASTEXITCODE -ne 0) { throw 'AOT publish failed.' }
+          if (-not (Test-Path ./artifacts/trial-dist/SteamEyaWinUI.exe)) { throw 'trial build missing exe' }
+          $files = Get-ChildItem ./artifacts/trial-dist -File
+          $bytes = (Get-ChildItem ./artifacts/trial-dist -Recurse -File | Measure-Object Length -Sum).Sum
+          Write-Output "trial-dist files=$($files.Count) bytes=$bytes"
+      - name: Zip trial build
+        shell: pwsh
+        run: |
+          Compress-Archive -Path ./artifacts/trial-dist/* -DestinationPath ./artifacts/trial-aot.zip -Force
+          Get-FileHash ./artifacts/trial-aot.zip -Algorithm SHA256 | Format-List
+      - name: Upload trial build
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: trial-aot-${{ github.sha }}
+          path: |
+            artifacts/trial-aot.zip
           if-no-files-found: error
