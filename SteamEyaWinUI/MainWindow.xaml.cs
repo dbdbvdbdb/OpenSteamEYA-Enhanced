@@ -182,7 +182,12 @@ public sealed partial class MainWindow : Window
 
         if (ContentFrame.CurrentSourcePageType != pageType || pageType == typeof(HistoryPage))
         {
-            ContentFrame.Navigate(pageType, pageName, new SuppressNavigationTransitionInfo());
+            // 只有账号管理页取消进场动画（该页首帧最重，过渡动画会与它抢 UI 线程）。
+            // 其它页面恢复 v0.4.9 的进场动画，不做全站取消（计划 V0-P2）。
+            NavigationTransitionInfo transition = pageType == typeof(AccountManagerPage)
+                ? new SuppressNavigationTransitionInfo()
+                : new EntranceNavigationTransitionInfo();
+            ContentFrame.Navigate(pageType, pageName, transition);
             ContentFrame.BackStack.Clear();
         }
     }
@@ -288,7 +293,7 @@ public sealed partial class MainWindow : Window
         {
             if (Content is FrameworkElement current) current.RequestedTheme = theme;
             if (ContentFrame.Content is Page page && page is not Pages.ThemeEditorPage)
-                ContentFrame.Navigate(page.GetType(), null, new SuppressNavigationTransitionInfo());
+                ContentFrame.Navigate(page.GetType());
         });
     }
 
